@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+currentStep=tmux
+
+startStep
+linkStepFiles
+endStep

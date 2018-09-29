@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+currentStep=curl
+
+startStep
+linkStepFiles
+endStep

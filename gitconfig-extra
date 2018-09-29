@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+gitConfigExtraPath=~/.extra.gitconfig
+
+gitConfigExtra() {
+  git config --file $gitConfigExtraPath "$@"
+}
+
+gitConfigExtraGet() {
+  gitConfigExtra --get "$@"
+}
+
+gitConfigExtraHas() {
+  gitConfigExtraGet "$@" > /dev/null
+
+  if [ $? == 0 ] ; then
+    echo true
+  else
+    echo false
+  fi
+}
+
+gitConfigExtraSet() {
+  gitConfigExtra --replace-all "$@"
+}

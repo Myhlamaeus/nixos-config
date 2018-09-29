@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+currentStep=git
+
+startStep
+linkStepFiles
+
+. ./gitconfig-extra
+
+if [ "$dryRun" = false ] ; then
+  if [[ ! -e $gitConfigExtraPath ]] ; then
+    echo "# automatically generated through dotfiles" > $gitConfigExtraPath
+    echo "" >> $gitConfigExtraPath
+  fi
+
+  hasDiff=$(gitConfigExtraHas diff.tool)
+  if [[ $hasDiff != true ]]; then
+    bComparePath=D:/Program\ Files/Beyond\ Compare\ 4/BCompare.exe
+
+    if [[ -e $bComparePath ]] ; then
+      log "setting up difftool: bc3"
+      gitConfigExtraSet difftool.bc3.trustExitCode true
+      gitConfigExtraSet difftool.bc3.path "$bComparePath"
+
+      log "difftool set to bc3"
+      gitConfigExtraSet diff.tool bc3
+    fi
+  fi
+
+  signingConfig=~/.signing.gitconfig
+  if [[ ! -e $signingConfig ]] ; then
+    prompt "input signing key" signingkey
+    git config --file $signingConfig --replace-all user.signingkey $signingkey
+    git config --file $signingConfig --replace-all commit.gpgsign true
+  fi
+fi
+git s > /dev/null
+endStep

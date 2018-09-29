@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+currentStep=vim
+
+startStep
+linkStepFiles
+linkDirectory "vim/.vim" "$targetBase/.vim"
+endStep

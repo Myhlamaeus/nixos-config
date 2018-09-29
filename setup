@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+
+sourceBase=profile
+targetBase=~
+dryRun=false
+currentStep=base
+step=
+
+while getopts "hds:" opt; do
+  case $opt in
+    d)
+      dryRun=true
+      ;;
+    s)
+      step=$OPTARG
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+  esac
+done
+
+function fmtMsg() {
+  step=$(printf %4s $currentStep)
+  echo "\e[1m\e[33m[$step]\e[0m $@"
+}
+
+function log() {
+  echo -e $(fmtMsg $@)
+}
+
+function prompt() {
+  echo -en $(fmtMsg $1":")" "
+  read $2
+}
+
+function startStep() {
+  echo -e "\e[1m$currentStep"
+  echo -e "================\e[0m"
+}
+
+function endStep() {
+  echo ""
+}
+
+function logLink() {
+  log "\e[34m$1\e[39m" → "\e[34m$2\e[39m"
+}
+
+function linkFiles() {
+  source=$1
+  target=$2
+  level=$3
+
+  paths=$(find ./$source -maxdepth 1 -type f -name "*" | cut -d "/" -f $level)
+  for path in $paths; do
+    fileTarget="$target/$path"
+
+    logLink $fileTarget ./$source/$path
+
+    if [ "$dryRun" = false ] ; then
+      unlink "$fileTarget" 2> /dev/null
+      ln -s "$(realpath ./$source/$path)" "$fileTarget"
+    fi
+  done
+}
+
+function linkDirectory() {
+  source=$1
+  target=$2
+
+  logLink $target ./$source
+
+  if [ "$dryRun" = false ] ; then
+    unlink $target 2> /dev/null
+    rm -r $target 2> /dev/null
+    ln -sd "$(realpath ./$source)" "$target"
+  fi
+}
+
+function linkStepFiles() {
+  if [ -d "./$currentStep" ] ; then
+    linkFiles $currentStep "$targetBase" 3
+  fi
+}
+
+export sourceBase
+export targetBase
+export dryRun
+export -f fmtMsg
+export -f log
+export -f prompt
+export -f startStep
+export -f endStep
+export -f logLink
+export -f linkFiles
+export -f linkDirectory
+export -f linkStepFiles
+
+if [[ -z $step ]] ; then
+  for f in setup-*; do
+    bash "$f" -H   || break # if needed
+  done
+else
+  for f in setup-*-$step; do
+    bash "$f" -H   || break # if needed
+  done
+fi
