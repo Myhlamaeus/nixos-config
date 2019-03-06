@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-git clone --depth 1 git@github.com:Myhlamaeus/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-./setup $*

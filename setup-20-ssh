@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-currentStep=ssh
-
-startStep
-linkStepFiles
-linkFiles ssh/.ssh "$targetBase/.ssh" 4
-endStep

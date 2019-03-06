@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-currentStep=wget
-
-startStep
-linkStepFiles
-endStep
