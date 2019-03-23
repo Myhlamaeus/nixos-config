@@ -57,17 +57,17 @@ rec {
       untracked = "magenta";
     };
 
-    "diff" = {
+    diff = {
       # Detect copies as well as renames
       renames = "copies";
     };
 
-    "help" = {
+    help = {
       # Automatically correct and execute mistyped commands
       autocorrect = 1;
     };
 
-    "merge" = {
+    merge = {
       # Include summaries of merged commits in newly created merge commit messages
       log = true;
     };
@@ -77,18 +77,18 @@ rec {
       driver = "${pkgs.nodejs}/bin/npx npm-merge-driver merge %A %O %B %P";
     };
 
-    "pull" = {
+    pull = {
       rebase = true;
     };
 
-    "push" = {
+    push = {
       # https://git-scm.com/docs/git-config#git-config-pushdefault
       default = "simple";
       # Make `git push` push relevant annotated tags when pushing branches out.
       followTags = true;
     };
 
-    "rebase" = {
+    rebase = {
       autoSquash = true;
       autoStash = true;
       missingCommitsCheck = "warn";
