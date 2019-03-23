@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-rec {
+{
   enable = true;
 
   userEmail = "dreyer.maltem+dev@gmail.com";
