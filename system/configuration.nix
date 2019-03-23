@@ -80,7 +80,7 @@ in
   ];
   environment.pathsToLink = [ "/share/zsh" ];
 
-  security.wrappers.slock.source = "${pkgs.slock.out}/bin/slock";
+  programs.slock.enable = true;
 
   # List font packages
   fonts = {
@@ -124,7 +124,7 @@ in
   # networking.firewall.enable = false;
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # services.printing.enable = true;
 
   # Enable sound.
   sound.enable = true;
