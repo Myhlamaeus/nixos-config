@@ -4,6 +4,36 @@
 
 { config, pkgs, ... }:
 
+let
+  bitlbeeDiscord = with pkgs; with stdenv.lib;
+    stdenv.mkDerivation rec {
+      name = "bitlbee-discord-2017-12-27";
+
+      src = fetchFromGitHub {
+        rev = "aa0bbf2df851b1fd1b27164713121d20c610b7c5";
+        owner = "sm00th";
+        repo = "bitlbee-discord";
+        sha256 = "02pigk2vbz0jdz11f96sygdvp1j762yjn62h124fkcsc070g7a2f";
+      };
+
+      nativeBuildInputs = [ autoreconfHook pkgconfig ];
+      buildInputs = [ bitlbee glib ];
+
+      preConfigure = ''
+        export BITLBEE_PLUGINDIR=$out/lib/bitlbee
+        ./autogen.sh
+      '';
+
+      meta = {
+        description = "Bitlbee plugin for Discord";
+
+        homepage = https://github.com/sm00th/bitlbee-discord;
+        license = licenses.gpl2Plus;
+        maintainers = [ maintainers.lassulus ];
+        platforms = stdenv.lib.platforms.linux;
+      };
+    };
+in
 {
   nixpkgs.config.allowUnfree = true;
 
@@ -39,6 +69,8 @@
   environment.systemPackages = with pkgs; [
     # shell
     wget neovim git ncurses
+    # vm
+    virtualboxHardened nixops
   ];
   environment.pathsToLink = [ "/share/zsh" ];
 
@@ -76,12 +108,8 @@
   # started in user sessions.
   programs.bash.enableCompletion = true;
   # programs.mtr.enable = true;
-  # programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
 
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -97,17 +125,21 @@
   hardware.pulseaudio.enable = true;
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "gb";
-  # services.xserver.xkbVariant = "intl";
-  # services.xserver.xkbOptions = "eurosign:e";
+  services.xserver = {
+    enable = true;
 
-  # Enable touchpad support.
-  # services.xserver.libinput.enable = true;
+    layout = "gb";
+    # xkbVariant = "intl";
+    # xkbOptions = "eurosign:e";
 
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+    # Enable touchpad support.
+    libinput.enable = true;
+
+    displayManager.lightdm.enable = true;
+
+    windowManager.xmonad.enable = true;
+    windowManager.default = "xmonad";
+  };
 
   # Video drivers
   boot.extraModprobeConfig = "options nvidia-drm modeset=1";
@@ -120,26 +152,45 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.driSupport32Bit = true;
 
-  services.xserver.windowManager.xmonad = {
-    enable = true;
-    enableContribAndExtras = true;
-    extraPackages = haskellPackages: with haskellPackages; [
-      haskellPackages.xmobar
-    ];
-  };
-  services.xserver.windowManager.default = "xmonad";
+  hardware.u2f.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.guest = {
-  #   isNormalUser = true;
-  #   uid = 1000;
-  # };
   users.users.Myhlamaeus = {
     isNormalUser = true;
     shell = pkgs.zsh;
     home = "/home/Myhlamaeus";
     extraGroups = [ "wheel" ];
   };
+
+  # Temporarily, until supported by home-manager.
+  services.bitlbee = {
+    enable = true;
+    plugins = [
+      bitlbeeDiscord
+    ];
+  };
+
+  virtualisation.virtualbox.host = { enable = true; };
+  virtualisation.libvirtd.enable = true;
+  # security.setuidPrograms = [ "VirtualBox" "VBoxManage" ];
+
+  nix.nixPath = [
+    (let
+      sshConfigFile =
+        pkgs.writeText "ssh_config" ''
+          Host github.com
+          IdentityFile /etc/ssh/ssh_host_rsa_key
+          StrictHostKeyChecking=no
+        '';
+    in
+      "ssh-config-file=${sshConfigFile}"
+    )
+    # The following lines are just the default values of NIX_PATH
+    # We have to keep them to not brick the system
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "nixos-config=/etc/nixos/configuration.nix"
+    "/nix/var/nix/profiles/per-user/root/channels"
+  ];
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
