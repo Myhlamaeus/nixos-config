@@ -1,4 +1,4 @@
-{ config, pkgs, lib, callPackage, ... }:
+{ pkgs, lib, ... }:
 
 let
   unstable = import <nixpkgs-unstable> {};
@@ -26,14 +26,14 @@ let
 
 in
   {
-    imports = [ ./xmonad.nix ];
-
-    # Let Home Manager install and manage itself.
-    programs.home-manager.enable = true;
+    imports = [
+      ./browsers/chromium.nix ./browsers/firefox.nix ./editors/emacs.nix ./editors/neovim.nix
+      ./email.nix ./git.nix ./x11.nix ./xmonad.nix
+    ];
 
     home.packages = with pkgs; [
       # shell
-      jq python36Packages.powerline ranger zsh
+      jq python36Packages.powerline ranger
       # dev
       haskellPackages.stylish-haskell shellcheck
       # git
@@ -48,115 +48,17 @@ in
       calibre mpc_cli mpv shutter
       # security
       gnupg keepassxc pass
-      # (pass.withExtensions (exts: with exts; [ pass-import ]))
       # other
-      hledger weechat mysql-workbench tor-browser-bundle
+      hledger weechat mysql-workbench
       # non-free
-      unstable.pkgs.discord google-chrome steam
+      unstable.pkgs.discord steam
+      # term emulator
+      rxvt_unicode
     ];
 
     home.keyboard = {
       layout = "gb";
     };
-
-    home.sessionVariables = {
-      EDITOR = "emacs";
-      BROWSER = "google-chrome-stable";
-    };
-
-    home.stateVersion = "18.09";
-
-    accounts.email.accounts = {
-      home = {
-        primary = true;
-        flavor = "gmail.com";
-        address = "dreyer.maltem@gmail.com";
-        userName = "dreyer.maltem@gmail.com";
-        realName = "Malte-Maurice Dreyer";
-        notmuch.enable = true;
-        mbsync = {
-          enable = true;
-          create = "both";
-          patterns = [
-            "*" "![Gmail]*" "[Gmail]/Sent Mail"
-            "[Gmail]/Starred" "[Gmail]/All Mail"
-          ];
-        };
-        msmtp = {
-          enable = true;
-        };
-        passwordCommand = "${pkgs.pass}/bin/pass show 'Private Passwords/Email/Google'";
-      };
-    };
-    programs.alot = {
-      enable = true;
-    };
-    programs.notmuch = {
-      enable = true;
-      maildir.synchronizeFlags = true;
-    };
-    programs.mbsync.enable = true;
-    services.mbsync = {
-      enable = true;
-      postExec = "NOTMUCH_CONFIG=~/.config/notmuch/notmuchrc ${pkgs.notmuch}/bin/notmuch new";
-    };
-    programs.msmtp.enable = true;
-
-    programs.neovim = {
-      enable = true;
-
-      configure = {
-        packages.myVimPackage = with pkgs.vimPlugins; {
-          # loaded on launch
-          start = [ vim-nix ];
-          # manually loadable by calling `:packadd $plugin-name`
-          opt = [ ];
-        };
-      };
-    };
-
-    programs.emacs = {
-      enable = true;
-
-      extraPackages = epkgs: with epkgs; [
-        # undo-tree
-        # evil
-        # evil-leader
-        # evil-anzu
-        # evil-args
-        # evil-ediff
-        # evil-exchange
-        # evil-iedit-state
-        # evil-indent-plus
-        # evil-lisp-state
-        # evil-mc
-        # evil-nerd-commenter
-        # evil-matchit
-        # evil-numbers
-        # evil-search-highlight-persist
-        # evil-surround
-        # # ;; Temporarily disabled, pending the resolution of
-        # # ;; https://github.com/7696122/evil-terminal-cursor-changer/issues/8
-        # # ;; evil-terminal-cursor-changer
-        # # evil-tutor
-        # # (evil-unimpaired :location (recipe :fetcher local))
-        # evil-visual-mark-mode
-        # # (hs-minor-mode :location built-in)
-        # linum-relative
-        # vi-tilde-fringe
-        # org-plus-contrib
-
-        # expand-region
-        # iedit
-        # haskell-mode
-      ];
-    };
-
-    programs.firefox = {
-      enable = true;
-    };
-
-    programs.git = import ./git.nix { inherit pkgs; };
 
     home.file.".editorconfig" = {
       source = builtins.toFile "editorconfig" ''
@@ -207,15 +109,19 @@ in
 
       defaultKeymap = "viins";
       initExtra = ''
-        setopt extendedglob nomatch
+        setopt EXTENDED_GLOB NOMATCH HIST_REDUCE_BLANKS
         unsetopt autocd beep notify
         bindkey -v
         DEFAULT_USER=Myhlamaeus
         prompt_context(){}
       '';
 
+      dotDir = ".config/zsh";
+
       history = {
+        expireDuplicatesFirst = true;
         extended = true;
+        ignoreDups = true;
       };
 
       oh-my-zsh = {
@@ -257,20 +163,6 @@ in
       enable = true;
     };
 
-    services.redshift = {
-      enable = true;
-      latitude = "53.2626212";
-      longitude = "10.4411094";
-      brightness = {
-        day = "0.9";
-        night = "0.3";
-      };
-      temperature = {
-        day = 5500;
-        night = 2000;
-      };
-    };
-
     # services.bitlbee = {
     #   enable = true;
     #   plugins = [
@@ -278,35 +170,8 @@ in
     #   ];
     # };
 
-    xsession = {
-      enable = true;
-      initExtra = ''
-        # http://wallpaperswide.com/fedora_29_background-wallpapers.html
-        ${pkgs.feh}/bin/feh --bg-scale ${./fedora_29_background-wallpaper-2560x1440.jpg}
-      '';
-      profileExtra = ''
-        # ${pkgs.google-drive-ocamlfuse}/bin/google-drive-ocamlfuse ~/google-drive
-        ${pkgs.xdg_utils}/bin/xdg-settings set default-web-browser google-chrome.desktop
-      '';
-    };
+    # Let Home Manager install and manage itself.
+    programs.home-manager.enable = true;
 
-    services.screen-locker = {
-      enable = true;
-      lockCmd = "${pkgs.slock}/bin/slock";
-    };
-
-    services.unclutter = {
-      enable = true;
-    };
-
-    xresources = {
-      extraConfig = builtins.readFile (
-        pkgs.fetchFromGitHub {
-          owner = "logico-dev";
-          repo = "Xresources-themes";
-          rev = "1df25bf5b2e639e8695e8f2eb39e9d373af3b888";
-          sha256 = "0jjnnkyps2v0qdylad9ci2izpn0zqlkpdlv626sbhw35ayghxpv4";
-        } + "/base16-spacemacs-256.Xresources"
-      );
-    };
+    home.stateVersion = "18.09";
   }
