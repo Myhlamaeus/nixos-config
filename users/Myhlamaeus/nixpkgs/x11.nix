@@ -24,8 +24,7 @@
       ${pkgs.feh}/bin/feh --bg-scale ${./fedora_29_background-wallpaper-2560x1440.jpg}
     '';
     profileExtra = ''
-      # ${pkgs.google-drive-ocamlfuse}/bin/google-drive-ocamlfuse ~/google-drive
-      # ${pkgs.xdg_utils}/bin/xdg-settings set default-web-browser google-chrome.desktop
+      ${pkgs.google-drive-ocamlfuse}/bin/google-drive-ocamlfuse ~/media/google-drive
     '';
   };
 
