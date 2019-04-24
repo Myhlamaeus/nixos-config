@@ -85,7 +85,6 @@ in
   # List font packages
   fonts = {
     fonts = with pkgs; [
-      font-droid
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
