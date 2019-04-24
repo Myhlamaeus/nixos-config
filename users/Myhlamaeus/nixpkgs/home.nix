@@ -1,8 +1,6 @@
 { pkgs, lib, ... }:
 
 let
-  unstable = import <nixpkgs-unstable> {};
-
   urxvtConfig = exts: with builtins; with lib;
     let
       mkPath = mods: strings.concatStringsSep ":" (map (mod: "${mod}/lib/urxvt/perl") mods);
@@ -51,7 +49,7 @@ in
       # other
       hledger weechat mysql-workbench
       # non-free
-      unstable.pkgs.discord steam
+      discord steam
       # term emulator
       rxvt_unicode
     ];
