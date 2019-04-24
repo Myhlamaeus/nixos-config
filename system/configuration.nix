@@ -76,7 +76,7 @@ in
     # shell
     wget neovim git ncurses
     # vm
-    virtualboxHardened nixops
+    nixops
   ];
   environment.pathsToLink = [ "/share/zsh" ];
 
@@ -176,9 +176,7 @@ in
     ];
   };
 
-  virtualisation.virtualbox.host = { enable = true; };
   virtualisation.libvirtd.enable = true;
-  # security.setuidPrograms = [ "VirtualBox" "VBoxManage" ];
 
   nix.nixPath = [
     (let
