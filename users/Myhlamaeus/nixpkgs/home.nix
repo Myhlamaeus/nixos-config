@@ -159,6 +159,10 @@ in
 
     services.mpd = {
       enable = true;
+
+      network = {
+        listenAddress = "/run/mpd/socket";
+      };
     };
 
     # services.bitlbee = {
