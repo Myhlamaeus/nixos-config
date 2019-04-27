@@ -146,6 +146,9 @@ in
     windowManager.default = "xmonad";
   };
 
+  # Needed for home-manager GTK themes
+  services.dbus.packages = with pkgs; [ gnome3.dconf ];
+
   # Video drivers
   boot.extraModprobeConfig = "options nvidia-drm modeset=1";
   boot.initrd.kernelModules = [
