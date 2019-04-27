@@ -181,7 +181,7 @@ in
         { tags = [ "lightnovel" ]; url = "https://www.wuxiaworld.com/feed/chapters"; }
         { tags = [ "manga" ];      url = "https://readms.net/rss"; }
         { tags = [ ];              url = "https://xkcd.com/atom.xml"; }
-        { tags = [ "programming" "haskell" ]; url = "https://haskellweekly.news/haskell-weekly.atom"; }
+        { tags = [ "dev" "haskell" ]; url = "https://haskellweekly.news/haskell-weekly.atom"; }
       ];
       extraConfig = ''
         color background          white   black
