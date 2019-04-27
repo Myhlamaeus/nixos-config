@@ -35,8 +35,6 @@ in
         jq python36Packages.powerline ranger
         # dev
         haskellPackages.stylish-haskell shellcheck
-        # git
-        gitAndTools.git-open gitAndTools.git-recent
         # x11
         dmenu xclip
         # hs
@@ -53,7 +51,10 @@ in
         discord linux-steam-integration
         # term emulator
         rxvt_unicode
-      ];
+      ] ++ (with pkgs.gitAndTools; [
+        # git
+        git-open git-recent git-absorb
+      ]);
 
       home.keyboard = {
         layout = "gb";
