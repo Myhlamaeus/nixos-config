@@ -50,7 +50,7 @@ in
         # other
         hledger weechat mysql-workbench
         # non-free
-        discord steam
+        discord linux-steam-integration
         # term emulator
         rxvt_unicode
       ];
