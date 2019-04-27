@@ -40,38 +40,50 @@ data Workspace
   | WMsg
   | WGaming
   | WRead
+  | WWatch
+  | WListen
   | WN Int
   deriving (Eq)
+wNamedCount = 5
 
 instance Show Workspace where
-  show WOs = "1:os"
-  show WMsg = "2:msg"
+  show WOs     = "1:os"
+  show WMsg    = "2:msg"
   show WGaming = "3:gaming"
-  show WRead = "4:read"
-  show (WN 0) = "0"
-  show (WN n) = show (n + 4)
+  show WRead   = "4:read"
+  show WWatch  = "5:watch"
+  show WListen = "6:listen"
+  show (WN n)
+    | n + wNamedCount < 9 = show $ n + wNamedCount + 1
+    | n + wNamedCount == 9 = "0"
+    | otherwise           = show $ n + wNamedCount
+
+instance Enum Workspace where
+  toEnum 0 = WOs
+  toEnum 1 = WMsg
+  toEnum 2 = WGaming
+  toEnum 3 = WRead
+  toEnum 4 = WWatch
+  toEnum 5 = WListen
+  toEnum n = WN $ n - wNamedCount
+
+  fromEnum WOs = 0
+  fromEnum WMsg = 1
+  fromEnum WGaming = 2
+  fromEnum WRead = 3
+  fromEnum WWatch = 4
+  fromEnum WListen = 5
+  fromEnum (WN n) = n + wNamedCount
+
+instance Bounded Workspace where
+  minBound = toEnum 0
+  maxBound = toEnum 10
 
 instance Ord Workspace where
-  WOs <= _ = True
-  WMsg <= a
-    | a <= WOs = False
-    | otherwise = True
-  WGaming <= a
-    | a <= WMsg = False
-    | otherwise = True
-  WRead <= a
-    | a <= WGaming = False
-    | otherwise = True
-  WN 0 <= WN a = a == 0 || a > 9
-  WN a <= WN 0 = a <= 9
-  WN a <= WN b = a <= b
+  a <= b = fromEnum a <= fromEnum b
 
-workspaces' =
-  [ WOs
-  , WMsg
-  , WGaming
-  , WRead
-  ] <> sort (fmap WN [0..5])
+workspaces' :: [Workspace]
+workspaces' = [ minBound .. maxBound ]
 
 doShift' = doShift . (show :: Workspace -> String)
 
@@ -95,21 +107,21 @@ main = do
           }
         , workspaces = fmap show (workspaces' :: [Workspace])
         , manageHook = composeAll
-          [ isInfixOf "messages.android.com" <$> title --> doShift' WMsg
-          , isInfixOf "Steam" <$> title --> doShift' WGaming
-          , isInfixOf "steam" <$> title --> doShift' WGaming
-          , isInfixOf "calibre" <$> className --> doShift' WRead
-          , isInfixOf "goodreads.com" <$> title --> doShift' WRead
-          , className =? "Discord" --> doShift' WMsg
-          , className =? "Xmessage" --> doFloat
+          [ isInfixOf "messages.android.com" <$> title     --> doShift' WMsg
+          , isInfixOf "Steam"                <$> title     --> doShift' WGaming
+          , isInfixOf "steam"                <$> title     --> doShift' WGaming
+          , isInfixOf "calibre"              <$> className --> doShift' WRead
+          , isInfixOf "goodreads.com"        <$> title     --> doShift' WRead
+          , className =? "Discord"                         --> doShift' WMsg
+          , className =? "Xmessage"                        --> doFloat
           ] <+> def
         }
         `additionalKeysP`
-        [ ("M-C-l", spawn "xautolock -locknow")
+        [ ("M-C-l",   spawn "xautolock -locknow")
         , ("M-C-S-l", spawn "systemctl hibernate")
-        , ("M-C-r", spawn "systemctl --user start redshift")
+        , ("M-C-r",   spawn "systemctl --user start redshift")
         , ("M-C-S-r", spawn "systemctl --user stop redshift")
-        , ("M-0", windows $ W.greedyView (show (workspaces' !! 9)))
-        , ("M-S-0", windows $ W.shift (show (workspaces' !! 9)))
-        , ("M-p", spawn "dmenu_run")
+        , ("M-0",     windows . W.greedyView . show . (toEnum :: Int -> Workspace) $ 9)
+        , ("M-S-0",   windows . W.shift      . show . (toEnum :: Int -> Workspace) $ 9)
+        , ("M-p",     spawn "dmenu_run")
         ]
