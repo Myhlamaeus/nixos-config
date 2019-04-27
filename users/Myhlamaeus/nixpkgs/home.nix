@@ -183,6 +183,7 @@ in
         { tags = [ ];              url = "https://xkcd.com/atom.xml"; }
         { tags = [ "dev" "haskell" ]; url = "https://haskellweekly.news/haskell-weekly.atom"; }
         { tags = [ "dev" "sys" "nix" ]; url = "https://weekly.nixos.org/feeds/all.rss.xml"; }
+        { tags = [ "gaming" "nvidia" ]; url = "http://nvidianews.nvidia.com/rss.xml"; }
       ];
       extraConfig = ''
         color background          white   black
