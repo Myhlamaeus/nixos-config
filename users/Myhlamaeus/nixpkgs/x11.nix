@@ -39,6 +39,26 @@
     enable = true;
   };
 
+  gtk = {
+    enable = true;
+    font = {
+      package = pkgs.fira;
+      name = "Fira Sans 8";
+    };
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+    };
+    theme = {
+      package = pkgs.adapta-gtk-theme;
+      name = "Adapta-Nokto";
+    };
+  };
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+  };
+
   xresources = {
     extraConfig = builtins.readFile (
       pkgs.fetchFromGitHub {
