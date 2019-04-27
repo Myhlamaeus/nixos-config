@@ -182,6 +182,7 @@ in
         { tags = [ "manga" ];      url = "https://readms.net/rss"; }
         { tags = [ ];              url = "https://xkcd.com/atom.xml"; }
         { tags = [ "dev" "haskell" ]; url = "https://haskellweekly.news/haskell-weekly.atom"; }
+        { tags = [ "dev" "sys" "nix" ]; url = "https://weekly.nixos.org/feeds/all.rss.xml"; }
       ];
       extraConfig = ''
         color background          white   black
