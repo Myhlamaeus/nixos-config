@@ -184,6 +184,7 @@ in
         { tags = [ "dev" "haskell" ]; url = "https://haskellweekly.news/haskell-weekly.atom"; }
         { tags = [ "dev" "sys" "nix" ]; url = "https://weekly.nixos.org/feeds/all.rss.xml"; }
         { tags = [ "gaming" "nvidia" ]; url = "http://nvidianews.nvidia.com/rss.xml"; }
+        { tags = [ "dev" "media" ]; url = "https://aomedia.org/feed/"; }
       ];
       extraConfig = ''
         color background          white   black
