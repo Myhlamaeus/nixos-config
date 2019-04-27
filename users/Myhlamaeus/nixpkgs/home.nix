@@ -185,6 +185,7 @@ in
         { tags = [ "dev" "sys" "nix" ]; url = "https://weekly.nixos.org/feeds/all.rss.xml"; }
         { tags = [ "gaming" "nvidia" ]; url = "http://nvidianews.nvidia.com/rss.xml"; }
         { tags = [ "dev" "media" ]; url = "https://aomedia.org/feed/"; }
+        { tags = [ "science" "physics" ]; url = "https://physicsworld.com/feed/"; }
       ];
       extraConfig = ''
         color background          white   black
