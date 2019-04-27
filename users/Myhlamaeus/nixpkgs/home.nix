@@ -165,6 +165,14 @@ in
       };
     };
 
+
+    programs.bat = {
+      enable = true;
+      config = {
+        theme = "TwoDark";
+      };
+    };
+
     programs.newsboat = {
       enable = true;
       autoReload = true;
