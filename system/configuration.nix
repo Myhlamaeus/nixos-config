@@ -46,6 +46,8 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      <home-manager/nixos>
+      ./users/Myhlamaeus/home
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -161,14 +163,6 @@ in
   hardware.opengl.driSupport32Bit = true;
 
   hardware.u2f.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.Myhlamaeus = {
-    isNormalUser = true;
-    shell = pkgs.zsh;
-    home = "/home/Myhlamaeus";
-    extraGroups = [ "wheel" ];
-  };
 
   # Temporarily, until supported by home-manager.
   services.bitlbee = {
