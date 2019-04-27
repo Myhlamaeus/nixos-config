@@ -177,15 +177,15 @@ in
       enable = true;
       autoReload = true;
       urls = [
-        { tags = [ "anime" ];      url = "http://www8.watch-anime.org/feed/"; }
-        { tags = [ "lightnovel" ]; url = "https://www.wuxiaworld.com/feed/chapters"; }
-        { tags = [ "manga" ];      url = "https://readms.net/rss"; }
-        { tags = [ ];              url = "https://xkcd.com/atom.xml"; }
-        { tags = [ "dev" "haskell" ]; url = "https://haskellweekly.news/haskell-weekly.atom"; }
-        { tags = [ "dev" "sys" "nix" ]; url = "https://weekly.nixos.org/feeds/all.rss.xml"; }
-        { tags = [ "gaming" "nvidia" ]; url = "http://nvidianews.nvidia.com/rss.xml"; }
-        { tags = [ "dev" "media" ]; url = "https://aomedia.org/feed/"; }
-        { tags = [ "science" "physics" ]; url = "https://physicsworld.com/feed/"; }
+        { tags = [ "ani"                ]; url = "http://www8.watch-anime.org/feed/";              }
+        { tags = [ "ln"                 ]; url = "https://www.wuxiaworld.com/feed/chapters";       }
+        { tags = [ "mga"                ]; url = "https://readms.net/rss";                         }
+        { tags = [                      ]; url = "https://xkcd.com/atom.xml";                      }
+        { tags = [ "dev" "hask"         ]; url = "https://haskellweekly.news/haskell-weekly.atom"; }
+        { tags = [ "dev" "sys"    "nix" ]; url = "https://weekly.nixos.org/feeds/all.rss.xml";     }
+        { tags = [ "gam" "nvidia"       ]; url = "http://nvidianews.nvidia.com/rss.xml";           }
+        { tags = [ "dev" "media"        ]; url = "https://aomedia.org/feed/";                      }
+        { tags = [ "sci" "phys"         ]; url = "https://physicsworld.com/feed/";                 }
       ];
       extraConfig = ''
         color background          white   black
