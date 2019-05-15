@@ -173,6 +173,11 @@ in
     ];
   };
 
+  services.clamav = {
+    daemon.enable = true;
+    updater.enable = true;
+  };
+
   virtualisation.libvirtd.enable = true;
 
   nix.nixPath = [
