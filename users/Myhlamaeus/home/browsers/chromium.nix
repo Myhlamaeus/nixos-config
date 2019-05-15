@@ -29,7 +29,7 @@
         # "clngdbkpkpeebahjckkjfobafhncgmne" # Stylus
         # "nlnkcinjjeoojlhdiedbbolilahmnldj" # Tab Sorter
         "eggkanocgddhmamlbiijnphhppkpkmkl" # Tabs Outliner
-        # "dhdgffkkebhmkfjojejmpbldmpobfkfo" # Tampermonkey
+        "dhdgffkkebhmkfjojejmpbldmpobfkfo" # Tampermonkey
         "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
         "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium
         "bhmmomiinigofkjcapegjjndpbikblnp" # WOT Web of Trust, Website Reputation Ratings
