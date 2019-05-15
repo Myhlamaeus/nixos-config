@@ -1,5 +1,7 @@
 {
   allowUnfree = true;
+  allowBroken = true;
+
   packageOverrides = pkgs: {
     nur = builtins.fetchTarball {
       # Get the revision by choosing a version from https://github.com/nix-community/NUR/commits/master
