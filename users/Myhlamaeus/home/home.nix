@@ -108,8 +108,13 @@ in
         initExtra = ''
           setopt EXTENDED_GLOB NOMATCH HIST_REDUCE_BLANKS
           unsetopt autocd beep notify
-          bindkey -v
           DEFAULT_USER=Myhlamaeus
+
+          bindkey -v
+          # https://unix.stackexchange.com/questions/438307/zsh-start-new-prompt-in-command-mode-vi-mode
+          zle-line-init() { zle -K vicmd; }
+          zle -N zle-line-init
+
           prompt_context(){}
         '';
 
