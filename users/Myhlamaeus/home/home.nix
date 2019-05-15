@@ -190,6 +190,9 @@ in
           { tags = [ "gam" "nvidia"       ]; url = "http://nvidianews.nvidia.com/rss.xml";           }
           { tags = [ "dev" "media"        ]; url = "https://aomedia.org/feed/";                      }
           { tags = [ "sci" "phys"         ]; url = "https://physicsworld.com/feed/";                 }
+          { tags = [ "gam" "tes"          ]; url = "https://feeds.feedburner.com/openmw";            }
+          { tags = [ "mat"                ]; url = "https://export.arxiv.org/rss/math";              }
+          { tags = [ "dev" "sys"    "nix" ]; url = "https://blog.hercules-ci.com/feed.xml";          }
         ];
         extraConfig = ''
           color background          white   black
