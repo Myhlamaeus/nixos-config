@@ -51,10 +51,7 @@ in
         discord linux-steam-integration
         # term emulator
         rxvt_unicode
-      ] ++ (with pkgs.gitAndTools; [
-        # git
-        git-open git-recent git-absorb
-      ]);
+      ];
 
       home.keyboard = {
         layout = "gb";

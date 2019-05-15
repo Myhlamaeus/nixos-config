@@ -2,6 +2,11 @@
 
 {
   home-manager.users.Myhlamaeus = {
+    home.packages =
+      with pkgs.gitAndTools; [
+        git-absorb git-open git-recent
+      ];
+
     programs.git = {
       enable = true;
 
