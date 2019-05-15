@@ -114,6 +114,7 @@ in
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.bash.enableCompletion = true;
+  programs.zsh.enableCompletion = true;
   # programs.mtr.enable = true;
 
   # List services that you want to enable:
