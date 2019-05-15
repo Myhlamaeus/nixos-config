@@ -26,7 +26,7 @@ in
   {
     imports = [
       ./browsers/chromium.nix ./browsers/firefox.nix ./editors/emacs.nix ./editors/neovim.nix
-      ./email.nix ./git.nix ./x11.nix ./xmonad.nix
+      ./email.nix ./games.nix ./git.nix ./x11.nix ./xmonad.nix
     ];
 
     home-manager.users.Myhlamaeus = {
@@ -48,7 +48,7 @@ in
         # other
         hledger weechat mysql-workbench
         # non-free
-        discord linux-steam-integration
+        discord
         # term emulator
         rxvt_unicode
       ];
