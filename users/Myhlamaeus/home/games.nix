@@ -12,6 +12,7 @@ in
           openrct2
           openttd
           zeroad
+          dwarf-fortress-packages.dwarf-fortress-full
         ]) ++ (with pkgs-unstable; [
           linux-steam-integration
           openmw
