@@ -8,7 +8,7 @@ in
     home-manager.users.Myhlamaeus = {
       home.packages =
         (with pkgs.gitAndTools; [
-          git-absorb git-appraise git-codeowners git-ignore git-open git-recent
+          git-absorb git-appraise git-codeowners git-ignore git-open git-recent lab
         ]) ++ (with nixpkgs-unstable.gitAndTools; [
           git-bug
         ]);
