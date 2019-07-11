@@ -46,7 +46,7 @@ in
         # media
         mpc_cli mpv shutter greg
         # security
-        gnupg keepassxc pass
+        gnupg keepassxc pass keybase
         # other
         hledger weechat mysql-workbench
         # non-free
@@ -58,6 +58,9 @@ in
         # because of plugin compatibility
         calibre
       ]);
+
+      services.keybase.enable = true;
+      services.kbfs.enable = true;
 
       home.keyboard = {
         layout = "gb";
