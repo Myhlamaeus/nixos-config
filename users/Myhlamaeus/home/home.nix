@@ -21,6 +21,8 @@ let
           );
         "perl-ext-common" = mkExts exts;
       };
+  pkgs-unstable = (import <nixpkgs-unstable> { config = { allowUnfree = true; }; });
+
 
 in
   {
@@ -30,7 +32,7 @@ in
     ];
 
     home-manager.users.Myhlamaeus = {
-      home.packages = with pkgs; [
+      home.packages = (with pkgs; [
         # shell
         jq python36Packages.powerline ranger
         # dev
@@ -42,7 +44,7 @@ in
         # term emulator
         rxvt_unicode
         # media
-        calibre mpc_cli mpv shutter greg
+        mpc_cli mpv shutter greg
         # security
         gnupg keepassxc pass
         # other
@@ -51,7 +53,11 @@ in
         discord
         # term emulator
         rxvt_unicode
-      ];
+      ]) ++ (with pkgs-unstable; [
+        # media
+        # because of plugin compatibility
+        calibre
+      ]);
 
       home.keyboard = {
         layout = "gb";
