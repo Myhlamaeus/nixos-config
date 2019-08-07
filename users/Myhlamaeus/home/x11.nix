@@ -33,7 +33,7 @@
       enable = true;
       # Must be installed via configuration.nix and
       # referenced like this as it is wrapped
-      lockCmd = "slock";
+      lockCmd = "sh -c 'slock & sleep 0.5 && xset dpms force off'";
     };
 
     services.unclutter = {
