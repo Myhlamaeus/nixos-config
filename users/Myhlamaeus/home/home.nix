@@ -53,10 +53,12 @@ in
         discord
         # term emulator
         rxvt_unicode
+        # media
+        calibre
       ]) ++ (with pkgs-unstable; [
         # media
         # because of plugin compatibility
-        calibre
+        # calibre
       ]);
 
       services.keybase.enable = true;
