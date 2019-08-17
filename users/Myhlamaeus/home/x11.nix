@@ -34,6 +34,7 @@
       # Must be installed via configuration.nix and
       # referenced like this as it is wrapped
       lockCmd = "sh -c 'slock & sleep 0.5 && xset dpms force off'";
+      xautolockExtraOptions = ["-corners -000"];
     };
 
     services.unclutter = {
