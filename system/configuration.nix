@@ -20,9 +20,9 @@ let
       buildInputs = [ bitlbee glib ];
 
       preConfigure = ''
-        export BITLBEE_PLUGINDIR=$out/lib/bitlbee
-        ./autogen.sh
-      '';
+          export BITLBEE_PLUGINDIR=$out/lib/bitlbee
+          ./autogen.sh
+        '';
 
       meta = {
         description = "Bitlbee plugin for Discord";
@@ -44,7 +44,8 @@ in
   };
 
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       <home-manager/nixos>
       ./users/Myhlamaeus/home
@@ -92,10 +93,10 @@ in
     # rule.  Changing ModemManager's filter policy from "strict" to "default"
     # may also help.  But if you don't use a modem, completely removing
     # the troublesome ModemManager is the most effective solution.
-  '';
+    '';
 
   networking.hostName = "nixos"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -116,7 +117,10 @@ in
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     # shell
-    wget neovim git ncurses
+    wget
+    neovim
+    git
+    ncurses
     # vm
     nixops
   ];
@@ -221,15 +225,16 @@ in
   virtualisation.libvirtd.enable = true;
 
   nix.nixPath = [
-    (let
-      sshConfigFile =
-        pkgs.writeText "ssh_config" ''
-          Host github.com
-          IdentityFile /etc/ssh/ssh_host_rsa_key
-          StrictHostKeyChecking=no
-        '';
-    in
-      "ssh-config-file=${sshConfigFile}"
+    (
+      let
+        sshConfigFile =
+          pkgs.writeText "ssh_config" ''
+              Host github.com
+              IdentityFile /etc/ssh/ssh_host_rsa_key
+              StrictHostKeyChecking=no
+            '';
+      in
+        "ssh-config-file=${sshConfigFile}"
     )
     # The following lines are just the default values of NIX_PATH
     # We have to keep them to not brick the system

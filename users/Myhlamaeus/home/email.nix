@@ -14,8 +14,11 @@
           enable = true;
           create = "both";
           patterns = [
-            "*" "![Gmail]*" "[Gmail]/Sent Mail"
-            "[Gmail]/Starred" "[Gmail]/All Mail"
+            "*"
+            "![Gmail]*"
+            "[Gmail]/Sent Mail"
+            "[Gmail]/Starred"
+            "[Gmail]/All Mail"
           ];
         };
         msmtp = {

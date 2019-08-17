@@ -11,13 +11,17 @@ let
 
       unpackPhase = "true";
       buildPhase = ''
-        cp "${config}" xmonad.hs
-        '' + mapAttrsToString (name: value: ''
-          sed -i "s#${name}#${value}#g" xmonad.hs
-        '') replacements;
+          cp "${config}" xmonad.hs
+        ''
+      + mapAttrsToString (
+          name: value: ''
+              sed -i "s#${name}#${value}#g" xmonad.hs
+            ''
+        ) replacements
+      ;
       installPhase = ''
-        cp xmonad.hs "$out"
-      '';
+          cp xmonad.hs "$out"
+        '';
     };
   xmobar = config:
     stdenv.mkDerivation {
@@ -26,11 +30,11 @@ let
 
       unpackPhase = "true";
       installPhase = ''
-        mkdir -p "$out/bin"
+          mkdir -p "$out/bin"
 
-        makeWrapper "${pkgs.haskellPackages.xmobar}/bin/xmobar" "$out/bin/xmobar" \
-          --add-flags "\"${config}\""
-      '';
+          makeWrapper "${pkgs.haskellPackages.xmobar}/bin/xmobar" "$out/bin/xmobar" \
+            --add-flags "\"${config}\""
+        '';
     };
 
 in
@@ -41,7 +45,8 @@ in
         enableContribAndExtras = true;
         config = xmonadConfig
           ./xmonad.hs
-          { xmobar-with-config = (xmobar ./xmobar.hs) + /bin/xmobar;
+          {
+            xmobar-with-config = (xmobar ./xmobar.hs) + /bin/xmobar;
             dmenu_run = "${pkgs.dmenu}/bin/dmenu_run";
             xautolock = "${pkgs.xautolock}/bin/xautolock";
           };

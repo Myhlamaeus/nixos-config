@@ -21,12 +21,12 @@
     xsession = {
       enable = true;
       initExtra = ''
-        # http://wallpaperswide.com/fedora_29_background-wallpapers.html
-        ${pkgs.feh}/bin/feh --bg-scale ${./fedora_29_background-wallpaper-2560x1440.jpg}
-      '';
+          # http://wallpaperswide.com/fedora_29_background-wallpapers.html
+          ${pkgs.feh}/bin/feh --bg-scale ${./fedora_29_background-wallpaper-2560x1440.jpg}
+        '';
       profileExtra = ''
-        ${pkgs.google-drive-ocamlfuse}/bin/google-drive-ocamlfuse ~/media/google-drive
-      '';
+          ${pkgs.google-drive-ocamlfuse}/bin/google-drive-ocamlfuse ~/media/google-drive
+        '';
     };
 
     services.screen-locker = {
@@ -34,7 +34,7 @@
       # Must be installed via configuration.nix and
       # referenced like this as it is wrapped
       lockCmd = "sh -c 'slock & sleep 0.5 && xset dpms force off'";
-      xautolockExtraOptions = ["-corners -000"];
+      xautolockExtraOptions = [ "-corners -000" ];
     };
 
     services.unclutter = {
@@ -68,7 +68,8 @@
           repo = "Xresources-themes";
           rev = "1df25bf5b2e639e8695e8f2eb39e9d373af3b888";
           sha256 = "0jjnnkyps2v0qdylad9ci2izpn0zqlkpdlv626sbhw35ayghxpv4";
-        } + "/base16-spacemacs-256.Xresources"
+        }
+        + "/base16-spacemacs-256.Xresources"
       );
     };
   };
