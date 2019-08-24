@@ -43,6 +43,7 @@ in
     home.packages = (
       with pkgs; [
         # shell
+        ag
         jq
         python36Packages.powerline
         ranger
