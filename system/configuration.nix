@@ -33,6 +33,20 @@ let
         platforms = stdenv.lib.platforms.linux;
       };
     };
+    teensyUdev =
+      pkgs.stdenv.mkDerivation {
+        name = "49-teensy.rules";
+        src =
+          builtins.fetchurl {
+            url = "https://www.pjrc.com/teensy/49-teensy.rules";
+            sha256 = "052rgk3q9pnxrrxx98x6yrhbxvhjp1z5mn4vpkwgni7jrrnvn5vw";
+          };
+        unpackPhase = "true";
+        installPhase = ''
+          mkdir -p $out/etc/udev/rules.d
+          cp $src $out/etc/udev/rules.d/49-teensy.rules
+        '';
+      };
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -57,45 +71,8 @@ in
 
   services.atd.enable = true;
 
-  services.udev.extraRules = ''
-    # UDEV Rules for Teensy boards, http://www.pjrc.com/teensy/
-    #
-    # The latest version of this file may be found at:
-    #   http://www.pjrc.com/teensy/49-teensy.rules
-    #
-    # This file must be placed at:
-    #
-    # /etc/udev/rules.d/49-teensy.rules    (preferred location)
-    #   or
-    # /lib/udev/rules.d/49-teensy.rules    (req'd on some broken systems)
-    #
-    # To install, type this command in a terminal:
-    #   sudo cp 49-teensy.rules /etc/udev/rules.d/49-teensy.rules
-    #
-    # After this file is installed, physically unplug and reconnect Teensy.
-    #
-    ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", ENV{ID_MM_DEVICE_IGNORE}="1", ENV{ID_MM_PORT_IGNORE}="1"
-    ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789A]?", ENV{MTP_NO_PROBE}="1"
-    SUBSYSTEMS=="usb", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789ABCD]?", OWNER:="Myhlamaeus"
-    KERNEL=="ttyACM*", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="04[789B]?", OWNER:="Myhlamaeus"
-    #
-    # If you share your linux system with other users, or just don't like the
-    # idea of write permission for everybody, you can replace MODE:="0666" with
-    # OWNER:="yourusername" to create the device owned by you, or with
-    # GROUP:="somegroupname" and mange access using standard unix groups.
-    #
-    # ModemManager tends to interfere with USB Serial devices like Teensy.
-    # Problems manifest as the Arduino Serial Monitor missing some incoming
-    # data, and "Unable to open /dev/ttyACM0 for reboot request" when
-    # uploading.  If you experience these problems, disable or remove
-    # ModemManager from your system.  If you must use a modem, perhaps
-    # try disabling the "MM_FILTER_RULE_TTY_ACM_INTERFACE" ModemManager
-    # rule.  Changing ModemManager's filter policy from "strict" to "default"
-    # may also help.  But if you don't use a modem, completely removing
-    # the troublesome ModemManager is the most effective solution.
-    '';
+  services.udev.packages = [ teensyUdev ];
 
-  networking.hostName = "nixos"; # Define your hostname.
   networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
