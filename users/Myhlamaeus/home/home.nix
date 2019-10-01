@@ -51,6 +51,7 @@ in
         # dev
         haskellPackages.stylish-haskell
         shellcheck
+        ispell
         # x11
         dmenu
         xclip
