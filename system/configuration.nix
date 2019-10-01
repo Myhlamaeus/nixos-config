@@ -203,6 +203,10 @@ in
   };
 
   virtualisation.libvirtd.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    autoPrune.enable = true;
+  };
 
   nix.nixPath = [
     (
@@ -225,8 +229,16 @@ in
 
   nix.gc = {
     automatic = true;
-    dates = "weekly";
+    dates = "18:15";
     options = "--delete-older-than 30d";
+  };
+  nix.optimise = {
+    automatic = true;
+    dates = ["18:45"];
+  };
+  system.autoUpgrade = {
+    enable = true;
+    dates = "19:40";
   };
 
   # This value determines the NixOS release with which your system is to be
@@ -234,8 +246,4 @@ in
   # servers. You should change this only after NixOS release notes say you
   # should.
   system.stateVersion = "19.03"; # Did you read the comment?
-  system.autoUpgrade = {
-    enable = true;
-    dates = "05:00";
-  };
 }
