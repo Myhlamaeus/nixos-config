@@ -151,6 +151,8 @@ in
         co = "checkout";
         cp = "cherry-pick";
         df = "diff --patch-with-stat";
+        fu = "commit --fixup";
+        fuh = "commit --fixup HEAD";
         pu = "push";
         puf = "push --force";
         "rec" = "rebase --continue";
