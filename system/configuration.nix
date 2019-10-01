@@ -61,6 +61,7 @@ in
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./cachix.nix
       <home-manager/nixos>
       ./users/Myhlamaeus/home
     ];
@@ -93,6 +94,8 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # nix
+    cachix
     # shell
     wget
     neovim
