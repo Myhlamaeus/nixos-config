@@ -31,13 +31,15 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     csharp
      finance
+     gtags
      haskell
      html
      javascript
      nixos
-     php
      shell-scripts
+     terraform
      typescript
      yaml
      ;; ----------------------------------------------------------------
@@ -52,10 +54,10 @@ values."
      ;; git
      markdown
      org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
-     ;; spell-checking
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
+     spell-checking
      syntax-checking
      ;; version-control
      )
@@ -63,7 +65,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(editorconfig)
+   dotspacemacs-additional-packages '(editorconfig polymode direnv)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -312,14 +314,10 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (require 'ob-haskell)
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((haskell . t)))
-  ;; (require 'ob-sh)
+  ;; (require 'ob-haskell)
   ;; (org-babel-do-load-languages
   ;;  'org-babel-load-languages
-  ;;  '((sh . t)))
+  ;;  '((haskell . t)))
   )
 
 (defun dotspacemacs/user-config ()
@@ -330,18 +328,25 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (editorconfig-mode 1)
+  (define-hostmode poly-nix-hostmode
+    :mode 'nix-mode
+    )
+  (define-innermode poly-nix-fenced-string-innermode
+    :mode 'haskell-mode
+    :head-matcher (cons "#+BEGIN_SRC" 1)
+    :tail-matcher (cons "''" 1)
+    ;; :tail-matcher (cons "^[ \t]*\\(#+END_SRC\\)[ \t]*$" 1)
+    ;; :mode-matcher (cons "#+BEGIN_SRC \\(?:lang *= *\\)?\\([^ \t\n;=,}]+\\)" 1)
+    :head-mode 'host
+    :tail-mode 'host
+    )
+  (define-polymode poly-nix-mode
+    :hostmode 'poly-nix-hostmode
+    :innermodes '(poly-nix-fenced-string-innermode
+                   )
+    )
+  (direnv-mode)
   )
-
-(defun sort-words (reverse beg end)
-  "Sort words in region alphabetically, in REVERSE if negative.
-    Prefixed with negative \\[universal-argument], sorts in reverse.
-
-    The variable `sort-fold-case' determines whether alphabetic case
-    affects the sort order.
-
-    See `sort-regexp-fields'."
-  (interactive "*P\nr")
-  (sort-regexp-fields reverse "[^\s]+" "\\&" beg end))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -350,12 +355,10 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-  '(org-agenda-files
-     (quote
-       ("~/org/nix-setup.org" "~/org/cooking.org" "~/org/math.org" "~/org/vanity.org")))
+ '(evil-want-Y-yank-to-eol nil)
   '(package-selected-packages
      (quote
-       (tide typescript-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode mmm-mode markdown-toc markdown-mode gh-md editorconfig phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode ledger-mode flycheck-ledger org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc coffee-mode insert-shebang fish-mode xterm-color shell-pop multi-term flycheck-pos-tip pos-tip flycheck-haskell eshell-z eshell-prompt-extras esh-help nix-mode helm-nixos-options nixos-options yaml-mode intero flycheck hlint-refactor hindent helm-hoogle haskell-snippets yasnippet company-ghci company-ghc ghc company haskell-mode cmm-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+       (helm-gtags ggtags omnisharp csharp-mode xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help direnv terraform-mode hcl-mode polymode yaml-mode web-mode web-beautify tide typescript-mode tagedit slim-mode scss-mode sass-mode pug-mode phpunit phpcbf php-extras php-auto-yasnippets org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download nix-mode mmm-mode markdown-toc markdown-mode livid-mode skewer-mode simple-httpd ledger-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc intero insert-shebang htmlize hlint-refactor hindent helm-nixos-options helm-hoogle helm-css-scss helm-company helm-c-yasnippet haskell-snippets haml-mode gnuplot gh-md fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck-ledger flycheck-haskell flycheck fish-mode emmet-mode editorconfig drupal-mode php-mode company-web web-completion-data company-tern dash-functional tern company-statistics company-shell company-nixos-options nixos-options company-ghci company-ghc ghc haskell-mode company-cabal company coffee-mode cmm-mode auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete which-key use-package toc-org request persp-mode paradox org-plus-contrib org-bullets lorem-ipsum link-hint hydra lv hl-todo helm-swoop helm-projectile projectile helm-make helm-descbinds google-translate eyebrowse expand-region exec-path-from-shell evil-nerd-commenter evil-matchit dumb-jump define-word aggressive-indent ace-window ace-link avy iedit smartparens evil helm helm-core async dash ws-butler winum volatile-highlights vi-tilde-fringe uuidgen spinner spaceline restart-emacs rainbow-delimiters popwin popup pkg-info pcre2el open-junk-file neotree move-text macrostep linum-relative indent-guide hungry-delete highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-mode-manager helm-flx helm-ag goto-chg golden-ratio flx-ido fill-column-indicator fancy-battery evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-mc evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav diminish column-enforce-mode clean-aindent-mode bind-key auto-highlight-symbol auto-compile adaptive-wrap ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
