@@ -44,6 +44,7 @@ in
       with pkgs; [
         # shell
         ag
+        cheat
         jq
         python36Packages.powerline
         ranger
