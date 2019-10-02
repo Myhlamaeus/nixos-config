@@ -33,7 +33,7 @@ in
     ./editors/emacs.nix
     ./editors/neovim.nix
     ./email.nix
-    ./games.nix
+    ./games
     ./git.nix
     ./x11.nix
     ./xmonad.nix
