@@ -69,7 +69,7 @@ in
         # security
         gnupg
         keepassxc
-        pass
+        (pass.withExtensions (exts: with exts; [ pass-update pass-audit ]))
         keybase
         # other
         hledger
