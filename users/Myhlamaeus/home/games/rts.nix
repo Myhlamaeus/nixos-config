@@ -5,18 +5,16 @@ let
 
 in
 {
-  home-manager.users.Myhlamaeus = {
-    home.packages =
-      (
-        with pkgs; [
-          openra
-          zeroad
-        ]
-      )
-      ++ (
-           with pkgs-unstable; [
-           ]
-         )
-    ;
-  };
+  home.packages =
+    (
+      with pkgs; [
+        openra
+        zeroad
+      ]
+    )
+    ++ (
+          with pkgs-unstable; [
+          ]
+        )
+  ;
 }

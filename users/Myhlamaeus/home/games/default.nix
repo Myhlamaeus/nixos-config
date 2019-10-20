@@ -1,5 +1,10 @@
-{ pkgs, lib, ... }:
+_:
 
 {
-  imports = [ ./platforms.nix ./rpgs.nix ./rts.nix ./simulation.nix ];
+  imports = [
+    ./platforms.nix
+    ./rpgs.nix
+    ./rts.nix
+    ./simulation.nix
+  ];
 }

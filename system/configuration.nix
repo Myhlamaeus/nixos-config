@@ -63,7 +63,7 @@ in
       ./hardware-configuration.nix
       ./cachix.nix
       <home-manager/nixos>
-      ./users/Myhlamaeus/home
+      ./users
     ];
 
   # Use the systemd-boot EFI boot loader.

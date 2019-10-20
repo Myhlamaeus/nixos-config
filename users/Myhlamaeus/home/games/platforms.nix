@@ -5,17 +5,15 @@ let
 
 in
 {
-  home-manager.users.Myhlamaeus = {
-    home.packages =
-      (
-        with pkgs; [
-        ]
-      )
-      ++ (
-           with pkgs-unstable; [
-             linux-steam-integration
-           ]
-         )
-    ;
-  };
+  home.packages =
+    (
+      with pkgs; [
+      ]
+    )
+    ++ (
+          with pkgs-unstable; [
+            linux-steam-integration
+          ]
+        )
+  ;
 }

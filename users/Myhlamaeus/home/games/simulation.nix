@@ -5,19 +5,17 @@ let
 
 in
 {
-  home-manager.users.Myhlamaeus = {
-    home.packages =
-      (
-        with pkgs; [
-          openrct2
-          openttd
-          dwarf-fortress-packages.dwarf-fortress-full
-        ]
-      )
-      ++ (
-           with pkgs-unstable; [
-           ]
-         )
-    ;
-  };
+  home.packages =
+    (
+      with pkgs; [
+        openrct2
+        openttd
+        dwarf-fortress-packages.dwarf-fortress-full
+      ]
+    )
+    ++ (
+          with pkgs-unstable; [
+          ]
+        )
+  ;
 }

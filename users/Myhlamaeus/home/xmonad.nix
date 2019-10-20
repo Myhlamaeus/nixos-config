@@ -38,18 +38,16 @@ let
     };
 
 in
-  {
-    home-manager.users.Myhlamaeus = {
-      xsession.windowManager.xmonad = {
-        enable = true;
-        enableContribAndExtras = true;
-        config = xmonadConfig
-          ./xmonad.hs
-          {
-            xmobar-with-config = (xmobar ./xmobar.hs) + /bin/xmobar;
-            dmenu_run = "${pkgs.dmenu}/bin/dmenu_run";
-            xautolock = "${pkgs.xautolock}/bin/xautolock";
-          };
+{
+  xsession.windowManager.xmonad = {
+    enable = true;
+    enableContribAndExtras = true;
+    config = xmonadConfig
+      ./xmonad.hs
+      {
+        xmobar-with-config = (xmobar ./xmobar.hs) + /bin/xmobar;
+        dmenu_run = "${pkgs.dmenu}/bin/dmenu_run";
+        xautolock = "${pkgs.xautolock}/bin/xautolock";
       };
-    };
-  }
+  };
+}
