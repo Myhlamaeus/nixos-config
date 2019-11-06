@@ -46,7 +46,7 @@ in
       ./xmonad.hs
       {
         xmobar-with-config = (xmobar ./xmobar.hs) + /bin/xmobar;
-        dmenu_run = "${pkgs.dmenu}/bin/dmenu_run";
+        rofi = "${pkgs.rofi}/bin/rofi";
         xautolock = "${pkgs.xautolock}/bin/xautolock";
       };
   };

@@ -59,9 +59,6 @@ in
       haskellPackages.stylish-haskell
       shellcheck
       ispell
-      # x11
-      dmenu
-      xclip
       # hs
       cabal-install
       cabal2nix

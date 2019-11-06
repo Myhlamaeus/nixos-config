@@ -123,5 +123,6 @@ main = do
         , ("M-C-S-r", spawn "systemctl --user stop redshift")
         , ("M-0",     windows . W.greedyView . show . (toEnum :: Int -> Workspace) $ 9)
         , ("M-S-0",   windows . W.shift      . show . (toEnum :: Int -> Workspace) $ 9)
-        , ("M-p",     spawn "dmenu_run")
+        , ("M-p",     spawn "rofi -show run")
+        , ("M-S-p",   spawn "rofi -show window")
         ]

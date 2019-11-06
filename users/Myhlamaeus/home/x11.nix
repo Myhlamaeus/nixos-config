@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ dmenu xclip ];
+  home.packages = with pkgs; [ xclip ];
 
   services.redshift = {
     enable = true;
@@ -58,6 +58,24 @@
   qt = {
     enable = true;
     platformTheme = "gtk";
+  };
+
+  programs.rofi = {
+    enable = true;
+    theme = "android_notification";
+    extraConfig = ''
+      rofi.kb-remove-char-back:  BackSpace
+      rofi.kb-accept-entry:  Return,KP_Enter
+      rofi.kb-remove-to-eol:  Shift+BackSpace
+      rofi.kb-move-char-back:  Left
+      rofi.kb-move-char-forward:  Right
+      rofi.kb-row-left:          Control+h
+      rofi.kb-row-right:         Control+l
+      rofi.kb-row-down:          Control+j
+      rofi.kb-row-up:            Control+k
+      rofi.kb-page-prev:         Control+b
+      rofi.kb-page-next:         Control+f
+    '';
   };
 
   xresources = {
