@@ -234,7 +234,7 @@ in
   nix.gc = {
     automatic = true;
     dates = "18:15";
-    options = "--delete-older-than 30d";
+    options = "--delete-older-than 5d";
   };
   nix.optimise = {
     automatic = true;
