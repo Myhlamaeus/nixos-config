@@ -40,7 +40,7 @@ in
   nixpkgs.config = {
     allowUnfree = true;
   };
-  xdg.configFile."nixpkggs/config.nix".text = ''
+  xdg.configFile."nixpkgs/config.nix".text = ''
     {
       allowBroken = true;
       allowUnfree = true;
