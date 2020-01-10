@@ -75,7 +75,8 @@ in
 
   services.atd.enable = true;
 
-  services.udev.packages = [ teensyUdev ];
+  services.udev.packages = [ teensyUdev pkgs.steamPackages.steam ];
+  # options.hardware.steam-hardware.enable = true;
 
   networking.wireless.enable = true; # Enables wireless support via wpa_supplicant.
 
