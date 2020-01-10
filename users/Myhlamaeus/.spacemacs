@@ -39,6 +39,8 @@ This function should only modify configuration layer settings."
      gtags
      haskell
      (html :variables
+       css-enable-lsp t
+       html-enable-lsp t
        web-fmt-tool 'prettier
        )
      javascript
