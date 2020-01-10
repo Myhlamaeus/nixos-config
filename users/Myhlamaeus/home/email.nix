@@ -23,7 +23,7 @@
       msmtp = {
         enable = true;
       };
-      passwordCommand = "${pkgs.pass}/bin/pass show 'Private Passwords/Email/Google'";
+      passwordCommand = "${pkgs.pass}/bin/pass show private/emails/gmail";
       gpg = {
         key = "7FCB362E2D975AD2A45A682CAD1390B6FE33C758";
       };
