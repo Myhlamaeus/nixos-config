@@ -33,20 +33,21 @@ let
         platforms = stdenv.lib.platforms.linux;
       };
     };
-    teensyUdev =
-      pkgs.stdenv.mkDerivation {
-        name = "49-teensy.rules";
-        src =
-          builtins.fetchurl {
-            url = "https://www.pjrc.com/teensy/49-teensy.rules";
-            sha256 = "052rgk3q9pnxrrxx98x6yrhbxvhjp1z5mn4vpkwgni7jrrnvn5vw";
-          };
-        unpackPhase = "true";
-        installPhase = ''
-          mkdir -p $out/etc/udev/rules.d
-          cp $src $out/etc/udev/rules.d/49-teensy.rules
-        '';
-      };
+  teensyUdev =
+    pkgs.stdenv.mkDerivation {
+      name = "49-teensy.rules";
+      src =
+        builtins.fetchurl {
+          url = "https://www.pjrc.com/teensy/49-teensy.rules";
+          sha256 = "052rgk3q9pnxrrxx98x6yrhbxvhjp1z5mn4vpkwgni7jrrnvn5vw";
+        };
+      unpackPhase = "true";
+      installPhase = ''
+        mkdir -p $out/etc/udev/rules.d
+        cp $src $out/etc/udev/rules.d/49-teensy.rules
+      '';
+    };
+
 in
 {
   nixpkgs.config.allowUnfree = true;
