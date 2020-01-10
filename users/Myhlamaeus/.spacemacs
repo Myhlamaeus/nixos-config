@@ -47,6 +47,7 @@ This function should only modify configuration layer settings."
      nixos
      prettier
      python
+     react
      shell-scripts
      terraform
      typescript
