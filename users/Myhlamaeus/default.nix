@@ -7,7 +7,7 @@
     isNormalUser = true;
     shell = pkgs.zsh;
     home = "/home/Myhlamaeus";
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "docker" ];
   };
 
   home-manager.users.Myhlamaeus = import ./home;
