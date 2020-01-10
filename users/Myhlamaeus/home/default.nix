@@ -35,6 +35,7 @@ in
     ./git.nix
     ./x11.nix
     ./xmonad.nix
+    ./direnv
   ];
 
   nixpkgs.config = {
@@ -201,11 +202,6 @@ in
       "Mod1-x" = "perl:clipboard:copy";
       "Mod1-y" = "perl:clipboard:paste";
     };
-  };
-
-  programs.direnv = {
-    enable = true;
-    enableZshIntegration = true;
   };
 
   services.mpd = {
