@@ -38,9 +38,12 @@ This function should only modify configuration layer settings."
      finance
      gtags
      haskell
-     html
+     (html :variables
+       web-fmt-tool 'prettier
+       )
      javascript
      nixos
+     prettier
      python
      shell-scripts
      terraform
