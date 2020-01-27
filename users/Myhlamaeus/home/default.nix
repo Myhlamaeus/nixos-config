@@ -56,6 +56,7 @@ in
       jq
       python36Packages.powerline
       ranger
+      zsh-completions
       # dev
       haskellPackages.stylish-haskell
       shellcheck
