@@ -196,6 +196,12 @@ in
 
   hardware.u2f.enable = true;
 
+  services.smartd = {
+    enable = true;
+
+    notifications.x11.enable = true;
+  };
+
   # Temporarily, until supported by home-manager.
   services.bitlbee = {
     enable = true;
