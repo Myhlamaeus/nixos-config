@@ -189,6 +189,7 @@ in
     "nvidia_modeset"
     "nvidia_uvm"
     "nvidia_drm"
+    "uinput"
   ];
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.driSupport32Bit = true;
