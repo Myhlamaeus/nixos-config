@@ -43,14 +43,21 @@ This function should only modify configuration layer settings."
        html-enable-lsp t
        web-fmt-tool 'prettier
        )
-     javascript
+     (javascript :variables
+       javascript-fmt-on-save t
+       )
      nixos
      prettier
      python
      react
      shell-scripts
-     terraform
-     typescript
+     templates
+     (terraform :variables
+       terraform-auto-format-on-save t
+       )
+     (typescript :variables
+       typescript-fmt-on-save t
+       )
      yaml
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
