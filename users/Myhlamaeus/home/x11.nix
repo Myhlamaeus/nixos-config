@@ -54,6 +54,9 @@
       package = pkgs.adapta-gtk-theme;
       name = "Adapta-Nokto";
     };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
   };
   qt = {
     enable = true;
