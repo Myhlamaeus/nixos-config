@@ -13,10 +13,4 @@
       };
     };
   };
-
-  # Not yet in stable
-  # systemd.user.sessionVariables = {
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
 }

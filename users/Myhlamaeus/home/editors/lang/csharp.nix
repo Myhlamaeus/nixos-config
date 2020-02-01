@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 with pkgs;
 let
@@ -21,15 +21,26 @@ in
     })
   ];
 
-  home.packages = [
-    # dotnet-combined
-    omnisharp-roslyn
-  ];
+  custom.editors = {
+    env = {
+      bin.packages = [
+        # dotnet-combined
+        omnisharp-roslyn
+      ];
 
-  home.sessionVariables = {
-    DOTNET_ROOT = dotnetRoot;
-    MSBuildSdksPath = "${dotnetSdk}/$(${dotnetBinary} --version)/Sdks";
-    MSBUILD_EXE_PATH = "${dotnetSdk}/$(${dotnetBinary} --version)/MSBuild.dll";
+      vars = {
+        DOTNET_ROOT = dotnetRoot;
+      };
+    };
+
+    emacs.setup = ''
+      (let (
+        (dotnet-sdk (concat "${dotnetSdk}/" (string-trim-right (shell-command-to-string "${dotnetBinary} --version"))))
+        )
+        (setenv "MSBuildSdksPath" (concat dotnet-sdk "/Sdks"))
+        (setenv "MSBUILD_EXE_PATH" (concat dotnet-sdk "/MSBuild.dll"))
+      )
+    '';
   };
 
   home.file.".omnisharp/omnisharp.json" = {
