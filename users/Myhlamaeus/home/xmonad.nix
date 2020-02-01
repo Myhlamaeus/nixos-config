@@ -48,6 +48,8 @@ in
         xmobar-with-config = (xmobar ./xmobar.hs) + /bin/xmobar;
         rofi = "${pkgs.rofi}/bin/rofi";
         xautolock = "${pkgs.xautolock}/bin/xautolock";
+        xsel = "${pkgs.xsel}/bin/xsel";
+        xvkbd = "${pkgs.xvkbd}/bin/xvkbd";
       };
   };
 }
