@@ -5,34 +5,6 @@
 { config, pkgs, ... }:
 
 let
-  bitlbeeDiscord = with pkgs; with stdenv.lib;
-    stdenv.mkDerivation rec {
-      name = "bitlbee-discord-2017-12-27";
-
-      src = fetchFromGitHub {
-        rev = "aa0bbf2df851b1fd1b27164713121d20c610b7c5";
-        owner = "sm00th";
-        repo = "bitlbee-discord";
-        sha256 = "02pigk2vbz0jdz11f96sygdvp1j762yjn62h124fkcsc070g7a2f";
-      };
-
-      nativeBuildInputs = [ autoreconfHook pkgconfig ];
-      buildInputs = [ bitlbee glib ];
-
-      preConfigure = ''
-          export BITLBEE_PLUGINDIR=$out/lib/bitlbee
-          ./autogen.sh
-        '';
-
-      meta = {
-        description = "Bitlbee plugin for Discord";
-
-        homepage = https://github.com/sm00th/bitlbee-discord;
-        license = licenses.gpl2Plus;
-        maintainers = [ maintainers.lassulus ];
-        platforms = stdenv.lib.platforms.linux;
-      };
-    };
   teensyUdev =
     pkgs.stdenv.mkDerivation {
       name = "49-teensy.rules";
@@ -205,8 +177,8 @@ in
   # Temporarily, until supported by home-manager.
   services.bitlbee = {
     enable = true;
-    plugins = [
-      bitlbeeDiscord
+    plugins = with pkgs; [
+      bitlbee-discord
     ];
   };
 
