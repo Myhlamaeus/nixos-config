@@ -1,3 +1,7 @@
 {
-  imports = [ ./csharp.nix ];
+  imports = [
+    ./csharp.nix
+    ./javascript.nix
+    ./typescript.nix
+  ];
 }

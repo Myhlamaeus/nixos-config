@@ -48,6 +48,7 @@ This function should only modify configuration layer settings."
        )
      (javascript :variables
        javascript-fmt-on-save t
+       javascript-fmt-tool 'prettier
        )
      nixos
      prettier
@@ -60,6 +61,7 @@ This function should only modify configuration layer settings."
        )
      (typescript :variables
        typescript-fmt-on-save t
+       typescript-fmt-tool 'prettier
        )
      yaml
      ;; ----------------------------------------------------------------
