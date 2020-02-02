@@ -1,11 +1,11 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   pkgs-unstable = (import <nixpkgs-unstable> { config = { allowUnfree = true; }; });
 
 in
 {
-  home.packages =
+  config.home.packages = lib.mkIf config.custom.games.enable (
     (
       with pkgs; [
       ]
@@ -15,5 +15,5 @@ in
             openmw
           ]
         )
-  ;
+  );
 }

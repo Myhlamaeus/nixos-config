@@ -38,6 +38,8 @@ in
     ./direnv
   ];
 
+  custom.games.enable = true;
+
   nixpkgs.config = {
     allowUnfree = true;
   };
