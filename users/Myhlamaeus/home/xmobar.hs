@@ -11,7 +11,7 @@ Config {
     -- Position xmobar along the top, with a stalonetray in the top right.
     -- Add right padding to xmobar to ensure stalonetray and xmobar don't
     -- overlap. stalonetrayrc-single is configured for 12 icons, each 23px
-    -- wide. 
+    -- wide.
     -- right_padding = num_icons * icon_size
     -- right_padding = 12 * 23 = 276
     -- Example: position = TopP 0 276
@@ -50,7 +50,7 @@ Config {
       , Run Date "%FT%T%z (W%V-%u)" "date" 10
       -- , Run Com "getMasterVolume" [] "volumelevel" 10
       , Run StdinReader
-      , Run MPD [ "-t", "<state>: <artist> - <track>" ] 10
+      , Run MPD [ "-t", "<state>: <artist> - <track>", "-h", "~/mpd.socket" ] 10
       ]
     , sepChar = "%"
     , alignSep = "}{"
