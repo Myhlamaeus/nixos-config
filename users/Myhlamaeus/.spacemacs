@@ -50,6 +50,10 @@ This function should only modify configuration layer settings."
        javascript-fmt-on-save t
        javascript-fmt-tool 'prettier
        )
+     (json :variables
+       json-fmt-on-save t
+       json-fmt-tool 'prettier
+       )
      nixos
      prettier
      python
