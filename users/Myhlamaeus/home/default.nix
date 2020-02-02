@@ -224,7 +224,7 @@ in
   };
 
   programs.newsboat = {
-    enable = true;
+    enable = false;
     autoReload = true;
     urls = [
       { tags = [ "ani" ]; url = "http://www8.watch-anime.org/feed/"; }
