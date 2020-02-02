@@ -252,7 +252,7 @@ in
   };
 
   home.file.".local/share/greg/data/data" = {
-    source = builtins.toFile "data" ''
+    text = ''
         [LifesLibrary]
         url = https://extras.lifeslibrarybookclub.com/feed.php?id=25fdd6f482baf1d8a5e22fb8746acce59215a059c7e05b4ee4ffe35726020592
         date_info = available
