@@ -40,7 +40,9 @@ This function should only modify configuration layer settings."
      epub
      finance
      gtags
-     haskell
+     (haskell :variables
+       haskell-completion-backend 'lsp
+       )
      (html :variables
        css-enable-lsp t
        html-enable-lsp t
