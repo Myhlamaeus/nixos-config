@@ -14,7 +14,9 @@ in
     )
     ++ (
           with pkgs-unstable; [
-            dwarf-fortress-packages.dwarf-fortress-full
+            (dwarf-fortress-packages.dwarf-fortress-full.override {
+              theme = null;
+            })
           ]
         )
   );
