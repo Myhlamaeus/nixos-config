@@ -8,6 +8,7 @@ in
 {
   imports = [
     ./platforms.nix
+    ./roguelike.nix
     ./rpgs.nix
     ./rts.nix
     ./simulation.nix
