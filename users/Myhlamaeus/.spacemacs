@@ -68,6 +68,7 @@ This function should only modify configuration layer settings."
        )
      nixos
      notmuch
+     pass
      prettier
      protobuf
      python
