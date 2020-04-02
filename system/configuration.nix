@@ -22,6 +22,8 @@ let
 
 in
 {
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   nixpkgs.overlays = [
     (self: super:
       {
@@ -178,14 +180,6 @@ in
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
 
   # Video drivers
-  boot.extraModprobeConfig = "options nvidia-drm modeset=1";
-  boot.initrd.kernelModules = [
-    "nvidia"
-    "nvidia_modeset"
-    "nvidia_uvm"
-    "nvidia_drm"
-    "uinput"
-  ];
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.driSupport32Bit = true;
 
