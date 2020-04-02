@@ -155,7 +155,9 @@ in
   # networking.firewall.enable = false;
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing.enable = true;
+  services.printing.drivers = with pkgs; [ gutenprint ];
+  hardware.sane.enable = true;
 
   # Enable sound.
   sound.enable = true;
