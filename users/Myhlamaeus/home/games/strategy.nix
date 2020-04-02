@@ -10,6 +10,7 @@ in
       with pkgs; [
         openra
         zeroad
+        hedgewars
       ]
     )
     ++ (
