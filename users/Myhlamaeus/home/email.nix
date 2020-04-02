@@ -73,4 +73,10 @@
   };
   systemd.user.services.mbsync.Service.Environment = [ "NOTMUCH_CONFIG=/home/Myhlamaeus/.config/notmuch/notmuchrc" ];
   programs.msmtp.enable = true;
+
+  home.file.".mailcap" = {
+    text = ''
+      text/html;  ${pkgs.w3m}/bin/w3m -dump -o document_charset=%{charset} '%s'; nametemplate=%s.html; copiousoutput
+    '';
+  };
 }
