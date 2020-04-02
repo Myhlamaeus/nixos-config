@@ -63,6 +63,8 @@ in
       haskellPackages.stylish-haskell
       shellcheck
       ispell
+      zeal
+      sqlite
       # hs
       cabal-install
       cabal2nix

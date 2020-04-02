@@ -40,6 +40,9 @@ This function should only modify configuration layer settings."
      (csharp :variables
        csharp-backend 'lsp
        )
+     (dash :variables
+       dash-docs-docset-newpath "~/.local/share/Zeal/Zeal/docsets"
+       )
      (elfeed :variables
        rmh-elfeed-org-files (list
                               "~/.emacs.d/private/elfeed/dev.org"
