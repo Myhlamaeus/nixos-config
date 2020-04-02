@@ -1,4 +1,4 @@
-import { h } from "preact"
+import { createElement as h } from "react"
 import { $3 } from "@storybook/addon-knobs"
 
 import { ${1:`(file-name-sans-extension (file-name-base))`} } from "./$1"
