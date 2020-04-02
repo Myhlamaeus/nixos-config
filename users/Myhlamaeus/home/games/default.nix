@@ -10,7 +10,7 @@ in
     ./platforms.nix
     ./roguelike.nix
     ./rpgs.nix
-    ./rts.nix
+    ./strategy.nix
     ./simulation.nix
   ];
 
