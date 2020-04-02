@@ -28,6 +28,23 @@
         key = "7FCB362E2D975AD2A45A682CAD1390B6FE33C758";
       };
     };
+
+    upsquared = {
+      flavor = "gmail.com";
+      address = "md@upsquared.com";
+      userName = "md@upsquared.com";
+      realName = "Maurice Dreyer";
+      notmuch.enable = true;
+      mbsync = {
+        enable = true;
+        create = "both";
+        expunge = "both";
+      };
+      msmtp = {
+        enable = true;
+      };
+      passwordCommand = "${pkgs.coreutils}/bin/cat ~/.config/email/work";
+    };
   };
   programs.alot = {
     enable = true;
