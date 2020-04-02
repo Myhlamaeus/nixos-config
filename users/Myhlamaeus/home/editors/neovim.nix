@@ -5,7 +5,10 @@
     enable = true;
 
     configure = {
-      packages.myVimPackage = with pkgs.vimPlugins; {
+      customRC = ''
+        :inoremap fd <Esc>
+      '';
+      packages.nix = with pkgs.vimPlugins; {
         # loaded on launch
         start = [ vim-nix ];
         # manually loadable by calling `:packadd $plugin-name`
