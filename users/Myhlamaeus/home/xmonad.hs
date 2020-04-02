@@ -125,6 +125,8 @@ main = do
         , ("M-S-0",   windows . W.shift      . show . (toEnum :: Int -> Workspace) $ 9)
         , ("M-p",     spawn "rofi -show run")
         , ("M-S-p",   spawn "rofi -show window")
+        , ("M-a",     spawn "rofi -modi drun -show drun")
+        , ("M-S-a",   spawn "rofi -show window")
         , (hyper "p", spawn "sh -c 'xsel | xvkbd -xsendevent -file -'")
         ]
   where
