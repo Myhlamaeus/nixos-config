@@ -534,7 +534,8 @@ before packages are loaded."
       (org-projectile-todo-files)))
   (org-babel-do-load-languages
     'org-babel-load-languages
-    '((ledger . t)))
+    '((haskell . t)
+       (ledger . t)))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
