@@ -23,6 +23,7 @@ let
 in
 {
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.tmpOnTmpfs = true;
 
   nixpkgs.overlays = [
     (self: super:
