@@ -10,11 +10,11 @@ in
       with pkgs; [
         openrct2
         openttd
-        dwarf-fortress-packages.dwarf-fortress-full
       ]
     )
     ++ (
           with pkgs-unstable; [
+            dwarf-fortress-packages.dwarf-fortress-full
           ]
         )
   );
