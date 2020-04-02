@@ -39,7 +39,8 @@
   programs.mbsync.enable = true;
   services.mbsync = {
     enable = true;
-    postExec = "${pkgs.notmuch}/bin/notmuch --config /home/Myhlamaeus/.config/notmuch/notmuchrc new";
+    postExec = "${pkgs.notmuch}/bin/notmuch new";
   };
+  systemd.user.services.mbsync.Service.Environment = [ "NOTMUCH_CONFIG=/home/Myhlamaeus/.config/notmuch/notmuchrc" ];
   programs.msmtp.enable = true;
 }
