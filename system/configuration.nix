@@ -181,6 +181,8 @@ in
     windowManager.default = "xmonad";
   };
 
+  services.fwupd.enable = true;
+
   # Needed for home-manager GTK themes
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
 
