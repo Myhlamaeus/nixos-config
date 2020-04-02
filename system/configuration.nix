@@ -129,9 +129,9 @@ in
 
     fontconfig = {
       defaultFonts = {
-        monospace = [ "Fira Code" ];
-        sansSerif = [ "Fira Sans" ];
-        serif = [ "Computer Modern" ];
+        monospace = [ "Fira Code" "Noto Color Emoji" ];
+        sansSerif = [ "Fira Sans" "Noto Color Emoji" ];
+        serif = [ "Computer Modern" "Noto Color Emoji" ];
       };
       ultimate.enable = true;
     };
