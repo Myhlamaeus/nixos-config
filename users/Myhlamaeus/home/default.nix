@@ -58,7 +58,6 @@ in
       jq
       python36Packages.powerline
       ranger
-      zsh-completions
       # dev
       haskellPackages.stylish-haskell
       shellcheck
@@ -93,6 +92,7 @@ in
   )
   ++ (
         with pkgs-unstable; [
+          zsh-completions
           # media
           # because of plugin compatibility
           # calibre

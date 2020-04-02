@@ -22,6 +22,26 @@ let
 
 in
 {
+  nixpkgs.overlays = [
+    (self: super:
+      {
+        add-optparse-applicative-completions = { pkg, bins }: super.pkgs.symlinkJoin {
+          name = "${pkg.name}-with-completion";
+          paths = [ pkg ];
+          buildInputs = [ super.pkgs.coreutils ];
+          postBuild = ''
+            mkdir -p $out/share/{bash-completion/completions,zsh/site-functions,fish/completions}
+            ${super.lib.concatMapStringsSep "\n" (n: ''
+              $out/bin/${n} --bash-completion-script=$out/bin/${n} >$out/share/bash-completion/completions/${n}
+              $out/bin/${n} --zsh-completion-script=$out/bin/${n} >$out/share/zsh/site-functions/_${n}
+              $out/bin/${n} --fish-completion-script=$out/bin/${n} >$out/share/fish/completions/_${n}
+            '') bins}
+          '';
+        };
+      }
+    )
+  ];
+
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.packageOverrides = pkgs: {
     # Get the revision by choosing a version from https://github.com/nix-community/NUR/commits/master
@@ -73,6 +93,7 @@ in
   environment.systemPackages = with pkgs; [
     # nix
     cachix
+    (add-optparse-applicative-completions { pkg = cachix; bins = [ "cachix" ]; })
     # shell
     wget
     neovim
@@ -81,7 +102,6 @@ in
     # vm
     nixops
   ];
-  environment.pathsToLink = [ "/share/zsh" ];
 
   programs.slock.enable = true;
 
@@ -115,7 +135,10 @@ in
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.bash.enableCompletion = true;
-  programs.zsh.enableCompletion = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+  };
   # programs.mtr.enable = true;
 
   # List services that you want to enable:
