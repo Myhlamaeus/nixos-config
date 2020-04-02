@@ -1,0 +1,28 @@
+* Fun                                                            :fun:elfeed:
+** Anime :anime:
+*** http://www8.watch-anime.org/feed/
+** Manga :manga:
+*** https://readms.net/rss
+** Light Novel :ln:
+*** https://www.wuxiaworld.com/feed/chapters
+** Gaming :gaming:
+*** entry-title: \(nvidia\|geforce\|elder scrolls\|games\|gaming\)
+*** http://nvidianews.nvidia.com/rss.xml
+*** TES                                                                 :tes:
+**** entry-title: \(the elder scrolls\)
+**** Morrowind                                                    :morrowind:
+***** entry-title: \(tes iii\|the elder scrolls iii\|morrowind\|openmw\|tes3mp\)
+***** https://feeds.feedburner.com/openmw
+***** https://www.reddit.com/r/openmw/.rss
+**** Oblivion                                                      :oblivion:
+***** entry-title: \(tes iv\|the elder scrolls iv\|oblivion\)
+**** Skyrim                                                        :skyrim:
+***** entry-title: \(tes v\|the elder scrolls v\|skyrim\)
+*** Dwarf Fortress                                                       :df:
+**** entry-title: \(dwarf fortress\)
+**** https://bay12games.com/dwarves/dev_now.rss
+**** https://bay12games.com/dwarves/dev_release.rss
+**** https://www.reddit.com/r/dwarffortress/.rss
+** Comics                                                             :comic:
+*** entry-title: \(xkcd\)
+*** https://xkcd.com/atom.xml

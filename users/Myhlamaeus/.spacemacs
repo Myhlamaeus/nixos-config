@@ -37,6 +37,13 @@ This function should only modify configuration layer settings."
        colors-colorize-identifiers 'all
        )
      csharp
+     (elfeed :variables
+       rmh-elfeed-org-files (list
+                              "~/.emacs.d/private/elfeed/dev.org"
+                              "~/.emacs.d/private/elfeed/fun.org"
+                              "~/.emacs.d/private/elfeed/math.org"
+                              )
+       )
      epub
      finance
      gtags

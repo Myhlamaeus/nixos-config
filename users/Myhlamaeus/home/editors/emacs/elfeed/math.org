@@ -1,0 +1,7 @@
+* Science                                                        :sci:elfeed:
+** Math                                                                :math:
+*** entry-title: \(math\|mathematics\|\(category\|group\) theory\)
+*** https://export.arxiv.org/rss/math
+** Physics                                                             :phys:
+*** entry-title: \(physics\|quantum\)
+*** https://physicsworld.com/feed/

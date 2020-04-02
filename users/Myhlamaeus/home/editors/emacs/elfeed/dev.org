@@ -1,0 +1,16 @@
+* Dev                                                            :dev:elfeed:
+** entry-title: \(linux\|linus\|ubuntu\|kde\|gnome\)                  :linux:
+** Emacs                                                              :emacs:
+*** http://www.terminally-incoherent.com/blog/feed
+*** http://nullprogram.com/feed
+*** entry-title: \(emacs\|org-mode\)
+*** http://planet.emacsen.org/atom.xml
+** Haskell                                                             :hask:
+*** entry-title: \(haskell|hask\)
+*** https://haskellweekly.news/haskell-weekly.atom
+** Nix                                                                  :nix:
+*** entry-title: \(\bnix\b\)
+*** https://weekly.nixos.org/feeds/all.rss.xml
+*** https://blog.hercules-ci.com/feed.xml                                :ci:
+** Media                                                              :media:
+*** https://aomedia.org/feed/
