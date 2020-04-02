@@ -13,6 +13,8 @@ in
   };
 
   config = {
+    custom.editors.env.bin.packages = with pkgs; [ gnuplot ];
+
     home.file.".emacs.d/private" = {
       source = ./emacs;
       recursive = true;
