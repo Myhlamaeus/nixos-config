@@ -5,6 +5,7 @@
     ./javascript.nix
     ./json.nix
     ./ledger.nix
+    ./protobuf.nix
     ./typescript.nix
   ];
 }

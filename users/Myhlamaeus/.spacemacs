@@ -68,6 +68,7 @@ This function should only modify configuration layer settings."
      nixos
      notmuch
      prettier
+     protobuf
      python
      react
      shell-scripts
