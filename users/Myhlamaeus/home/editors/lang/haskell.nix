@@ -6,7 +6,7 @@ in
 {
   custom.editors.env.bin.packages = [
     (all-hies.unstable.selection {
-      selector = p: { inherit (p) ghc864 ghc865 ghc882; };
+      selector = p: { inherit (p) ghc864 ghc865 ghc881 ghc882; };
     })
   ];
 }
