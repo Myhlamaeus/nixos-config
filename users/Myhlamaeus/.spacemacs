@@ -96,7 +96,9 @@ This function should only modify configuration layer settings."
      lsp
      markdown
      multiple-cursors
-     org
+     (org :variables
+       org-agenda-files '("~/org")
+       )
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -517,6 +519,12 @@ This function is called at the very end of Spacemacs startup, after layer
 configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
+  (with-eval-after-load 'org-agenda
+    (require 'org-projectile)
+    (mapcar '(lambda (file)
+               (when (file-exists-p file)
+                 (push file org-agenda-files)))
+      (org-projectile-todo-files)))
   (org-babel-do-load-languages
     'org-babel-load-languages
     '((ledger . t)))
