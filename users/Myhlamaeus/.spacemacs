@@ -97,6 +97,13 @@ This function should only modify configuration layer settings."
      markdown
      multiple-cursors
      (org :variables
+       org-enable-org-journal-support t
+       org-journal-dir "~/org/journal"
+       org-journal-file-format "%Y-%m-%d.org"
+       org-journal-date-prefix "#+TITLE: "
+       org-journal-date-format "%F (%G-W%V-%u)"
+       org-journal-time-prefix "* "
+       org-journal-time-format "%T"
        org-agenda-files '("~/org")
        )
      (shell :variables
