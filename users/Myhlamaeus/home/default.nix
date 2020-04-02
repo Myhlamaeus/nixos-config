@@ -93,6 +93,8 @@ in
   ++ (
         with pkgs-unstable; [
           zsh-completions
+          niv
+          (pkgs.add-optparse-applicative-completions { pkg = niv; bins = [ "niv" ]; })
           # media
           # because of plugin compatibility
           # calibre
