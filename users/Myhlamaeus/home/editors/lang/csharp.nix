@@ -24,7 +24,7 @@ in
   custom.editors = {
     env = {
       bin.packages = [
-        # dotnet-combined
+        dotnet-combined
         omnisharp-roslyn
       ];
 

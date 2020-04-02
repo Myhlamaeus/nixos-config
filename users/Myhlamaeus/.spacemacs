@@ -36,7 +36,9 @@ This function should only modify configuration layer settings."
      (colors :variables
        colors-colorize-identifiers 'all
        )
-     csharp
+     (csharp :variables
+       csharp-backend 'lsp
+       )
      (elfeed :variables
        rmh-elfeed-org-files (list
                               "~/.emacs.d/private/elfeed/dev.org"
