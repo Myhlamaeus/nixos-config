@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   security.pam.enableEcryptfs = true;
@@ -10,5 +10,5 @@
     extraGroups = [ "wheel" "docker" ];
   };
 
-  home-manager.users.Myhlamaeus = import ./home;
+  home-manager.users.Myhlamaeus = import ./home config.nixpkgs.overlays;
 }

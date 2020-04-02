@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+overlays: { pkgs, lib, ... }:
 
 let
   urxvtConfig = exts: with builtins; with lib;
@@ -40,6 +40,7 @@ in
 
   custom.games.enable = true;
 
+  nixpkgs.overlays = overlays;
   nixpkgs.config = {
     allowUnfree = true;
   };
