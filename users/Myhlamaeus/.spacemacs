@@ -66,6 +66,7 @@ This function should only modify configuration layer settings."
        json-fmt-tool 'prettier
        )
      nixos
+     notmuch
      prettier
      python
      react

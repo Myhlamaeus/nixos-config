@@ -46,9 +46,6 @@
       passwordCommand = "${pkgs.coreutils}/bin/cat ~/.config/email/work";
     };
   };
-  programs.alot = {
-    enable = true;
-  };
   programs.notmuch = {
     enable = true;
     maildir.synchronizeFlags = true;
@@ -79,4 +76,6 @@
       text/html;  ${pkgs.w3m}/bin/w3m -dump -o document_charset=%{charset} '%s'; nametemplate=%s.html; copiousoutput
     '';
   };
+
+  systemd.user.services.emacs.Service.Environment = [ "NOTMUCH_CONFIG=/home/Myhlamaeus/.config/notmuch/notmuchrc" ];
 }
