@@ -216,6 +216,8 @@ in
     enable = true;
     autoPrune.enable = true;
   };
+  virtualisation.anbox.enable = true;
+  programs.adb.enable = true;
 
   nix.nixPath = [
     (
