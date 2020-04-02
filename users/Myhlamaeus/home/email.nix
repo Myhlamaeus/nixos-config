@@ -52,6 +52,19 @@
   programs.notmuch = {
     enable = true;
     maildir.synchronizeFlags = true;
+    hooks.postNew = ''
+      notmuch tag +calendar -- tag:new and mimetype:text/calendar
+
+      notmuch tag +upsquared -- tag:new and \( to:@upsquared.com or from:@upsquared.com or from:@digital-spring.de \)
+      notmuch tag -upsquared -- tag:new and tag:calendar and subject:"Play Divinity"
+      notmuch tag +fitnesspilot -- tag:new and \( from:@fitnesspilot.com or fitnesspilot \)
+      notmuch tag +veepee -- tag:new and \( from:@kontakt.veepee.de or from:@venteprivee.com or from:@vente-exclusive.com or from:@vente-privee.com or from:@veepee.com \)
+      notmuch tag +debatoo -- tag:new and from:@debatoo.com
+      notmuch tag +test -inbox -- tag:new and tag:upsquared and \( from:@fitnesspilot.com or from:@kontakt.veepee.de or from:@venteprivee.com \)
+
+      notmuch tag +unread +inbox -new -- tag:new
+    '';
+    new.tags = [ "new" ];
   };
   programs.mbsync.enable = true;
   services.mbsync = {
