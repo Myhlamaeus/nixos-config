@@ -43,7 +43,20 @@ in
         # Use gtk3 instead of the default gtk2
         withGTK3 = true;
         withGTK2 = false;
+        srcRepo = true;
       }).overrideAttrs (attrs: {
+        name = "emacs-27.0.90-git";
+        pname = "emacs";
+        version = "27.0.90";
+        versionModifier = "-git";
+        src = pkgs.fetchFromGitHub {
+          owner = "emacs-mirror";
+          repo = "emacs";
+          rev = "c5f255d68156926923232b1edadf50faac527861";
+          sha256 = "13n82lxbhmkcmlzbh0nml8ydxyfvz8g7wsdq7nszlwmq914gb5nk";
+        };
+        patches = [ ];
+
         # Use emacsclient in the .desktop file
         postInstall = (attrs.postInstall or "") + ''
           ${pkgs.gnused}/bin/sed -i 's/Exec=emacs/Exec=emacsclient -c -a emacs/' $out/share/applications/emacs.desktop
