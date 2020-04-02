@@ -124,12 +124,14 @@ in
       iosevka
       fixedsys-excelsior
       powerline-fonts
+      cm_unicode
     ];
 
     fontconfig = {
       defaultFonts = {
         monospace = [ "Fira Code" ];
         sansSerif = [ "Fira Sans" ];
+        serif = [ "Computer Modern" ];
       };
       ultimate.enable = true;
     };
