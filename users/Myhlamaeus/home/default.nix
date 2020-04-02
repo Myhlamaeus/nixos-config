@@ -80,7 +80,7 @@ in
       (pass.withExtensions (exts: with exts; [ pass-update pass-audit ]))
       keybase
       # other
-      hledger
+      ledger
       weechat
       mysql-workbench
       # non-free
