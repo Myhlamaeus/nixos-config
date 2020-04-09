@@ -270,6 +270,8 @@ in
     source = ./greg.conf;
   };
 
+  programs.command-not-found.enable = true;
+
   # services.bitlbee = {
   #   enable = true;
   #   plugins = [
