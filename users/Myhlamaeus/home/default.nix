@@ -102,6 +102,7 @@ in
           (pkgs.add-optparse-applicative-completions { pkg = niv; bins = [ "niv" ]; })
           fahcontrol
           fahclient
+          keybase-gui
           # media
           # because of plugin compatibility
           # calibre
