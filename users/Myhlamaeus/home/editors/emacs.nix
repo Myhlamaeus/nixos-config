@@ -18,7 +18,7 @@ in
   };
 
   config = {
-    custom.editors.env.bin.packages = with pkgs; [ gnuplot ];
+    custom.editors.env.bin.packages = with pkgs; [ gnuplot unzip ];
 
     home.file.".emacs.d/private" = {
       source = ./emacs;
