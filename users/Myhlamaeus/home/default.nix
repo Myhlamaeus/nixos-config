@@ -60,6 +60,7 @@ in
       jq
       python36Packages.powerline
       ranger
+      nix-index
       # dev
       haskellPackages.stylish-haskell
       shellcheck
