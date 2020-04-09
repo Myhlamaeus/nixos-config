@@ -117,6 +117,7 @@ in
       "x-scheme-handler/webcal" = "chromium-browser.desktop";
     };
   };
+  xdg.userDirs.enable = true;
 
   programs.browserpass.enable = true;
 
