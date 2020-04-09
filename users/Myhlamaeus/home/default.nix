@@ -1,4 +1,4 @@
-overlays: { pkgs, lib, ... }:
+overlays: packageOverrides: { pkgs, lib, ... }:
 
 let
   urxvtConfig = exts: with builtins; with lib;
@@ -43,6 +43,7 @@ in
   nixpkgs.overlays = overlays;
   nixpkgs.config = {
     allowUnfree = true;
+    inherit packageOverrides;
   };
   xdg.configFile."nixpkgs/config.nix".text = ''
     {
