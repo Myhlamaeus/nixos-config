@@ -10,6 +10,11 @@ in
     setup = mkOption {
       type = with types; lines;
     };
+
+    spacemacs.rev = mkOption {
+      type = with types; str;
+      default = "develop";
+    };
   };
 
   config = {
@@ -65,6 +70,38 @@ in
     };
 
     services.emacs.enable = true;
+
+    systemd.user.services.spacemacs-setup = {
+      Unit = {
+        Wants = [ "home-manager-Myhlamaeus.service" ];
+        After = [ "home-manager-Myhlamaeus.service" ];
+      };
+
+      Service = {
+        Type = "oneshot";
+        RemainAfterExit = "yes";
+        SyslogIdentifier = "spacemacs-setup";
+
+        # The activation script is run by a login shell to make sure
+        # that the user is given a sane Nix environment.
+        ExecStart = builtins.toString (pkgs.writeScript "activate-spacemacs-setup" ''
+          #! ${pkgs.stdenv.shell} -el
+          if ! [ -e ~/.emacs.d ] ; then
+            echo "Setting up spacemacs config"
+            git clone -b ${cfg.emacs.spacemacs.rev} https://github.com/syl20bnr/spacemacs ~/.emacs.d
+          fi
+          if ! [ -e ~/.spacemacs ] ; then
+            ln -s ${../../spacemacs} ~/.spacemacs
+          fi
+          git --git-dir ~/.emacs.d/.git --work-tree ~/.emacs.d fetch origin master
+          git --git-dir ~/.emacs.d/.git --work-tree ~/.emacs.d checkout d95d41f55
+        '');
+      };
+
+      Install = {
+        WantedBy = [ "multi-user.target" ];
+      };
+    };
 
     systemd.user.services.emacs.Service.Requires = "gpg-agent.service basic.target -.slice";
 
