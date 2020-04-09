@@ -30,6 +30,7 @@
       # "flcpelgcagfhfoegekianiofphddckof" # KB SSL Enforcer
       # "mahhgdkliaknjffpmocpaglcoljnhodn" # Memrise Button
       "lmjdlojahmbbcodnpecnjnmlddbkjhnn" # Notifier for GitHub
+      "kkkjlfejijcjgjllecmnejhogpbcigdc" # Org Capture
       "chlffgpmiacpedhhbkiomidkjlcfhogd" # Pushbullet
       # "fmkadmapgofadopljbjfkapdkoienihi" # React Developer Tools
       "kbmfpngjjgdllneeigpgjifpgocmfgmb" # Reddit Enhancement Suite

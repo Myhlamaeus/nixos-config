@@ -67,5 +67,20 @@ in
     services.emacs.enable = true;
 
     systemd.user.services.emacs.Service.Requires = "gpg-agent.service basic.target -.slice";
+
+    home.packages = with pkgs; [
+      (makeDesktopItem rec {
+        name = "org-protocol";
+        desktopName = name;
+        exec = "emacsclient %u";
+        categories = "System;";
+        mimeType = "x-scheme-handler/org-protocol;";
+      })
+    ];
+    xdg.mimeApps = {
+      defaultApplications = {
+        "x-scheme-handler/org-protocol" = "org-protocol.desktop";
+      };
+    };
   };
 }

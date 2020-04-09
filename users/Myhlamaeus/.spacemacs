@@ -544,6 +544,18 @@ before packages are loaded."
     'org-babel-load-languages
     '((haskell . t)
        (ledger . t)))
+  (require 'org-protocol)
+  (defun transform-square-brackets-to-round-ones(string-to-transform)
+    "Transforms [ into ( and ] into ), other chars left unchanged."
+    (concat
+      (mapcar #'(lambda (c) (if (equal c ?[) ?\( (if (equal c ?]) ?\) c))) string-to-transform))
+    )
+  (setq org-capture-templates `(
+	                               ("p" "Protocol" entry (file+headline ,(concat (file-name-as-directory org-directory) "notes.org") "Inbox")
+                                   "* %^{Title}\n Source: %u, [[%:link][%(transform-square-brackets-to-round-ones \"%:description\")]]\n\n#+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n")
+	                               ("L" "Protocol Link" entry (file+headline ,(concat (file-name-as-directory org-directory) "notes.org") "Inbox")
+                                   "* [[%:link][%(transform-square-brackets-to-round-ones \"%:description\")]]\n")
+                                 ))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
