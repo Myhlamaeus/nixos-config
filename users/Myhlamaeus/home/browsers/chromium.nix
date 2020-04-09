@@ -15,6 +15,7 @@
     extensions = [
       "fhgenkpocbhhddlgkjnfghpjanffonno" # Authy Chrome Extension
       # "agoopbiflnjadjfbhimhlmcbgmdgldld" # Baseliner
+      "naepdomgkenhinolocfifgehidddafch" # Browserpass
       # "jifpbeccnghkjeaalbbjmodiffmgedin" # Chrome extension source viewer
       # "inomeogfingihgjfjlpeplalcfajhgai" # Chrome Remote Desktop
       "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
@@ -43,6 +44,7 @@
       "bhmmomiinigofkjcapegjjndpbikblnp" # WOT Web of Trust, Website Reputation Ratings
     ];
   };
+  programs.browserpass.browsers = [ "chromium" ];
 
   # Not yet in stable
   # systemd.user.sessionVariables = {

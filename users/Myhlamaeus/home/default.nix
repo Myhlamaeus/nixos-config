@@ -106,6 +106,8 @@ in
       )
   ;
 
+  programs.browserpass.enable = true;
+
   services.keybase.enable = true;
   services.kbfs.enable = true;
 
