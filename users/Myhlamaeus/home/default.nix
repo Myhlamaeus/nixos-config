@@ -105,6 +105,18 @@ in
         ]
       )
   ;
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = {
+      "application/x-keepass2" = "org.keepassxc.KeePassXC.desktop";
+    };
+    defaultApplications = {
+      "application/x-keepass2"  = "org.keepassxc.KeePassXC.desktop";
+      "application/pdf"         = "chromium-browser.desktop";
+      "x-scheme-handler/mailto" = "chromium-browser.desktop";
+      "x-scheme-handler/webcal" = "chromium-browser.desktop";
+    };
+  };
 
   programs.browserpass.enable = true;
 
