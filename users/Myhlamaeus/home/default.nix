@@ -128,10 +128,6 @@ in
   services.keybase.enable = true;
   services.kbfs.enable = true;
 
-  home.keyboard = {
-    layout = "gb";
-  };
-
   home.file.".editorconfig" = {
     source = builtins.toFile "editorconfig" ''
         ; EditorConfig helps developers define and maintain consistent
@@ -283,5 +279,5 @@ in
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  home.stateVersion = "18.09";
+  home.stateVersion = "19.09";
 }
