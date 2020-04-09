@@ -153,7 +153,7 @@ in
       fu = "commit --fixup";
       fuh = "commit --fixup HEAD";
       pu = "push";
-      puf = "push --force";
+      puf = "push --force-with-lease";
       "rec" = "rebase --continue";
       ri = "rebase -i";
       upd = "fetch origin master:master develop:develop";
