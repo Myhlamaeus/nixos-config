@@ -558,6 +558,7 @@ before packages are loaded."
 	                               ("L" "Protocol Link" entry (file+headline ,(concat (file-name-as-directory org-directory) "notes.org") "Inbox")
                                    "* [[%:link][%(transform-square-brackets-to-round-ones \"%:description\")]]\n")
                                  ))
+  (setq evil-want-minibuffer t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
