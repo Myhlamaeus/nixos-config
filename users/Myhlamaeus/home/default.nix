@@ -113,12 +113,13 @@ in
     enable = true;
     associations.added = {
       "application/epub+zip"   = "emacs.desktop";
+      "application/pdf"        = "emacs.desktop";
       "application/x-keepass2" = "org.keepassxc.KeePassXC.desktop";
     };
     defaultApplications = {
       "application/epub+zip"    = "emacs.desktop";
+      "application/pdf"         = "emacs.desktop";
       "application/x-keepass2"  = "org.keepassxc.KeePassXC.desktop";
-      "application/pdf"         = "chromium-browser.desktop";
       "x-scheme-handler/mailto" = "chromium-browser.desktop";
       "x-scheme-handler/webcal" = "chromium-browser.desktop";
     };
