@@ -117,7 +117,11 @@ in {
       "x-scheme-handler/magnet" = "userapp-transmission-gtk-IMV9S0.desktop";
     };
   };
-  xdg.userDirs.enable = true;
+  xdg.userDirs = {
+    enable = true;
+
+    extraConfig = { XDG_SAVEGAMES_DIR = "$HOME/Saves"; };
+  };
 
   home.activation.home-dir-permissions =
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''

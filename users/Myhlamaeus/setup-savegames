@@ -1,0 +1,55 @@
+#! /run/current-system/sw/bin/env nix-shell
+#! nix-shell -i bash -p xdg-user-dirs
+
+set -euo pipefail
+
+XDG_SAVEGAMES_DIR="$(xdg-user-dir SAVEGAMES)"
+XDG_SAVEGAMES_DIR="${XDG_SAVEGAMES_DIR:-$HOME/Saves}"
+
+protonHome() {
+  gameId=$1
+
+  echo "$data/Steam/steamapps/compatdata/$gameId/pfx/drive_c/users/steamuser"
+}
+
+setupSavegame() {
+  dev=$1
+  game=$2
+  target="$XDG_SAVEGAMES_DIR/$dev/$game"
+  source=$3
+
+  if ! [[ -e $source ]] ; then
+    mkdir -p "$target"
+    mkdir -p "$(dirname "$source")"
+    ln -s "$target" "$source"
+    echo -e "\e[32m✓\e[0m $source -> $target (created)"
+  elif [[ -L $source ]] ; then
+    if ! [[ $(readlink -f "$source") == "$target" ]] ; then
+      >&2 echo -e "\e[31m✗\e[0m $target is pointing elsewhere"
+    else
+      echo -e "\e[32m✓\e[0m $source -> $target (already set up)"
+    fi
+  elif [[ -f $source ]] ; then
+    >&2 echo -e "\e[31m✗\e[0m $target is a file"
+  else
+    mkdir -p "$(dirname "$target")"
+    mv "$source" "$target"
+    ln -s "$target" "$source"
+    echo -e "\e[32m✓\e[0m $source -> $target (moved)"
+  fi
+}
+
+home=${HOME:-/home/$USER}
+data=${XDG_DATA_HOME:-$home/.local/share}
+
+setupSavegame "6-eyes-studio" "fell-seal-arbiters-mark" "$home/Fell Seal"
+setupSavegame "bay-12-games" "dwarf-fortress" "$data/df_linux"
+setupSavegame "benn-powell" "operator-overload" "$data/co.uk.benn-gaming/operatoroverload"
+setupSavegame "chucklefish" "wargroove" "$data/Chucklefish/Wargroove"
+setupSavegame "dcss-devteam" "crawl" "$home/.crawl"
+setupSavegame "larian-studios" "divinity-original-sin-enhanced-edition" "$home/Larian Studios/Divinity Original Sin Enhanced Edition"
+setupSavegame "wube-software" "factorio" "$home/.factorio"
+setupSavegame "zachtronics" "infinifactory" "$data/Infinifactory"
+setupSavegame "openmw" "openmw" "$data/openmw"
+setupSavegame "berserk-games" "tabletop-simulator/native" "$data/Tabletop Simulator"
+setupSavegame "berserk-games" "tabletop-simulator/proton" "$(protonHome 286160)/My Documents/My Games/Tabletop Simulator"
