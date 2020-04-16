@@ -62,7 +62,6 @@ in
       ranger
       nix-index
       # dev
-      haskellPackages.stylish-haskell
       shellcheck
       ispell
       zeal
@@ -83,6 +82,7 @@ in
       keepassxc
       (pass.withExtensions (exts: with exts; [ pass-update pass-audit ]))
       keybase
+      keybase-gui
       # other
       ledger
       weechat
@@ -102,7 +102,6 @@ in
           (pkgs.add-optparse-applicative-completions { pkg = niv; bins = [ "niv" ]; })
           fahcontrol
           fahclient
-          keybase-gui
           # media
           # because of plugin compatibility
           # calibre

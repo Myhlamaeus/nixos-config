@@ -22,7 +22,6 @@ let
 
 in
 {
-  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.tmpOnTmpfs = true;
 
   nixpkgs.overlays = [
@@ -78,10 +77,11 @@ in
 
   # Select internationalisation properties.
   i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleUseXkbConfig = true;
-    # consoleKeyMap = "gb";
     defaultLocale = "en_GB.UTF-8";
+  };
+  console = {
+    useXkbConfig = true;
+    font = "Lat2-Terminus16";
   };
 
   # Set your time zone.
@@ -129,7 +129,6 @@ in
         sansSerif = [ "Fira Sans" "Noto Color Emoji" ];
         serif = [ "Computer Modern" "Noto Color Emoji" ];
       };
-      ultimate.enable = true;
     };
   };
 
@@ -174,7 +173,7 @@ in
     displayManager.lightdm.enable = true;
 
     windowManager.xmonad.enable = true;
-    windowManager.default = "xmonad";
+    displayManager.defaultSession = "none+xmonad";
   };
 
   services.fwupd.enable = true;
