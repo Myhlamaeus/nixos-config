@@ -85,6 +85,8 @@ in
       element-desktop
       keybase
       # other
+      fahcontrol
+      fahviewer
       ledger
       transmission-gtk
       vlc

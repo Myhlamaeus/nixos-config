@@ -212,6 +212,11 @@
   };
   users.users.Myhlamaeus.extraGroups = [ config.services.davfs2.davGroup ];
 
+  services.foldingathome = {
+    enable = true;
+    user = "Myhlamaeus";
+  };
+
   nix.nixPath = [
     (
       let
