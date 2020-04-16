@@ -11,11 +11,11 @@ in
         (retroarch.override {
           cores = with libretro; [ dolphin ];
         })
+        linux-steam-integration
       ]
     )
     ++ (
           with pkgs-unstable; [
-            linux-steam-integration
           ]
         )
   );
