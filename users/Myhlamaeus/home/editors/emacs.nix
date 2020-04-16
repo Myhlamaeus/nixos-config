@@ -18,7 +18,7 @@ in
   };
 
   config = {
-    custom.editors.env.bin.packages = with pkgs; [ gnuplot unzip ];
+    custom.editors.env.bin.packages = with pkgs; [ gnuplot unzip texlive.combined.scheme-full ];
 
     home.file.".emacs.d/private" = {
       source = ./emacs;
