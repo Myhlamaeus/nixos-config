@@ -1,4 +1,4 @@
-overlays: packageOverrides: { pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 let
   urxvtConfig = exts: with builtins; with lib;
@@ -40,11 +40,6 @@ in
 
   custom.games.enable = true;
 
-  nixpkgs.overlays = overlays;
-  nixpkgs.config = {
-    allowUnfree = true;
-    inherit packageOverrides;
-  };
   xdg.configFile."nixpkgs/config.nix".text = ''
     {
       allowBroken = true;

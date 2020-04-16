@@ -10,5 +10,5 @@
     extraGroups = [ "wheel" "docker" ];
   };
 
-  home-manager.users.Myhlamaeus = import ./home config.nixpkgs.overlays config.nixpkgs.config.packageOverrides;
+  home-manager.users.Myhlamaeus = import ./home;
 }

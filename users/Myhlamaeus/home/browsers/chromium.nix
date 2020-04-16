@@ -1,15 +1,6 @@
 { pkgs, ... }:
 
 {
-  nixpkgs.overlays = [
-    (self: super: {
-      chromium = super.chromium.override {
-        commandLineArgs = "--force-dark-mode";
-        enableWideVine = true;
-      };
-    })
-  ];
-
   programs.chromium = {
     enable = true;
     extensions = [

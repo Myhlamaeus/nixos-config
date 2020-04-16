@@ -9,18 +9,6 @@ let
   dotnetBinary = "${dotnetRoot}/dotnet";
 in
 {
-  nixpkgs.overlays = [
-    (self: super: {
-      omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (oldAttrs: rec {
-          version = "1.34.9";
-          src = fetchurl {
-            url = "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v${version}/omnisharp-mono.tar.gz";
-            sha256 = "1b5jzc7dj9hhddrr73hhpq95h8vabkd6xac1bwq05lb24m0jsrp9";
-          };
-      });
-    })
-  ];
-
   custom.editors = {
     env = {
       bin.packages = [
