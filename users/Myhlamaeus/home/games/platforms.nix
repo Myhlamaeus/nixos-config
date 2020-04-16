@@ -8,7 +8,9 @@ in
   config.home.packages = lib.mkIf config.custom.games.enable (
     (
       with pkgs; [
-        (retroarch.override { cores = [ ]; })
+        (retroarch.override {
+          cores = with libretro; [ dolphin ];
+        })
       ]
     )
     ++ (
