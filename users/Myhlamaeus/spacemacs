@@ -575,6 +575,11 @@ before packages are loaded."
                (when (file-exists-p file)
                  (push file org-agenda-files)))
       (org-projectile-todo-files)))
+  (projectile-register-project-type 'lerna '("lerna.json")
+    :compile "npm install"
+    :test "npm test"
+    :run "npm start"
+    :test-suffix ".test")
   (org-babel-do-load-languages
     'org-babel-load-languages
     '((haskell . t)
