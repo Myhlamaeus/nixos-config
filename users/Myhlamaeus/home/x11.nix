@@ -32,7 +32,7 @@
     enable = true;
     # Must be installed via configuration.nix and
     # referenced like this as it is wrapped
-    lockCmd = "sh -c 'slock & sleep 0.5 && xset dpms force off'";
+    lockCmd = "${pkgs.bash}/bin/bash -c '/run/wrappers/bin/slock & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
     xautolockExtraOptions = [ "-corners -000" ];
   };
 
