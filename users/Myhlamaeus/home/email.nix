@@ -77,5 +77,11 @@
     '';
   };
 
+  home.file.".mailrc" = {
+    text = ''
+      set sendmail="msmtp"
+    '';
+  };
+
   systemd.user.services.emacs.Service.Environment = [ "NOTMUCH_CONFIG=/home/Myhlamaeus/.config/notmuch/notmuchrc" ];
 }
