@@ -43,7 +43,4 @@
   home.sessionVariables = {
     BROWSER = "chromium";
   };
-
-  # Backwards-compatibility
-  home.packages = with pkgs; [ google-chrome ];
 }
