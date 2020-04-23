@@ -50,7 +50,7 @@ Config {
       , Run Date "%FT%T%z (W%V-%u)" "date" 10
       -- , Run Com "getMasterVolume" [] "volumelevel" 10
       , Run StdinReader
-      , Run MPD [ "-t", "<state>: <artist> - <track>", "-h", "~/mpd.socket" ] 10
+      , Run MPD [ "-t", "<state>: <artist> - <track>", "-h", "/run/user/1000/mpd.socket" ] 10
       ]
     , sepChar = "%"
     , alignSep = "}{"

@@ -229,7 +229,7 @@ in
     enable = true;
 
     network = {
-      listenAddress = "/home/Myhlamaeus/mpd.socket";
+      listenAddress = "/run/user/1000/mpd.socket";
     };
   };
 
