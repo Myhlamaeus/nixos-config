@@ -43,4 +43,24 @@
   home.sessionVariables = {
     BROWSER = "chromium";
   };
+
+  home.packages = let
+    makeChromiumDesktopItem = { name, desktopName, app, profileDirectory ? "Default", categories ? "" }:
+      with pkgs; with lib;
+      makeDesktopItem rec {
+        name = "youtube-music";
+        desktopName = "YouTube Music";
+        exec = ''
+          ${chromium}/bin/chromium --profile-directory=${escapeShellArg profileDirectory} --app=${escapeShellArg app}
+        '';
+        inherit categories;
+      };
+  in
+  [
+    (makeChromiumDesktopItem {
+      name = "youtube-music";
+      desktopName = "YouTube Music";
+      app = "https://music.youtube.com";
+    })
+  ];
 }
