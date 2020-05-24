@@ -190,6 +190,7 @@ in
 
     # Enable touchpad support.
     libinput.enable = true;
+    digimend.enable = true;
 
     displayManager.lightdm.enable = true;
 
