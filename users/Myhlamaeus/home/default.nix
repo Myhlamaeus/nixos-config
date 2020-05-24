@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   urxvtConfig = exts: with builtins; with lib;
@@ -109,6 +109,7 @@ in
         ]
       )
   ;
+  xdg.enable = true;
   xdg.mimeApps = {
     enable = true;
     associations.added = {
