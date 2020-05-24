@@ -77,6 +77,12 @@ in
       (pass.withExtensions (exts: with exts; [ pass-update pass-audit ]))
       keybase
       keybase-gui
+      # graphics
+      alchemy
+      blender
+      gimp
+      inkscape
+      krita
       # other
       ledger
       weechat
