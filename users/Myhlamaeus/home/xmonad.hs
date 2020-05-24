@@ -46,17 +46,17 @@ data Workspace
   deriving (Eq)
 wNamedCount = 5
 
-instance Show Workspace where
-  show WOs     = "1:os"
-  show WMsg    = "2:msg"
-  show WGaming = "3:gaming"
-  show WRead   = "4:read"
-  show WWatch  = "5:watch"
-  show WListen = "6:listen"
-  show (WN n)
-    | n + wNamedCount < 9 = show $ n + wNamedCount + 1
-    | n + wNamedCount == 9 = "0"
-    | otherwise           = show $ n + wNamedCount
+workspaceName :: Workspace -> String
+workspaceName WOs     = "1:os"
+workspaceName WMsg    = "2:msg"
+workspaceName WGaming = "3:gaming"
+workspaceName WRead   = "4:read"
+workspaceName WWatch  = "5:watch"
+workspaceName WListen = "6:listen"
+workspaceName (WN n)
+  | n + wNamedCount < 9 = show $ n + wNamedCount + 1
+  | n + wNamedCount == 9 = "0"
+  | otherwise           = show $ n + wNamedCount
 
 instance Enum Workspace where
   toEnum 0 = WOs
@@ -85,7 +85,7 @@ instance Ord Workspace where
 workspaces' :: [Workspace]
 workspaces' = [ minBound .. maxBound ]
 
-doShift' = doShift . (show :: Workspace -> String)
+doShift' = doShift . workspaceName
 
 main = do
   xmobar <- spawnPipe "xmobar-with-config"
@@ -105,7 +105,7 @@ main = do
           , ppCurrent = xmobarColor xmobarCurrentWorkspaceColor ""
           , ppSep = "   "
           }
-        , workspaces = fmap show (workspaces' :: [Workspace])
+        , workspaces = fmap workspaceName workspaces'
         , manageHook = composeAll
           [ isInfixOf "messages.android.com" <$> title     --> doShift' WMsg
           , isInfixOf "Steam"                <$> title     --> doShift' WGaming
@@ -121,8 +121,8 @@ main = do
         , ("M-C-S-l", spawn "systemctl hibernate")
         , ("M-C-r",   spawn "systemctl --user start redshift")
         , ("M-C-S-r", spawn "systemctl --user stop redshift")
-        , ("M-0",     windows . W.greedyView . show . (toEnum :: Int -> Workspace) $ 9)
-        , ("M-S-0",   windows . W.shift      . show . (toEnum :: Int -> Workspace) $ 9)
+        , ("M-0",     windows . W.greedyView . workspaceName $ toEnum 9)
+        , ("M-S-0",   windows . W.shift      . workspaceName $ toEnum 9)
         , ("M-p",     spawn "rofi -show run")
         , ("M-S-p",   spawn "rofi -show window")
         , ("M-a",     spawn "rofi -modi drun -show drun")
