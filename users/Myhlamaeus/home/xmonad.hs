@@ -112,11 +112,15 @@ main = do
         , workspaces = fmap workspaceName workspaces'
         , manageHook = composeAll
           [ isInfixOf "messages.android.com" <$> title     --> doShift' WMsg
-          , isInfixOf "Steam"                <$> title     --> doShift' WGaming
-          , isInfixOf "steam"                <$> title     --> doShift' WGaming
+          , className =? "Discord"                         --> doShift' WMsg
+          , className =? "keybase"                         --> doShift' WMsg
+          , className =? "Steam"                           --> doShift' WGaming
+          , isInfixOf "openmw"               <$> className --> doShift' WGaming
+          , className =? "Dwarf_Fortress"                  --> doShift' WGaming
+          , className =? "dwarftherapist"                  --> doShift' WGaming
+          , title     =? "dfhack"                          --> doShift' WGaming
           , isInfixOf "calibre"              <$> className --> doShift' WRead
           , isInfixOf "goodreads.com"        <$> title     --> doShift' WRead
-          , className =? "Discord"                         --> doShift' WMsg
           , className =? "Xmessage"                        --> doFloat
           ] <+> def
         }
