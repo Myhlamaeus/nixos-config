@@ -71,6 +71,7 @@ in
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./cachix.nix
+      ./netboot.nix
       <home-manager/nixos>
       ./users
     ];
