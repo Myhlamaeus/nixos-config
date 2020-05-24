@@ -58,7 +58,6 @@ in
       nix-index
       # dev
       shellcheck
-      ispell
       zeal
       sqlite
       # hs
@@ -88,6 +87,13 @@ in
       rxvt_unicode
       # media
       calibre
+      # aspell
+      aspell
+      aspellDicts.de
+      aspellDicts.en
+      aspellDicts.en-computers
+      aspellDicts.en-science
+      aspellDicts.la
     ]
   )
   ++ (
