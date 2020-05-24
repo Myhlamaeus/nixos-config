@@ -42,9 +42,10 @@ data Workspace
   | WRead
   | WWatch
   | WListen
+  | WWork
   | WN Int
   deriving (Eq)
-wNamedCount = 5
+wNamedCount = 6
 
 workspaceName :: Workspace -> String
 workspaceName WOs     = "1:os"
@@ -53,6 +54,7 @@ workspaceName WGaming = "3:gaming"
 workspaceName WRead   = "4:read"
 workspaceName WWatch  = "5:watch"
 workspaceName WListen = "6:listen"
+workspaceName WWork   = "7:work"
 workspaceName (WN n)
   | n + wNamedCount < 9 = show $ n + wNamedCount + 1
   | n + wNamedCount == 9 = "0"
@@ -65,6 +67,7 @@ instance Enum Workspace where
   toEnum 3 = WRead
   toEnum 4 = WWatch
   toEnum 5 = WListen
+  toEnum 6 = WWork
   toEnum n = WN $ n - wNamedCount
 
   fromEnum WOs = 0
@@ -73,6 +76,7 @@ instance Enum Workspace where
   fromEnum WRead = 3
   fromEnum WWatch = 4
   fromEnum WListen = 5
+  fromEnum WWork = 6
   fromEnum (WN n) = n + wNamedCount
 
 instance Bounded Workspace where
