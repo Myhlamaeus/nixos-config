@@ -50,9 +50,9 @@ in
         withGTK2 = false;
         srcRepo = true;
       }).overrideAttrs (attrs: {
-        name = "emacs-27.0.90-git";
+        name = "emacs-27.0.91-git";
         pname = "emacs";
-        version = "27.0.90";
+        version = "27.0.91";
         versionModifier = "-git";
         src = pkgs.fetchFromGitHub {
           owner = "emacs-mirror";
