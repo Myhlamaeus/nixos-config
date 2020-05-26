@@ -72,7 +72,7 @@ in
       ./hardware-configuration.nix
       ./cachix.nix
       <home-manager/nixos>
-      ./users
+      ../users
     ];
 
   home-manager = {
