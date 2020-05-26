@@ -71,37 +71,42 @@ in
 
     services.emacs.enable = true;
 
-    systemd.user.services.spacemacs-setup = {
-      Unit = {
-        Wants = [ "home-manager-Myhlamaeus.service" ];
-        After = [ "home-manager-Myhlamaeus.service" ];
-      };
+    systemd.user.services.spacemacs-setup = let
+        head = "develop";
+        commit = "1ec43e726";
+      in
+      {
+        Unit = {
+          Wants = [ "home-manager-Myhlamaeus.service" ];
+          After = [ "home-manager-Myhlamaeus.service" ];
+        };
 
-      Service = {
-        Type = "oneshot";
-        RemainAfterExit = "yes";
-        SyslogIdentifier = "spacemacs-setup";
+        Service = {
+          Type = "oneshot";
+          RemainAfterExit = "yes";
+          SyslogIdentifier = "spacemacs-setup";
 
-        # The activation script is run by a login shell to make sure
-        # that the user is given a sane Nix environment.
-        ExecStart = builtins.toString (pkgs.writeScript "activate-spacemacs-setup" ''
-          #! ${pkgs.stdenv.shell} -el
-          if ! [ -e ~/.emacs.d ] ; then
-            echo "Setting up spacemacs config"
-            git clone -b ${cfg.emacs.spacemacs.rev} https://github.com/syl20bnr/spacemacs ~/.emacs.d
-          fi
-          if ! [ -e ~/.spacemacs ] ; then
-            ln -s ${../../spacemacs} ~/.spacemacs
-          fi
-          git --git-dir ~/.emacs.d/.git --work-tree ~/.emacs.d fetch origin master
-          git --git-dir ~/.emacs.d/.git --work-tree ~/.emacs.d checkout d95d41f55
-        '');
-      };
+          # The activation script is run by a login shell to make sure
+          # that the user is given a sane Nix environment.
+          ExecStart = builtins.toString (pkgs.writeScript "activate-spacemacs-setup" ''
+            #! ${pkgs.stdenv.shell} -el
+            if ! [ -e ~/.emacs.d ] ; then
+              echo "Setting up spacemacs config"
+              git clone -b ${cfg.emacs.spacemacs.rev} https://github.com/syl20bnr/spacemacs ~/.emacs.d
+            fi
+            if ! [ -e ~/.spacemacs ] ; then
+              ln -s ${../../spacemacs} ~/.spacemacs
+            fi
+            git --git-dir ~/.emacs.d/.git --work-tree ~/.emacs.d fetch origin ${escapeShellArg head}
+            git --git-dir ~/.emacs.d/.git --work-tree ~/.emacs.d update-ref refs/heads/${escapeShellArg head} ${escapeShellArg commit}
+            git --git-dir ~/.emacs.d/.git --work-tree ~/.emacs.d checkout ${escapeShellArg head}
+          '');
+        };
 
-      Install = {
-        WantedBy = [ "multi-user.target" ];
+        Install = {
+          WantedBy = [ "multi-user.target" ];
+        };
       };
-    };
 
     systemd.user.services.emacs.Service.Requires = "gpg-agent.service basic.target -.slice";
 
