@@ -88,7 +88,7 @@ in
       enable = true;
       editor = false;
     };
-    boot.loader.efi.canTouchEfiVariables = true;
+    efi.canTouchEfiVariables = true;
   };
 
   services.atd.enable = true;
