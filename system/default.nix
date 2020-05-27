@@ -80,15 +80,6 @@ in
 
   hardware.enableAllFirmware = true;
 
-  boot.loader = {
-    systemd-boot = {
-      # Use the systemd-boot EFI boot loader.
-      enable = true;
-      editor = false;
-    };
-    efi.canTouchEfiVariables = true;
-  };
-
   services.atd.enable = true;
 
   services.udev.packages = [ teensyUdev pkgs.steamPackages.steam ];
