@@ -136,7 +136,10 @@ in
   programs.browserpass.enable = true;
 
   services.keybase.enable = true;
-  services.kbfs.enable = true;
+  services.kbfs = {
+    enable = true;
+    mountPoint = "media/keybase";
+  };
 
   home.file.".editorconfig" = {
     source = builtins.toFile "editorconfig" ''
