@@ -133,6 +133,14 @@ in
   };
   xdg.userDirs.enable = true;
 
+  home.activation.home-dir-permissions = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    find ~ \
+      -path ~/media -prune -o \
+      -type d \
+      -exec setfacl -Rdm "o::000" "{}" + \
+      -exec setfacl -Rdm "g::000" "{}" +
+  '';
+
   programs.browserpass.enable = true;
 
   services.keybase.enable = true;
