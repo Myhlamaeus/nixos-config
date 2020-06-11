@@ -121,6 +121,14 @@ in
         ${escapeShellArg cfg.emacs.spacemacs.ref}
     '';
 
+    home.activation.org-mode = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      if ! [ -e ~/org ] ; then
+        $DRY_RUN_CMD ln -s $VERBOSE_ARG \
+          ~/media/keybase/private/myhlamaeus/org \
+          ~/org
+      fi
+    '';
+
     systemd.user.services.emacs.Service.Requires = "gpg-agent.service basic.target -.slice";
 
     home.packages = with pkgs; [
