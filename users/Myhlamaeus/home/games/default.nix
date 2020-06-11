@@ -12,6 +12,7 @@ in
     ./rpgs.nix
     ./strategy.nix
     ./simulation.nix
+    ./other.nix
   ];
 
   options.custom.games = {
