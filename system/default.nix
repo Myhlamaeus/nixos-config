@@ -92,6 +92,10 @@ in
   # Select internationalisation properties.
   i18n = {
     defaultLocale = "en_GB.UTF-8";
+    extraLocaleSettings = {
+      LC_TIME = "en_DK.UTF-8";
+      LC_MONETARY = "en_IE.UTF-8";
+    };
   };
   console = {
     useXkbConfig = true;
