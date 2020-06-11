@@ -134,11 +134,16 @@ in
   xdg.userDirs.enable = true;
 
   home.activation.home-dir-permissions = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    find ~ \
-      -path ~/media -prune -o \
+    $DRY_RUN_CMD find ~ \
+      -path "$HOME/media" -prune -o \
       -type d \
-      -exec setfacl -Rdm "o::000" "{}" + \
-      -exec setfacl -Rdm "g::000" "{}" +
+      -exec setfacl -dm "o::000" "{}" + \
+      -exec setfacl -dm "g::000" "{}" + \
+      -exec chmod go-rwx "{}" +
+    $DRY_RUN_CMD find ~ \
+      -path "$HOME/media" -prune -o \
+      -type f \
+      -exec chmod go-rwx "{}" +
   '';
 
   programs.browserpass.enable = true;
