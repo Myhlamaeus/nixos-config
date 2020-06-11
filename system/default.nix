@@ -5,6 +5,7 @@
 { config, pkgs, ... }:
 
 let
+  sources = import ../nix/sources.nix;
   teensyUdev =
     pkgs.stdenv.mkDerivation {
       name = "49-teensy.rules";
@@ -61,7 +62,7 @@ in
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.packageOverrides = pkgs: {
-    nur = import <nur> {
+    nur = import sources.nur {
       inherit pkgs;
     };
   };
@@ -69,7 +70,7 @@ in
   imports =
     [
       ./cachix.nix
-      <home-manager/nixos>
+      (sources.home-manager + "/nixos")
       ../users
     ];
 

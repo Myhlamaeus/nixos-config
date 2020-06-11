@@ -1,0 +1,38 @@
+{
+    "home-manager": {
+        "branch": "release-20.03",
+        "description": "Manage a user environment using Nix",
+        "homepage": "https://rycee.gitlab.io/home-manager/",
+        "owner": "rycee",
+        "repo": "home-manager",
+        "rev": "96fcf3b017d813fac300ecb821b6db6b7b5d0c40",
+        "sha256": "0m7b8cazlcci3bi1j99cpgq10qp6mjml6v11jlfabh05kpyswqkk",
+        "type": "tarball",
+        "url": "https://github.com/rycee/home-manager/archive/96fcf3b017d813fac300ecb821b6db6b7b5d0c40.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "niv": {
+        "branch": "master",
+        "description": "Easy dependency management for Nix projects",
+        "homepage": "https://github.com/nmattia/niv",
+        "owner": "nmattia",
+        "repo": "niv",
+        "rev": "f73bf8d584148677b01859677a63191c31911eae",
+        "sha256": "0jlmrx633jvqrqlyhlzpvdrnim128gc81q5psz2lpp2af8p8q9qs",
+        "type": "tarball",
+        "url": "https://github.com/nmattia/niv/archive/f73bf8d584148677b01859677a63191c31911eae.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nur": {
+        "branch": "master",
+        "description": "Nix User Repository: User contributed nix packages [maintainer=@Mic92]",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "c31c1ebffd12a04db46869751b5e957df177ae95",
+        "sha256": "0kwd9i49ggd0cqlpl5h9pcjwpm6xkcl86cx1g1spg9g9vljmjr85",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/NUR/archive/c31c1ebffd12a04db46869751b5e957df177ae95.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}
