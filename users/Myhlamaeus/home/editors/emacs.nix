@@ -11,9 +11,15 @@ in
       type = with types; lines;
     };
 
-    spacemacs.rev = mkOption {
-      type = with types; str;
-      default = "develop";
+    spacemacs = {
+      ref = mkOption {
+        type = with types; str;
+        default = "develop";
+      };
+      rev = mkOption {
+        type = with types; str;
+        default = "5fcd84d84";
+      };
     };
   };
 
@@ -71,42 +77,49 @@ in
 
     services.emacs.enable = true;
 
-    systemd.user.services.spacemacs-setup = let
-        head = "develop";
-        commit = "1ec43e726";
-      in
-      {
-        Unit = {
-          Wants = [ "home-manager-Myhlamaeus.service" ];
-          After = [ "home-manager-Myhlamaeus.service" ];
-        };
-
-        Service = {
-          Type = "oneshot";
-          RemainAfterExit = "yes";
-          SyslogIdentifier = "spacemacs-setup";
-
-          # The activation script is run by a login shell to make sure
-          # that the user is given a sane Nix environment.
-          ExecStart = builtins.toString (pkgs.writeScript "activate-spacemacs-setup" ''
-            #! ${pkgs.stdenv.shell} -el
-            if ! [ -e ~/.emacs.d ] ; then
-              echo "Setting up spacemacs config"
-              git clone -b ${cfg.emacs.spacemacs.rev} https://github.com/syl20bnr/spacemacs ~/.emacs.d
-            fi
-            if ! [ -e ~/.spacemacs ] ; then
-              ln -s ${../../spacemacs} ~/.spacemacs
-            fi
-            git --git-dir ~/.emacs.d/.git --work-tree ~/.emacs.d fetch origin ${escapeShellArg head}
-            git --git-dir ~/.emacs.d/.git --work-tree ~/.emacs.d update-ref refs/heads/${escapeShellArg head} ${escapeShellArg commit}
-            git --git-dir ~/.emacs.d/.git --work-tree ~/.emacs.d checkout ${escapeShellArg head}
-          '');
-        };
-
-        Install = {
-          WantedBy = [ "multi-user.target" ];
-        };
-      };
+    home.activation.spacemacs-setup = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      if ! [ -e ~/.emacs.d ] ; then
+        $DRY_RUN_CMD git \
+          clone $VERBOSE_ARG \
+          -b ${escapeShellArg cfg.emacs.spacemacs.ref} \
+          https://github.com/syl20bnr/spacemacs \
+          ~/.emacs.d
+      fi
+      if ! [ -e ~/.emacs.d/.git ] ; then
+        local temp=$(mktemp -d)
+        mv ~/.emacs.d/private "$temp"
+        $DRY_RUN_CMD git \
+          clone $VERBOSE_ARG \
+          -b ${escapeShellArg cfg.emacs.spacemacs.ref} \
+          https://github.com/syl20bnr/spacemacs \
+          ~/.emacs.d
+        rm -r ~/.emacs.d/private
+        mv "$temp"/private ~/.emacs.d
+        rm -r "$temp"
+      fi
+      if ! [ -e ~/.spacemacs ] ; then
+        $DRY_RUN_CMD ln -s $VERBOSE_ARG \
+          /etc/nixos/config/users/Myhlamaeus/spacemacs \
+          ~/.spacemacs
+      fi
+      $DRY_RUN_CMD git \
+        --git-dir ~/.emacs.d/.git \
+        --work-tree ~/.emacs.d \
+        fetch $VERBOSE_ARG \
+        origin \
+        ${escapeShellArg cfg.emacs.spacemacs.ref}
+      $DRY_RUN_CMD git \
+        --git-dir ~/.emacs.d/.git \
+        --work-tree ~/.emacs.d \
+        update-ref \
+        refs/heads/${escapeShellArg cfg.emacs.spacemacs.ref} \
+        ${escapeShellArg cfg.emacs.spacemacs.rev}
+      $DRY_RUN_CMD git \
+        --git-dir ~/.emacs.d/.git \
+        --work-tree ~/.emacs.d \
+        checkout \
+        ${escapeShellArg cfg.emacs.spacemacs.ref}
+    '';
 
     systemd.user.services.emacs.Service.Requires = "gpg-agent.service basic.target -.slice";
 
