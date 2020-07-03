@@ -6,29 +6,14 @@
 
 let
   sources = import ../nix/sources.nix;
-  teensyUdev =
-    pkgs.stdenv.mkDerivation {
-      name = "49-teensy.rules";
-      src =
-        builtins.fetchurl {
-          url = "https://www.pjrc.com/teensy/49-teensy.rules";
-          sha256 = "052rgk3q9pnxrrxx98x6yrhbxvhjp1z5mn4vpkwgni7jrrnvn5vw";
-        };
-      unpackPhase = "true";
-      installPhase = ''
-        mkdir -p $out/etc/udev/rules.d
-        cp $src $out/etc/udev/rules.d/49-teensy.rules
-      '';
-    };
 
 in
 {
   boot.tmpOnTmpfs = true;
 
   nixpkgs.overlays = [
-    (self: super:
-      {
-        add-optparse-applicative-completions = { pkg, bins }: super.pkgs.symlinkJoin {
+    (self: super: {
+      add-optparse-applicative-completions = { pkg, bins }: super.pkgs.symlinkJoin {
           name = "${pkg.name}-with-completion";
           paths = [ pkg ];
           buildInputs = [ super.pkgs.coreutils ];
@@ -41,22 +26,26 @@ in
             '') bins}
           '';
         };
-      }
-    )
+    })
     (self: super: {
       omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (oldAttrs: rec {
-          version = "1.34.9";
-          src = builtins.fetchurl {
-            url = "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v${version}/omnisharp-mono.tar.gz";
-            sha256 = "1b5jzc7dj9hhddrr73hhpq95h8vabkd6xac1bwq05lb24m0jsrp9";
-          };
-      });
+          version = sources.omnisharp-roslyn.version;
+          src = sources.omnisharp-roslyn;
+        });
     })
     (self: super: {
       chromium = super.chromium.override {
-        commandLineArgs = "--force-dark-mode";
-        enableWideVine = true;
-      };
+          commandLineArgs = "--force-dark-mode";
+          enableWideVine = true;
+        };
+    })
+    (self: super: {
+      teensy-loader-cli = super.teensy-loader-cli.overrideAttrs (attrs: rec {
+          postInstall = (attrs.postInstall or "") + ''
+            mkdir -p $out/lib/udev/rules.d
+            cp ${sources.teensy-udev-rules} $out/lib/udev/rules.d/49-teensy.rules
+          '';
+        });
     })
   ];
 
@@ -83,7 +72,7 @@ in
 
   services.atd.enable = true;
 
-  services.udev.packages = [ teensyUdev pkgs.steamPackages.steam ];
+  services.udev.packages = with pkgs; [ teensy-loader-cli steamPackages.steam ];
   # options.hardware.steam-hardware.enable = true;
 
   # Configure network proxy if necessary
