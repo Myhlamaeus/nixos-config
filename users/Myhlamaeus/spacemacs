@@ -591,6 +591,7 @@ before packages are loaded."
     )
   (setq org-noter-notes-search-path '("~/org/noter"))
   (setq org-noter-default-notes-file-names '("notes.org" "mathematics-exercises.org"))
+  (add-to-list 'hs-special-modes-alist '(typescript-mode "{" "}" "/[*/]" nil))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
