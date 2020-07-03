@@ -242,16 +242,16 @@ in
 
   nix.gc = {
     automatic = true;
-    dates = "18:15";
+    dates = "05:00";
     options = "--delete-older-than 5d";
   };
   nix.optimise = {
     automatic = true;
-    dates = ["18:45"];
+    dates = ["05:30"];
   };
   system.autoUpgrade = {
     enable = true;
-    dates = "19:40";
+    dates = "04:30";
   };
 
   # This value determines the NixOS release with which your system is to be
