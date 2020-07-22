@@ -29,6 +29,19 @@
   services.xserver = {
     videoDrivers = [ "nvidia" ];
   };
+  hardware.opengl = {
+    extraPackages = with pkgs; [
+      libvdpau-va-gl
+      vaapiVdpau
+    ];
+  };
+  nixpkgs.overlays = [
+    (self: super: {
+      chromium = super.chromium.override {
+        enableVaapi = true;
+      };
+    })
+  ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "uas" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
