@@ -48,12 +48,10 @@
     makeChromiumDesktopItem = { name, desktopName, app, profileDirectory ? "Default", categories ? "" }:
       with pkgs; with lib;
       makeDesktopItem rec {
-        name = "youtube-music";
-        desktopName = "YouTube Music";
         exec = ''
           ${chromium}/bin/chromium --profile-directory=${escapeShellArg profileDirectory} --app=${escapeShellArg app}
         '';
-        inherit categories;
+        inherit name desktopName categories;
       };
   in
   [
