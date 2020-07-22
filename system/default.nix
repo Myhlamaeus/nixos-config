@@ -9,6 +9,21 @@ let
 
 in
 {
+  imports =
+    [
+      <nixpkgs/nixos/modules/profiles/hardened.nix>
+      ./cachix.nix
+      (sources.home-manager + "/nixos")
+      ../users
+    ];
+
+  # <nixpkgs>'s hardened kernel doesn't support 32 bit emulation (`linuxPackages_hardened.kernel.features.ia32Emulation`)
+  # The hardened kernel breaks Chromium
+  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelModules = [ "usb_storage" "fuse" ];
+  # Required for `nix.useSandbox`
+  security.allowUserNamespaces = true;
+
   boot.tmpOnTmpfs = true;
 
   nixpkgs.overlays = [
@@ -60,13 +75,6 @@ in
       inherit pkgs;
     };
   };
-
-  imports =
-    [
-      ./cachix.nix
-      (sources.home-manager + "/nixos")
-      ../users
-    ];
 
   home-manager = {
     useUserPackages = true;
