@@ -28,6 +28,9 @@
   # Video drivers
   services.xserver = {
     videoDrivers = [ "nvidia" ];
+    screenSection = ''
+      Option "metamodes" "2560x1440_144 +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
+    '';
   };
   hardware.opengl = {
     extraPackages = with pkgs; [
