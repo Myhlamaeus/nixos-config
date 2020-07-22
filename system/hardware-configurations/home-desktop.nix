@@ -25,6 +25,11 @@
     };
   };
 
+  # Video drivers
+  services.xserver = {
+    videoDrivers = [ "nvidia" ];
+  };
+
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "uas" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];

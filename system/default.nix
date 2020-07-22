@@ -204,7 +204,6 @@ in
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
 
   # Video drivers
-  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.driSupport32Bit = true;
 
   hardware.u2f.enable = true;
