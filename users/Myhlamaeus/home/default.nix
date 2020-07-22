@@ -294,6 +294,20 @@ in
     source = ./greg.conf;
   };
 
+  home.file.".ledgerrc".text =
+    let
+      formatPair = k: v: if v == true then "--${k}" else "--${k}=${toString v}";
+      toConfig = cfg: with lib; with builtins; concatStringsSep "\n" (map (concatStringsSep "\n") (mapAttrsToList (k: v: if typeOf v == "list" then map (formatPair k) v else [(formatPair k v)]) cfg));
+
+    in
+      toConfig {
+        input-date-format = "%F";
+        date-format = "%F";
+        datetime-format = "%FT%T";
+        strict = true;
+        file = ["~/org/ledger/definitions" "~/org/ledger/ledger"];
+      };
+
   xdg.configFile."cheat/conf.yml".text = builtins.toJSON {
     # The editor to use with 'cheat -e <sheet>'. Defaults to $EDITOR or $VISUAL.
     # editor = pkgs.neovim + "/bin/nvim";
