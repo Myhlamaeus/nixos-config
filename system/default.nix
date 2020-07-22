@@ -47,6 +47,11 @@ in
           '';
         });
     })
+    (self: super: {
+      cheatPackages = {
+        community = sources.cheatsheets;
+      };
+    })
   ];
 
   nixpkgs.config.allowUnfree = true;

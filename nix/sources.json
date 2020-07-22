@@ -1,4 +1,16 @@
 {
+    "cheatsheets": {
+        "branch": "master",
+        "description": "Community-sourced cheatsheets.",
+        "homepage": null,
+        "owner": "cheat",
+        "repo": "cheatsheets",
+        "rev": "ebfa3f0ce59fbf048eb5abfa9cf9bf44418094b3",
+        "sha256": "1110gqkdw7ig79asmfc1130i9vp9vf8fl7qrcaq3hsz0skbi1xwa",
+        "type": "tarball",
+        "url": "https://github.com/cheat/cheatsheets/archive/ebfa3f0ce59fbf048eb5abfa9cf9bf44418094b3.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "home-manager": {
         "branch": "release-20.03",
         "description": "Manage a user environment using Nix",
