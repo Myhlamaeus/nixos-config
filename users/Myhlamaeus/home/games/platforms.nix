@@ -5,8 +5,7 @@ let
 
 in
 {
-  config.home.packages = lib.mkIf config.custom.games.enable (
-    (
+  config.custom.games.packages = (
       with pkgs; [
         (retroarch.override {
           cores = with libretro; [ dolphin ];
@@ -15,8 +14,8 @@ in
       ]
     )
     ++ (
-          with pkgs-unstable; [
-          ]
-        )
-  );
+        with pkgs-unstable; [
+        ]
+      )
+  ;
 }

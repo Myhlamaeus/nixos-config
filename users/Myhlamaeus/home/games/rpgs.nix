@@ -5,16 +5,15 @@ let
 
 in
 {
-  config.home.packages = lib.mkIf config.custom.games.enable (
-    (
+  config.custom.games.packages = (
       with pkgs; [
         wesnoth
       ]
     )
     ++ (
-          with pkgs-unstable; [
-            openmw
-          ]
-        )
-  );
+        with pkgs-unstable; [
+          openmw
+        ]
+      )
+  ;
 }

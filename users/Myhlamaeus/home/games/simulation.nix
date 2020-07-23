@@ -5,19 +5,18 @@ let
 
 in
 {
-  config.home.packages = lib.mkIf config.custom.games.enable (
-    (
+  config.custom.games.packages = (
       with pkgs; [
         openrct2
         openttd
       ]
     )
     ++ (
-          with pkgs-unstable; [
-            (dwarf-fortress-packages.dwarf-fortress-full.override {
-              theme = null;
-            })
-          ]
-        )
-  );
+        with pkgs-unstable; [
+          (dwarf-fortress-packages.dwarf-fortress-full.override {
+            theme = null;
+          })
+        ]
+      )
+  ;
 }

@@ -5,15 +5,14 @@ let
 
 in
 {
-  config.home.packages = lib.mkIf config.custom.games.enable (
-    (
+  config.custom.games.packages = (
       with pkgs; [
         teeworlds
       ]
     )
     ++ (
-          with pkgs-unstable; [
-          ]
-        )
-  );
+        with pkgs-unstable; [
+        ]
+      )
+  ;
 }
