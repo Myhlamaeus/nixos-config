@@ -55,8 +55,8 @@ in
         withGTK3 = true;
         withGTK2 = false;
         srcRepo = true;
-      }).overrideAttrs (attrs: {
-        name = "emacs-27.0.91-git";
+      }).overrideAttrs (attrs: rec {
+        name = "${pname}-${version}${versionModifier}";
         pname = "emacs";
         version = "27.0.91";
         versionModifier = "-git";
