@@ -11,7 +11,7 @@ in
         (retroarch.override {
           cores = with libretro; [ dolphin ];
         })
-        linux-steam-integration
+        steam
       ]
     )
     ++ (
