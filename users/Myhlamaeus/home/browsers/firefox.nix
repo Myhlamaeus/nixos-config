@@ -75,57 +75,59 @@ let
 
 in
 {
-  programs.firefox = {
-    enable = true;
+  config = mkIf config.custom.x11.enable {
+    programs.firefox = {
+      enable = true;
 
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-      browserpass
-      darkreader
-      vimium
-      ublock-origin
-      https-everywhere
-      decentraleyes
-      # clearurls
-      # grammarly
-      # authy
-      # terms-of-service-didnt-read
-      temporary-containers
-      multi-account-containers
-      umatrix
-      # canvasblocker
-    ];
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        browserpass
+        darkreader
+        vimium
+        ublock-origin
+        https-everywhere
+        decentraleyes
+        # clearurls
+        # grammarly
+        # authy
+        # terms-of-service-didnt-read
+        temporary-containers
+        multi-account-containers
+        umatrix
+        # canvasblocker
+      ];
 
-    profiles = {
-      private = {
-        id = 1;
-        isDefault = true;
+      profiles = {
+        private = {
+          id = 1;
+          isDefault = true;
 
-        settings = sharedSettings;
-      };
+          settings = sharedSettings;
+        };
 
-      work = {
-        id = 2;
-        isDefault = false;
+        work = {
+          id = 2;
+          isDefault = false;
 
-        settings = sharedSettings;
-      };
+          settings = sharedSettings;
+        };
 
-      secret = {
-        id = 0;
-        path = "3ugol2lb.default";
-        isDefault = false;
+        secret = {
+          id = 0;
+          path = "3ugol2lb.default";
+          isDefault = false;
 
-        settings = sharedSettings;
+          settings = sharedSettings;
+        };
       };
     };
-  };
-  programs.browserpass.browsers = [ "firefox" ];
+    programs.browserpass.browsers = [ "firefox" ];
 
-  home.sessionVariables = {
-    BROWSER = "firefox";
-  };
+    home.sessionVariables = {
+      BROWSER = "firefox";
+    };
 
-  home.packages = with pkgs; [
-    (tor-browser-bundle-bin.override { pulseaudioSupport = true; })
-  ];
+    home.packages = with pkgs; [
+      (tor-browser-bundle-bin.override { pulseaudioSupport = true; })
+    ];
+  };
 }
