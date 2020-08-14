@@ -87,7 +87,6 @@ in
       # other
       ledger
       weechat
-      mysql-workbench
       # non-free
       discord
       # term emulator
