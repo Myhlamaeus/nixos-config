@@ -67,6 +67,18 @@
         "url_template": "https://github.com/<owner>/<repo>/releases/download/v<version>/omnisharp-mono.tar.gz",
         "version": "1.34.9"
     },
+    "pass-git-helper": {
+        "branch": "master",
+        "description": "A git credential helper interfacing with pass, the standard unix password manager.",
+        "homepage": null,
+        "owner": "languitar",
+        "repo": "pass-git-helper",
+        "rev": "faceb47cccbb0d7b0330871f353bccb9b9ddd201",
+        "sha256": "1gv78msx04hjvca3dixaj5dbvkmaak6qm0qgvqg9yb3hzjh1jbjl",
+        "type": "tarball",
+        "url": "https://github.com/languitar/pass-git-helper/archive/faceb47cccbb0d7b0330871f353bccb9b9ddd201.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "teensy-udev-rules": {
         "sha256": "052rgk3q9pnxrrxx98x6yrhbxvhjp1z5mn4vpkwgni7jrrnvn5vw",
         "type": "file",

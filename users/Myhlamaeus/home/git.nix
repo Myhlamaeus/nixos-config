@@ -167,6 +167,11 @@ in
         "url \"git://gist.github.com/\"" = {
           insteadOf = "gist:";
         };
+
+        credential = {
+          helper = "${ pkgs.pass-git-helper }/bin/pass-git-helper";
+          useHttpPath = true;
+        };
       };
 
       aliases = {
@@ -245,5 +250,14 @@ in
         signByDefault = true;
       };
     };
+
+    xdg.configFile."pass-git-helper/git-pass-mapping.ini".text = ''
+      [DEFAULT]
+      username_extractor=regex_search
+      regex_username=^login: (.*)$
+
+      [github.com/eatchinteractive/*]
+      target=work/eatch/github
+    '';
   };
 }

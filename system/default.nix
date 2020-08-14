@@ -67,6 +67,20 @@ in
         community = sources.cheatsheets;
       };
     })
+    (self: super: {
+      pass-git-helper = super.python38Packages.buildPythonApplication {
+        pname = "pass-git-helper";
+        version = sources.pass-git-helper.branch;
+        versionSuffix = "-git";
+
+        propagatedBuildInputs = with pkgs.python38Packages; [ pyxdg ];
+        checkInputs = with pkgs.python38Packages; [ coveralls pytest pytest-mock ];
+
+        src = sources.pass-git-helper;
+
+        doCheck = false;
+      };
+    })
   ];
 
   nixpkgs.config.allowUnfree = true;
