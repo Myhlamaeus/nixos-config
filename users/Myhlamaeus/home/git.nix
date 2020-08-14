@@ -8,6 +8,8 @@ let
 
 in
 {
+  imports = [ (sources.felschr-nixos + "/home/git.nix") ];
+
   options = {
     programs.git.custom = {
       ignoreFiles = mkOption {
@@ -46,14 +48,21 @@ in
       enable = true;
 
       custom = {
+        profiles = rec {
+          private = {
+            name = "Maurice B. Lewis";
+            email = "dreyer.maltem+dev@gmail.com";
+            signingKey = "4BBC645F979A88FA!";
+            dirs = [ "~" "/etc/nixos" ];
+          };
+        };
+        defaultProfile = "private";
+
         ignoreFiles = [ (pkgs.fetchurl {
           name = "gitignore";
           inherit (sources.gitignore) url sha256;
         }) ];
       };
-
-      userEmail = "dreyer.maltem+dev@gmail.com";
-      userName = "Maurice B. Lewis";
 
       ignores = map builtins.readFile cfg.custom.ignoreFiles
         ++ [
@@ -246,7 +255,6 @@ in
       };
 
       signing = {
-        key = "4BBC645F979A88FA!";
         signByDefault = true;
       };
     };

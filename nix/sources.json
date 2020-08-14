@@ -11,6 +11,12 @@
         "url": "https://github.com/cheat/cheatsheets/archive/ebfa3f0ce59fbf048eb5abfa9cf9bf44418094b3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "felschr-nixos": {
+        "ref": "main",
+        "repo": "git@gitlab.com:FelschR/nixos-config",
+        "rev": "5422f746786e9f5fd483fe5ff6be184c73a421b6",
+        "type": "git"
+    },
     "gitignore": {
         "langs": "archive,backup,emacs,linux,vim",
         "sha256": "1i0jm60hin3rw8ycqb3gpqpk0rlsv72ib8m5y1rfh4wjyzvg9hs3",
