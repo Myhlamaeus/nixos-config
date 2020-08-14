@@ -53,8 +53,8 @@ in
     gtk = {
       enable = true;
       font = {
-        package = pkgs.fira;
-        name = "Fira Sans 8";
+        package = pkgs.cm_unicode;
+        name = "CMU Sans Serif 8";
       };
       iconTheme = {
         package = pkgs.papirus-icon-theme;

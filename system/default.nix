@@ -165,9 +165,9 @@ in
 
     fontconfig = {
       defaultFonts = {
-        monospace = [ "Fira Code" "Noto Color Emoji" ];
-        sansSerif = [ "Fira Sans" "Noto Color Emoji" ];
-        serif = [ "Computer Modern" "Noto Color Emoji" ];
+        monospace = [ "CMU Sans Serif" "Noto Color Emoji" ];
+        sansSerif = [ "CMU Sans Serif" "Noto Color Emoji" ];
+        serif = [ "CMU Serif" "Noto Color Emoji" ];
       };
     };
   };
