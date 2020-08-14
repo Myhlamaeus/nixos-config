@@ -38,12 +38,6 @@
   };
   programs.browserpass.browsers = [ "chromium" ];
 
-  # Not yet in stable
-  # systemd.user.sessionVariables = {
-  home.sessionVariables = {
-    BROWSER = "chromium";
-  };
-
   home.packages = let
     makeChromiumDesktopItem = { name, desktopName, app, profileDirectory ? "Default", categories ? "" }:
       with pkgs; with lib;
