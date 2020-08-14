@@ -58,13 +58,13 @@ in
       }).overrideAttrs (attrs: rec {
         name = "${pname}-${version}${versionModifier}";
         pname = "emacs";
-        version = "27.0.91";
+        version = "27.1.50";
         versionModifier = "-git";
         src = pkgs.fetchFromGitHub {
           owner = "emacs-mirror";
           repo = "emacs";
-          rev = "c5f255d68156926923232b1edadf50faac527861";
-          sha256 = "13n82lxbhmkcmlzbh0nml8ydxyfvz8g7wsdq7nszlwmq914gb5nk";
+          rev = "6dada01015c10c016892802fbb2632a6235eebdd";
+          sha256 = "1qjx3i6xgcm6xfzgs6fhf0597y8qwqsyxy5az7zj4dgp29vw0h5g";
         };
         patches = [ ];
 
