@@ -52,6 +52,7 @@ in
       chromium = super.chromium.override {
           commandLineArgs = "--force-dark-mode";
           enableWideVine = true;
+          enableVaapi = true;
         };
     })
     (self: super: {
