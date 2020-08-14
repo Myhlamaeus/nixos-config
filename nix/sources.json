@@ -13,7 +13,7 @@
     },
     "felschr-nixos": {
         "ref": "main",
-        "repo": "git@gitlab.com:FelschR/nixos-config",
+        "repo": "https://gitlab.com/FelschR/nixos-config.git",
         "rev": "5422f746786e9f5fd483fe5ff6be184c73a421b6",
         "type": "git"
     },
