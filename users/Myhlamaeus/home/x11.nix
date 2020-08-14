@@ -1,95 +1,106 @@
-{ pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+with lib;
+let
+  cfg = config.custom.x11;
+
+in
 {
-  home.packages = with pkgs; [ xclip ];
-
-  services.redshift = {
-    enable = true;
-    latitude = "53.2626212";
-    longitude = "10.4411094";
-    brightness = {
-      day = "0.9";
-      night = "0.3";
-    };
-    temperature = {
-      day = 5500;
-      night = 2000;
-    };
+  options.custom.x11 = {
+    enable = mkEnableOption "x11";
   };
 
-  xsession = {
-    enable = true;
-    initExtra = ''
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [ xclip ];
+
+    services.redshift = {
+      enable = true;
+      latitude = "53.2626212";
+      longitude = "10.4411094";
+      brightness = {
+        day = "0.9";
+        night = "0.3";
+      };
+      temperature = {
+        day = 5500;
+        night = 2000;
+      };
+    };
+
+    xsession = {
+      enable = true;
+      initExtra = ''
         # http://wallpaperswide.com/fedora_29_background-wallpapers.html
         ${pkgs.feh}/bin/feh --bg-scale ${./fedora_29_background-wallpaper-2560x1440.jpg}
       '';
-    profileExtra = ''
+      profileExtra = ''
         ${pkgs.google-drive-ocamlfuse}/bin/google-drive-ocamlfuse ~/media/google-drive
       '';
-  };
-
-  services.screen-locker = {
-    enable = true;
-    # Must be installed via configuration.nix and
-    # referenced like this as it is wrapped
-    lockCmd = "${pkgs.bash}/bin/bash -c '/run/wrappers/bin/slock & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
-    xautolockExtraOptions = [ "-corners -000" ];
-  };
-
-  services.unclutter = {
-    enable = true;
-  };
-
-  gtk = {
-    enable = true;
-    font = {
-      package = pkgs.fira;
-      name = "Fira Sans 8";
     };
-    iconTheme = {
-      package = pkgs.papirus-icon-theme;
-      name = "Papirus-Dark";
-    };
-    theme = {
-      package = pkgs.adapta-gtk-theme;
-      name = "Adapta-Nokto";
-    };
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
-    };
-  };
-  qt = {
-    enable = true;
-    platformTheme = "gtk";
-  };
 
-  programs.rofi = {
-    enable = true;
-    theme = "android_notification";
-    extraConfig = ''
-      rofi.kb-remove-char-back:  BackSpace
-      rofi.kb-accept-entry:  Return,KP_Enter
-      rofi.kb-remove-to-eol:  Shift+BackSpace
-      rofi.kb-move-char-back:  Left
-      rofi.kb-move-char-forward:  Right
-      rofi.kb-row-left:          Control+h
-      rofi.kb-row-right:         Control+l
-      rofi.kb-row-down:          Control+j
-      rofi.kb-row-up:            Control+k
-      rofi.kb-page-prev:         Control+b
-      rofi.kb-page-next:         Control+f
-    '';
-  };
+    services.screen-locker = {
+      enable = true;
+      # Must be installed via configuration.nix and
+      # referenced like this as it is wrapped
+      lockCmd = "${pkgs.bash}/bin/bash -c '/run/wrappers/bin/slock & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
+      xautolockExtraOptions = [ "-corners -000" ];
+    };
 
-  xresources = {
-    extraConfig = builtins.readFile (
-      pkgs.fetchFromGitHub {
-        owner = "logico-dev";
-        repo = "Xresources-themes";
-        rev = "1df25bf5b2e639e8695e8f2eb39e9d373af3b888";
-        sha256 = "0jjnnkyps2v0qdylad9ci2izpn0zqlkpdlv626sbhw35ayghxpv4";
-      }
-      + "/base16-spacemacs-256.Xresources"
-    );
+    services.unclutter = {
+      enable = true;
+    };
+
+    gtk = {
+      enable = true;
+      font = {
+        package = pkgs.fira;
+        name = "Fira Sans 8";
+      };
+      iconTheme = {
+        package = pkgs.papirus-icon-theme;
+        name = "Papirus-Dark";
+      };
+      theme = {
+        package = pkgs.adapta-gtk-theme;
+        name = "Adapta-Nokto";
+      };
+      gtk3.extraConfig = {
+        gtk-application-prefer-dark-theme = true;
+      };
+    };
+    qt = {
+      enable = true;
+      platformTheme = "gtk";
+    };
+
+    programs.rofi = {
+      enable = true;
+      theme = "android_notification";
+      extraConfig = ''
+        rofi.kb-remove-char-back:  BackSpace
+        rofi.kb-accept-entry:  Return,KP_Enter
+        rofi.kb-remove-to-eol:  Shift+BackSpace
+        rofi.kb-move-char-back:  Left
+        rofi.kb-move-char-forward:  Right
+        rofi.kb-row-left:          Control+h
+        rofi.kb-row-right:         Control+l
+        rofi.kb-row-down:          Control+j
+        rofi.kb-row-up:            Control+k
+        rofi.kb-page-prev:         Control+b
+        rofi.kb-page-next:         Control+f
+      '';
+    };
+
+    xresources = {
+      extraConfig = builtins.readFile (
+        pkgs.fetchFromGitHub {
+          owner = "logico-dev";
+          repo = "Xresources-themes";
+          rev = "1df25bf5b2e639e8695e8f2eb39e9d373af3b888";
+          sha256 = "0jjnnkyps2v0qdylad9ci2izpn0zqlkpdlv626sbhw35ayghxpv4";
+        }
+        + "/base16-spacemacs-256.Xresources"
+      );
+    };
   };
 }

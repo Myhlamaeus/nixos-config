@@ -39,6 +39,7 @@ in
   ];
 
   custom.games.enable = true;
+  custom.x11.enable = true;
 
   xdg.configFile."nixpkgs/config.nix".text = ''
     {

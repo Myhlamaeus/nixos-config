@@ -1,22 +1,15 @@
 { config, pkgs, lib, ... }:
 
-let
-  pkgs-unstable = (import <nixpkgs-unstable> { config = { allowUnfree = true; }; });
+with lib;
 
-in
 {
-  config.custom.games.packages = (
-      with pkgs; [
-        openrct2
-        openttd
-        (dwarf-fortress-packages.dwarf-fortress-full.override {
-          theme = null;
-        })
-      ]
-    )
-    ++ (
-        with pkgs-unstable; [
-        ]
-      )
+  config.custom.games.packages = with pkgs;
+    optionals config.custom.x11.enable [
+      openrct2
+      openttd
+      (dwarf-fortress-packages.dwarf-fortress-full.override {
+        theme = null;
+      })
+    ]
   ;
 }

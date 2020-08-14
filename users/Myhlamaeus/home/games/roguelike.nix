@@ -1,7 +1,10 @@
 { config, pkgs, lib, ... }:
 
+with lib;
+
 {
-  config.custom.games.packages = with pkgs; [
+  config.custom.games.packages = with pkgs;
+    [
       crawl
     ]
   ;

@@ -1,20 +1,13 @@
 { config, pkgs, lib, ... }:
 
-let
-  pkgs-unstable = (import <nixpkgs-unstable> { config = { allowUnfree = true; }; });
+with lib;
 
-in
 {
-  config.custom.games.packages = (
-      with pkgs; [
-        openra
-        zeroad
-        hedgewars
-      ]
-    )
-    ++ (
-        with pkgs-unstable; [
-        ]
-      )
+  config.custom.games.packages = with pkgs;
+    optionals config.custom.x11.enable [
+      openra
+      zeroad
+      hedgewars
+    ]
   ;
 }
