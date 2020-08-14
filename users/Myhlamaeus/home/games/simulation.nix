@@ -9,13 +9,13 @@ in
       with pkgs; [
         openrct2
         openttd
+        (dwarf-fortress-packages.dwarf-fortress-full.override {
+          theme = null;
+        })
       ]
     )
     ++ (
         with pkgs-unstable; [
-          (dwarf-fortress-packages.dwarf-fortress-full.override {
-            theme = null;
-          })
         ]
       )
   ;
