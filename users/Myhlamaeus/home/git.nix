@@ -64,6 +64,11 @@ in
           "nohup.out"
         ];
 
+      attributes = [
+        # Automatically normalize line endings for all text-based files
+        "* text=auto"
+      ];
+
       extraConfig = {
         apply = {
           # Detect whitespace errors when applying a patch
@@ -71,11 +76,6 @@ in
         };
 
         core = {
-          attributesfile = builtins.toFile "gitattributes" ''
-              # Automatically normalize line endings for all text-based files
-              * text=auto
-            '';
-
           # Treat spaces before tabs and all kinds of trailing whitespace as an error
           # [default] trailing-space: looks for spaces at the end of a line
           # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
