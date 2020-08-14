@@ -6,6 +6,7 @@
 
 let
   sources = import ../nix/sources.nix;
+  pkgs-unstable = (import <nixpkgs-unstable> { config = { allowUnfree = true; }; });
 
 in
 {
@@ -81,6 +82,9 @@ in
 
         doCheck = false;
       };
+    })
+    (self: super: {
+      inherit (pkgs-unstable) openmw dwarf-fortress-packages;
     })
   ];
 
