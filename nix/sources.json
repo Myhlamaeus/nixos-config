@@ -11,6 +11,13 @@
         "url": "https://github.com/cheat/cheatsheets/archive/ebfa3f0ce59fbf048eb5abfa9cf9bf44418094b3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "gitignore": {
+        "langs": "archive,backup,emacs,linux,vim",
+        "sha256": "1i0jm60hin3rw8ycqb3gpqpk0rlsv72ib8m5y1rfh4wjyzvg9hs3",
+        "type": "file",
+        "url": "https://www.gitignore.io/api/archive,backup,emacs,linux,vim",
+        "url_template": "https://www.gitignore.io/api/<langs>"
+    },
     "home-manager": {
         "branch": "release-20.03",
         "description": "Manage a user environment using Nix",
