@@ -8,11 +8,11 @@ in
   config.custom.games.packages = (
       with pkgs; [
         wesnoth
+        openmw
       ]
     )
     ++ (
         with pkgs-unstable; [
-          openmw
         ]
       )
   ;
