@@ -105,7 +105,6 @@ in
   ++ (
         with pkgs-unstable; [
           zsh-completions
-          niv
           (pkgs.add-optparse-applicative-completions { pkg = niv; bins = [ "niv" ]; })
           fahcontrol
           fahclient
