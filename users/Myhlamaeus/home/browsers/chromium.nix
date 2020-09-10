@@ -4,7 +4,7 @@ with lib;
 {
   config = mkIf config.custom.x11.enable {
     programs.chromium = {
-      enable = true;
+      enable = false;
       extensions = [
         "fhgenkpocbhhddlgkjnfghpjanffonno" # Authy Chrome Extension
         # "agoopbiflnjadjfbhimhlmcbgmdgldld" # Baseliner
