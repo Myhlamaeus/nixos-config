@@ -374,6 +374,8 @@ in
 
   programs.command-not-found.enable = true;
 
+  services.kdeconnect.enable = true;
+
   # services.bitlbee = {
   #   enable = true;
   #   plugins = [
