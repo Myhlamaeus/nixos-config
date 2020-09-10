@@ -81,20 +81,20 @@ in
       enable = true;
 
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        browserpass
-        darkreader
-        vimium
-        ublock-origin
-        https-everywhere
-        decentraleyes
-        # clearurls
-        # grammarly
         # authy
-        # terms-of-service-didnt-read
-        temporary-containers
+        browserpass
+        canvasblocker
+        clearurls
+        darkreader
+        decentraleyes
+        # grammarly
+        https-everywhere
         multi-account-containers
+        temporary-containers
+        terms-of-service-didnt-read
+        ublock-origin
         umatrix
-        # canvasblocker
+        vimium
       ];
 
       profiles = {
