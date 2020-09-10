@@ -134,7 +134,7 @@ in
   home.activation.home-dir-permissions = lib.hm.dag.entryAfter ["writeBoundary"] ''
     $DRY_RUN_CMD find ~ \
       -path "$HOME/media" -prune -o \
-      -path "$HOME/webdav/lost+found" -prune -o \
+      -path "$HOME/webdav" -prune -o \
       -type d \
       -exec setfacl -dm "o::000" "{}" + \
       -exec setfacl -dm "g::000" "{}" + \
