@@ -132,6 +132,10 @@ in
           autocorrect = 1;
         };
 
+        init = {
+          defaultBranch = "main";
+        };
+
         merge = {
           # Include summaries of merged commits in newly created merge commit messages
           log = true;
