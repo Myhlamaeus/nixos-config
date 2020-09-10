@@ -76,6 +76,7 @@ in
       gnupg
       keepassxc
       (pass.withExtensions (exts: with exts; [ pass-update pass-audit ]))
+      element-desktop
       keybase
       keybase-gui
       # graphics
