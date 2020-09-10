@@ -134,8 +134,24 @@ in
       BROWSER = "firefox";
     };
 
-    home.packages = with pkgs; [
-      (tor-browser-bundle-bin.override { pulseaudioSupport = true; })
-    ];
+    home.packages = let
+      escapeDesktopArg = arg: replaceStrings ["\""] ["\"\\\"\""] (toString arg);
+      mkExec = with lib; { app ? null, profile ? null, ... }: ''
+          firefox ${ optionalString (profile != null) "-P \"${ escapeDesktopArg profile }\"" } ${ optionalString (app != null) "--ssb=\"${ escapeDesktopArg app }\"" } %U
+        '';
+      mkFirefoxDesktopItem = attrs:
+        pkgs.makeDesktopItem ({ icon = "firefox"; } // (removeAttrs attrs [ "app" "profile" ]) // { exec = mkExec attrs; });
+    in
+      (with pkgs; [
+        (tor-browser-bundle-bin.override { pulseaudioSupport = true; })
+      ])
+        ++ [
+          (mkFirefoxDesktopItem {
+            name = "youtube-music";
+            desktopName = "YouTube Music";
+            app = "https://music.youtube.com";
+          })
+        ]
+    ;
   };
 }

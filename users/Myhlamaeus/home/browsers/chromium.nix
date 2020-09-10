@@ -39,23 +39,5 @@ with lib;
       ];
     };
     programs.browserpass.browsers = [ "chromium" ];
-
-    home.packages = let
-      makeChromiumDesktopItem = { name, desktopName, app, profileDirectory ? "Default", categories ? "" }:
-        with pkgs; with lib;
-          makeDesktopItem rec {
-            exec = ''
-        ${chromium}/bin/chromium --profile-directory=${escapeShellArg profileDirectory} --app=${escapeShellArg app}
-      '';
-            inherit name desktopName categories;
-          };
-    in
-      [
-        (makeChromiumDesktopItem {
-          name = "youtube-music";
-          desktopName = "YouTube Music";
-          app = "https://music.youtube.com";
-        })
-      ];
   };
 }
