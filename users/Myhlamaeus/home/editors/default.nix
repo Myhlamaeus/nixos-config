@@ -16,10 +16,12 @@ in
     env = {
       bin.packages = mkOption {
         type = with types; listOf package;
+        default = [ ];
       };
 
       vars = mkOption {
         type = with types; attrsOf str;
+        default = { };
       };
     };
   };
