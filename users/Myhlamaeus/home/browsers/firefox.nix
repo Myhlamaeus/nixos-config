@@ -67,6 +67,9 @@ let
     # Restore previous session
     "browser.startup.page" = 3;
 
+    # Disable internal password manager
+    "signon.rememberSignons" = false;
+
     # Dark theme
     "devtools.theme" = if config.gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme
       then "dark"
