@@ -52,6 +52,7 @@ This function should only modify configuration layer settings."
        )
      epub
      finance
+     graphviz
      gtags
      (haskell :variables
        haskell-completion-backend 'lsp
@@ -561,7 +562,8 @@ before packages are loaded."
   (org-babel-do-load-languages
     'org-babel-load-languages
     '((haskell . t)
-       (ledger . t)))
+       (ledger . t)
+          (dot . t)))
   (require 'org-protocol)
   (defun transform-square-brackets-to-round-ones(string-to-transform)
     "Transforms [ into ( and ] into ), other chars left unchanged."
