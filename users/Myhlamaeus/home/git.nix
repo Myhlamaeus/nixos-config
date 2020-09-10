@@ -8,7 +8,7 @@ let
 
 in
 {
-  imports = [ (sources.felschr-nixos + "/home/git.nix") ];
+  imports = [ (sources.felschr-nixos + "/home/modules/git.nix") ];
 
   options = {
     programs.git.custom = {
@@ -47,17 +47,17 @@ in
     programs.git = {
       enable = true;
 
-      custom = {
-        profiles = rec {
-          private = {
-            name = "Maurice B. Lewis";
-            email = "dreyer.maltem+dev@gmail.com";
-            signingKey = "4BBC645F979A88FA!";
-            dirs = [ "~" "/etc/nixos" ];
-          };
+      profiles = rec {
+        private = {
+          name = "Maurice B. Lewis";
+          email = "dreyer.maltem+dev@gmail.com";
+          signingKey = "4BBC645F979A88FA!";
+          dirs = [ "~" "/etc/nixos" ];
         };
-        defaultProfile = "private";
+      };
+      defaultProfile = "private";
 
+      custom = {
         ignoreFiles = [ (pkgs.fetchurl {
           name = "gitignore";
           inherit (sources.gitignore) url sha256;

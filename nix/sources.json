@@ -5,16 +5,16 @@
         "homepage": null,
         "owner": "cheat",
         "repo": "cheatsheets",
-        "rev": "dc27892c897178f4065948bd952495a34b2636f5",
-        "sha256": "1wva1vij553vw9pvsxgiii1g1k051xn85sg76yqmlyhn4gh0vqvl",
+        "rev": "92db692c0fd6348793ee0641cb63d08977be90fd",
+        "sha256": "0dkw1pi19ih050zni4x03fchgrghd8kv5lbirvfsvdsf5d0zs272",
         "type": "tarball",
-        "url": "https://github.com/cheat/cheatsheets/archive/dc27892c897178f4065948bd952495a34b2636f5.tar.gz",
+        "url": "https://github.com/cheat/cheatsheets/archive/92db692c0fd6348793ee0641cb63d08977be90fd.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "felschr-nixos": {
         "ref": "main",
         "repo": "https://gitlab.com/FelschR/nixos-config.git",
-        "rev": "5422f746786e9f5fd483fe5ff6be184c73a421b6",
+        "rev": "c42f889863fc563b6154741511e4be3ba5b80daa",
         "type": "git"
     },
     "gitignore": {
@@ -30,10 +30,10 @@
         "homepage": "https://rycee.gitlab.io/home-manager/",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "318bc0754ed6370cfcae13183a7f13f7aa4bc73f",
-        "sha256": "0hgn85yl7gixw1adjfa9nx8axmlpw5y1883lzg3zigknx6ff5hsr",
+        "rev": "4a8d6280544d9b061c0b785d2470ad6eeda47b02",
+        "sha256": "0m9zhp94ckzzxsgx5xdi374ndr3bh1d84344rncn9qzgnm2pzfj0",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/318bc0754ed6370cfcae13183a7f13f7aa4bc73f.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/4a8d6280544d9b061c0b785d2470ad6eeda47b02.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {
@@ -42,10 +42,22 @@
         "homepage": "https://github.com/nmattia/niv",
         "owner": "nmattia",
         "repo": "niv",
-        "rev": "e82eb322ea32a747a51c431d7787221bcc6d9038",
-        "sha256": "1fy4dcr05d80diwlxmh42xnjm5ki1pkbky38smvlqjaky2y2f71f",
+        "rev": "dd13098d01eaa6be68237e7e38f96782b0480755",
+        "sha256": "1cfjdbsn0219fjzam1k7nqzkz8fb1ypab50rhyj026qbklqq2kvq",
         "type": "tarball",
-        "url": "https://github.com/nmattia/niv/archive/e82eb322ea32a747a51c431d7787221bcc6d9038.tar.gz",
+        "url": "https://github.com/nmattia/niv/archive/dd13098d01eaa6be68237e7e38f96782b0480755.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs": {
+        "branch": "nixos-20.03",
+        "description": "Nix Packages collection",
+        "homepage": null,
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4bd1938e03e1caa49a6da1ec8cff802348458f05",
+        "sha256": "0529npmibafjr80i2bhqg22pjr3d5qz1swjcq2jkdla1njagkq2k",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/4bd1938e03e1caa49a6da1ec8cff802348458f05.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nur": {
@@ -54,10 +66,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "22a0c079284245748b782b29958f9160d35adf42",
-        "sha256": "01dm7v5piqv76xy2lyj2x3pc91db96svb9qmcaixd01w6g78iqz8",
+        "rev": "cef4d5a491388a63f42af92787fc38e0def48e96",
+        "sha256": "1gcsq4z4bh1c72s1ckxk95ind4n8iw0zlfbj17z6i61xdqq158a5",
         "type": "tarball",
-        "url": "https://github.com/nix-community/NUR/archive/22a0c079284245748b782b29958f9160d35adf42.tar.gz",
+        "url": "https://github.com/nix-community/NUR/archive/cef4d5a491388a63f42af92787fc38e0def48e96.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "omnisharp-roslyn": {
@@ -66,7 +78,7 @@
         "homepage": "",
         "owner": "OmniSharp",
         "repo": "omnisharp-roslyn",
-        "rev": "8e7eef87ad340664fcbc151f8d8742eed69410bc",
+        "rev": "007d05703e5ed7d5f73f66f3662cc532ca53e9ad",
         "sha256": "1n15f6gvdjarbj6rzs48j49wal343bh6mdsbmfjgd07z6bikrv6x",
         "type": "tarball",
         "url": "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.34.9/omnisharp-mono.tar.gz",
@@ -79,10 +91,10 @@
         "homepage": null,
         "owner": "languitar",
         "repo": "pass-git-helper",
-        "rev": "faceb47cccbb0d7b0330871f353bccb9b9ddd201",
-        "sha256": "1gv78msx04hjvca3dixaj5dbvkmaak6qm0qgvqg9yb3hzjh1jbjl",
+        "rev": "0180749f840a8e2a2cbb4fbf1d8172869926e289",
+        "sha256": "1f36fvvipyinbv7ll4c5pcvnilw6h127xrmmg7il485mvcan6l5k",
         "type": "tarball",
-        "url": "https://github.com/languitar/pass-git-helper/archive/faceb47cccbb0d7b0330871f353bccb9b9ddd201.tar.gz",
+        "url": "https://github.com/languitar/pass-git-helper/archive/0180749f840a8e2a2cbb4fbf1d8172869926e289.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "teensy-udev-rules": {
