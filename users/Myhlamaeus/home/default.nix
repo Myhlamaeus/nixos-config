@@ -305,7 +305,6 @@ in
         date-format = "%F";
         datetime-format = "%FT%T";
         strict = true;
-        file = ["~/org/ledger/definitions" "~/org/ledger/ledger"];
       };
 
   xdg.configFile."cheat/conf.yml".text = builtins.toJSON {
