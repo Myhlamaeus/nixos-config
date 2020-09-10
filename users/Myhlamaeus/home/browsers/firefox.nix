@@ -196,6 +196,14 @@ in
             app = "https://music.youtube.com";
           })
         ]
+        ++ mapAttrsToList (k: v: mkFirefoxDesktopItem {
+          name = "firefox-profile-${k}";
+          desktopName = "Firefox (${ v.name })";
+          profile = v.name;
+          mimeType = "text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp";
+          genericName = "Web Browser";
+          categories = "Application;Network;WebBrowser";
+        }) (filterAttrs (k: v: !v.isDefault) config.programs.firefox.profiles)
     ;
   };
 }
