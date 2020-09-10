@@ -15,6 +15,10 @@ in
       ignoreFiles = mkOption {
         type = with lib.types; listOf path;
       };
+
+      ignoreTemplates = mkOption {
+        type = with lib.types; listOf str;
+      };
     };
   };
 
@@ -58,10 +62,9 @@ in
       defaultProfile = "private";
 
       custom = {
-        ignoreFiles = [ (pkgs.fetchurl {
-          name = "gitignore";
-          inherit (sources.gitignore) url sha256;
-        }) ];
+        ignoreFiles = map (n: "${ sources.gitignore }/templates/${ n }.gitignore") cfg.custom.ignoreTemplates;
+
+        ignoreTemplates = [ "Archive" "Archives" "Backup" "direnv" "dotenv" "Emacs" "Linux" "Vim" "Zsh" ];
       };
 
       ignores = map builtins.readFile cfg.custom.ignoreFiles

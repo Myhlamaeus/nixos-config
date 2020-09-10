@@ -18,11 +18,16 @@
         "type": "git"
     },
     "gitignore": {
-        "langs": "archive,backup,emacs,linux,vim",
-        "sha256": "1i0jm60hin3rw8ycqb3gpqpk0rlsv72ib8m5y1rfh4wjyzvg9hs3",
-        "type": "file",
-        "url": "https://www.gitignore.io/api/archive,backup,emacs,linux,vim",
-        "url_template": "https://www.gitignore.io/api/<langs>"
+        "branch": "master",
+        "description": "The largest collection of useful .gitignore templates",
+        "homepage": "https://www.gitignore.io",
+        "owner": "toptal",
+        "repo": "gitignore",
+        "rev": "aaefb4c9d4a2eb182e452705d43a4a93e21f4b50",
+        "sha256": "0qji5c8faml9gzsnvqn0c37906z87akmz62w4npjd02inmidi62j",
+        "type": "tarball",
+        "url": "https://github.com/toptal/gitignore/archive/aaefb4c9d4a2eb182e452705d43a4a93e21f4b50.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {
         "branch": "release-20.03",
