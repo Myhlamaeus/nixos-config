@@ -133,6 +133,19 @@ in
     home.sessionVariables = {
       BROWSER = "firefox";
     };
+    xdg.mimeApps.defaultApplications = let
+      listToAttrs' = pairs: with lib; listToAttrs (concatMap ({ names, value }: map (name: nameValuePair name value) names) pairs);
+    in
+      listToAttrs' [
+        {
+          names = [ "text/html" "text/xml" "application/xhtml+xml" "application/vnd.mozilla.xul+xml" ];
+          value = "firefox.desktop";
+        }
+        {
+          names = [ "x-scheme-handler/http" "x-scheme-handler/https" ];
+          value = "firefox-auto.desktop";
+        }
+      ];
 
     home.packages = let
       escapeDesktopArg = arg: replaceStrings ["\""] ["\"\\\"\""] (toString arg);
@@ -141,11 +154,42 @@ in
         '';
       mkFirefoxDesktopItem = attrs:
         pkgs.makeDesktopItem ({ icon = "firefox"; } // (removeAttrs attrs [ "app" "profile" ]) // { exec = mkExec attrs; });
+      autoFirefox = pkgs.makeDesktopItem {
+        name = "firefox-auto";
+        desktopName = "Firefox (automatic profile)";
+        icon = "firefox";
+        mimeType = "x-scheme-handler/http;x-scheme-handler/https";
+        genericName = "Web Browser";
+        categories = "Application;Network;WebBrowser";
+        exec = let
+          script = pkgs.writeScript "firefox-auto" ''
+            url=$1
+            profile=
+            matchUrl=''${url#"http://"}
+            matchUrl=''${matchUrl#"https://"}
+            case "''${matchUrl}" in
+              gitlab.com/fitnesspilot|gitlab.com/fitnesspilot/*) profile=work ;;
+              *.asana.com/*) profile=work ;;
+              cloud.google.com/*) profile=work ;;
+              meet.google.com/*) profile=work ;;
+              *.slack.com/*) profile=work ;;
+              *.nuget.org/*) profile=work ;;
+              *.microsoft.com/*) profile=work ;;
+            esac
+            if [[ $profile == "" ]] ; then
+              firefox "$url"
+            else
+              firefox -P "$profile" "$url"
+            fi
+          '';
+        in "${ script } %U";
+      };
     in
       (with pkgs; [
         (tor-browser-bundle-bin.override { pulseaudioSupport = true; })
       ])
         ++ [
+          autoFirefox
           (mkFirefoxDesktopItem {
             name = "youtube-music";
             desktopName = "YouTube Music";

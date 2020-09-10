@@ -127,8 +127,6 @@ in
       "application/epub+zip"    = "emacs.desktop";
       "application/pdf"         = "emacs.desktop";
       "application/x-keepass2"  = "org.keepassxc.KeePassXC.desktop";
-      "x-scheme-handler/mailto" = "chromium-browser.desktop";
-      "x-scheme-handler/webcal" = "chromium-browser.desktop";
     };
   };
   xdg.userDirs.enable = true;
