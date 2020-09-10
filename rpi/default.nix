@@ -38,6 +38,10 @@ in
 
   services.openssh = {
     enable = true;
+
+    challengeResponseAuthentication = false;
+    passwordAuthentication = false;
+    permitRootLogin = false;
   };
 
   boot.initrd.network.ssh = {
