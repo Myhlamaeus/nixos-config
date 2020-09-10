@@ -11,7 +11,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ xclip ];
+    home.packages = with pkgs; [ xclip (dunst.override { dunstify = true; }) ];
 
     services.redshift = {
       enable = true;
@@ -42,8 +42,30 @@ in
       enable = true;
       # Must be installed via configuration.nix and
       # referenced like this as it is wrapped
-      lockCmd = "${pkgs.bash}/bin/bash -c '/run/wrappers/bin/slock & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
+      lockCmd = "${pkgs.bash}/bin/bash -c '${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_PAUSE; /run/wrappers/bin/slock ${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_RESUME & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
       xautolockExtraOptions = [ "-corners -000" ];
+    };
+
+    services.dunst = {
+      enable = true;
+      settings = {
+        global = {
+          geometry = "1000x1+0+0";
+          shrink = true;
+          frame_color = "#eceff1";
+          font = "Fira Code 8";
+          word_wrap = true;
+          stack_duplicates = true;
+          browser = "firefox";
+          dmenu = "${ pkgs.dmenu }/bin/dmenu";
+        };
+
+        urgency_normal = {
+          background = "#37474f";
+          foreground = "#eceff1";
+          timeout = 10;
+        };
+      };
     };
 
     services.unclutter = {
