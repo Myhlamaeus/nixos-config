@@ -64,6 +64,10 @@ let
     # Not rendering IDNs as their Punycode equivalent leaves you open to phishing attacks that can be very difficult to notice.
     "network.IDN_show_punycode" = true;
 
+    # Restore previous session
+    "browser.startup.page" = 3;
+
+    # Dark theme
     "devtools.theme" = if config.gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme
       then "dark"
       else "light";
