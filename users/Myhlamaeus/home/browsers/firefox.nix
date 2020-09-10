@@ -7,7 +7,8 @@ let
     # A result of the Tor Uplift effort, this preference isolates all browser identifier sources (e.g. cookies) to the first party domain, with the goal of preventing tracking across different domains. (Don't do this if you are using the Firefox Addon "Cookie AutoDelete" with Firefox v58 or below.)
     "privacy.firstparty.isolate" = true;
     # A result of the Tor Uplift effort, this preference makes Firefox more resistant to browser fingerprinting.
-    "privacy.resistFingerprinting" = true;
+    # Temporarily disabled due to prefers-color-scheme
+    "privacy.resistFingerprinting" = false;
     # [FF67+] Blocks Fingerprinting
     "privacy.trackingprotection.fingerprinting.enabled" = true;
     # [FF67+] Blocks CryptoMining
