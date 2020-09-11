@@ -18,6 +18,11 @@ in
       ../users
     ];
 
+  nix.package = pkgs.nixUnstable;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
   # <nixpkgs>'s hardened kernel doesn't support 32 bit emulation (`linuxPackages_hardened.kernel.features.ia32Emulation`)
   # The hardened kernel breaks Chromium
   boot.kernelPackages = pkgs.linuxPackages;
