@@ -107,11 +107,6 @@ in
         with pkgs-unstable; [
           zsh-completions
           (pkgs.add-optparse-applicative-completions { pkg = niv; bins = [ "niv" ]; })
-          fahcontrol
-          fahclient
-          # media
-          # because of plugin compatibility
-          # calibre
         ]
       )
   ;
