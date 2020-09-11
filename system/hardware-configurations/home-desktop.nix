@@ -1,10 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ];
-
   # anbox
   networking.useDHCP = false;
   networking.interfaces.enp2s0.useDHCP = true;

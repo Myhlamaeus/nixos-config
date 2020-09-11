@@ -4,18 +4,10 @@
 
 { config, pkgs, ... }:
 
-let
-  sources = import ../nix/sources.nix;
-  pkgs-unstable = (import <nixpkgs-unstable> { config = { allowUnfree = true; }; });
-
-in
 {
   imports =
     [
-      <nixpkgs/nixos/modules/profiles/hardened.nix>
       ./cachix.nix
-      (sources.home-manager + "/nixos")
-      ../users
     ];
 
   nix.package = pkgs.nixUnstable;
@@ -49,56 +41,15 @@ in
         };
     })
     (self: super: {
-      omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (oldAttrs: rec {
-          version = sources.omnisharp-roslyn.version;
-          src = sources.omnisharp-roslyn;
-        });
-    })
-    (self: super: {
       chromium = super.chromium.override {
           commandLineArgs = "--force-dark-mode";
           enableWideVine = true;
           enableVaapi = true;
         };
     })
-    (self: super: {
-      teensy-loader-cli = super.teensy-loader-cli.overrideAttrs (attrs: rec {
-          postInstall = (attrs.postInstall or "") + ''
-            mkdir -p $out/lib/udev/rules.d
-            cp ${sources.teensy-udev-rules} $out/lib/udev/rules.d/49-teensy.rules
-          '';
-        });
-    })
-    (self: super: {
-      cheatPackages = {
-        community = sources.cheatsheets;
-      };
-    })
-    (self: super: {
-      pass-git-helper = super.python38Packages.buildPythonApplication {
-        pname = "pass-git-helper";
-        version = sources.pass-git-helper.branch;
-        versionSuffix = "-git";
-
-        propagatedBuildInputs = with pkgs.python38Packages; [ pyxdg ];
-        checkInputs = with pkgs.python38Packages; [ coveralls pytest pytest-mock ];
-
-        src = sources.pass-git-helper;
-
-        doCheck = false;
-      };
-    })
-    (self: super: {
-      inherit (pkgs-unstable) openmw dwarf-fortress-packages;
-    })
   ];
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import sources.nur {
-      inherit pkgs;
-    };
-  };
 
   home-manager = {
     useUserPackages = true;

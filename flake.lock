@@ -1,0 +1,169 @@
+{
+  "nodes": {
+    "cheatsheets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1599476423,
+        "narHash": "sha256-4gj9QStOt63dznHRsidq8OUHmRugk2g/KADGFOINfDY=",
+        "owner": "cheat",
+        "repo": "cheatsheets",
+        "rev": "92db692c0fd6348793ee0641cb63d08977be90fd",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cheat",
+        "ref": "master",
+        "repo": "cheatsheets",
+        "type": "github"
+      }
+    },
+    "felschr-nixos": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1599476319,
+        "narHash": "sha256-iDWhP2Ldc12AKm9PSnz1CgEwpH4QSo9hDzVURlUz54g=",
+        "owner": "FelschR",
+        "repo": "nixos-config",
+        "rev": "c42f889863fc563b6154741511e4be3ba5b80daa",
+        "type": "gitlab"
+      },
+      "original": {
+        "owner": "FelschR",
+        "ref": "main",
+        "repo": "nixos-config",
+        "type": "gitlab"
+      }
+    },
+    "gitignore": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1595048391,
+        "narHash": "sha256-UpjYYrVRgCavJVyYX6c66BuQzmDA4m31f4lW5RArUWI=",
+        "owner": "toptal",
+        "repo": "gitignore",
+        "rev": "aaefb4c9d4a2eb182e452705d43a4a93e21f4b50",
+        "type": "github"
+      },
+      "original": {
+        "owner": "toptal",
+        "ref": "master",
+        "repo": "gitignore",
+        "type": "github"
+      }
+    },
+    "home-manager": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1598217225,
+        "narHash": "sha256-QLp/RbXv42SZzYQMglqAa+RmyRmx9dKf7v9PRtKFP1U=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "4a8d6280544d9b061c0b785d2470ad6eeda47b02",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "release-20.03",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1599476815,
+        "narHash": "sha256-U+D5lLRB0TalwExyHT4ubWR5hXgYLhEBytKpFeu1SRQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs-channels",
+        "rev": "4bd1938e03e1caa49a6da1ec8cff802348458f05",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-20.03",
+        "repo": "nixpkgs-channels",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1599510591,
+        "narHash": "sha256-rx6LLVncYqChBVVNopRY7tn59aP4qPqNjsAxt2X6/L8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs-channels",
+        "rev": "61525137fd1002f6f2a5eb0ea27d480713362cd5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs-channels",
+        "type": "github"
+      }
+    },
+    "nur": {
+      "locked": {
+        "lastModified": 1599761641,
+        "narHash": "sha256-eyBF6+dcVt2taIBCkDxpqf5SynHiuP2/9zWvTEhMETA=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "41e6f5c2cc09ad7e92dee6d1e3e198d00a35197d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
+    "omnisharp-roslyn": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1599586761,
+        "narHash": "sha256-nghRphJIIX+H+uwV3pm1G35e1Hjq38Pz/fiixoGE4d4=",
+        "owner": "OmniSharp",
+        "repo": "omnisharp-roslyn",
+        "rev": "007d05703e5ed7d5f73f66f3662cc532ca53e9ad",
+        "type": "github"
+      },
+      "original": {
+        "owner": "OmniSharp",
+        "ref": "master",
+        "repo": "omnisharp-roslyn",
+        "type": "github"
+      }
+    },
+    "pass-git-helper": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1599394225,
+        "narHash": "sha256-s1BjFdu1IELjebXmfkSAhtNoN7uFEUrPXjb6G/d2Zrg=",
+        "owner": "languitar",
+        "repo": "pass-git-helper",
+        "rev": "0180749f840a8e2a2cbb4fbf1d8172869926e289",
+        "type": "github"
+      },
+      "original": {
+        "owner": "languitar",
+        "ref": "master",
+        "repo": "pass-git-helper",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "cheatsheets": "cheatsheets",
+        "felschr-nixos": "felschr-nixos",
+        "gitignore": "gitignore",
+        "home-manager": "home-manager",
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "nur": "nur",
+        "omnisharp-roslyn": "omnisharp-roslyn",
+        "pass-git-helper": "pass-git-helper"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

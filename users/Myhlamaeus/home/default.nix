@@ -22,7 +22,6 @@ let
           );
         "perl-ext-common" = mkExts exts;
       };
-  pkgs-unstable = (import <nixpkgs-unstable> { config = { allowUnfree = true; }; });
 
 
 in
@@ -57,6 +56,7 @@ in
       python36Packages.powerline
       ranger
       nix-index
+      zsh-completions
       # dev
       shellcheck
       zeal
@@ -102,12 +102,6 @@ in
       aspellDicts.la
     ]
   )
-  ++ (
-        with pkgs-unstable; [
-          zsh-completions
-          (pkgs.add-optparse-applicative-completions { pkg = niv; bins = [ "niv" ]; })
-        ]
-      )
   ;
   xdg.enable = true;
   xdg.mimeApps = {

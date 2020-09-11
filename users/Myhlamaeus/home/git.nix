@@ -2,14 +2,10 @@
 
 with lib;
 let
-  nixpkgs-unstable = import <nixpkgs-unstable> {};
-  sources = import ../../../nix/sources.nix;
   cfg = config.programs.git;
 
 in
 {
-  imports = [ (sources.felschr-nixos + "/home/modules/git.nix") ];
-
   options = {
     programs.git.custom = {
       ignoreFiles = mkOption {
@@ -28,6 +24,7 @@ in
         with pkgs; [
           git
           git-lfs
+          git-bug
         ]
       )
       ++ (
@@ -39,11 +36,6 @@ in
           git-open
           git-recent
           lab
-        ]
-      )
-      ++ (
-        with nixpkgs-unstable.gitAndTools; [
-          git-bug
         ]
       )
     ;
@@ -62,7 +54,7 @@ in
       defaultProfile = "private";
 
       custom = {
-        ignoreFiles = map (n: "${ sources.gitignore }/templates/${ n }.gitignore") cfg.custom.ignoreTemplates;
+        ignoreFiles = map (n: "${ pkgs.gitignore }/templates/${ n }.gitignore") cfg.custom.ignoreTemplates;
 
         ignoreTemplates = [ "Archive" "Archives" "Backup" "direnv" "dotenv" "Emacs" "Linux" "Vim" "Zsh" ];
       };
