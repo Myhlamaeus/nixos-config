@@ -188,6 +188,9 @@ in
           helper = "${ pkgs.pass-git-helper }/bin/pass-git-helper";
           useHttpPath = true;
         };
+
+        github.user = "Myhlamaeus";
+        gitlab.user = "Myhlamaeus";
       };
 
       aliases = {

@@ -52,6 +52,7 @@ This function should only modify configuration layer settings."
        )
      epub
      finance
+     github
      graphviz
      gtags
      (haskell :variables
