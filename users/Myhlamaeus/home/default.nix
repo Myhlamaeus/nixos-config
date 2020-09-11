@@ -87,7 +87,6 @@ in
       krita
       # other
       ledger
-      weechat
       # non-free
       discord
       # term emulator
@@ -367,13 +366,6 @@ in
   programs.command-not-found.enable = true;
 
   services.kdeconnect.enable = true;
-
-  # services.bitlbee = {
-  #   enable = true;
-  #   plugins = [
-  #     pkgs.bitlbee-discord
-  #   ];
-  # };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

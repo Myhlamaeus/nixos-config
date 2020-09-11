@@ -244,14 +244,6 @@ in
     notifications.x11.enable = true;
   };
 
-  # Temporarily, until supported by home-manager.
-  services.bitlbee = {
-    enable = true;
-    plugins = with pkgs; [
-      bitlbee-discord
-    ];
-  };
-
   virtualisation.libvirtd.enable = true;
   virtualisation.docker = {
     enable = true;
