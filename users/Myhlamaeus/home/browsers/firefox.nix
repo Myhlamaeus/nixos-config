@@ -101,7 +101,7 @@ in
         terms-of-service-didnt-read
         ublock-origin
         umatrix
-        vimium
+        tridactyl
       ];
 
       profiles = {
