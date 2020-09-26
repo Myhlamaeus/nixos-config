@@ -15,10 +15,7 @@
     flake = false;
   };
 
-  inputs.felschr-nixos = {
-    url = "gitlab:FelschR/nixos-config/main";
-    flake = false;
-  };
+  inputs.felschr-nixos.url = "gitlab:FelschR/nixos-config/main";
 
   inputs.gitignore = {
     url = "github:toptal/gitignore/master";
@@ -63,7 +60,6 @@
                   inherit (unstable) dwarf-fortress-packages emacs notmuch openmw zsh-completions;
                   inherit (unstable.gitAndTools) git-bug;
                   inherit gitignore;
-                  inherit felschr-nixos;
 
                   cheatPackages = {
                     community = cheatsheets;
@@ -116,7 +112,7 @@
 
             home-manager.users.Myhlamaeus = {
               imports = [
-                "${ felschr-nixos }/home/modules/git.nix"
+                felschr-nixos.homeManagerModules.git
               ];
             };
           }
