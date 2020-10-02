@@ -10,6 +10,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ./backups.nix
+    ./grocy.nix
     ./matrix.nix
     ./webdav.nix
   ];
@@ -23,6 +24,7 @@ in
     # backups.enable = true;
     matrix-synapse.enable = true;
     webdav.enable = true;
+    grocy.enable = true;
   };
 
   networking = {
