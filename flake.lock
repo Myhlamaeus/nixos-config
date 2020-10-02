@@ -38,8 +38,12 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_2",
-        "nur": "nur",
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "nur": [
+          "nur"
+        ],
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
@@ -221,22 +225,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1600573085,
-        "narHash": "sha256-w5SGosyuTbFCBoUzgy2gyVcxYxRUvZ6SgHsRIPkZXgI=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "1179840f9a88b8a548f4b11d1a03aa25a790c379",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1600791342,
         "narHash": "sha256-rHcPneff0ktF2Jhmh8kd+NqP1SaHa6uU2YJx1kyG1qQ=",
         "owner": "NixOS",
@@ -251,7 +239,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1600952868,
         "narHash": "sha256-U1HfLLrV7gs2u0hU1YjU4aDGbTC1uYtxyNu2TWXKXMY=",
@@ -268,22 +256,6 @@
       }
     },
     "nur": {
-      "locked": {
-        "lastModified": 1600942119,
-        "narHash": "sha256-En5A8eFmuGG/GYpFE8rsXUxCNbdjEH0NSmlze4NXbBE=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "db2d66991e8068db7a7e1a617901f8e732147fe6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "ref": "master",
-        "repo": "NUR",
-        "type": "github"
-      }
-    },
-    "nur_2": {
       "locked": {
         "lastModified": 1601126770,
         "narHash": "sha256-kHLELgf0J6kT2xy6OpUXXan6j1JZAHkkfO7qH3G499Q=",
@@ -340,7 +312,7 @@
         "flake-utils": "flake-utils_2",
         "gitignore-nix-src": "gitignore-nix-src",
         "hindent-src": "hindent-src",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1600939022,
@@ -363,9 +335,9 @@
         "felschr-nixos": "felschr-nixos",
         "gitignore": "gitignore",
         "home-manager": "home-manager_2",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgs-unstable": "nixpkgs-unstable",
-        "nur": "nur_2",
+        "nur": "nur",
         "omnisharp-roslyn": "omnisharp-roslyn",
         "pass-git-helper": "pass-git-helper"
       }

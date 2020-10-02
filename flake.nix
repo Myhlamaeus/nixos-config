@@ -15,7 +15,11 @@
     flake = false;
   };
 
-  inputs.felschr-nixos.url = "gitlab:FelschR/nixos-config/main";
+  inputs.felschr-nixos = {
+    url = "gitlab:FelschR/nixos-config/main";
+    inputs.nixpkgs.follows = "nixpkgs-unstable";
+    inputs.nur.follows = "nur";
+  };
 
   inputs.gitignore = {
     url = "github:toptal/gitignore/master";
