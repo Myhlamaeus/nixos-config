@@ -21,6 +21,7 @@
   # The hardened kernel breaks Chromium
   boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelModules = [ "usb_storage" "fuse" ];
+  security.lockKernelModules = false;
   # Required for `nix.useSandbox`
   security.allowUserNamespaces = true;
 
