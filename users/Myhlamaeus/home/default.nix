@@ -74,7 +74,6 @@ in
       greg
       # security
       gnupg
-      keepassxc
       (pass.withExtensions (exts: with exts; [ pass-update pass-audit ]))
       element-desktop
       keybase
@@ -109,13 +108,11 @@ in
     associations.added = {
       "application/epub+zip"   = "emacs.desktop";
       "application/pdf"        = "emacs.desktop";
-      "application/x-keepass2" = "org.keepassxc.KeePassXC.desktop";
       "application/rss+xml"    = "emacs.desktop";
     };
     defaultApplications = {
       "application/epub+zip"   = "emacs.desktop";
       "application/pdf"        = "emacs.desktop";
-      "application/x-keepass2" = "org.keepassxc.KeePassXC.desktop";
       "application/rss+xml"    = "emacs.desktop";
     };
   };
