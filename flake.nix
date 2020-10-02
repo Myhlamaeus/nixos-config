@@ -66,6 +66,31 @@
 
             nix.registry.nixpkgs.flake = nixpkgs;
 
+            services.openvpn.servers.nordvpn = let
+              nordvpn-ovpn = pkgs.stdenv.mkDerivation {
+                name = "nordvpn-ovpn";
+                src = pkgs.fetchurl {
+                  name = "nordvpn-ovpn-source.zip";
+                  url =
+                    "https://downloads.nordcdn.com/configs/archives/servers/ovpn.zip";
+                  sha256 = "LRITHrAK13FZ6xqE8pFAFKtTLhoavT7U/90EBeNfNmY=";
+                };
+                nativeBuildInputs = with pkgs; [ unzip ];
+                unpackCmd = ''
+                  unzip $curSrc -d out
+                '';
+                installPhase = ''
+                  mkdir -p $out/lib/ovpn
+                  cp -r ovpn_udp $out/lib/ovpn/udp
+                  cp -r ovpn_tcp $out/lib/ovpn/tcp
+                '';
+              };
+            in {
+              config =
+                "config ${nordvpn-ovpn}/lib/ovpn/udp/de1000.nordvpn.com.udp.ovpn";
+              autoStart = false;
+            };
+
             nixpkgs.overlays = [
               nur.overlay
 
