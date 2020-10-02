@@ -100,6 +100,23 @@
 
                     doCheck = false;
                   };
+
+                  proton-ge-custom = pkgs.stdenv.mkDerivation rec {
+                    pname = "proton-ge-custom";
+                    version = "5.9-GE-6-ST";
+                    src = builtins.fetchurl {
+                      name = "${ pname }-${ version }-source";
+                      url = "https://github.com/GloriousEggroll/${ pname }/releases/download/${ version }/Proton-${ version }.tar.gz";
+                      sha256 = "1ryrkwivig5qnz57378x9jmz78nch71vhpxl73g366r7wlmx9m79";
+                    };
+                    unpackCmd = ''
+                      mkdir out
+                      tar -xzf $curSrc -C out
+                    '';
+                    installPhase = ''
+                      cp -r Proton-${ pkgs.lib.escapeShellArg version } $out
+                    '';
+                  };
                 }
               )
             ];
