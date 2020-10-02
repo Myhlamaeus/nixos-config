@@ -40,9 +40,17 @@ in
 
     services.screen-locker = {
       enable = true;
-      # Must be installed via configuration.nix and
+      # slock must be installed via configuration.nix and
       # referenced like this as it is wrapped
-      lockCmd = "${pkgs.bash}/bin/bash -c '${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_PAUSE; /run/wrappers/bin/slock ${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_RESUME & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
+      lockCmd = let
+          cmd = pkgs.writeScript "lock" ''
+            ${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_PAUSE
+            /run/wrappers/bin/slock
+            ${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_RESUME
+          '';
+        in
+        "${pkgs.bash}/bin/bash -c '${cmd} & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
+      # lockCmd = "${pkgs.bash}/bin/bash -c '${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_PAUSE; /run/wrappers/bin/slock ${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_RESUME & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
       xautolockExtraOptions = [ "-corners -000" ];
     };
 
