@@ -75,15 +75,16 @@ in
       # security
       gnupg
       (pass.withExtensions (exts: with exts; [ pass-update pass-audit ]))
-      element-desktop
-      keybase
-      keybase-gui
       # graphics
       alchemy
       blender
       gimp
       inkscape
       krita
+      # social
+      element-desktop
+      keybase
+      keybase-gui
       # other
       ledger
       # non-free
