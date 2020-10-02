@@ -110,11 +110,13 @@ in
       "application/epub+zip"   = "emacs.desktop";
       "application/pdf"        = "emacs.desktop";
       "application/x-keepass2" = "org.keepassxc.KeePassXC.desktop";
+      "application/rss+xml"    = "emacs.desktop";
     };
     defaultApplications = {
-      "application/epub+zip"    = "emacs.desktop";
-      "application/pdf"         = "emacs.desktop";
-      "application/x-keepass2"  = "org.keepassxc.KeePassXC.desktop";
+      "application/epub+zip"   = "emacs.desktop";
+      "application/pdf"        = "emacs.desktop";
+      "application/x-keepass2" = "org.keepassxc.KeePassXC.desktop";
+      "application/rss+xml"    = "emacs.desktop";
     };
   };
   xdg.userDirs.enable = true;
