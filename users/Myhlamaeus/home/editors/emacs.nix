@@ -86,7 +86,7 @@ in
       fi
       if ! [ -e ~/.spacemacs ] ; then
         $DRY_RUN_CMD ln -s $VERBOSE_ARG \
-          /etc/nixos/config/users/Myhlamaeus/spacemacs \
+          /etc/nixos/users/Myhlamaeus/spacemacs \
           ~/.spacemacs
       fi
       $DRY_RUN_CMD git \
