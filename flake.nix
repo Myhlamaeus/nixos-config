@@ -3,6 +3,11 @@
 
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
+  inputs.nixops = {
+    url = "github:NixOS/nixops/master";
+    inputs.nixpkgs.follows = "nixpkgs-unstable";
+  };
+
   inputs.home-manager = {
     url = "github:nix-community/home-manager/release-20.09";
     inputs.nixpkgs.follows = "nixpkgs";
@@ -41,9 +46,9 @@
     flake = false;
   };
 
-  outputs = { self, nixpkgs, flake-utils, home-manager, pre-commit-hooks, nur
-    , nixpkgs-unstable, cheatsheets, felschr-nixos, gitignore, omnisharp-roslyn
-    }:
+  outputs = { self, nixpkgs, flake-utils, nixops, home-manager, pre-commit-hooks
+    , nur, nixpkgs-unstable, cheatsheets, felschr-nixos, gitignore
+    , omnisharp-roslyn }:
     rec {
 
       homeManagerModules.tridactyl = import ./homeManagerModules/tridactyl.nix;
@@ -68,6 +73,10 @@
 
             nixpkgs.overlays = [
               nur.overlay
+
+              (self: super: {
+                nixopsUnstable = nixops.defaultPackage.x86_64-linux;
+              })
 
               # dunno how to set allowUnfree with nixpkgs-unstable.legacyPackages.x86_64-linux
               (self: super:
