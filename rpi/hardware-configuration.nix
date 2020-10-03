@@ -3,10 +3,6 @@
 with lib;
 
 {
-  imports =
-    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ];
-
   boot.loader.grub.enable = false;
   boot.loader.raspberryPi.enable = true;
   boot.loader.raspberryPi.version = 4;

@@ -140,5 +140,33 @@
         ];
     };
 
+    nixosConfigurations.rpi = nixpkgs-unstable.lib.nixosSystem {
+      system = "aarch64-linux";
+      modules =
+        [
+          nixpkgs.nixosModules.notDetected
+
+          ({ pkgs, ... }: {
+            networking = {
+              hostName = "rpi";
+              domain = "maurice-dreyer.name";
+            };
+
+            # Let 'nixos-version --json' know about the Git revision
+            # of this flake.
+            system.configurationRevision = nixpkgs-unstable.lib.mkIf (self ? rev) self.rev;
+
+            nix.registry.nixpkgs.flake = nixpkgs-unstable;
+          })
+
+          {
+            imports = [
+              ./rpi/hardware-configuration.nix
+              ./rpi
+            ];
+          }
+        ];
+    };
+
   };
 }

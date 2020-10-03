@@ -8,7 +8,6 @@ let
 in
 {
   imports = [
-    ./hardware-configuration.nix
     ./backups.nix
     ./grocy.nix
     ./matrix.nix
@@ -30,11 +29,6 @@ in
     matrix-synapse.enable = true;
     webdav.enable = true;
     grocy.enable = true;
-  };
-
-  networking = {
-    hostName = "rpi";
-    domain = "maurice-dreyer.name";
   };
 
   environment.systemPackages = with pkgs; [
