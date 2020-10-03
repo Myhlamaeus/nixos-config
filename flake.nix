@@ -45,7 +45,10 @@
           nixpkgs.nixosModules.notDetected
 
           ({ pkgs, ... }: {
-            networking.hostName = "home-desktop";
+            networking = {
+              hostName = "home-desktop";
+              domain = "maurice-dreyer.name";
+            };
 
             # Let 'nixos-version --json' know about the Git revision
             # of this flake.
