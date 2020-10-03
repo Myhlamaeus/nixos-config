@@ -97,6 +97,7 @@
       pkg = cachix;
       bins = [ "cachix" ];
     })
+    nixopsUnstable
     # shell
     wget
     neovim
