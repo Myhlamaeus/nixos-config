@@ -78,7 +78,7 @@
                   };
                 in {
                   inherit (unstable)
-                    dwarf-fortress-packages emacs notmuch openmw
+                    dwarf-fortress-packages emacs notmuch openmw pantalaimon
                     zsh-completions;
                   inherit (unstable.gitAndTools) git-bug;
                   inherit gitignore;

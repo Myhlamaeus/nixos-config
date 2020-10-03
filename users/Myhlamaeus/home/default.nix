@@ -81,6 +81,7 @@ in {
     # social
     element-desktop
     keybase
+    pantalaimon
     # other
     fahcontrol
     fahviewer
@@ -101,6 +102,36 @@ in {
     aspellDicts.en-science
     aspellDicts.la
   ]);
+  xdg.configFile."pantalaimon/pantalaimon.conf".text = ''
+    [Default]
+    LogLevel = Warning
+    SSL = True
+    Notifications = On
+    # DebugEncryption = True
+
+    [local-matrix]
+    Homeserver = https://matrix.maurice-dreyer.name
+    ListenAddress = localhost
+    ListenPort = 8009
+    # Proxy = http://localhost:8080
+    # SSL = False
+    # IgnoreVerification = False
+    UseKeyring = False
+  '';
+  systemd.user.services.pantalaimon = {
+    Unit = {
+      Description = "Pantalaimon E2E Matrix reverse proxy";
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+
+    Service = {
+      Environment = "PATH=${config.home.profileDirectory}/bin";
+      ExecStart = "${pkgs.pantalaimon}/bin/pantalaimon";
+    };
+
+    Install = { WantedBy = [ "graphical-session.target" ]; };
+  };
   xdg.enable = true;
   xdg.mimeApps = {
     enable = true;
