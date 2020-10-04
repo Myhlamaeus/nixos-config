@@ -32,6 +32,7 @@ in
   };
 
   environment.systemPackages = with pkgs; [
+    git
     rxvt_unicode.terminfo
   ];
 
