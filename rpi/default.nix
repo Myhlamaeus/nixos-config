@@ -15,6 +15,11 @@ in
     ./webdav.nix
   ];
 
+  nix.package = pkgs.nixUnstable;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
   programs.gnupg.agent = {
     enable = true;
     pinentryFlavor = "curses";
