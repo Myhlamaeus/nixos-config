@@ -42,7 +42,7 @@ in
 
     challengeResponseAuthentication = false;
     passwordAuthentication = false;
-    permitRootLogin = false;
+    permitRootLogin = "no";
   };
 
   boot.initrd.network.ssh = {
