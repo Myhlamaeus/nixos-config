@@ -10,6 +10,7 @@ in
   imports = [
     ./backups.nix
     ./grocy.nix
+    ./home-assistant.nix
     ./matrix.nix
     ./webdav.nix
   ];
@@ -26,9 +27,10 @@ in
 
   custom = {
     # backups.enable = true;
+    grocy.enable = true;
+    home-assistant.enable = true;
     matrix-synapse.enable = true;
     webdav.enable = true;
-    grocy.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
