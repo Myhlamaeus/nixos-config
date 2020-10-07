@@ -1,0 +1,52 @@
+* Home automation
+  :PROPERTIES:
+  :ORDERED:  t
+  :END:
+** DONE Install home-assistant on rpi
+** DONE Set up hue
+** TODO [#A] Add smart smoke detectors
+   - [ ] Bedroom
+   - [ ] Living room
+   - [ ] Floor
+** TODO [#A] Replace old power strips
+** TODO [#A] Set up coronavirus integration
+*** TODO Set up nix derivation
+*** TODO Add to home-assistant
+** TODO [#B] Set up wake up and sleep routines
+   - [ ] Dim lights
+   - [ ] Change light warmth
+   - [ ] Set Do not Disturb on smartphone
+** TODO [#B] Set up Dyson air purifier
+*** TODO Set up nix derivation
+*** TODO Add to home-assistant
+** TODO [#C] Set up MQTT broker
+** TODO [#C] Set up owntracks
+** TODO [#C] Add charging stands to relevant locations
+   - [ ] Desk
+   - [ ] Bedside
+** TODO [#C] Add NFC tags to charging stands
+   - [ ] Desk
+   - [ ] Bedside
+** TODO [#C] Add room presence
+   - [ ] Bedroom
+   - [ ] Living room
+   - [ ] Floor
+   - [ ] Kitchen
+** TODO [#C] Automate blinds
+   - [ ] Bedroom
+   - [ ] Living room
+** TODO [#C] Detect whether devices are running
+   - [ ] Washing machine
+   - [ ] Dishwasher
+   - [ ] Fridge
+   - [ ] Microwave oven
+   - [ ] Electric kettle
+** TODO [#C] Turn on lights iff someone is present in the room
+   - [ ] Turn off lights in bedroom if smartphone is in bed charging stand
+** TODO [#C] Keep smartphone charged between 70 % and 80 %
+** TODO [#C] Connect greenhouse to zigbee?
+** TODO [#C] Add a hydroponics system to greenhouse
+** TODO [#C] Add a lawnmower robot to mow path to greenhouse
+** TODO [#C] Add a weather station
+** TODO [#C] Add smart door locks
+** TODO [#C] Track pet locations
