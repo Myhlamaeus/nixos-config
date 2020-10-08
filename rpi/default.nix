@@ -93,6 +93,19 @@ in {
     extraGroups = [ "wheel" "docker" ];
   };
 
+  users.users.nixops = {
+    openssh.authorizedKeys.keyFiles = [ ./key ];
+    isNormalUser = false;
+    shell = pkgs.runtimeShell;
+  };
+  security.sudo.extraRules = [{
+    users = [ "nixops" ];
+    commands = [{
+      command = "ALL";
+      options = [ "NOPASSWD" ];
+    }];
+  }];
+
   networking.wireless.enable = false;
 
   # This value determines the NixOS release with which your system is to be
