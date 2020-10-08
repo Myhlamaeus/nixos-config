@@ -14,7 +14,7 @@ in {
       enable = true;
       include = [ "/home" "/var" "/etc" ];
       exclude = [ "/" ];
-      secretFile = /var/lib/duplicity/secret;
+      secretFile = /run/keys/duplicity-secrets;
       targetUrl =
         "b2://0339f0142cfa@myhlamaeus-backup/${config.networking.hostName}.${config.networking.domain}/";
       extraFlags = [

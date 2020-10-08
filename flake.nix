@@ -156,39 +156,48 @@
         ];
       };
 
-      nixosConfigurations.rpi = nixpkgs-unstable.lib.nixosSystem {
-        system = "aarch64-linux";
-        modules = [
-          nixpkgs.nixosModules.notDetected
+      nixopsConfigurations.default = {
 
-          ({ pkgs, ... }: {
-            networking = {
-              hostName = "rpi";
-              domain = "maurice-dreyer.name";
-            };
+        nixpkgs = nixpkgs-unstable;
 
-            # Let 'nixos-version --json' know about the Git revision
-            # of this flake.
-            system.configurationRevision =
-              nixpkgs-unstable.lib.mkIf (self ? rev) self.rev;
+        network = {
+          description = "home";
+          enableRollback = true;
+        };
 
-            nix.registry.nixpkgs.flake = nixpkgs-unstable;
-          })
+        defaults = {
+          networking.domain = "maurice-dreyer.name";
 
-          {
-            nixpkgs.overlays = [ felschr-nixos.overlays.deconz ];
+          nixpkgs.overlays = [ felschr-nixos.overlays.deconz ];
 
-            nixpkgs.config.allowUnfree = true;
+          imports = [ felschr-nixos.nixosModules.deconz ];
 
-            imports = [
-              ./rpi/hardware-configuration.nix
-              felschr-nixos.nixosModules.deconz
-              ./rpi
-            ];
-          }
-        ];
+          # Let 'nixos-version --json' know about the Git revision
+          # of this flake.
+          system.configurationRevision =
+            nixpkgs-unstable.lib.mkIf (self ? rev) self.rev;
+
+          nix.registry.nixpkgs.flake = nixpkgs-unstable;
+        };
+
+        rpi = {
+          deployment.targetHost = "rpi.maurice-dreyer.name";
+          deployment.targetUser = "nixops";
+          nixpkgs.system = "aarch64-linux";
+          nixpkgs.crossSystem.system = "aarch64-linux";
+          networking.hostName = "rpi";
+
+          nixpkgs.config.allowUnfree = true;
+
+          imports = [
+            nixpkgs.nixosModules.notDetected
+            ./secrets/rpi.nix
+            ./rpi/hardware-configuration.nix
+            ./rpi
+          ];
+        };
+
       };
-
     } // flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};

@@ -25,6 +25,12 @@ in {
   };
 
   config = mkIf cfg.enable {
+    deployment.keys.hass-secrets = {
+      user = "hass";
+      group = "hass";
+      permissions = "0640";
+    };
+
     services.home-assistant = {
       enable = true;
 
@@ -245,6 +251,13 @@ in {
       };
       # configWritable = true; # doesn't work atm
     };
+    systemd.services.home-assistant = {
+      after = [ "hass-secrets-key.service" ];
+      wants = [ "hass-secrets-key.service" ];
+    };
+    system.activationScripts.hass-secrets = ''
+      ln -s /run/keys/hass-secrets /var/lib/hass/secrets.yaml
+    '';
 
     services.nginx.virtualHosts.${cfg.homeAssistantHostname} = {
       enableACME = true;
