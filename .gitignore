@@ -1,4 +1,6 @@
 .log
+/secrets
+!/secrets/.gitkeep
 
 ### Created by https://www.gitignore.io
 ### Linux ###
