@@ -4,38 +4,100 @@
   :END:
 ** DONE Install home-assistant on rpi
 ** DONE Set up hue
+** TODO [#A] Set up deconz
+   https://github.com/dresden-elektronik/deconz-rest-doc/blob/gh-pages/configuration/index.md#acquire-api-key
+   https://gitlab.com/felschr/nixos-config/-/blob/main/services/home-assistant.nix
 ** TODO [#A] Add smart smoke detectors
+   http://www.heimantech.com/product/?type=list&classid=1
    - [ ] Bedroom
    - [ ] Living room
    - [ ] Floor
+** TODO [#A] Add CO detector?
 ** TODO [#A] Replace old power strips
+   - [ ] Behind shelf for fridge and microwave oven
+   - [ ] Atop shelf to electric kettle (maybe inset into tabletop?)
+   - [ ] Under shelves for dishwasher and washing machine
+   - [ ] Connected to router and rpi
 ** TODO [#A] Set up coronavirus integration
 *** TODO Set up nix derivation
+    https://github.com/NixOS/nixpkgs-channels/blob/nixos-unstable/pkgs/servers/home-assistant/component-packages.nix#L138
 *** TODO Add to home-assistant
+** TODO [#A] Set up backups correctly
+*** duplicity -> gdrive?
+    Is already set up, but apparently incorrectly.
+*** btrfs snapshots?
+    Would have to be encrypted and uploaded somewhere.
 ** TODO [#B] Set up wake up and sleep routines
    - [ ] Dim lights
    - [ ] Change light warmth
    - [ ] Set Do not Disturb on smartphone
+   - [ ] Pause dunst notifications on desktop
+   - [ ] Set redshift temperature on desktop
 ** TODO [#B] Set up Dyson air purifier
 *** TODO Set up nix derivation
+    https://github.com/NixOS/nixpkgs-channels/blob/nixos-unstable/pkgs/servers/home-assistant/component-packages.nix#L195
 *** TODO Add to home-assistant
+** TODO [#B] Add remaining smart lights
+   https://www.ikea.com/de/de/p/tradfri-led-leuchtmittel-e27-600-lm-kabellos-dimmbar-farb-und-weissspektrum-farb-und-weissspektrum-rund-opalweiss-00408612/
+   Apparently IKEA devices can receive OTA updates from deconz:
+   https://github.com/dresden-elektronik/deconz-rest-plugin/issues/96
+   - [ ] Kitchen
+   - [ ] Living room
+   - [ ] Living room
+   - [ ] Living room
+** TODO [#B] Add pet doorbells
+*** TODO [#A] Add devices
+    Any zigbee button with sufficiently low actuation force should work; water proofing might be required
+    https://www.reddit.com/r/homeassistant/comments/bzsonu/does_it_exist_waterproof_battery_powered/
+    https://en.wikipedia.org/wiki/Conformal_coating
+    https://pebblesmart.com/
+    - [ ] Outside front door for cat
+    - [ ] Inside stairwell for cat
+    - [ ] Inside near terrace door for dog
+*** TODO [#A] Train cat
+*** TODO [#B] Train dog
+** TODO [#B] Add CO2 sensor?
+   Apparently the cheaper CO2 sensors have their value falsified by a lot of factors. Those around 100 EUR are more sensible.
+   https://www.element14.com/community/thread/63123/l/can-you-recommend-a-co2-sensor-for-the-raspberry-pi3
+   https://senseair.com/products/flexibility-counts/k30/
+   https://www.co2meter.com/products/cozir-2000-ppm-co2-sensor
+   https://www.sparkfun.com/products/14193
+   https://www.gassensing.co.uk/product/sprintir-co2-sensor/
+   https://www.adafruit.com/product/3566
 ** TODO [#C] Set up MQTT broker
+   Required for owntracks and room-assistant.
 ** TODO [#C] Set up owntracks
 ** TODO [#C] Add charging stands to relevant locations
+   Desk stand should have connection to desktop computer.
+   Stands with integrated NFC tags would be optimal.
    - [ ] Desk
    - [ ] Bedside
 ** TODO [#C] Add NFC tags to charging stands
+   Not needed if integrated into charging stands
    - [ ] Desk
    - [ ] Bedside
 ** TODO [#C] Add room presence
+   https://www.home-assistant.io/integrations/mqtt_room/
+   https://github.com/mKeRix/room-assistant
    - [ ] Bedroom
    - [ ] Living room
    - [ ] Floor
    - [ ] Kitchen
-** TODO [#C] Automate blinds
+** TODO [#C] Add floor plan
+** TODO [#C] Automate blinds/curtains
    - [ ] Bedroom
    - [ ] Living room
+*** Automation of existing blinds/curtains
+    - https://smarthome.university/best-motorized-blinds/
+    - https://create.arduino.cc/projecthub/Froz3nArcher/smart-blinds-573548
+    - Aqara Smart Curtain Motor
+    - https://www.brunt-nordic.com/en/
+*** Full devices
+    - https://www.ikea.com/gb/en/cat/electric-blinds-44531/
+** TODO [#C] Set up owntracks sharing
+   https://owntracks.org/booklet/guide/bridge/
 ** TODO [#C] Detect whether devices are running
+   https://philhawthorne.com/making-dumb-dishwashers-and-washing-machines-smart-alerts-when-the-dishes-and-clothes-are-cleaned/
    - [ ] Washing machine
    - [ ] Dishwasher
    - [ ] Fridge
@@ -46,7 +108,80 @@
 ** TODO [#C] Keep smartphone charged between 70 % and 80 %
 ** TODO [#C] Connect greenhouse to zigbee?
 ** TODO [#C] Add a hydroponics system to greenhouse
+   https://www.instructables.com/Aeroponic-Barrel-Garden/
+   GFCI
+   https://www.home-assistant.io/integrations/plant/
+   https://www.instructables.com/Starting-a-Scrappy-Garden/
+   https://www.instructables.com/Grow-Oyster-Mushrooms-at-Home/
+   https://www.instructables.com/Regrow-Lettuce-and-Celery-Scraps-Indoors-Super-Eas/
+   https://www.instructables.com/Indoor-Seed-Propagator-From-Recycled-Fruit-Veg-Tra/
+   https://www.instructables.com/Aquaponics-Mars-Colony-55-Gallon-Home-Grow-Station/
+   https://www.instructables.com/Subterranean-Irrigation-System/
+   https://www.instructables.com/Mason-Jar-Terrarium-2/
+   https://www.instructables.com/Basic-Guide-to-Grow-Micro-green/
+   https://www.instructables.com/living/gardening/projects/
+   https://www.instructables.com/Hyduino-Automated-Hydroponics-with-an-Arduino/
+   https://www.instructables.com/Raspberry-Pi-Powered-IOT-Garden/
+   https://www.nal.usda.gov/afsic/hydroponics
+   https://www.adafruit.com/product/1150
+   https://www.ebay.com/p/1048337746?iid=191129120663
+   https://www.dx.com/p/arduino-5v-relay-module-blue-black-2013775.html#.VGGsLpDF_44
+   https://www.ebay.com/c/1331516195
+   hyduino
+   https://cityos.io/topic/301/Build-Your-Own-Hydroponic-System-using-Arduino
+   https://create.arduino.cc/projecthub/Rushabh_Jain18/hydroponics-c5490c
+   vertical hydroponics
+   WaterMaster 360-degree sprayer
+   https://www.homestratosphere.com/vertical-hydroponic-gardening/
+   https://magpi.raspberrypi.org/articles/hydroponic-gardening
+   https://www.instructables.com/DIY-Hydroponics-With-Raspberry-Pi/
+   https://www.instructables.com/How-I-Made-My-Garden-Water-Storage-System-July-202/
+   https://www.instructables.com/Raised-Planter-Bed/
+   https://www.instructables.com/Natural-Fertilizer-for-Your-Garden-From-Your-Kitch/
+   https://www.instructables.com/Easy-Rain-Catch-Garden-Irrigation/
 ** TODO [#C] Add a lawnmower robot to mow path to greenhouse
 ** TODO [#C] Add a weather station
+   https://shop.weatherflow.com/collections/frontpage/products/tempest
+   https://www.reddit.com/r/homeassistant/comments/he60jy/tempest_weather_station_integration/
+   https://github.com/briis/smartweatherudp
 ** TODO [#C] Add smart door locks
+   https://danalock.com/
 ** TODO [#C] Track pet locations
+   https://uk.pcmag.com/pet-trackers/89817/the-best-pet-trackers-and-gps-dog-collars-for-2020
+   Would be great if it could be integrated with owntracks.
+   APRS would be useful, but it wouldn't allow live tracking.
+** TODO [#C] Add home surveillance
+** TODO [#C] Add door sensors
+   https://smarthome.university/home-assistant/best-hardware-for-home-assistant/#Best_Z-wave_Multisensor_For_Home_Assistant
+** TODO [#C] Add smart doorbell
+** TODO [#C] Add window sensors
+   https://smarthome.university/home-assistant/best-hardware-for-home-assistant/#Best_Z-wave_Multisensor_For_Home_Assistant
+** TODO [#C] Add caldav event and task creation?
+** TODO [#C] Replace motion sensors
+** TODO [#C] Replace flood lights
+** TODO [#C] Automate desk
+   Probably requires some kind of RJ45 sniffing or documentation of HS11A-1's protocol.
+   https://ossmann.blogspot.com/2011/02/throwing-star-lan-tap.html
+   https://www.loctekmotion.com/product/control-panel/
+
+   This apparently can only change the height, it can't detect the current height:
+   https://create.arduino.cc/projecthub/giannozzo/office-desk-web-control-6d64c1
+   It's also not certain whether the protocol is the same.
+** TODO [#C] Set up caldav <-> org-mode sync
+   https://github.com/dengste/org-caldav
+** TODO [#C] Update radicale
+** TODO [#C] Add shared calendars
+   https://radicale.org/3.0.html#documentation/authentication-and-rights
+** TODO [#C] Create home-assistant grocy integration
+** TODO [#C] Set up jellyfin
+   There's apparently no up-to-date home-assistant integration, but the emby integration might work somewhat.
+** TODO [#C] Add org-pomodoro sensor
+** TODO [#C] Disable notifications during pomodoro session
+** TODO [#C] Automate night light on smartphone
+   https://play.google.com/store/apps/details?id=com.corphish.nightlight.generic&hl=en_US
+* rpi
+** DONE Resize boot partition
+   Apparently fat16 can't be resized anymore. Recreating the boot partition with the same name and copying in the files
+   just works with the rpi boot loader.
+** TODO Deploy via nixops
+   Example: https://github.com/edolstra/hydra-ec2-demo/blob/master/flake.nix
