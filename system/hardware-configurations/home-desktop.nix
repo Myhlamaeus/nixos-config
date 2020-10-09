@@ -55,12 +55,12 @@
   };
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/d09b6a47-adc0-460b-9736-bfcf18a5772d";
+    { device = "/dev/mapper/Main-root";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/5ee265fc-0320-4acc-b69e-1af90955136b";
+    { device = "/dev/mapper/encrypted-boot";
       fsType = "ext2";
     };
 
@@ -70,7 +70,7 @@
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/155b4f53-416b-4fb3-a87e-465fdb65453a";
+    { device = "/dev/mapper/Main-home";
       fsType = "ext4";
     };
 
@@ -80,7 +80,7 @@
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/23aae00f-4f92-4f37-9bd0-e652251f8b33"; }
+    [ { device = "/dev/mapper/Main-swap"; }
     ];
 
   nix.maxJobs = lib.mkDefault 8;
