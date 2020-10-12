@@ -3,7 +3,8 @@
 *** http://www8.watch-anime.org/feed/
 ** Manga :manga:
 *** https://readms.net/rss
-** Light Novel :ln:
+*** https://leviatanscans.com/feed
+** Light Novel                                                           :ln:
 *** https://www.wuxiaworld.com/feed/chapters
 ** Gaming :gaming:
 *** entry-title: \(nvidia\|geforce\|elder scrolls\|games\|gaming\)
