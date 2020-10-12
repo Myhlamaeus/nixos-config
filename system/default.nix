@@ -10,6 +10,8 @@
       ./cachix.nix
     ];
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   nix.package = pkgs.nixUnstable;
   nix.extraOptions = ''
     experimental-features = nix-command flakes
