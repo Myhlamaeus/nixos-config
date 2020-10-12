@@ -33,6 +33,12 @@ in
     webdav.enable = true;
   };
 
+  local.services.deconz = {
+    enable = true;
+    httpPort = 8080;
+    wsPort = 1443;
+  };
+
   environment.systemPackages = with pkgs; [
     git
     rxvt_unicode.terminfo

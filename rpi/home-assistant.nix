@@ -30,6 +30,10 @@ in
     services.home-assistant = {
       enable = true;
 
+      package = pkgs.home-assistant.override {
+        extraPackages = ps: [ (ps.callPackage pkgs.pydeconz { }) ];
+      };
+
       openFirewall = true;
 
       config = {
@@ -54,12 +58,16 @@ in
         #   # }
         # ];
 
-        hue = { };
-
         # owntracks = {
         #   mqtt_topic = "owntracks/#";
 	      #   secret = "!secret owntracks_secret";
         # };
+
+        deconz = {
+          host = "localhost";
+          port = config.local.services.deconz.httpPort;
+          api_key = "!secret deconzSecret";
+        };
       };
       # configWritable = true; # doesn't work atm
     };

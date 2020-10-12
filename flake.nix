@@ -163,8 +163,15 @@
           })
 
           {
+            nixpkgs.overlays = [
+              felschr-nixos.overlays.deconz
+            ];
+
+            nixpkgs.config.allowUnfree = true;
+
             imports = [
               ./rpi/hardware-configuration.nix
+              felschr-nixos.nixosModules.deconz
               ./rpi
             ];
           }
