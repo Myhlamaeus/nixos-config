@@ -7,6 +7,7 @@ with lib;
   boot.loader.raspberryPi.enable = true;
   boot.loader.raspberryPi.version = 4;
   boot.kernelPackages = pkgs.linuxPackages_rpi4;
+  boot.kernelParams = [ "console=ttyAMA0,115200" "console=tty1" ];
 
   boot.initrd.availableKernelModules = [ "usbhid" ];
   boot.initrd.kernelModules = [ ];
