@@ -47,11 +47,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1602405592,
-        "narHash": "sha256-gkQ4I+xjqkWMNLXVdjAE3OqychwUXdOhGzl+ULsfnUY=",
+        "lastModified": 1602693696,
+        "narHash": "sha256-MCm5vaBo3pgELKcqrsrxR5wxlu9JOpqAX3yofbaFCG4=",
         "owner": "FelschR",
         "repo": "nixos-config",
-        "rev": "3e6bc499d0e48d69fcc0dfa8be9b5320badf148f",
+        "rev": "7b04776cc3534fc4f44ec972535d06bfc0ebaa47",
         "type": "gitlab"
       },
       "original": {
@@ -165,11 +165,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1601584113,
-        "narHash": "sha256-4gLn43KG5KzJatEul+/TfsiMnj3FK3ZU6VMdXdPpdRY=",
+        "lastModified": 1602339342,
+        "narHash": "sha256-Qh+BDMfBmMSnhEhXSyF539aKGUGbq1IKBmtghiG/VhY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "9ff2188c5d2c65b20ded3f2e7a759319866313d3",
+        "rev": "b5847455066d0191cebd6b140531cc154443e316",
         "type": "github"
       },
       "original": {
@@ -198,11 +198,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1602073410,
-        "narHash": "sha256-Sm02HUnyh66agyXFy2biV7q7kULiPthP0NUO+4OPj5o=",
+        "lastModified": 1602583230,
+        "narHash": "sha256-e3ia4cyTihIfBIwwWX8rjvpL2MExWxzbsySb5K39Mng=",
         "owner": "NixOS",
         "repo": "nixpkgs-channels",
-        "rev": "067d8e6c9f4ad3df62d4c9359865747aedea8853",
+        "rev": "d3784204ba1a6bbb0c0ebf89b706bda50c113112",
         "type": "github"
       },
       "original": {
@@ -230,11 +230,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1602402297,
-        "narHash": "sha256-JtkPhpNVAW+e+i4Wi2cUQL9abDZggEoKxzUUGGZD1aQ=",
+        "lastModified": 1603076465,
+        "narHash": "sha256-ptliNie785hPuc8TT1ktXxnsuioynVsZwgbRf81VKt4=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "1cc609428be16e52d0db637dea71bd012e039714",
+        "rev": "c031fbab75cd4781bf39500120de17d2989e83dd",
         "type": "github"
       },
       "original": {
@@ -247,11 +247,11 @@
     "omnisharp-roslyn": {
       "flake": false,
       "locked": {
-        "lastModified": 1602255212,
-        "narHash": "sha256-J/uuVDqE7KX1wFkyDotLpXDWYKrQdTrUjClohdDMCMA=",
+        "lastModified": 1602699492,
+        "narHash": "sha256-64M4fOAmJ+NRBBntT8xrK3tFTkzSWSaO28w0toKcOsU=",
         "owner": "OmniSharp",
         "repo": "omnisharp-roslyn",
-        "rev": "df9d4fcebe0729760c5988ec9fa499c092e5dcb8",
+        "rev": "bc763a01a69a7db3f3d5f82aa137c47130fb6c04",
         "type": "github"
       },
       "original": {
