@@ -4,7 +4,8 @@
   :END:
 ** DONE Install home-assistant on rpi
 ** DONE Set up hue
-** TODO [#A] Set up deconz
+** DONE Set up deconz
+   CLOSED: [2020-10-21 Wed 13:28]
    https://github.com/dresden-elektronik/deconz-rest-doc/blob/gh-pages/configuration/index.md#acquire-api-key
    https://gitlab.com/felschr/nixos-config/-/blob/main/services/home-assistant.nix
 ** TODO [#A] Add smart smoke detectors
@@ -23,8 +24,8 @@
     https://github.com/NixOS/nixpkgs-channels/blob/nixos-unstable/pkgs/servers/home-assistant/component-packages.nix#L138
 *** TODO Add to home-assistant
 ** TODO [#B] Set up wake up and sleep routines
-   - [ ] Dim lights
-   - [ ] Change light warmth
+   - [X] Dim lights
+   - [X] Change light warmth
    - [ ] Set Do not Disturb on smartphone
    - [ ] Pause dunst notifications on desktop
    - [ ] Set redshift temperature on desktop
