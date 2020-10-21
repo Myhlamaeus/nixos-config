@@ -66,6 +66,8 @@
      https://github.com/jpmens/mosquitto-auth-plug
      Perhaps the passwd file can be generated on-the-fly, seeing as there's no supported integration.
 ** TODO [#C] Set up owntracks
+   Apparently sharing data with other self-hosted owntracks instances requires some form of mqtt broker federation:
+   https://owntracks.org/booklet/guide/bridge/
 ** TODO [#C] Add charging stands to relevant locations
    Desk stand should have connection to desktop computer.
    Stands with integrated NFC tags would be optimal.
@@ -191,7 +193,7 @@
     Is already set up, but apparently incorrectly.
 *** btrfs snapshots?
     Would have to be encrypted and uploaded somewhere.
-** TODO [#A] Setup LDAP
+** TODO [#A] Set up LDAP
    :PROPERTIES:
    :ORDERED:  t
    :END:
@@ -215,5 +217,26 @@
      Could take a bit until it's available in nixpkgs
 **** TODO home-assistant
      https://github.com/home-assistant/core/pull/37645
+** TODO [#B] Reconsider domain name
+   The current domain name leaks private information.
 ** TODO [#C] Deploy via nixops
    Example: https://github.com/edolstra/hydra-ec2-demo/blob/master/flake.nix
+** TODO [#C] Use btrfs
+   https://jappieklooster.nl/nixos-on-encrypted-btrfs.html
+*** TODO btrfs
+*** TODO Backups
+*** TODO Opt-in state
+    https://mt-caret.github.io/blog/posts/2020-06-29-optin-state.html
+** TODO [#C] Set up funkwhale
+*** TODO Set up funkwhale
+*** TODO Add podcasts
+** TODO [#C] Use nixos containers where appropriate
+   https://discourse.nixos.org/t/minimal-working-nextcloud-config/9316/9
+* system
+** TODO [#B] Migrate to podman
+** TODO [#B] Use btrfs
+   https://jappieklooster.nl/nixos-on-encrypted-btrfs.html
+*** TODO btrfs
+*** TODO Backups
+*** TODO Opt-in state
+    https://mt-caret.github.io/blog/posts/2020-06-29-optin-state.html
