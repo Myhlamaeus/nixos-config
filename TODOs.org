@@ -66,6 +66,10 @@
    https://www.adafruit.com/product/3566
 ** TODO [#C] Set up MQTT broker
    Required for owntracks and room-assistant.
+**** TODO Set up mosquitto
+**** TODO Set up LDAP integration
+     https://github.com/jpmens/mosquitto-auth-plug
+     Perhaps the passwd file can be generated on-the-fly, seeing as there's no supported integration.
 ** TODO [#C] Set up owntracks
 ** TODO [#C] Add charging stands to relevant locations
    Desk stand should have connection to desktop computer.
@@ -175,6 +179,9 @@
 ** TODO [#C] Create home-assistant grocy integration
 ** TODO [#C] Set up jellyfin
    There's apparently no up-to-date home-assistant integration, but the emby integration might work somewhat.
+*** TODO Set up jellyfin
+*** TODO Set up LDAP integration
+    https://github.com/jellyfin/jellyfin-plugin-ldapauth
 ** TODO [#C] Add org-pomodoro sensor
 ** TODO [#C] Disable notifications during pomodoro session
 ** TODO [#C] Automate night light on smartphone
@@ -183,5 +190,29 @@
 ** DONE Resize boot partition
    Apparently fat16 can't be resized anymore. Recreating the boot partition with the same name and copying in the files
    just works with the rpi boot loader.
-** TODO Deploy via nixops
+** TODO [#A] Setup LDAP
+   :PROPERTIES:
+   :ORDERED:  t
+   :END:
+*** TODO Set up LDAP server
+*** TODO Set up integrations
+**** TODO ssh
+     https://askubuntu.com/questions/776700/ssh-ldap-authorizedkeyscommand
+     https://blog.shichao.io/2015/04/17/setup_openldap_server_with_openssh_lpk_on_ubuntu.html
+     https://github.com/AndriiGrytsenko/openssh-ldap-publickey
+**** TODO matrix
+     https://github.com/matrix-org/matrix-synapse-ldap3
+     https://github.com/ma1uta/ma1sd
+**** TODO postgresql
+     https://www.postgresql.org/docs/11/auth-ldap.html
+**** TODO nginx/radicale (webdav/caldav/carddav)
+     Radicale trusts the nginx auth, so the same options apply.
+     https://www.nginx.com/blog/nginx-plus-authenticate-users/
+     https://github.com/nginxinc/nginx-ldap-auth
+**** TODO grocy
+     https://github.com/grocy/grocy/commit/31fcdf377a8337d780dae08805e2f037d0ce1cbe
+     Could take a bit until it's available in nixpkgs
+**** TODO home-assistant
+     https://github.com/home-assistant/core/pull/37645
+** TODO [#C] Deploy via nixops
    Example: https://github.com/edolstra/hydra-ec2-demo/blob/master/flake.nix
