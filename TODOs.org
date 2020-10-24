@@ -22,11 +22,6 @@
 *** TODO Set up nix derivation
     https://github.com/NixOS/nixpkgs-channels/blob/nixos-unstable/pkgs/servers/home-assistant/component-packages.nix#L138
 *** TODO Add to home-assistant
-** TODO [#A] Set up backups correctly
-*** duplicity -> gdrive?
-    Is already set up, but apparently incorrectly.
-*** btrfs snapshots?
-    Would have to be encrypted and uploaded somewhere.
 ** TODO [#B] Set up wake up and sleep routines
    - [ ] Dim lights
    - [ ] Change light warmth
@@ -190,6 +185,11 @@
 ** DONE Resize boot partition
    Apparently fat16 can't be resized anymore. Recreating the boot partition with the same name and copying in the files
    just works with the rpi boot loader.
+** TODO [#A] Set up backups correctly
+*** duplicity -> gdrive?
+    Is already set up, but apparently incorrectly.
+*** btrfs snapshots?
+    Would have to be encrypted and uploaded somewhere.
 ** TODO [#A] Setup LDAP
    :PROPERTIES:
    :ORDERED:  t
