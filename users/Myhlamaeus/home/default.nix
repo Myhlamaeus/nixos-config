@@ -56,9 +56,10 @@ in {
     nix-index
     zsh-completions
     # dev
+    openhantek6022
     shellcheck
-    zeal
     sqlite
+    zeal
     # hs
     cabal-install
     cabal2nix
