@@ -1,14 +1,14 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs-channels/nixos-20.03";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
 
   inputs.home-manager = {
-    url = "github:nix-community/home-manager/release-20.03";
-    flake = false;
+    url = "github:nix-community/home-manager/release-20.09";
+    inputs.nixpkgs.follows = "nixpkgs";
   };
 
   inputs.nur.url = "github:nix-community/NUR/master";
 
-  inputs.nixpkgs-unstable.url = "github:NixOS/nixpkgs-channels/nixos-unstable";
+  inputs.nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
   inputs.cheatsheets = {
     url = "github:cheat/cheatsheets/master";
@@ -127,7 +127,8 @@
 
           {
             imports = [
-              "${ nixpkgs.outPath }/nixos/modules/profiles/hardened.nix"
+              # Something about this broke in 20.09
+              # "${ nixpkgs.outPath }/nixos/modules/profiles/hardened.nix"
               "${ home-manager }/nixos"
               ./system/hardware-configurations/home-desktop.nix
               ./system

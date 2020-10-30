@@ -189,8 +189,6 @@
   # Video drivers
   hardware.opengl.driSupport32Bit = true;
 
-  hardware.u2f.enable = true;
-
   services.smartd = {
     enable = true;
 
