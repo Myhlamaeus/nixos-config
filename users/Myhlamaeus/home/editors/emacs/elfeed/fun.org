@@ -4,6 +4,7 @@
 ** Manga :manga:
 *** https://readms.net/rss
 *** https://leviatanscans.com/feed
+*** https://asurascans.com/manga/feed/
 ** Light Novel                                                           :ln:
 *** https://www.wuxiaworld.com/feed/chapters
 ** Gaming :gaming:
