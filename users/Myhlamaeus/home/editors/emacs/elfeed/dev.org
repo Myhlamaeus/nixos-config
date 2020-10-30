@@ -7,7 +7,7 @@
 *** http://planet.emacsen.org/atom.xml
 ** Haskell                                                             :hask:
 *** entry-title: \(haskell|hask\)
-*** https://haskellweekly.news/haskell-weekly.atom
+*** https://haskell.pl-a.net/atom.xml
 ** Nix                                                                  :nix:
 *** entry-title: \(\bnix\b\)
 *** https://weekly.nixos.org/feeds/all.rss.xml
