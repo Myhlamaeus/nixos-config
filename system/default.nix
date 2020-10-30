@@ -61,7 +61,11 @@
 
   services.atd.enable = true;
 
-  services.udev.packages = with pkgs; [ teensy-loader-cli steamPackages.steam ];
+  services.udev.packages = with pkgs; [
+    teensy-loader-cli
+    steamPackages.steam
+    openhantek6022
+  ];
   # options.hardware.steam-hardware.enable = true;
 
   # Configure network proxy if necessary
