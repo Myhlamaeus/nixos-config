@@ -16,11 +16,12 @@ in
 
     services.duplicity = {
       enable = true;
-      exclude = [ "/tmp" ];
-      secretFile = /root/duplicitySecret;
-      targetUrl = "pydrive+gdocs://google-drive-backup@hale-structure-285320.iam.gserviceaccount.com@developer.gserviceaccount.com/backups/${ config.networking.hostName }.${ config.networking.domain }/";
+      include = [ "/home" "/var" "/etc" ];
+      exclude = [ "/" ];
+      secretFile = /var/lib/duplicity/secret;
+      targetUrl = "b2://0339f0142cfa@myhlamaeus-backup/${ config.networking.hostName }.${ config.networking.domain }/";
       extraFlags = [
-        "--encrypt-key" "7FCB362E2D975AD2A45A682CAD1390B6FE33C758"
+        "--encrypt-key" "14F6ED45E324968B4F0E33AE71B446A5A29587FB"
         "--sign-key" "14F6ED45E324968B4F0E33AE71B446A5A29587FB"
       ];
     };

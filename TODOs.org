@@ -185,7 +185,8 @@
 ** DONE Resize boot partition
    Apparently fat16 can't be resized anymore. Recreating the boot partition with the same name and copying in the files
    just works with the rpi boot loader.
-** TODO [#A] Set up backups correctly
+** DONE Set up backups correctly
+   CLOSED: [2020-10-30 Fri 19:54]
 *** duplicity -> gdrive?
     Is already set up, but apparently incorrectly.
 *** btrfs snapshots?
