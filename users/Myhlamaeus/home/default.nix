@@ -49,7 +49,7 @@ in {
   home.packages = (with pkgs; [
     # shell
     ag
-    cheat
+    # cheat
     jq
     python36Packages.powerline
     ranger
@@ -163,6 +163,7 @@ in {
       $DRY_RUN_CMD find ~ \
         -path "$HOME/media" -prune -o \
         -path "$HOME/webdav/lost+found" -prune -o \
+        -path "$HOME/webdav/mnt/lost+found" -prune -o \
         -type f \
         -exec chmod go-rwx "{}" +
     '';
