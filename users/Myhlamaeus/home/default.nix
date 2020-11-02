@@ -86,6 +86,7 @@ in
       keybase
       # other
       ledger
+      transmission-gtk
       # non-free
       discord
       # term emulator
@@ -106,14 +107,16 @@ in
   xdg.mimeApps = {
     enable = true;
     associations.added = {
-      "application/epub+zip"   = "emacs.desktop";
-      "application/pdf"        = "emacs.desktop";
-      "application/rss+xml"    = "emacs.desktop";
+      "application/epub+zip"    = "emacs.desktop";
+      "application/pdf"         = "emacs.desktop";
+      "application/rss+xml"     = "emacs.desktop";
+      "x-scheme-handler/magnet" = "userapp-transmission-gtk-IMV9S0.desktop";
     };
     defaultApplications = {
-      "application/epub+zip"   = "emacs.desktop";
-      "application/pdf"        = "emacs.desktop";
-      "application/rss+xml"    = "emacs.desktop";
+      "application/epub+zip"    = "emacs.desktop";
+      "application/pdf"         = "emacs.desktop";
+      "application/rss+xml"     = "emacs.desktop";
+      "x-scheme-handler/magnet" = "userapp-transmission-gtk-IMV9S0.desktop";
     };
   };
   xdg.userDirs.enable = true;
