@@ -84,7 +84,7 @@ in
         mv "$temp"/private ~/.emacs.d
         rm -r "$temp"
       fi
-      if ! [ -e ~/.spacemacs ] ; then
+      if ! [ -L ~/.spacemacs ] ; then
         $DRY_RUN_CMD ln -s $VERBOSE_ARG \
           /etc/nixos/users/Myhlamaeus/spacemacs \
           ~/.spacemacs
@@ -109,7 +109,7 @@ in
     '';
 
     home.activation.org-mode = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      if ! [ -e ~/org ] ; then
+      if ! [ -L ~/org ] ; then
         $DRY_RUN_CMD ln -s $VERBOSE_ARG \
           ~/media/keybase/private/myhlamaeus/org \
           ~/org
