@@ -217,6 +217,22 @@
         "type": "github"
       }
     },
+    "morrowind-mods": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "narHash": "sha256-Sp2p8BLEwjTiTfQ0aIjfFnBXd8hGqlAn1yqBVH7Rjh4=",
+        "path": "/etc/nixos-morrowind-mods",
+        "type": "path"
+      },
+      "original": {
+        "path": "/etc/nixos-morrowind-mods",
+        "type": "path"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1605220118,
@@ -315,6 +331,7 @@
         "flake-utils": "flake-utils_2",
         "gitignore": "gitignore",
         "home-manager": "home-manager_2",
+        "morrowind-mods": "morrowind-mods",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",

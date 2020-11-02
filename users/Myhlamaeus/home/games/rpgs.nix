@@ -3,10 +3,6 @@
 with lib;
 
 {
-  imports = [
-    /home/Myhlamaeus/.ghq/gitlab.com/Myhlamaeus/morrowind-mods/home-manager.nix
-  ];
-
   config = {
     programs.morrowind = mkIf config.custom.games.enable {
       enable = true;

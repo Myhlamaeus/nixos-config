@@ -41,9 +41,14 @@
     flake = false;
   };
 
+  inputs.morrowind-mods = {
+    url = "/etc/nixos-morrowind-mods";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   outputs = { self, nixpkgs, flake-utils, home-manager, pre-commit-hooks, nur
     , nixpkgs-unstable, cheatsheets, felschr-nixos, gitignore, omnisharp-roslyn
-    }:
+    , morrowind-mods }:
     rec {
 
       homeManagerModules.tridactyl = import ./homeManagerModules/tridactyl.nix;
@@ -166,6 +171,7 @@
               imports = [
                 felschr-nixos.homeManagerModules.git
                 homeManagerModules.tridactyl
+                morrowind-mods.homeManagerModules.morrowind
               ];
             };
           }
