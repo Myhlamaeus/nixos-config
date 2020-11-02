@@ -251,11 +251,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1604069386,
-        "narHash": "sha256-C/CmrYy+ykfL4PppWOUDehsqgOKwNslFA/Ll1gcMWok=",
+        "lastModified": 1604341846,
+        "narHash": "sha256-NGYX3qQPsxRiLp12Te2IeL9X82c6NNg/HUaIm+OofIg=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "b33bed0ce1d99ac418ac077eba97f331ee6d9064",
+        "rev": "4ead89be68e51e0240469a39fd263d88b4a23b60",
         "type": "github"
       },
       "original": {
@@ -268,11 +268,11 @@
     "omnisharp-roslyn": {
       "flake": false,
       "locked": {
-        "lastModified": 1603446943,
-        "narHash": "sha256-X4WWh0QjTNoC55ssnKp+SyTglSuUiHguo2LLlq71p14=",
+        "lastModified": 1604288712,
+        "narHash": "sha256-/xBs+RIejv9qWFtsrBiuMdLbgD/YNG/IlEYC3nHGBss=",
         "owner": "OmniSharp",
         "repo": "omnisharp-roslyn",
-        "rev": "edc13641314788ddc1fafa70a70202f140742d37",
+        "rev": "e9e524f0a697e920b78c99d6b63dcfe253dcdfbf",
         "type": "github"
       },
       "original": {
