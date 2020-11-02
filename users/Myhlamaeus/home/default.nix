@@ -87,6 +87,7 @@ in
       # other
       ledger
       transmission-gtk
+      vlc
       # non-free
       discord
       # term emulator
