@@ -84,7 +84,6 @@ in
       # social
       element-desktop
       keybase
-      keybase-gui
       # other
       ledger
       # non-free
