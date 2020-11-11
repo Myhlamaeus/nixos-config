@@ -87,4 +87,9 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   # High-DPI console
   console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.config = {
+    General = { Enable = "Source,Sink,Media,Socket"; };
+  };
 }
