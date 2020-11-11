@@ -186,7 +186,7 @@ in
       };
     in
       (with pkgs; [
-        (tor-browser-bundle-bin.override { pulseaudioSupport = true; })
+        ((tor-browser-bundle-bin.override { pulseaudioSupport = true; }).overrideAttrs (old: { meta = old.meta // { broken = false; }; }))
       ])
         ++ [
           autoFirefox
