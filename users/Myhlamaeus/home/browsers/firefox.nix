@@ -63,6 +63,8 @@ let
     "network.prefetch-next" = false;
     # Not rendering IDNs as their Punycode equivalent leaves you open to phishing attacks that can be very difficult to notice.
     "network.IDN_show_punycode" = true;
+    # Enable DNT header
+    "privacy.donottrackheader.enabled" = true;
 
     # Restore previous session
     "browser.startup.page" = 3;
