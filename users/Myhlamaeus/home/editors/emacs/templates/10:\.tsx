@@ -1,10 +1,12 @@
-import { createElement as h, FC } from "react"
+import React, { HTMLAttributes } from "react"
 import styled from "styled-components"
 
-export type ${1:`(file-name-base)`}Props = {
-  $2
+export interface ${1:`(file-name-base)`}Props extends HTMLAttributes<$2> {
+  $3
 }
 
-export const $1: FC<$1Props> = ({
-  $3
-}) => $4
+export const $1 = styled(({
+  $4
+}: $1Props) => $5)`
+  $6
+`
