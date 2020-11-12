@@ -71,7 +71,6 @@ in
       mpc_cli
       mpv
       shutter
-      greg
       # security
       gnupg
       (pass.withExtensions (exts: with exts; [ pass-update pass-audit ]))
@@ -262,29 +261,6 @@ in
     config = {
       theme = "TwoDark";
     };
-  };
-
-  home.file.".local/share/greg/data/data" = {
-    text = ''
-        [LifesLibrary]
-        url = https://extras.lifeslibrarybookclub.com/feed.php?id=25fdd6f482baf1d8a5e22fb8746acce59215a059c7e05b4ee4ffe35726020592
-        date_info = available
-
-        [DearHankAndJohn]
-        url = http://feeds.wnyc.org/dearhankandjohn
-        date_info = available
-
-        [TheAnthropoceneReviewed]
-        url = http://feeds.wnyc.org/TheAnthropoceneReviewed
-        date_info = available
-
-        [SciShowTangents]
-        url = http://feeds.wnyc.org/scishow-tangents
-        date_info = available
-      '';
-  };
-  home.file.".config/greg/greg.conf" = {
-    source = ./greg.conf;
   };
 
   home.file.".ledgerrc".text =
