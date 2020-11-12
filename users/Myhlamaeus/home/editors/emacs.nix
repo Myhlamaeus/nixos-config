@@ -18,7 +18,7 @@ in
       };
       rev = mkOption {
         type = with types; str;
-        default = "9d4633a3c";
+        default = "c3872f165c3ea0862cdb939c5e7b7494b5ce0e72";
       };
     };
   };
