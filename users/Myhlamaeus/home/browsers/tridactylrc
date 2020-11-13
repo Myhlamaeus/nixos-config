@@ -95,10 +95,11 @@ bind ;C composite hint_focus; !s xdotool key Menu
 set searchurls {}
 
 " Nix
-set searchurls.np https://search.nixos.org/packages?channel=20.09&show=%s&sort=relevance&query=%s
-set searchurls.no https://search.nixos.org/options?channel=20.09&show=%s&sort=relevance&query=%s
-set searchurls.nup https://search.nixos.org/packages?channel=unstable&show=%s&sort=relevance&query=%s
-set searchurls.nuo https://search.nixos.org/options?channel=unstable&show=%s&sort=relevance&query=%s
+" Adding `&show=%s` would automagically open matching entries, but tridactyl only expands the first %s, so it would break the search
+set searchurls.np https://search.nixos.org/packages?channel=20.09&sort=relevance&query=%s
+set searchurls.no https://search.nixos.org/options?channel=20.09&sort=relevance&query=%s
+set searchurls.nup https://search.nixos.org/packages?channel=unstable&sort=relevance&query=%s
+set searchurls.nuo https://search.nixos.org/options?channel=unstable&sort=relevance&query=%s
 
 " Haskell
 set searchurls.hh https://hoogle.haskell.org/?hoogle=%s
