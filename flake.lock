@@ -265,23 +265,6 @@
         "type": "github"
       }
     },
-    "pass-git-helper": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1599394225,
-        "narHash": "sha256-s1BjFdu1IELjebXmfkSAhtNoN7uFEUrPXjb6G/d2Zrg=",
-        "owner": "languitar",
-        "repo": "pass-git-helper",
-        "rev": "0180749f840a8e2a2cbb4fbf1d8172869926e289",
-        "type": "github"
-      },
-      "original": {
-        "owner": "languitar",
-        "ref": "master",
-        "repo": "pass-git-helper",
-        "type": "github"
-      }
-    },
     "pre-commit-hooks": {
       "inputs": {
         "cabal-fmt-src": "cabal-fmt-src",
@@ -317,8 +300,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
-        "omnisharp-roslyn": "omnisharp-roslyn",
-        "pass-git-helper": "pass-git-helper"
+        "omnisharp-roslyn": "omnisharp-roslyn"
       }
     }
   },

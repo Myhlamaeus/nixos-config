@@ -177,7 +177,7 @@ in
         };
 
         credential = {
-          helper = "${ pkgs.pass-git-helper }/bin/pass-git-helper";
+          helper = "${ pkgs.gitAndTools.pass-git-helper }/bin/pass-git-helper";
           useHttpPath = true;
         };
 

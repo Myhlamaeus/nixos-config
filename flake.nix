@@ -31,12 +31,7 @@
     flake = false;
   };
 
-  inputs.pass-git-helper = {
-    url = "github:languitar/pass-git-helper/master";
-    flake = false;
-  };
-
-  outputs = { self, nixpkgs, home-manager, nur, nixpkgs-unstable, cheatsheets, felschr-nixos, gitignore, omnisharp-roslyn, pass-git-helper }: {
+  outputs = { self, nixpkgs, home-manager, nur, nixpkgs-unstable, cheatsheets, felschr-nixos, gitignore, omnisharp-roslyn }: {
 
     nixosConfigurations.home-desktop = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -90,19 +85,6 @@
                         cp ${teensy-udev-rules} $out/lib/udev/rules.d/49-teensy.rules
                       '';
                     });
-
-                  pass-git-helper = super.python38Packages.buildPythonApplication {
-                    pname = "pass-git-helper";
-                    version = pass-git-helper.rev;
-                    versionSuffix = "-git";
-
-                    propagatedBuildInputs = with pkgs.python38Packages; [ pyxdg ];
-                    checkInputs = with pkgs.python38Packages; [ coveralls pytest pytest-mock ];
-
-                    src = pass-git-helper;
-
-                    doCheck = false;
-                  };
 
                   proton-ge-custom = pkgs.stdenv.mkDerivation rec {
                     pname = "proton-ge-custom";
