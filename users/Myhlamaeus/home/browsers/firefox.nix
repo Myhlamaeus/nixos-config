@@ -207,5 +207,8 @@ in
           categories = "Application;Network;WebBrowser";
         }) (filterAttrs (k: v: !v.isDefault) config.programs.firefox.profiles)
     ;
+
+    home.file.".mozilla/native-messaging-hosts/tridactyl.json".source = "${pkgs.tridactyl-native}/lib/mozilla/native-messaging-hosts/tridactyl.json";
+    xdg.configFile."tridactyl/tridactylrc".source = ./tridactylrc;
   };
 }
