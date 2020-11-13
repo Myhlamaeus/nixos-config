@@ -265,9 +265,6 @@ in
       [DEFAULT]
       username_extractor=regex_search
       regex_username=^login: (.*)$
-
-      [github.com/eatchinteractive/*]
-      target=work/eatch/github
     '';
   };
 }
