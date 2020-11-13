@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./cachix.nix ];
+  imports = [ ./cachix.nix ./audio.nix ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
@@ -165,11 +165,6 @@
   services.printing.enable = true;
   services.printing.drivers = with pkgs; [ gutenprint ];
   hardware.sane.enable = true;
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.support32Bit = true;
 
   # Enable the X11 windowing system.
   services.xserver = {
