@@ -1,6 +1,5 @@
 { pkgs, ... }:
 
 {
-  custom.editors.env.bin.packages = [
-  ];
+  custom.editors.env.bin.packages = [ ];
 }

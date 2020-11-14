@@ -2,11 +2,9 @@
 
 with lib;
 
-let
-  cfg = config.custom.home-assistant;
+let cfg = config.custom.home-assistant;
 
-in
-{
+in {
   options.custom.home-assistant = {
     enable = mkEnableOption "custom.home-assistant";
 
@@ -17,7 +15,7 @@ in
 
     homeAssistantHostname = mkOption {
       type = with types; str;
-      default = "home.${ cfg.serverName }";
+      default = "home.${cfg.serverName}";
     };
 
     homeAssistantPort = mkOption {
@@ -45,11 +43,11 @@ in
           unit_system = "metric";
           time_zone = "UTC";
           temperature_unit = "C";
-          external_url = "https://${ cfg.homeAssistantHostname }";
-          internal_url = "https://${ cfg.homeAssistantHostname }";
+          external_url = "https://${cfg.homeAssistantHostname}";
+          internal_url = "https://${cfg.homeAssistantHostname}";
         };
 
-        default_config = {};
+        default_config = { };
         # sensor = [
         #   # missing input
         #   # {
@@ -60,7 +58,7 @@ in
 
         # owntracks = {
         #   mqtt_topic = "owntracks/#";
-	      #   secret = "!secret owntracks_secret";
+        #   secret = "!secret owntracks_secret";
         # };
 
         deconz = {
@@ -69,12 +67,10 @@ in
           api_key = "!secret deconzSecret";
         };
 
-        sensor = [
-          {
-            platform = "time_date";
-            display_options = [ "time" ];
-          }
-        ];
+        sensor = [{
+          platform = "time_date";
+          display_options = [ "time" ];
+        }];
 
         scene = [
           {
@@ -91,20 +87,12 @@ in
 
           {
             name = "Away bedroom";
-            entities = {
-              "light.bedroom" = {
-                state = "off";
-              };
-            };
+            entities = { "light.bedroom" = { state = "off"; }; };
           }
 
           {
             name = "Day bedroom";
-            entities = {
-              "light.bedroom" = {
-                state = "off";
-              };
-            };
+            entities = { "light.bedroom" = { state = "off"; }; };
           }
 
           {
@@ -141,20 +129,16 @@ in
               at = "04:00:00";
             };
 
-            condition = [
-              {
-                condition = "state";
-                entity_id = "person.maurice";
-                state = "home";
-              }
-            ];
+            condition = [{
+              condition = "state";
+              entity_id = "person.maurice";
+              state = "home";
+            }];
 
-            action = [
-              {
-                service = "scene.turn_on";
-                entity_id = "scene.wake_up";
-              }
-            ];
+            action = [{
+              service = "scene.turn_on";
+              entity_id = "scene.wake_up";
+            }];
           }
 
           {
@@ -262,12 +246,12 @@ in
       # configWritable = true; # doesn't work atm
     };
 
-    services.nginx.virtualHosts.${ cfg.homeAssistantHostname } = {
+    services.nginx.virtualHosts.${cfg.homeAssistantHostname} = {
       enableACME = true;
       forceSSL = true;
 
       locations."/" = {
-        proxyPass = "http://127.0.0.1:${ toString cfg.homeAssistantPort }";
+        proxyPass = "http://127.0.0.1:${toString cfg.homeAssistantPort}";
         proxyWebsockets = true;
       };
     };

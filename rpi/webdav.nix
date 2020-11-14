@@ -2,11 +2,9 @@
 
 with lib;
 
-let
-  cfg = config.custom.webdav;
+let cfg = config.custom.webdav;
 
-in
-{
+in {
   options.custom.webdav = {
     enable = mkEnableOption "custom.webdav";
 
@@ -17,17 +15,17 @@ in
 
     webdavHostname = mkOption {
       type = with types; str;
-      default = "webdav.${ cfg.serverName }";
+      default = "webdav.${cfg.serverName}";
     };
 
     caldavHostname = mkOption {
       type = with types; str;
-      default = "caldav.${ cfg.serverName }";
+      default = "caldav.${cfg.serverName}";
     };
 
     carddavHostname = mkOption {
       type = with types; str;
-      default = "carddav.${ cfg.serverName }";
+      default = "carddav.${cfg.serverName}";
     };
 
     radicalePort = mkOption {
@@ -49,19 +47,19 @@ in
       '';
 
       virtualHosts = {
-        ${ cfg.serverName } = {
+        ${cfg.serverName} = {
           enableACME = true;
           forceSSL = true;
 
           locations."= /.well-known/webdav".return =
-            "https://${ cfg.webdavHostname }$request_uri";
+            "https://${cfg.webdavHostname}$request_uri";
           locations."= /.well-known/caldav".return =
-            "https://${ cfg.caldavHostname }/";
+            "https://${cfg.caldavHostname}/";
           locations."= /.well-known/carddav".return =
-            "https://${ cfg.carddavHostname }/";
+            "https://${cfg.carddavHostname}/";
         };
 
-        ${ cfg.webdavHostname } = {
+        ${cfg.webdavHostname} = {
           enableACME = true;
           forceSSL = true;
 
@@ -89,17 +87,16 @@ in
           '';
         };
 
-        ${ cfg.caldavHostname } = {
+        ${cfg.caldavHostname} = {
           enableACME = true;
           forceSSL = true;
 
           # serverAliases = [ cfg.carddavHostname ];
 
-
           basicAuthFile = "/etc/nginx/auth/caldav-users.passwd";
 
           locations."/" = {
-            proxyPass = "http://127.0.0.1:${ toString cfg.radicalePort }";
+            proxyPass = "http://127.0.0.1:${toString cfg.radicalePort}";
             extraConfig = ''
               proxy_buffering on;
               proxy_set_header X-Remote-User $remote_user;
@@ -113,12 +110,13 @@ in
       enable = true;
 
       package = pkgs.radicale2.overrideAttrs (oldAtts: {
-        propagatedBuildInputs = pkgs.radicale.propagatedBuildInputs ++ (with pkgs.python38Packages; [ radicale_infcloud pytz ]);
+        propagatedBuildInputs = pkgs.radicale.propagatedBuildInputs
+          ++ (with pkgs.python38Packages; [ radicale_infcloud pytz ]);
       });
 
       config = ''
         [server]
-        hosts = 127.0.0.1:${ toString cfg.radicalePort }
+        hosts = 127.0.0.1:${toString cfg.radicalePort}
         pid = /run/radicale.pid
 
         ssl = False

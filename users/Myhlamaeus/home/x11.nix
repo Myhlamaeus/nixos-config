@@ -1,14 +1,10 @@
 { config, pkgs, lib, ... }:
 
 with lib;
-let
-  cfg = config.custom.x11;
+let cfg = config.custom.x11;
 
-in
-{
-  options.custom.x11 = {
-    enable = mkEnableOption "x11";
-  };
+in {
+  options.custom.x11 = { enable = mkEnableOption "x11"; };
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [ xclip (dunst.override { dunstify = true; }) ];
@@ -31,7 +27,9 @@ in
       enable = true;
       initExtra = ''
         # http://wallpaperswide.com/fedora_29_background-wallpapers.html
-        ${pkgs.feh}/bin/feh --bg-scale ${./fedora_29_background-wallpaper-2560x1440.jpg}
+        ${pkgs.feh}/bin/feh --bg-scale ${
+          ./fedora_29_background-wallpaper-2560x1440.jpg
+        }
       '';
       profileExtra = ''
         ${pkgs.google-drive-ocamlfuse}/bin/google-drive-ocamlfuse ~/media/google-drive
@@ -43,13 +41,12 @@ in
       # slock must be installed via configuration.nix and
       # referenced like this as it is wrapped
       lockCmd = let
-          cmd = pkgs.writeScript "lock" ''
-            ${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_PAUSE
-            /run/wrappers/bin/slock
-            ${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_RESUME
-          '';
-        in
-        "${pkgs.bash}/bin/bash -c '${cmd} & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
+        cmd = pkgs.writeScript "lock" ''
+          ${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_PAUSE
+          /run/wrappers/bin/slock
+          ${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_RESUME
+        '';
+      in "${pkgs.bash}/bin/bash -c '${cmd} & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
       # lockCmd = "${pkgs.bash}/bin/bash -c '${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_PAUSE; /run/wrappers/bin/slock ${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_RESUME & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
       xautolockExtraOptions = [ "-corners -000" ];
     };
@@ -65,7 +62,7 @@ in
           word_wrap = true;
           stack_duplicates = true;
           browser = "firefox";
-          dmenu = "${ pkgs.dmenu }/bin/dmenu";
+          dmenu = "${pkgs.dmenu}/bin/dmenu";
         };
 
         urgency_normal = {
@@ -76,9 +73,7 @@ in
       };
     };
 
-    services.unclutter = {
-      enable = true;
-    };
+    services.unclutter = { enable = true; };
 
     gtk = {
       enable = true;
@@ -94,9 +89,7 @@ in
         package = pkgs.adapta-gtk-theme;
         name = "Adapta-Nokto";
       };
-      gtk3.extraConfig = {
-        gtk-application-prefer-dark-theme = true;
-      };
+      gtk3.extraConfig = { gtk-application-prefer-dark-theme = true; };
     };
     qt = {
       enable = true;
@@ -122,15 +115,12 @@ in
     };
 
     xresources = {
-      extraConfig = builtins.readFile (
-        pkgs.fetchFromGitHub {
-          owner = "logico-dev";
-          repo = "Xresources-themes";
-          rev = "1df25bf5b2e639e8695e8f2eb39e9d373af3b888";
-          sha256 = "0jjnnkyps2v0qdylad9ci2izpn0zqlkpdlv626sbhw35ayghxpv4";
-        }
-        + "/base16-spacemacs-256.Xresources"
-      );
+      extraConfig = builtins.readFile (pkgs.fetchFromGitHub {
+        owner = "logico-dev";
+        repo = "Xresources-themes";
+        rev = "1df25bf5b2e639e8695e8f2eb39e9d373af3b888";
+        sha256 = "0jjnnkyps2v0qdylad9ci2izpn0zqlkpdlv626sbhw35ayghxpv4";
+      } + "/base16-spacemacs-256.Xresources");
     };
   };
 }

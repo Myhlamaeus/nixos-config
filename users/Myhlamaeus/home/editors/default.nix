@@ -1,16 +1,10 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-let
-  cfg = config.custom.editors;
+let cfg = config.custom.editors;
 
-in
-{
-  imports = [
-    ./emacs.nix
-    ./neovim.nix
-    ./lang
-  ];
+in {
+  imports = [ ./emacs.nix ./neovim.nix ./lang ];
 
   options.custom.editors = {
     env = {

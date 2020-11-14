@@ -1,31 +1,30 @@
 { config, pkgs, lib, ... }:
 
 let
-  urxvtConfig = exts: with builtins; with lib;
+  urxvtConfig = exts:
+    with builtins;
+    with lib;
     let
-      mkPath = mods: strings.concatStringsSep ":" (map (mod: "${mod}/lib/urxvt/perl") mods);
+      mkPath = mods:
+        strings.concatStringsSep ":" (map (mod: "${mod}/lib/urxvt/perl") mods);
       mkExts = strings.concatStringsSep ",";
       optElem = lib: ele: lists.optional (elem ele exts) lib;
-      optElems = lib: eles: lists.optional (!(lists.mutuallyExclusive eles exts)) lib;
+      optElems = lib: eles:
+        lists.optional (!(lists.mutuallyExclusive eles exts)) lib;
 
-    in
-      rec {
-        "perl-lib" = with pkgs; mkPath
-          (
-            optElem urxvt_vtwheel "vtwheel"
-            ++ optElem urxvt_autocomplete_all_the_things "autocomplete-ALL-the-things"
-            ++ optElem urxvt_font_size "font-size"
-            ++ optElems urxvt_perl [ "fullscreen" "newterm" ]
-            ++ optElems urxvt_perls [ "clipboard" "keyboard-select" "url-select" ]
-            ++ optElem urxvt_tabbedex "tabbedex"
-            ++ optElem urxvt_theme_switch "theme-switch"
-          );
-        "perl-ext-common" = mkExts exts;
-      };
+    in rec {
+      "perl-lib" = with pkgs;
+        mkPath (optElem urxvt_vtwheel "vtwheel"
+          ++ optElem urxvt_autocomplete_all_the_things
+          "autocomplete-ALL-the-things" ++ optElem urxvt_font_size "font-size"
+          ++ optElems urxvt_perl [ "fullscreen" "newterm" ]
+          ++ optElems urxvt_perls [ "clipboard" "keyboard-select" "url-select" ]
+          ++ optElem urxvt_tabbedex "tabbedex"
+          ++ optElem urxvt_theme_switch "theme-switch");
+      "perl-ext-common" = mkExts exts;
+    };
 
-
-in
-{
+in {
   imports = [
     ./browsers
     ./editors
@@ -47,96 +46,94 @@ in
     }
   '';
 
-  home.packages = (
-    with pkgs; [
-      # shell
-      ag
-      cheat
-      jq
-      python36Packages.powerline
-      ranger
-      nix-index
-      zsh-completions
-      # dev
-      shellcheck
-      zeal
-      sqlite
-      # hs
-      cabal-install
-      cabal2nix
-      hlint
-      # term emulator
-      rxvt_unicode
-      # media
-      mpc_cli
-      mpv
-      shutter
-      # security
-      gnupg
-      (pass.withExtensions (exts: with exts; [ pass-update pass-audit ]))
-      # graphics
-      alchemy
-      blender
-      gimp
-      inkscape
-      krita
-      # social
-      element-desktop
-      keybase
-      # other
-      fahcontrol
-      fahviewer
-      ledger
-      transmission-gtk
-      vlc
-      # non-free
-      discord
-      # term emulator
-      rxvt_unicode
-      # media
-      calibre
-      # aspell
-      aspell
-      aspellDicts.de
-      aspellDicts.en
-      aspellDicts.en-computers
-      aspellDicts.en-science
-      aspellDicts.la
-    ]
-  )
-  ;
+  home.packages = (with pkgs; [
+    # shell
+    ag
+    cheat
+    jq
+    python36Packages.powerline
+    ranger
+    nix-index
+    zsh-completions
+    # dev
+    shellcheck
+    zeal
+    sqlite
+    # hs
+    cabal-install
+    cabal2nix
+    hlint
+    # term emulator
+    rxvt_unicode
+    # media
+    mpc_cli
+    mpv
+    shutter
+    # security
+    gnupg
+    (pass.withExtensions (exts: with exts; [ pass-update pass-audit ]))
+    # graphics
+    alchemy
+    blender
+    gimp
+    inkscape
+    krita
+    # social
+    element-desktop
+    keybase
+    # other
+    fahcontrol
+    fahviewer
+    ledger
+    transmission-gtk
+    vlc
+    # non-free
+    discord
+    # term emulator
+    rxvt_unicode
+    # media
+    calibre
+    # aspell
+    aspell
+    aspellDicts.de
+    aspellDicts.en
+    aspellDicts.en-computers
+    aspellDicts.en-science
+    aspellDicts.la
+  ]);
   xdg.enable = true;
   xdg.mimeApps = {
     enable = true;
     associations.added = {
-      "application/epub+zip"    = "emacs.desktop";
-      "application/pdf"         = "emacs.desktop";
-      "application/rss+xml"     = "emacs.desktop";
+      "application/epub+zip" = "emacs.desktop";
+      "application/pdf" = "emacs.desktop";
+      "application/rss+xml" = "emacs.desktop";
       "x-scheme-handler/magnet" = "userapp-transmission-gtk-IMV9S0.desktop";
     };
     defaultApplications = {
-      "application/epub+zip"    = "emacs.desktop";
-      "application/pdf"         = "emacs.desktop";
-      "application/rss+xml"     = "emacs.desktop";
+      "application/epub+zip" = "emacs.desktop";
+      "application/pdf" = "emacs.desktop";
+      "application/rss+xml" = "emacs.desktop";
       "x-scheme-handler/magnet" = "userapp-transmission-gtk-IMV9S0.desktop";
     };
   };
   xdg.userDirs.enable = true;
 
-  home.activation.home-dir-permissions = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    $DRY_RUN_CMD find ~ \
-      -path "$HOME/media" -prune -o \
-      -path "$HOME/webdav" -prune -o \
-      -type d \
-      -exec setfacl -dm "o::000" "{}" + \
-      -exec setfacl -dm "g::000" "{}" + \
-      -exec chmod go-rwx "{}" +
-    $DRY_RUN_CMD find ~ \
-      -path "$HOME/media" -prune -o \
-      -path "$HOME/webdav/lost+found" -prune -o \
-      -type f \
-      -exec chmod go-rwx "{}" +
-  '';
+  home.activation.home-dir-permissions =
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      $DRY_RUN_CMD find ~ \
+        -path "$HOME/media" -prune -o \
+        -path "$HOME/webdav" -prune -o \
+        -type d \
+        -exec setfacl -dm "o::000" "{}" + \
+        -exec setfacl -dm "g::000" "{}" + \
+        -exec chmod go-rwx "{}" +
+      $DRY_RUN_CMD find ~ \
+        -path "$HOME/media" -prune -o \
+        -path "$HOME/webdav/lost+found" -prune -o \
+        -type f \
+        -exec chmod go-rwx "{}" +
+    '';
 
   programs.browserpass.enable = true;
 
@@ -148,37 +145,37 @@ in
 
   home.file.".editorconfig" = {
     source = builtins.toFile "editorconfig" ''
-        ; EditorConfig helps developers define and maintain consistent
-        ; coding styles between different editors and IDEs.
+      ; EditorConfig helps developers define and maintain consistent
+      ; coding styles between different editors and IDEs.
 
-        ; For more visit http://editorconfig.org.
-        root = true
+      ; For more visit http://editorconfig.org.
+      root = true
 
-        ; Choose between lf or rf on "end_of_line" property
-        [*]
-        indent_style = space
-        end_of_line = lf
-        charset = utf-8
-        trim_trailing_whitespace = true
-        insert_final_newline = true
-        indent_size = 2
+      ; Choose between lf or rf on "end_of_line" property
+      [*]
+      indent_style = space
+      end_of_line = lf
+      charset = utf-8
+      trim_trailing_whitespace = true
+      insert_final_newline = true
+      indent_size = 2
 
-        [*.md]
-        trim_trailing_whitespace = false
-      '';
+      [*.md]
+      trim_trailing_whitespace = false
+    '';
   };
 
   home.file.".curlrc" = {
     source = builtins.toFile "curlrc" ''
-        # Disguise as IE 9 on Windows 7.
-        user-agent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)"
+      # Disguise as IE 9 on Windows 7.
+      user-agent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)"
 
-        # When following a redirect, automatically set the previous URL as referer.
-        referer = ";auto"
+      # When following a redirect, automatically set the previous URL as referer.
+      referer = ";auto"
 
-        # Wait 60 seconds before timing out.
-        connect-timeout = 60
-      '';
+      # Wait 60 seconds before timing out.
+      connect-timeout = 60
+    '';
   };
 
   services.gpg-agent = {
@@ -195,17 +192,17 @@ in
 
     defaultKeymap = "viins";
     initExtra = ''
-        setopt EXTENDED_GLOB NOMATCH HIST_REDUCE_BLANKS
-        unsetopt autocd beep notify
-        DEFAULT_USER=Myhlamaeus
+      setopt EXTENDED_GLOB NOMATCH HIST_REDUCE_BLANKS
+      unsetopt autocd beep notify
+      DEFAULT_USER=Myhlamaeus
 
-        bindkey -v
-        # https://unix.stackexchange.com/questions/438307/zsh-start-new-prompt-in-command-mode-vi-mode
-        zle-line-init() { zle -K vicmd; }
-        zle -N zle-line-init
+      bindkey -v
+      # https://unix.stackexchange.com/questions/438307/zsh-start-new-prompt-in-command-mode-vi-mode
+      zle-line-init() { zle -K vicmd; }
+      zle -N zle-line-init
 
-        prompt_context(){}
-      '';
+      prompt_context(){}
+    '';
 
     dotDir = ".config/zsh";
 
@@ -227,13 +224,17 @@ in
 
     fonts = [ "xft:Roboto Mono Light for Powerline:size=10" ];
 
-    extraConfig =
-      (urxvtConfig [ "default" "clipboard" "keyboard-select" "tabbedex" "url-select" "vtwheel" ])
-      // {
-            "url-select.launcher" = "xdg-open";
-            "url-select.underline" = "true";
-          }
-      ;
+    extraConfig = (urxvtConfig [
+      "default"
+      "clipboard"
+      "keyboard-select"
+      "tabbedex"
+      "url-select"
+      "vtwheel"
+    ]) // {
+      "url-select.launcher" = "xdg-open";
+      "url-select.underline" = "true";
+    };
 
     keybindings = {
       "C-f" = "perl:keyboard-select:search";
@@ -249,32 +250,36 @@ in
   services.mpd = {
     enable = true;
 
-    network = {
-      listenAddress = "/run/user/1000/mpd.socket";
-    };
+    network = { listenAddress = "/run/user/1000/mpd.socket"; };
 
-    musicDirectory = with lib; mkIf config.xdg.enable (/. + replaceStrings ["$HOME"] [config.home.homeDirectory] config.xdg.userDirs.music);
+    musicDirectory = with lib;
+      mkIf config.xdg.enable (/.
+        + replaceStrings [ "$HOME" ] [ config.home.homeDirectory ]
+        config.xdg.userDirs.music);
   };
 
   programs.bat = {
     enable = true;
-    config = {
-      theme = "TwoDark";
-    };
+    config = { theme = "TwoDark"; };
   };
 
-  home.file.".ledgerrc".text =
-    let
-      formatPair = k: v: if v == true then "--${k}" else "--${k}=${toString v}";
-      toConfig = cfg: with lib; with builtins; concatStringsSep "\n" (map (concatStringsSep "\n") (mapAttrsToList (k: v: if typeOf v == "list" then map (formatPair k) v else [(formatPair k v)]) cfg));
+  home.file.".ledgerrc".text = let
+    formatPair = k: v: if v == true then "--${k}" else "--${k}=${toString v}";
+    toConfig = cfg:
+      with lib;
+      with builtins;
+      concatStringsSep "\n" (map (concatStringsSep "\n") (mapAttrsToList (k: v:
+        if typeOf v == "list" then
+          map (formatPair k) v
+        else
+          [ (formatPair k v) ]) cfg));
 
-    in
-      toConfig {
-        input-date-format = "%F";
-        date-format = "%F";
-        datetime-format = "%FT%T";
-        strict = true;
-      };
+  in toConfig {
+    input-date-format = "%F";
+    date-format = "%F";
+    datetime-format = "%FT%T";
+    strict = true;
+  };
 
   xdg.configFile."cheat/conf.yml".text = builtins.toJSON {
     # The editor to use with 'cheat -e <sheet>'. Defaults to $EDITOR or $VISUAL.

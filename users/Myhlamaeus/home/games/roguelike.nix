@@ -3,9 +3,5 @@
 with lib;
 
 {
-  config.custom.games.packages = with pkgs;
-    [
-      crawl
-    ]
-  ;
+  config.custom.games.packages = with pkgs; [ crawl ];
 }

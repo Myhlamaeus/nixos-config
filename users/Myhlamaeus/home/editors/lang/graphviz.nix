@@ -1,7 +1,5 @@
 { pkgs, ... }:
 
 {
-  custom.editors.env.bin.packages = with pkgs; [
-    graphviz
-  ];
+  custom.editors.env.bin.packages = with pkgs; [ graphviz ];
 }

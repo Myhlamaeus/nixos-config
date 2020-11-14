@@ -1,11 +1,9 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-let
-  cfg = config.custom.games;
+let cfg = config.custom.games;
 
-in
-{
+in {
   imports = [
     ./platforms.nix
     ./roguelike.nix
@@ -20,11 +18,9 @@ in
 
     packages = mkOption {
       type = with types; listOf package;
-      default = [];
+      default = [ ];
     };
   };
 
-  config = mkIf cfg.enable {
-    home.packages = cfg.packages;
-  };
+  config = mkIf cfg.enable { home.packages = cfg.packages; };
 }

@@ -2,11 +2,9 @@
 
 with builtins;
 
-let
-  matrixServerName = "matrix.${ config.networking.domain }";
+let matrixServerName = "matrix.${config.networking.domain}";
 
-in
-{
+in {
   imports = [
     ./backups.nix
     ./grocy.nix
@@ -39,10 +37,7 @@ in
     wsPort = 1443;
   };
 
-  environment.systemPackages = with pkgs; [
-    git
-    rxvt_unicode.terminfo
-  ];
+  environment.systemPackages = with pkgs; [ git rxvt_unicode.terminfo ];
 
   i18n.defaultLocale = "en_GB.UTF-8";
 
@@ -56,7 +51,7 @@ in
 
   boot.initrd.network.ssh = {
     enable = true;
-    authorizedKeys = [(readFile "./key")];
+    authorizedKeys = [ (readFile "./key") ];
   };
 
   security.acme = {
@@ -73,7 +68,7 @@ in
     recommendedProxySettings = true;
 
     virtualHosts = {
-      ${ config.networking.domain } = {
+      ${config.networking.domain} = {
         enableACME = true;
         forceSSL = true;
       };
@@ -82,17 +77,12 @@ in
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [
-      80
-      443
-      3478
-      5349
-    ];
-    allowedUDPPorts = [
-      3478
-      5349
-    ];
-    allowedUDPPortRanges = [ { from = 49152; to = 65535; } ];
+    allowedTCPPorts = [ 80 443 3478 5349 ];
+    allowedUDPPorts = [ 3478 5349 ];
+    allowedUDPPortRanges = [{
+      from = 49152;
+      to = 65535;
+    }];
   };
 
   users.users.Myhlamaeus = {

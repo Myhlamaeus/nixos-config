@@ -7,9 +7,6 @@ with lib;
     optionals config.custom.x11.enable [
       openrct2
       openttd
-      (dwarf-fortress-packages.dwarf-fortress-full.override {
-        theme = null;
-      })
-    ]
-  ;
+      (dwarf-fortress-packages.dwarf-fortress-full.override { theme = null; })
+    ];
 }

@@ -4,9 +4,5 @@ with lib;
 
 {
   config.custom.games.packages = with pkgs;
-    optionals config.custom.x11.enable [
-      openmw
-      wesnoth
-    ]
-  ;
+    optionals config.custom.x11.enable [ openmw wesnoth ];
 }

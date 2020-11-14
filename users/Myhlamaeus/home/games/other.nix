@@ -4,8 +4,5 @@ with lib;
 
 {
   config.custom.games.packages = with pkgs;
-    optionals config.custom.x11.enable [
-      teeworlds
-    ]
-  ;
+    optionals config.custom.x11.enable [ teeworlds ];
 }

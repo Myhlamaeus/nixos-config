@@ -73,18 +73,22 @@ let
     "signon.rememberSignons" = false;
 
     # Dark theme
-    "devtools.theme" = if config.gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme
-      then "dark"
-      else "light";
-    "extensions.activeThemeID" = concatStrings
-      [ "firefox-compact-"
-        (if config.gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme then "dark" else "light")
-        "@mozilla.org"
-      ];
+    "devtools.theme" =
+      if config.gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme then
+        "dark"
+      else
+        "light";
+    "extensions.activeThemeID" = concatStrings [
+      "firefox-compact-"
+      (if config.gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme then
+        "dark"
+      else
+        "light")
+      "@mozilla.org"
+    ];
   };
 
-in
-{
+in {
   config = mkIf config.custom.x11.enable {
     programs.firefox = {
       enable = true;
@@ -141,7 +145,8 @@ in
           # This (clearly) is remotely hosted code. Google will be sent the whole
           # contents of the page you are on if you run `:translate`
           # From https://github.com/jeremiahlee/page-translator
-          translate = ''js let googleTranslateCallback = document.createElement('script'); googleTranslateCallback.innerHTML = "function googleTranslateElementInit(){ new google.translate.TranslateElement(); }"; document.body.insertBefore(googleTranslateCallback, document.body.firstChild); let googleTranslateScript = document.createElement('script'); googleTranslateScript.charset="UTF-8"; googleTranslateScript.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&tl=&sl=&hl="; document.body.insertBefore(googleTranslateScript, document.body.firstChild);'';
+          translate = ''
+            js let googleTranslateCallback = document.createElement('script'); googleTranslateCallback.innerHTML = "function googleTranslateElementInit(){ new google.translate.TranslateElement(); }"; document.body.insertBefore(googleTranslateCallback, document.body.firstChild); let googleTranslateScript = document.createElement('script'); googleTranslateScript.charset="UTF-8"; googleTranslateScript.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&tl=&sl=&hl="; document.body.insertBefore(googleTranslateScript, document.body.firstChild);'';
         };
 
         autoCommands = {
@@ -153,7 +158,8 @@ in
 
         bindings = {
           # Open right click menu on links
-          ";C" = "composite hint_focus; !s ${pkgs.xdotool}/bin/xdotool key Menu";
+          ";C" =
+            "composite hint_focus; !s ${pkgs.xdotool}/bin/xdotool key Menu";
           # Handy multiwindow/multitasking binds
           gd = "tabdetach";
           gD = "composite tabduplicate; tabdetach";
@@ -163,24 +169,30 @@ in
           J = "tabprev";
           K = "tabnext";
           # Comment toggler for Reddit, Hacker News and Lobste.rs
-          ";c" = ''hint -Jc [class*="expand"],[class="togg"],[class="comment_folder"]'';
+          ";c" = ''
+            hint -Jc [class*="expand"],[class="togg"],[class="comment_folder"]'';
         };
 
         urlBindings = {
           "github.com" = {
             # Pull request checkout command to clipboard (only works if you're a collaborator or above)
-            ",yp" = ''composite js document.getElementById("clone-help-step-1").textContent.replace("git checkout -b", "git checkout -B").replace("git pull ", "git fetch ") + "git reset --hard " + document.getElementById("clone-help-step-1").textContent.split(" ")[3].replace("-","/") | yank'';
+            ",yp" = ''
+              composite js document.getElementById("clone-help-step-1").textContent.replace("git checkout -b", "git checkout -B").replace("git pull ", "git fetch ") + "git reset --hard " + document.getElementById("clone-help-step-1").textContent.split(" ")[3].replace("-","/") | yank'';
             # Yank git URI
-            ",yr" = ''composite js document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank'';
+            ",yr" = ''
+              composite js document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank'';
             # Clone repo
-            ",g" = ''js const uri = document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git"); const namespace = uri.replace(/^git@git(?:hub|lab).com:/, "").replace(/\/.*?\.git$/, ""); tri.native.run(`mkdir -p ~/.ghq/''${namespace}; cd ~/.ghq/''${namespace}; git clone ''${uri}; cd \"$(basename \"''${uri}\" .git)\"`)'';
+            ",g" = ''
+              js const uri = document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git"); const namespace = uri.replace(/^git@git(?:hub|lab).com:/, "").replace(/\/.*?\.git$/, ""); tri.native.run(`mkdir -p ~/.ghq/''${namespace}; cd ~/.ghq/''${namespace}; git clone ''${uri}; cd \"$(basename \"''${uri}\" .git)\"`)'';
           };
 
           "gitlab.com" = {
             # Yank git URI
-            ",y" = ''composite js document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank'';
+            ",y" = ''
+              composite js document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank'';
             # Clone repo
-            ",g" = ''js const uri = document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git"); const namespace = uri.replace(/^git@git(?:hub|lab).com:/, "").replace(/\/.*?\.git$/, ""); tri.native.run(`mkdir -p ~/.ghq/''${namespace}; cd ~/.ghq/''${namespace}; git clone ''${uri}; cd \"$(basename \"''${uri}\" .git)\"`)'';
+            ",g" = ''
+              js const uri = document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git"); const namespace = uri.replace(/^git@git(?:hub|lab).com:/, "").replace(/\/.*?\.git$/, ""); tri.native.run(`mkdir -p ~/.ghq/''${namespace}; cd ~/.ghq/''${namespace}; git clone ''${uri}; cd \"$(basename \"''${uri}\" .git)\"`)'';
           };
 
           "www.google.com" = {
@@ -199,10 +211,14 @@ in
         searchUrls = {
           # Nix
           # Adding `&show=%s` would automagically open matching entries, but tridactyl only expands the first %s, so it would break the search
-          np = "https://search.nixos.org/packages?channel=20.09&sort=relevance&query=%s";
-          no = "https://search.nixos.org/options?channel=20.09&sort=relevance&query=%s";
-          nup = "https://search.nixos.org/packages?channel=unstable&sort=relevance&query=%s";
-          nuo = "https://search.nixos.org/options?channel=unstable&sort=relevance&query=%s";
+          np =
+            "https://search.nixos.org/packages?channel=20.09&sort=relevance&query=%s";
+          no =
+            "https://search.nixos.org/options?channel=20.09&sort=relevance&query=%s";
+          nup =
+            "https://search.nixos.org/packages?channel=unstable&sort=relevance&query=%s";
+          nuo =
+            "https://search.nixos.org/options?channel=unstable&sort=relevance&query=%s";
 
           # Haskell
           hh = "https://hoogle.haskell.org/?hoogle=%s";
@@ -220,14 +236,16 @@ in
           jfp = "https://gcanti.github.io/fp-ts/modules/%s.ts.html";
 
           # Shopping
-          az = "https://smile.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=%s";
+          az =
+            "https://smile.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=%s";
 
           # Other
           g = "https://www.google.com/search?q=%s";
           gs = "https://scholar.google.com/scholar?q=%s";
           w = "https://en.wikipedia.org/wiki/Special:Search/%s";
           yt = "https://www.youtube.com/results?search_query=%s";
-          sp = "https://startpage.com/do/search?language=english&cat=web&query=%s";
+          sp =
+            "https://startpage.com/do/search?language=english&cat=web&query=%s";
           osm = "https://www.openstreetmap.org/search?query=%s";
         };
 
@@ -244,30 +262,46 @@ in
     };
     programs.browserpass.browsers = [ "firefox" ];
 
-    home.sessionVariables = {
-      BROWSER = "firefox";
-    };
+    home.sessionVariables = { BROWSER = "firefox"; };
     xdg.mimeApps.defaultApplications = let
-      listToAttrs' = pairs: with lib; listToAttrs (concatMap ({ names, value }: map (name: nameValuePair name value) names) pairs);
-    in
-      listToAttrs' [
-        {
-          names = [ "text/html" "text/xml" "application/xhtml+xml" "application/vnd.mozilla.xul+xml" ];
-          value = "firefox.desktop";
-        }
-        {
-          names = [ "x-scheme-handler/http" "x-scheme-handler/https" ];
-          value = "firefox-auto.desktop";
-        }
-      ];
+      listToAttrs' = pairs:
+        with lib;
+        listToAttrs (concatMap
+          ({ names, value }: map (name: nameValuePair name value) names) pairs);
+    in listToAttrs' [
+      {
+        names = [
+          "text/html"
+          "text/xml"
+          "application/xhtml+xml"
+          "application/vnd.mozilla.xul+xml"
+        ];
+        value = "firefox.desktop";
+      }
+      {
+        names = [ "x-scheme-handler/http" "x-scheme-handler/https" ];
+        value = "firefox-auto.desktop";
+      }
+    ];
 
     home.packages = let
-      escapeDesktopArg = arg: replaceStrings ["\""] ["\"\\\"\""] (toString arg);
-      mkExec = with lib; { app ? null, profile ? null, ... }: ''
-          firefox ${ optionalString (profile != null) "-P \"${ escapeDesktopArg profile }\"" } ${ optionalString (app != null) "--ssb=\"${ escapeDesktopArg app }\"" } %U
+      escapeDesktopArg = arg:
+        replaceStrings [ ''"'' ] [ ''"\""'' ] (toString arg);
+      mkExec = with lib;
+        { app ? null, profile ? null, ... }: ''
+          firefox ${
+            optionalString (profile != null)
+            ''-P "${escapeDesktopArg profile}"''
+          } ${
+            optionalString (app != null) ''--ssb="${escapeDesktopArg app}"''
+          } %U
         '';
       mkFirefoxDesktopItem = attrs:
-        pkgs.makeDesktopItem ({ icon = "firefox"; } // (removeAttrs attrs [ "app" "profile" ]) // { exec = mkExec attrs; });
+        pkgs.makeDesktopItem ({
+          icon = "firefox";
+        } // (removeAttrs attrs [ "app" "profile" ]) // {
+          exec = mkExec attrs;
+        });
       autoFirefox = pkgs.makeDesktopItem {
         name = "firefox-auto";
         desktopName = "Firefox (automatic profile)";
@@ -296,28 +330,29 @@ in
               firefox -P "$profile" "$url"
             fi
           '';
-        in "${ script } %U";
+        in "${script} %U";
       };
-    in
-      (with pkgs; [
-        ((tor-browser-bundle-bin.override { pulseaudioSupport = true; }).overrideAttrs (old: { meta = old.meta // { broken = false; }; }))
-      ])
-        ++ [
-          autoFirefox
-          (mkFirefoxDesktopItem {
-            name = "youtube-music";
-            desktopName = "YouTube Music";
-            app = "https://music.youtube.com";
-          })
-        ]
-        ++ mapAttrsToList (k: v: mkFirefoxDesktopItem {
+    in (with pkgs;
+      [
+        ((tor-browser-bundle-bin.override {
+          pulseaudioSupport = true;
+        }).overrideAttrs (old: { meta = old.meta // { broken = false; }; }))
+      ]) ++ [
+        autoFirefox
+        (mkFirefoxDesktopItem {
+          name = "youtube-music";
+          desktopName = "YouTube Music";
+          app = "https://music.youtube.com";
+        })
+      ] ++ mapAttrsToList (k: v:
+        mkFirefoxDesktopItem {
           name = "firefox-profile-${k}";
-          desktopName = "Firefox (${ v.name })";
+          desktopName = "Firefox (${v.name})";
           profile = v.name;
-          mimeType = "text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp";
+          mimeType =
+            "text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp";
           genericName = "Web Browser";
           categories = "Application;Network;WebBrowser";
-        }) (filterAttrs (k: v: !v.isDefault) config.programs.firefox.profiles)
-    ;
+        }) (filterAttrs (k: v: !v.isDefault) config.programs.firefox.profiles);
   };
 }

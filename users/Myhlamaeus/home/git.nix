@@ -1,44 +1,28 @@
 { config, pkgs, lib, ... }:
 
 with lib;
-let
-  cfg = config.programs.git;
+let cfg = config.programs.git;
 
-in
-{
+in {
   options = {
     programs.git.custom = {
-      ignoreFiles = mkOption {
-        type = with lib.types; listOf path;
-      };
+      ignoreFiles = mkOption { type = with lib.types; listOf path; };
 
-      ignoreTemplates = mkOption {
-        type = with lib.types; listOf str;
-      };
+      ignoreTemplates = mkOption { type = with lib.types; listOf str; };
     };
   };
 
   config = {
-    home.packages =
-      (
-        with pkgs; [
-          git
-          git-lfs
-          git-bug
-        ]
-      )
-      ++ (
-        with pkgs.gitAndTools; [
-          git-absorb
-          git-appraise
-          git-codeowners
-          git-ignore
-          git-open
-          git-recent
-          lab
-        ]
-      )
-    ;
+    home.packages = (with pkgs; [ git git-lfs git-bug ])
+      ++ (with pkgs.gitAndTools; [
+        git-absorb
+        git-appraise
+        git-codeowners
+        git-ignore
+        git-open
+        git-recent
+        lab
+      ]);
 
     programs.git = {
       enable = true;
@@ -54,19 +38,29 @@ in
       defaultProfile = "private";
 
       custom = {
-        ignoreFiles = map (n: "${ pkgs.gitignore }/templates/${ n }.gitignore") cfg.custom.ignoreTemplates;
+        ignoreFiles = map (n: "${pkgs.gitignore}/templates/${n}.gitignore")
+          cfg.custom.ignoreTemplates;
 
-        ignoreTemplates = [ "Archive" "Archives" "Backup" "direnv" "dotenv" "Emacs" "Linux" "Vim" "Zsh" ];
+        ignoreTemplates = [
+          "Archive"
+          "Archives"
+          "Backup"
+          "direnv"
+          "dotenv"
+          "Emacs"
+          "Linux"
+          "Vim"
+          "Zsh"
+        ];
       };
 
-      ignores = map builtins.readFile cfg.custom.ignoreFiles
-        ++ [
-          # nix
-          "result"
-          ".direnv"
-          # Linux
-          "nohup.out"
-        ];
+      ignores = map builtins.readFile cfg.custom.ignoreFiles ++ [
+        # nix
+        "result"
+        ".direnv"
+        # Linux
+        "nohup.out"
+      ];
 
       attributes = [
         # Automatically normalize line endings for all text-based files
@@ -127,13 +121,9 @@ in
           autocorrect = 1;
         };
 
-        init = {
-          defaultBranch = "main";
-        };
+        init = { defaultBranch = "main"; };
 
-        log = {
-          date = "format:%c";
-        };
+        log = { date = "format:%c"; };
 
         merge = {
           # Include summaries of merged commits in newly created merge commit messages
@@ -145,9 +135,7 @@ in
           driver = "${pkgs.nodejs}/bin/npx npm-merge-driver merge %A %O %B %P";
         };
 
-        pull = {
-          rebase = true;
-        };
+        pull = { rebase = true; };
 
         push = {
           # https://git-scm.com/docs/git-config#git-config-pushdefault
@@ -164,24 +152,16 @@ in
         };
 
         # URL shorthands
-        "url \"git@github.com:\"" = {
-          insteadOf = "gh:";
-        };
+        "url \"git@github.com:\"" = { insteadOf = "gh:"; };
 
-        "url \"git://github.com/\"" = {
-          insteadOf = "github:";
-        };
+        "url \"git://github.com/\"" = { insteadOf = "github:"; };
 
-        "url \"git@gist.github.com:\"" = {
-          insteadOf = "gst:";
-        };
+        "url \"git@gist.github.com:\"" = { insteadOf = "gst:"; };
 
-        "url \"git://gist.github.com/\"" = {
-          insteadOf = "gist:";
-        };
+        "url \"git://gist.github.com/\"" = { insteadOf = "gist:"; };
 
         credential = {
-          helper = "${ pkgs.gitAndTools.pass-git-helper }/bin/pass-git-helper";
+          helper = "${pkgs.gitAndTools.pass-git-helper}/bin/pass-git-helper";
           useHttpPath = true;
         };
 
@@ -209,16 +189,19 @@ in
         # View the current working tree status using the short format
         s = "status -s";
         # Show the diff between the latest commit and the current state
-        d = "!git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat";
+        d =
+          "!git diff-index --quiet HEAD -- || clear; git diff --patch-with-stat";
         # `git di $number` shows the diff between the state `$number` revisions ago and the current state
-        di = "!d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d";
+        di =
+          "!d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d";
         # Pull in remote changes for the current repository and all its submodules
         p = "!git pull; git submodule foreach git pull";
         pras = "!git pull; git submodule foreach git pull";
         # Commit all changes
         ca = "!git add -A && git commit -av";
         # Switch to a branch, creating it if necessary
-        go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f";
+        go = ''
+          !f() { git checkout -b "$1" 2> /dev/null || git checkout "$1"; }; f'';
         # List aliases
         aliases = "config --get-regexp alias";
         # Amend the currently staged files to the latest commit
@@ -228,9 +211,11 @@ in
         # Find tags containing commit
         ft = "!f() { git describe --always --contains $1; }; f";
         # Find commits by source code
-        fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f";
+        fc =
+          "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f";
         # Find commits by commit message
-        fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f";
+        fm =
+          "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f";
         # List contributors with number of commits
         contributors = "shortlog --summary --numbered;";
         # Merge GitHub pull request on top of the current branch or,
@@ -257,12 +242,11 @@ in
                 }; f"
         '';
         # Delete all merged branches
-        cleanbranches = "!git branch --merged | egrep -v '(^\\\\*|master|develop)' | xargs -r git branch -d";
+        cleanbranches =
+          "!git branch --merged | egrep -v '(^\\\\*|master|develop)' | xargs -r git branch -d";
       };
 
-      signing = {
-        signByDefault = true;
-      };
+      signing = { signByDefault = true; };
     };
 
     xdg.configFile."pass-git-helper/git-pass-mapping.ini".text = ''

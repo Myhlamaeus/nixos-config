@@ -20,13 +20,9 @@
           "[Gmail]/All Mail"
         ];
       };
-      msmtp = {
-        enable = true;
-      };
+      msmtp = { enable = true; };
       passwordCommand = "${pkgs.coreutils}/bin/cat ~/.config/email/private";
-      gpg = {
-        key = "7FCB362E2D975AD2A45A682CAD1390B6FE33C758";
-      };
+      gpg = { key = "7FCB362E2D975AD2A45A682CAD1390B6FE33C758"; };
     };
 
     upsquared = {
@@ -40,9 +36,7 @@
         create = "both";
         expunge = "both";
       };
-      msmtp = {
-        enable = true;
-      };
+      msmtp = { enable = true; };
       passwordCommand = "${pkgs.coreutils}/bin/cat ~/.config/email/work";
     };
   };
@@ -68,7 +62,8 @@
     enable = true;
     postExec = "${pkgs.notmuch}/bin/notmuch new";
   };
-  systemd.user.services.mbsync.Service.Environment = [ "NOTMUCH_CONFIG=/home/Myhlamaeus/.config/notmuch/notmuchrc" ];
+  systemd.user.services.mbsync.Service.Environment =
+    [ "NOTMUCH_CONFIG=/home/Myhlamaeus/.config/notmuch/notmuchrc" ];
   programs.msmtp.enable = true;
 
   home.file.".mailcap" = {
@@ -83,5 +78,6 @@
     '';
   };
 
-  systemd.user.services.emacs.Service.Environment = [ "NOTMUCH_CONFIG=/home/Myhlamaeus/.config/notmuch/notmuchrc" ];
+  systemd.user.services.emacs.Service.Environment =
+    [ "NOTMUCH_CONFIG=/home/Myhlamaeus/.config/notmuch/notmuchrc" ];
 }

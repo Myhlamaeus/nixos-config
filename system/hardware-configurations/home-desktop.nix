@@ -26,20 +26,16 @@
     '';
   };
   hardware.opengl = {
-    extraPackages = with pkgs; [
-      libvdpau-va-gl
-      vaapiVdpau
-    ];
+    extraPackages = with pkgs; [ libvdpau-va-gl vaapiVdpau ];
   };
   nixpkgs.overlays = [
     (self: super: {
-      chromium = super.chromium.override {
-        enableVaapi = true;
-      };
+      chromium = super.chromium.override { enableVaapi = true; };
     })
   ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "uas" "usb_storage" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "xhci_pci" "ahci" "uas" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
@@ -54,39 +50,38 @@
     preLVM = true;
   };
 
-  fileSystems."/" =
-    { device = "/dev/mapper/Main-root";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/mapper/Main-root";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/mapper/encrypted-boot";
-      fsType = "ext2";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/mapper/encrypted-boot";
+    fsType = "ext2";
+  };
 
-  fileSystems."/boot/efi" =
-    { device = "/dev/disk/by-uuid/31F5-7439";
-      fsType = "vfat";
-    };
+  fileSystems."/boot/efi" = {
+    device = "/dev/disk/by-uuid/31F5-7439";
+    fsType = "vfat";
+  };
 
-  fileSystems."/home" =
-    { device = "/dev/mapper/Main-home";
-      fsType = "ext4";
-    };
+  fileSystems."/home" = {
+    device = "/dev/mapper/Main-home";
+    fsType = "ext4";
+  };
 
-  fileSystems."/home/Myhlamaeus/media/games" =
-    { device = "/dev/disk/by-partlabel/games";
-      fsType = "ext4";
-    };
+  fileSystems."/home/Myhlamaeus/media/games" = {
+    device = "/dev/disk/by-partlabel/games";
+    fsType = "ext4";
+  };
 
-  swapDevices =
-    [ { device = "/dev/mapper/Main-swap"; }
-    ];
+  swapDevices = [{ device = "/dev/mapper/Main-swap"; }];
 
   nix.maxJobs = lib.mkDefault 8;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   # High-DPI console
-  console.font = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+  console.font =
+    lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
   hardware.bluetooth.enable = true;
   hardware.bluetooth.config = {

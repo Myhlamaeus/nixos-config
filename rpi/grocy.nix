@@ -2,11 +2,9 @@
 
 with lib;
 
-let
-  cfg = config.custom.grocy;
+let cfg = config.custom.grocy;
 
-in
-{
+in {
   options.custom.grocy = {
     enable = mkEnableOption "custom.grocy";
 
@@ -17,7 +15,7 @@ in
 
     grocyHostname = mkOption {
       type = with types; str;
-      default = "grocy.${ cfg.serverName }";
+      default = "grocy.${cfg.serverName}";
     };
   };
 

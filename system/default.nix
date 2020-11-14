@@ -5,10 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      ./cachix.nix
-    ];
+  imports = [ ./cachix.nix ];
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
@@ -29,7 +26,8 @@
 
   nixpkgs.overlays = [
     (self: super: {
-      add-optparse-applicative-completions = { pkg, bins }: super.pkgs.symlinkJoin {
+      add-optparse-applicative-completions = { pkg, bins }:
+        super.pkgs.symlinkJoin {
           name = "${pkg.name}-with-completion";
           paths = [ pkg ];
           buildInputs = [ super.pkgs.coreutils ];
@@ -45,10 +43,10 @@
     })
     (self: super: {
       chromium = super.chromium.override {
-          commandLineArgs = "--force-dark-mode";
-          enableWideVine = true;
-          enableVaapi = true;
-        };
+        commandLineArgs = "--force-dark-mode";
+        enableWideVine = true;
+        enableVaapi = true;
+      };
     })
   ];
 
@@ -91,7 +89,10 @@
   environment.systemPackages = with pkgs; [
     # nix
     cachix
-    (add-optparse-applicative-completions { pkg = cachix; bins = [ "cachix" ]; })
+    (add-optparse-applicative-completions {
+      pkg = cachix;
+      bins = [ "cachix" ];
+    })
     # shell
     wget
     neovim
@@ -147,12 +148,14 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-  networking.firewall.allowedTCPPortRanges = [
-    { from = 1714; to = 1764; }
-  ];
-  networking.firewall.allowedUDPPortRanges = [
-    { from = 1714; to = 1764; }
-  ];
+  networking.firewall.allowedTCPPortRanges = [{
+    from = 1714;
+    to = 1764;
+  }];
+  networking.firewall.allowedUDPPortRanges = [{
+    from = 1714;
+    to = 1764;
+  }];
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -218,17 +221,13 @@
   };
 
   nix.nixPath = [
-    (
-      let
-        sshConfigFile =
-          pkgs.writeText "ssh_config" ''
-              Host github.com
-              IdentityFile /etc/ssh/ssh_host_rsa_key
-              StrictHostKeyChecking=no
-            '';
-      in
-        "ssh-config-file=${sshConfigFile}"
-    )
+    (let
+      sshConfigFile = pkgs.writeText "ssh_config" ''
+        Host github.com
+        IdentityFile /etc/ssh/ssh_host_rsa_key
+        StrictHostKeyChecking=no
+      '';
+    in "ssh-config-file=${sshConfigFile}")
     # The following lines are just the default values of NIX_PATH
     # We have to keep them to not brick the system
     "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
@@ -237,7 +236,8 @@
   ];
 
   nix.binaryCaches = [ "https://nixcache.reflex-frp.org" ];
-  nix.binaryCachePublicKeys = [ "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" ];
+  nix.binaryCachePublicKeys =
+    [ "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI=" ];
 
   nix.gc = {
     automatic = true;
@@ -246,7 +246,7 @@
   };
   nix.optimise = {
     automatic = true;
-    dates = ["05:30"];
+    dates = [ "05:30" ];
   };
   system.autoUpgrade = {
     enable = true;

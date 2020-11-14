@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 
-with lib;
-{
+with lib; {
   config = mkIf config.custom.x11.enable {
     programs.chromium = {
       enable = false;
