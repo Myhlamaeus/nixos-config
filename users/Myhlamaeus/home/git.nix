@@ -131,6 +131,10 @@ in
           defaultBranch = "main";
         };
 
+        log = {
+          date = "format:%c";
+        };
+
         merge = {
           # Include summaries of merged commits in newly created merge commit messages
           log = true;
