@@ -204,3 +204,5 @@ autocmd DocStart ^http(s?)://www.amazon. js tri.excmds.urlmodify("-t", "www", "s
 
 " For syntax highlighting see https://github.com/tridactyl/vim-tridactyl
 " vim: set filetype=tridactyl
+
+set smoothscroll true
