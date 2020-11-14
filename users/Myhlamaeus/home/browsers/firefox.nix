@@ -129,6 +129,118 @@ in
           settings = sharedSettings;
         };
       };
+
+      # A lot of the config was taken from https://github.com/tridactyl/tridactyl/blob/master/.tridactylrc
+      tridactyl = {
+        enable = true;
+
+        commands = {
+          # Stupid workaround to let hint -; be used with composite which steals semi-colons
+          hint_focus = "hint -;";
+          # Inject Google Translate
+          # This (clearly) is remotely hosted code. Google will be sent the whole
+          # contents of the page you are on if you run `:translate`
+          # From https://github.com/jeremiahlee/page-translator
+          translate = ''js let googleTranslateCallback = document.createElement('script'); googleTranslateCallback.innerHTML = "function googleTranslateElementInit(){ new google.translate.TranslateElement(); }"; document.body.insertBefore(googleTranslateCallback, document.body.firstChild); let googleTranslateScript = document.createElement('script'); googleTranslateScript.charset="UTF-8"; googleTranslateScript.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit&tl=&sl=&hl="; document.body.insertBefore(googleTranslateScript, document.body.firstChild);'';
+        };
+
+        autoCommands = {
+          # Redirects
+          "^http(s?)://www.amazon." = {
+            DocStart = [ ''js tri.excmds.urlmodify("-t", "www", "smile")'' ];
+          };
+        };
+
+        bindings = {
+          # Open right click menu on links
+          ";C" = "composite hint_focus; !s ${pkgs.xdotool}/bin/xdotool key Menu";
+          # Handy multiwindow/multitasking binds
+          gd = "tabdetach";
+          gD = "composite tabduplicate; tabdetach";
+          # Make yy use canonical / short links on the 5 websites that support them
+          yy = "clipboard yankcanon";
+          # Use vimium prev/next tab bindings
+          J = "tabprev";
+          K = "tabnext";
+          # Comment toggler for Reddit, Hacker News and Lobste.rs
+          ";c" = ''hint -Jc [class*="expand"],[class="togg"],[class="comment_folder"]'';
+        };
+
+        urlBindings = {
+          "github.com" = {
+            # Pull request checkout command to clipboard (only works if you're a collaborator or above)
+            ",yp" = ''composite js document.getElementById("clone-help-step-1").textContent.replace("git checkout -b", "git checkout -B").replace("git pull ", "git fetch ") + "git reset --hard " + document.getElementById("clone-help-step-1").textContent.split(" ")[3].replace("-","/") | yank'';
+            # Yank git URI
+            ",yr" = ''composite js document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank'';
+            # Clone repo
+            ",g" = ''js const uri = document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git"); const namespace = uri.replace(/^git@git(?:hub|lab).com:/, "").replace(/\/.*?\.git$/, ""); tri.native.run(`mkdir -p ~/.ghq/''${namespace}; cd ~/.ghq/''${namespace}; git clone ''${uri}; cd \"$(basename \"''${uri}\" .git)\"`)'';
+          };
+
+          "gitlab.com" = {
+            # Yank git URI
+            ",y" = ''composite js document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank'';
+            # Clone repo
+            ",g" = ''js const uri = document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git"); const namespace = uri.replace(/^git@git(?:hub|lab).com:/, "").replace(/\/.*?\.git$/, ""); tri.native.run(`mkdir -p ~/.ghq/''${namespace}; cd ~/.ghq/''${namespace}; git clone ''${uri}; cd \"$(basename \"''${uri}\" .git)\"`)'';
+          };
+
+          "www.google.com" = {
+            # Only hint search results
+            f = "hint -Jc .rc > .r > a";
+            F = "hint -Jbc .rc > .r > a";
+          };
+
+          "^https://duckduckgo.com" = {
+            # Only hint search results
+            f = "hint -Jc [class=result__a]";
+            F = "hint -Jbc [class=result__a]";
+          };
+        };
+
+        searchUrls = {
+          # Nix
+          # Adding `&show=%s` would automagically open matching entries, but tridactyl only expands the first %s, so it would break the search
+          np = "https://search.nixos.org/packages?channel=20.09&sort=relevance&query=%s";
+          no = "https://search.nixos.org/options?channel=20.09&sort=relevance&query=%s";
+          nup = "https://search.nixos.org/packages?channel=unstable&sort=relevance&query=%s";
+          nuo = "https://search.nixos.org/options?channel=unstable&sort=relevance&query=%s";
+
+          # Haskell
+          hh = "https://hoogle.haskell.org/?hoogle=%s";
+          hp = "https://hackage.haskell.org/packages/search?terms=%s";
+
+          # Forges
+          gh = "https://github.com/search?q=%s";
+          ghp = "https://github.com/%s";
+          gl = "https://gitlab.com/search?q=%s";
+          glp = "https://gitlab.com/%s";
+
+          # JavaScript
+          js = "https://developer.mozilla.org/en-US/search?q=%s";
+          jsp = "https://www.npmjs.com/search?q=%s";
+          jfp = "https://gcanti.github.io/fp-ts/modules/%s.ts.html";
+
+          # Shopping
+          az = "https://smile.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=%s";
+
+          # Other
+          g = "https://www.google.com/search?q=%s";
+          gs = "https://scholar.google.com/scholar?q=%s";
+          w = "https://en.wikipedia.org/wiki/Special:Search/%s";
+          yt = "https://www.youtube.com/results?search_query=%s";
+          sp = "https://startpage.com/do/search?language=english&cat=web&query=%s";
+          osm = "https://www.openstreetmap.org/search?query=%s";
+        };
+
+        theme = "dark";
+
+        enableSmoothScroll = true;
+
+        hint = {
+          filterMode = "vimperator-reflow";
+          names = "numeric";
+          delay = 100;
+        };
+      };
     };
     programs.browserpass.browsers = [ "firefox" ];
 
@@ -207,8 +319,5 @@ in
           categories = "Application;Network;WebBrowser";
         }) (filterAttrs (k: v: !v.isDefault) config.programs.firefox.profiles)
     ;
-
-    home.file.".mozilla/native-messaging-hosts/tridactyl.json".source = "${pkgs.tridactyl-native}/lib/mozilla/native-messaging-hosts/tridactyl.json";
-    xdg.configFile."tridactyl/tridactylrc".source = ./tridactylrc;
   };
 }

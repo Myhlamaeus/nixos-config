@@ -31,7 +31,9 @@
     flake = false;
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, nixpkgs-unstable, cheatsheets, felschr-nixos, gitignore, omnisharp-roslyn }: {
+  outputs = { self, nixpkgs, home-manager, nur, nixpkgs-unstable, cheatsheets, felschr-nixos, gitignore, omnisharp-roslyn }: rec {
+
+    homeManagerModules.tridactyl = import ./homeManagerModules/tridactyl.nix;
 
     nixosConfigurations.home-desktop = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -120,6 +122,7 @@
             home-manager.users.Myhlamaeus = {
               imports = [
                 felschr-nixos.homeManagerModules.git
+                homeManagerModules.tridactyl
               ];
             };
           }
