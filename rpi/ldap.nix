@@ -14,6 +14,6 @@ in
   config = mkIf cfg.enable {
     services.openldap = {
       enable = true;
-    }
+    };
   };
 }
