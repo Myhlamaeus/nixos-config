@@ -1,6 +1,7 @@
 .log
 /secrets
 !/secrets/.gitkeep
+/.pre-commit-config.yaml
 
 ### Created by https://www.gitignore.io
 ### Linux ###

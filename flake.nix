@@ -1,8 +1,17 @@
 {
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-20.09";
 
+  inputs.flake-utils.url = "github:numtide/flake-utils";
+
   inputs.home-manager = {
     url = "github:nix-community/home-manager/release-20.09";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  inputs.pre-commit-hooks = {
+    url =
+      # "github:Myhlamaeus/pre-commit-hooks.nix/feat/flake";
+      "github:Myhlamaeus/pre-commit-hooks.nix/8d48a4cd434a6a6cc8f2603b50d2c0b2981a7c55";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -19,6 +28,7 @@
     url = "gitlab:FelschR/nixos-config/main";
     inputs.nixpkgs.follows = "nixpkgs-unstable";
     inputs.nur.follows = "nur";
+    inputs.pre-commit-hooks.follows = "pre-commit-hooks";
   };
 
   inputs.gitignore = {
@@ -31,8 +41,10 @@
     flake = false;
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, nixpkgs-unstable, cheatsheets
-    , felschr-nixos, gitignore, omnisharp-roslyn }: rec {
+  outputs = { self, nixpkgs, flake-utils, home-manager, pre-commit-hooks, nur
+    , nixpkgs-unstable, cheatsheets, felschr-nixos, gitignore, omnisharp-roslyn
+    }:
+    rec {
 
       homeManagerModules.tridactyl = import ./homeManagerModules/tridactyl.nix;
 
@@ -168,5 +180,14 @@
         ];
       };
 
-    };
+    } // flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        pre-commit-check = pre-commit-hooks.defaultPackage.${system} {
+          src = ./.;
+          hooks = { nixfmt.enable = true; };
+        };
+      in {
+        devShell = pkgs.mkShell { inherit (pre-commit-check) shellHook; };
+      });
 }

@@ -44,7 +44,9 @@
         "nur": [
           "nur"
         ],
-        "pre-commit-hooks": "pre-commit-hooks"
+        "pre-commit-hooks": [
+          "pre-commit-hooks"
+        ]
       },
       "locked": {
         "lastModified": 1605349259,
@@ -93,6 +95,21 @@
       }
     },
     "flake-utils_2": {
+      "locked": {
+        "lastModified": 1604964167,
+        "narHash": "sha256-+mTmiCD29wecyDaGlbeWpvnysBygagl9FdMVfdU0RTM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "af81e8d00b2cd021d8806104f14d66ae429dc2f7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_3": {
       "locked": {
         "lastModified": 1600209923,
         "narHash": "sha256-zoOWauTliFEjI++esk6Jzk7QO5EKpddWXQm9yQK24iM=",
@@ -269,7 +286,7 @@
       "inputs": {
         "cabal-fmt-src": "cabal-fmt-src",
         "flake-compat": "flake-compat",
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils_3",
         "gitignore-nix-src": "gitignore-nix-src",
         "hindent-src": "hindent-src",
         "nixpkgs": [
@@ -295,12 +312,14 @@
       "inputs": {
         "cheatsheets": "cheatsheets",
         "felschr-nixos": "felschr-nixos",
+        "flake-utils": "flake-utils_2",
         "gitignore": "gitignore",
         "home-manager": "home-manager_2",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
-        "omnisharp-roslyn": "omnisharp-roslyn"
+        "omnisharp-roslyn": "omnisharp-roslyn",
+        "pre-commit-hooks": "pre-commit-hooks"
       }
     }
   },
