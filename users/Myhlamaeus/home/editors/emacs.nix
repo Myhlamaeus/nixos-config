@@ -14,7 +14,7 @@ in {
       };
       rev = mkOption {
         type = with types; str;
-        default = "c3872f165c3ea0862cdb939c5e7b7494b5ce0e72";
+        default = "28a4baeea4abc2c55f728355ba2666e77ed78118";
       };
     };
   };
@@ -24,6 +24,7 @@ in {
       gnuplot
       unzip
       texlive.combined.scheme-full
+      python3
     ];
 
     home.file.".emacs.d/private" = {
