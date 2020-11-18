@@ -24,21 +24,6 @@
       passwordCommand = "${pkgs.coreutils}/bin/cat ~/.config/email/private";
       gpg = { key = "7FCB362E2D975AD2A45A682CAD1390B6FE33C758"; };
     };
-
-    upsquared = {
-      flavor = "gmail.com";
-      address = "md@upsquared.com";
-      userName = "md@upsquared.com";
-      realName = "Maurice Dreyer";
-      notmuch.enable = true;
-      mbsync = {
-        enable = true;
-        create = "both";
-        expunge = "both";
-      };
-      msmtp = { enable = true; };
-      passwordCommand = "${pkgs.coreutils}/bin/cat ~/.config/email/work";
-    };
   };
   programs.notmuch = {
     enable = true;
@@ -46,13 +31,6 @@
     hooks.postNew = ''
       notmuch tag +calendar -- tag:new and mimetype:text/calendar
       notmuch tag +notification -- tag:new and from:notifications@
-
-      notmuch tag +upsquared -- tag:new and \( to:@upsquared.com or from:@upsquared.com or from:@digital-spring.de \)
-      notmuch tag -upsquared -- tag:new and tag:calendar and subject:"Play Divinity"
-      notmuch tag +fitnesspilot -- tag:new and \( from:@fitnesspilot.com or fitnesspilot \)
-      notmuch tag +veepee -- tag:new and \( from:@kontakt.veepee.de or from:@venteprivee.com or from:@vente-exclusive.com or from:@vente-privee.com or from:@veepee.com \)
-      notmuch tag +debatoo -- tag:new and from:@debatoo.com
-      notmuch tag +test -inbox -- tag:new and tag:upsquared and \( from:@fitnesspilot.com or from:@kontakt.veepee.de or from:@venteprivee.com \)
 
       notmuch tag +unread +inbox -new -- tag:new
     '';
