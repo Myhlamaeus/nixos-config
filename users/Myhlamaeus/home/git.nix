@@ -27,6 +27,8 @@ in {
     programs.git = {
       enable = true;
 
+      lfs.enable = true;
+
       profiles = rec {
         private = {
           name = "Maurice B. Lewis";
