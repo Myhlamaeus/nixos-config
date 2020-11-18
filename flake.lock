@@ -96,11 +96,11 @@
     },
     "flake-utils_2": {
       "locked": {
-        "lastModified": 1604964167,
-        "narHash": "sha256-+mTmiCD29wecyDaGlbeWpvnysBygagl9FdMVfdU0RTM=",
+        "lastModified": 1605370193,
+        "narHash": "sha256-YyMTf3URDL/otKdKgtoMChu4vfVL3vCMkRqpGifhUn0=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "af81e8d00b2cd021d8806104f14d66ae429dc2f7",
+        "rev": "5021eac20303a61fafe17224c087f5519baed54d",
         "type": "github"
       },
       "original": {
@@ -219,11 +219,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1605220118,
-        "narHash": "sha256-Und10ixH1WuW0XHYMxxuHRohKYb45R/T8CwZuLd2D2Q=",
+        "lastModified": 1605569173,
+        "narHash": "sha256-a9qTRg0q0CqMZEvAXIQbykAhZWd3jSpTxVMcoC+ysro=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3090c65041104931adda7625d37fa874b2b5c124",
+        "rev": "14cf906f33c39d38741062df2cca0b0575b210ff",
         "type": "github"
       },
       "original": {
@@ -235,11 +235,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1605171959,
-        "narHash": "sha256-JIM7QrQ2jpnA6qRfP8MzXD8USiWYStfL9Cssz01QvMw=",
+        "lastModified": 1605225031,
+        "narHash": "sha256-W+7blIrccTCTyQCCE4aGn1cFrGIuTinN96GxZrJiojs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a371c1071161104d329f6a85d922fd92b7cbab63",
+        "rev": "2deeb58f49480f468adca6b08291322de4dbce6b",
         "type": "github"
       },
       "original": {
@@ -251,11 +251,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1605354274,
-        "narHash": "sha256-SF4vWtZIYK+AiTKv6S4Pcw0Jq7e2KBTFDcHmNyvxzYw=",
+        "lastModified": 1605673015,
+        "narHash": "sha256-1KC18Yr/cwtt/GCYNU76Sc/WHp5aFsaGzOlQNgI3Ak8=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "34bad8441dd62c28332c3fb76baabb6a9a96594f",
+        "rev": "6ec605d2f9cd81ad06a004b5e91efbddf55138ec",
         "type": "github"
       },
       "original": {
@@ -268,11 +268,11 @@
     "omnisharp-roslyn": {
       "flake": false,
       "locked": {
-        "lastModified": 1605276103,
-        "narHash": "sha256-OTy3Hv68GQe/BErdmZz3sxzhYAH6SfpJa3hIJe2G/hs=",
+        "lastModified": 1605594105,
+        "narHash": "sha256-wFZYOomEsKXVZIyFxgPuYorXsRe3lvpNe/Rv0gFWbN0=",
         "owner": "OmniSharp",
         "repo": "omnisharp-roslyn",
-        "rev": "2254b9bc1f44a0e6a8471ab7ac8c821ba3fbfeaa",
+        "rev": "6fd5bb306373c52bef27250d3707fffa1476f766",
         "type": "github"
       },
       "original": {
