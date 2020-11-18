@@ -4,25 +4,36 @@
   accounts.email.accounts = {
     home = {
       primary = true;
-      flavor = "gmail.com";
-      address = "dreyer.maltem@gmail.com";
-      userName = "dreyer.maltem@gmail.com";
+      imap = {
+        host = "localhost";
+        port = 1143;
+        tls.enable = false;
+      };
+      imapnotify = {
+        enable = true;
+        onNotifyPost = {
+          mail = "\${pkgs.libnotify}/bin/notify-send 'New mail arrived'";
+        };
+      };
+      smtp = {
+        host = "localhost";
+        port = 1025;
+        tls.enable = false;
+      };
+      address = "me@maublew.name";
+      userName = "maublew";
       realName = "Maurice B. Lewis";
       notmuch.enable = true;
       mbsync = {
         enable = true;
         create = "both";
-        patterns = [
-          "*"
-          "![Gmail]*"
-          "[Gmail]/Sent Mail"
-          "[Gmail]/Starred"
-          "[Gmail]/All Mail"
-        ];
+        expunge = "both";
       };
-      msmtp = { enable = true; };
-      passwordCommand = "${pkgs.coreutils}/bin/cat ~/.config/email/private";
-      gpg = { key = "7FCB362E2D975AD2A45A682CAD1390B6FE33C758"; };
+      msmtp = {
+        enable = true;
+        extraConfig = { auth = "plain"; };
+      };
+      passwordCommand = "${pkgs.coreutils}/bin/cat ~/.config/email/home";
     };
   };
   programs.notmuch = {
@@ -41,6 +52,7 @@
     enable = true;
     postExec = "${pkgs.notmuch}/bin/notmuch new";
   };
+  services.imapnotify.enable = true;
   systemd.user.services.mbsync.Service.Environment =
     [ "NOTMUCH_CONFIG=/home/Myhlamaeus/.config/notmuch/notmuchrc" ];
   programs.msmtp.enable = true;
