@@ -564,6 +564,11 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (load "~/.emacs.d/private/user-init")
+  (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
+  (lsp-register-client
+    (make-lsp-client :new-connection (lsp-stdio-connection '("rnix-lsp"))
+      :major-modes '(nix-mode)
+      :server-id 'nix))
   )
 
 (defun dotspacemacs/user-load ()
