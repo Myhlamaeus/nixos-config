@@ -569,6 +569,10 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
     (make-lsp-client :new-connection (lsp-stdio-connection '("rnix-lsp"))
       :major-modes '(nix-mode)
       :server-id 'nix))
+  (lsp-register-client
+    (make-lsp-client :new-connection (lsp-stdio-connection '("terraform-ls" "serve"))
+      :major-modes '(terraform-mode)
+      :server-id 'terraform))
   )
 
 (defun dotspacemacs/user-load ()
