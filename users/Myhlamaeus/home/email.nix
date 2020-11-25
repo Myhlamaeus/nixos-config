@@ -80,4 +80,10 @@
 
   systemd.user.services.emacs.Service.Environment =
     [ "NOTMUCH_CONFIG=/home/Myhlamaeus/.config/notmuch/notmuchrc" ];
+
+  xdg.mimeApps = {
+    associations.added = { "x-scheme-handler/mailto" = "emacs.desktop"; };
+
+    defaultApplications = { "x-scheme-handler/mailto" = "emacs.desktop"; };
+  };
 }
