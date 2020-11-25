@@ -45,6 +45,7 @@
     maildir.synchronizeFlags = true;
     hooks.postNew = ''
       notmuch tag +calendar -- tag:new and mimetype:text/calendar
+      notmuch tag +notification -- tag:new and from:notifications@
 
       notmuch tag +upsquared -- tag:new and \( to:@upsquared.com or from:@upsquared.com or from:@digital-spring.de \)
       notmuch tag -upsquared -- tag:new and tag:calendar and subject:"Play Divinity"
