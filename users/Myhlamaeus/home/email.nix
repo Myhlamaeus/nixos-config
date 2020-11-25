@@ -43,9 +43,12 @@
       notmuch tag +calendar -- tag:new and mimetype:text/calendar
       notmuch tag +notification -- tag:new and from:notifications@
 
+      notmuch tag +important -- Importance:high
+      notmuch tag +unimportant -- Importance:low
       notmuch tag +unread +inbox -new -- tag:new
     '';
     new.tags = [ "new" ];
+    extraConfig = { index = { "header.Importance" = "Importance"; }; };
   };
   programs.mbsync.enable = true;
   services.mbsync = {
