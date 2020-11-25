@@ -253,7 +253,7 @@
     dates = [ "05:30" ];
   };
   system.autoUpgrade = {
-    enable = true;
+    enable = false;
     dates = "04:30";
   };
 
