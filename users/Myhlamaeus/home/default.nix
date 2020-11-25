@@ -51,7 +51,7 @@ in {
     ag
     cheat
     jq
-    python36Packages.powerline
+    python3Packages.powerline
     ranger
     nix-index
     zsh-completions
