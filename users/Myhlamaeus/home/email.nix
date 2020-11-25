@@ -45,6 +45,7 @@
 
       notmuch tag +important -- Importance:high
       notmuch tag +unimportant -- Importance:low
+      notmuch tag -new -- tag:sent
       notmuch tag +unread +inbox -new -- tag:new
     '';
     new.tags = [ "new" ];
