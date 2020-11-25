@@ -310,19 +310,33 @@ in {
         genericName = "Web Browser";
         categories = "Application;Network;WebBrowser";
         exec = let
+          mkKeyword = s: [ "${s}." "*.${s}.*" "*/${s}/*" ];
+          profiles = {
+            private = [ ];
+            work = lib.flatten (builtins.map mkKeyword [ "fitnesspilot" ]) ++ [
+              "*.asana.com/*"
+              "cloud.google.com/*"
+              "meet.google.com/*"
+              "*.slack.com/*"
+              "*.nuget.org/*"
+              "*.microsoft.com/*"
+            ];
+            secret = [ ];
+          };
+          attrsToList = v:
+            lib.flatten
+            (lib.mapAttrsToList (k: builtins.map (lib.nameValuePair k)) v);
+          concatMapAttrsToString = sep: f: v:
+            lib.concatMapStringsSep sep ({ name, value }: f name value)
+            (attrsToList v);
           script = pkgs.writeScript "firefox-auto" ''
             url=$1
             profile=
             matchUrl=''${url#"http://"}
             matchUrl=''${matchUrl#"https://"}
             case "''${matchUrl}" in
-              gitlab.com/fitnesspilot|gitlab.com/fitnesspilot/*) profile=work ;;
-              *.asana.com/*) profile=work ;;
-              cloud.google.com/*) profile=work ;;
-              meet.google.com/*) profile=work ;;
-              *.slack.com/*) profile=work ;;
-              *.nuget.org/*) profile=work ;;
-              *.microsoft.com/*) profile=work ;;
+              ${concatMapAttrsToString "\n  " (k: v: "${v}) ${k} ;;") profiles}
+              *) profile=$(echo -e "private\nwork\nsecret" | ${pkgs.rofi}/bin/rofi -dmenu) ;;
             esac
             if [[ $profile == "" ]] ; then
               firefox "$url"
