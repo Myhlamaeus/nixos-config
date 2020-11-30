@@ -65,6 +65,7 @@
     teensy-loader-cli
     steamPackages.steam
     openhantek6022
+    libsigrok
   ];
   # options.hardware.steam-hardware.enable = true;
 

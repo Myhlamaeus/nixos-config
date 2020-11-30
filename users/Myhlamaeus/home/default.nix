@@ -58,6 +58,7 @@ in {
     # dev
     obelisk
     openhantek6022
+    pulseview
     shellcheck
     sqlite
     zeal
