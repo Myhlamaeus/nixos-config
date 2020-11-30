@@ -99,6 +99,12 @@ in {
   };
 
   config = mkIf cfg.enable {
+    programs.firefox.tridactyl.theme =
+      if config.gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme then
+        "dark"
+      else
+        "light";
+
     home.file.".mozilla/native-messaging-hosts/tridactyl.json".source =
       "${pkgs.tridactyl-native}/lib/mozilla/native-messaging-hosts/tridactyl.json";
 
