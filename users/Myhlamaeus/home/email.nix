@@ -43,6 +43,11 @@
       notmuch tag +calendar -- tag:new and mimetype:text/calendar
       notmuch tag +notification -- tag:new and from:notifications@
 
+      notmuch tag +finance +financeInvoice -- tag:new and \( subject:invoice or body:invoice \)
+      notmuch tag +finance +financeReceipt -- tag:new and \( subject:receipt or body:receipt \)
+      notmuch tag +finance +financeOrder -- tag:new and \( subject:order or body:order or subject:bestell or body:bestell \)
+      notmuch tag -financeInvoice -- tag:new and tag:financeReceipt
+
       notmuch tag +important -- Importance:high
       notmuch tag +unimportant -- Importance:low
       notmuch tag -new -- tag:sent
