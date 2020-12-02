@@ -46,6 +46,9 @@
     }:
     rec {
 
+      homeManagerModules.firefoxAutoProfile =
+        import ./homeManagerModules/firefoxAutoProfile.nix;
+
       homeManagerModules.tridactyl = import ./homeManagerModules/tridactyl.nix;
 
       nixosConfigurations.home-desktop = nixpkgs.lib.nixosSystem {
@@ -140,6 +143,7 @@
             home-manager.users.Myhlamaeus = {
               imports = [
                 felschr-nixos.homeManagerModules.git
+                homeManagerModules.firefoxAutoProfile
                 homeManagerModules.tridactyl
               ];
             };

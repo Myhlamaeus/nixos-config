@@ -259,107 +259,48 @@ in {
           delay = 100;
         };
       };
+
+      autoProfile = {
+        enable = true;
+        associations = let
+          inherit (lib) flatten;
+          mkKeyword = s: [ "${s}." "*.${s}.*" "*/${s}/*" ];
+        in {
+          private = [ ];
+          work = flatten (map mkKeyword [ "fitnesspilot" ]) ++ [
+            "*.asana.com/*"
+            "cloud.google.com/*"
+            "meet.google.com/*"
+            "*.slack.com/*"
+            "*.nuget.org/*"
+            "*.microsoft.com/*"
+          ];
+          secret = [ ];
+        };
+      };
     };
     programs.browserpass.browsers = [ "firefox" ];
 
-    home.sessionVariables = { BROWSER = "firefox"; };
     xdg.mimeApps.defaultApplications = let
       listToAttrs' = pairs:
         with lib;
         listToAttrs (concatMap
           ({ names, value }: map (name: nameValuePair name value) names) pairs);
-    in listToAttrs' [
-      {
-        names = [
-          "text/html"
-          "text/xml"
-          "application/xhtml+xml"
-          "application/vnd.mozilla.xul+xml"
-        ];
-        value = "firefox.desktop";
-      }
-      {
-        names = [ "x-scheme-handler/http" "x-scheme-handler/https" ];
-        value = "firefox-auto.desktop";
-      }
-    ];
+    in listToAttrs' [{
+      names = [
+        "text/html"
+        "text/xml"
+        "application/xhtml+xml"
+        "application/vnd.mozilla.xul+xml"
+      ];
+      value = "firefox.desktop";
+    }];
 
-    home.packages = let
-      escapeDesktopArg = arg:
-        replaceStrings [ ''"'' ] [ ''"\""'' ] (toString arg);
-      mkExec = with lib;
-        { app ? null, profile ? null, ... }: ''
-          firefox ${
-            optionalString (profile != null)
-            ''-P "${escapeDesktopArg profile}"''
-          } ${
-            optionalString (app != null) ''--ssb="${escapeDesktopArg app}"''
-          } %U
-        '';
-      mkFirefoxDesktopItem = attrs:
-        pkgs.makeDesktopItem ({
-          icon = "firefox";
-        } // (removeAttrs attrs [ "app" "profile" ]) // {
-          exec = mkExec attrs;
-        });
-      autoFirefox = pkgs.makeDesktopItem {
-        name = "firefox-auto";
-        desktopName = "Firefox (automatic profile)";
-        icon = "firefox";
-        mimeType = "x-scheme-handler/http;x-scheme-handler/https";
-        genericName = "Web Browser";
-        categories = "Application;Network;WebBrowser";
-        exec = let
-          mkKeyword = s: [ "${s}." "*.${s}.*" "*/${s}/*" ];
-          profiles = {
-            private = [ ];
-            work = lib.flatten (builtins.map mkKeyword [ "fitnesspilot" ]) ++ [
-              "*.asana.com/*"
-              "cloud.google.com/*"
-              "meet.google.com/*"
-              "*.slack.com/*"
-              "*.nuget.org/*"
-              "*.microsoft.com/*"
-            ];
-            secret = [ ];
-          };
-          attrsToList = v:
-            lib.flatten
-            (lib.mapAttrsToList (k: builtins.map (lib.nameValuePair k)) v);
-          concatMapAttrsToString = sep: f: v:
-            lib.concatMapStringsSep sep ({ name, value }: f name value)
-            (attrsToList v);
-          script = pkgs.writeScript "firefox-auto" ''
-            url=$1
-            profile=
-            matchUrl=''${url#"http://"}
-            matchUrl=''${matchUrl#"https://"}
-            case "''${matchUrl}" in
-              ${concatMapAttrsToString "\n  " (k: v: "${v}) ${k} ;;") profiles}
-              *) profile=$(echo -e "private\nwork\nsecret" | ${pkgs.rofi}/bin/rofi -dmenu) ;;
-            esac
-            if [[ $profile == "" ]] ; then
-              firefox "$url"
-            else
-              firefox -P "$profile" "$url"
-            fi
-          '';
-        in "${script} %U";
-      };
-    in (with pkgs;
+    home.packages = (with pkgs;
       [
         ((tor-browser-bundle-bin.override {
           pulseaudioSupport = true;
         }).overrideAttrs (old: { meta = old.meta // { broken = false; }; }))
-      ]) ++ [ autoFirefox ] ++ mapAttrsToList (k: v:
-        mkFirefoxDesktopItem {
-          name = "firefox-profile-${k}";
-          desktopName = "Firefox (${v.name})";
-          profile = v.name;
-          mimeType =
-            "text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp";
-          genericName = "Web Browser";
-          categories = "Application;Network;WebBrowser";
-        }) (filterAttrs (k: v: !v.isDefault) config.programs.firefox.profiles);
+      ]);
   };
 }
