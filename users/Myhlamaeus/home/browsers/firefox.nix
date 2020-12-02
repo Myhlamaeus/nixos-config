@@ -351,14 +351,7 @@ in {
         ((tor-browser-bundle-bin.override {
           pulseaudioSupport = true;
         }).overrideAttrs (old: { meta = old.meta // { broken = false; }; }))
-      ]) ++ [
-        autoFirefox
-        (mkFirefoxDesktopItem {
-          name = "youtube-music";
-          desktopName = "YouTube Music";
-          app = "https://music.youtube.com";
-        })
-      ] ++ mapAttrsToList (k: v:
+      ]) ++ [ autoFirefox ] ++ mapAttrsToList (k: v:
         mkFirefoxDesktopItem {
           name = "firefox-profile-${k}";
           desktopName = "Firefox (${v.name})";
