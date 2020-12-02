@@ -201,6 +201,42 @@ in {
             F = "hint -Jbc .rc > .r > a";
           };
 
+          "^https://www.youtube.com/watch" = {
+            # Play/pause
+            ",p" = ''
+              composite js document.querySelector("ytd-player .ytp-play-button").dispatchEvent(new MouseEvent("click"))'';
+            # Seek forward/backward by PT10S
+            ",l" = ''
+              composite js document.querySelector("ytd-player video").currentTime += 10'';
+            ",h" = ''
+              composite js document.querySelector("ytd-player video").currentTime -= 10'';
+            # Go to next/previous video in list (or if not in a list to the suggestion and back in history)
+            # ",k" = ''composite js document.querySelector("ytd-player video").currentTime += 10'';
+            # ",j" = ''composite js document.querySelector("ytd-player video").currentTime -= 10'';
+            # Increase/decrease volume
+            ",v>" = ''
+              composite js document.querySelector("ytd-player video").volume += 0.1'';
+            ",v<" = ''
+              composite js document.querySelector("ytd-player video").volume -= 0.1'';
+            # Mute/unmute
+            # ",vm" = ''composite js document.querySelector("ytd-player video").dispatchEvent(new MouseEvent("click"))'';
+            # Previous/next frame (while paused)
+            # ",g" = ''composite js document.querySelector("ytd-player video").currentTime -= 10'';
+            # ",s" = ''composite js document.querySelector("ytd-player video").currentTime += 10'';
+            # Decrease/increase playback rate
+            ",f" = ''
+              composite js document.querySelector("ytd-player video").playbackRate += 0.25'';
+            ",d" = ''
+              composite js document.querySelector("ytd-player video").playbackRate -= 0.25'';
+            # Playback mode (full screen/theatre/mini)
+            ",tf" = ''
+              composite js document.querySelector("ytd-player .ytp-fullscreen-button").dispatchEvent(new MouseEvent("click"))'';
+            ",tt" = ''
+              composite js document.querySelector("ytd-player .ytp-size-button").dispatchEvent(new MouseEvent("click"))'';
+            ",tm" = ''
+              composite js document.querySelector("ytd-player .ytp-miniplayer-button, .ytd-miniplayer").dispatchEvent(new MouseEvent("click"))'';
+          };
+
           "^https://duckduckgo.com" = {
             # Only hint search results
             f = "hint -Jc [class=result__a]";
