@@ -21,7 +21,7 @@
         tls.enable = false;
       };
       address = "me@maublew.name";
-      userName = "maublew";
+      userName = "me@maublew.name";
       realName = "Maurice B. Lewis";
       notmuch.enable = true;
       mbsync = {

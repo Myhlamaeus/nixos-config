@@ -81,7 +81,9 @@ in {
     krita
     # social
     element-desktop
+    hydroxide
     keybase
+    protonmail-bridge
     # other
     fahcontrol
     fahviewer
