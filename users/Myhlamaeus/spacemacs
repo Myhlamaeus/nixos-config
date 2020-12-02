@@ -581,6 +581,7 @@ before packages are loaded."
   (setq message-send-mail-function 'message-send-mail-with-sendmail)
   (setq sendmail-program "msmtp")
   (setq message-sendmail-f-is-evil t)
+  (setq sendmail-program "msmtp")
   (add-to-list 'interpreter-mode-alist '("nix-shell" . nix-shebang-mode))
   (global-undo-tree-mode)
   (setq evil-undo-system 'undo-tree)
