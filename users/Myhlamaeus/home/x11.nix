@@ -79,7 +79,7 @@ in {
       enable = true;
       font = {
         package = pkgs.cm_unicode;
-        name = "CMU Sans Serif 8";
+        name = "serif 10";
       };
       iconTheme = {
         package = pkgs.papirus-icon-theme;

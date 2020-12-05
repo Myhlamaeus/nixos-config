@@ -135,6 +135,18 @@
         serif = [ "CMU Serif" "Noto Serif" "emoji" ];
         emoji = [ "Blobmoji" "Noto Color Emoji" ];
       };
+
+      overrides = [
+        {
+          sources =
+            [ "Arial" "Helvetica" "Helvetica Neue" "Roboto" "Segoe UI" ];
+          targets = [ "serif" "sans-serif" ];
+        }
+        {
+          sources = [ "Consolas" ];
+          targets = [ "monospace" ];
+        }
+      ];
     };
   };
 
