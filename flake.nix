@@ -46,6 +46,8 @@
     }:
     rec {
 
+      nixosModules.fontOverrides = import ./nixosModules/fontOverrides.nix;
+
       homeManagerModules.firefoxAutoProfile =
         import ./homeManagerModules/firefoxAutoProfile.nix;
 
@@ -135,6 +137,7 @@
               # Something about this broke in 20.09
               # "${ nixpkgs.outPath }/nixos/modules/profiles/hardened.nix"
               "${home-manager}/nixos"
+              nixosModules.fontOverrides
               ./system/hardware-configurations/home-desktop.nix
               ./system
               ./users
