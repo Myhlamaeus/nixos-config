@@ -114,6 +114,7 @@
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
+      noto-fonts-emoji-blob-bin
       liberation_ttf
       fira
       fira-code
@@ -129,9 +130,10 @@
 
     fontconfig = {
       defaultFonts = {
-        monospace = [ "CMU Sans Serif" "Noto Color Emoji" ];
-        sansSerif = [ "CMU Sans Serif" "Noto Color Emoji" ];
-        serif = [ "CMU Serif" "Noto Color Emoji" ];
+        monospace = [ "Fira Code" "emoji" ];
+        sansSerif = [ "CMU Sans Serif" "Noto Sans" "emoji" ];
+        serif = [ "CMU Serif" "Noto Serif" "emoji" ];
+        emoji = [ "Blobmoji" "Noto Color Emoji" ];
       };
     };
   };
