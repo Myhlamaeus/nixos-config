@@ -83,7 +83,7 @@
               (self: super:
                 let
                   unstable = import nixpkgs-unstable.outPath {
-                    system = "x86_64-linux";
+                    inherit (self) system;
                     config = { allowUnfree = true; };
                   };
                 in {
