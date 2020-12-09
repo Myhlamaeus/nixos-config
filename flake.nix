@@ -41,9 +41,14 @@
     flake = false;
   };
 
+  inputs.obelisk-source = {
+    url = "github:obsidiansystems/obelisk/master";
+    flake = false;
+  };
+
   outputs = { self, nixpkgs, flake-utils, home-manager, pre-commit-hooks, nur
     , nixpkgs-unstable, cheatsheets, felschr-nixos, gitignore, omnisharp-roslyn
-    }:
+    , obelisk-source }:
     rec {
 
       nixosModules.fontOverrides = import ./nixosModules/fontOverrides.nix;
@@ -128,6 +133,9 @@
                       cp -r Proton-${pkgs.lib.escapeShellArg version} $out
                     '';
                   };
+
+                  obelisk =
+                    (import obelisk-source { inherit (self) system; }).command;
                 })
             ];
           })

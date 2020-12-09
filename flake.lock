@@ -265,6 +265,23 @@
         "type": "github"
       }
     },
+    "obelisk-source": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1603392036,
+        "narHash": "sha256-oFlFkN+ivHsa32tGWalc21KYNnl8iu/2XPp7f9YYlSw=",
+        "owner": "obsidiansystems",
+        "repo": "obelisk",
+        "rev": "11beb6e8cd2419b2429925b76a98f24035e40985",
+        "type": "github"
+      },
+      "original": {
+        "owner": "obsidiansystems",
+        "ref": "master",
+        "repo": "obelisk",
+        "type": "github"
+      }
+    },
     "omnisharp-roslyn": {
       "flake": false,
       "locked": {
@@ -318,6 +335,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
+        "obelisk-source": "obelisk-source",
         "omnisharp-roslyn": "omnisharp-roslyn",
         "pre-commit-hooks": "pre-commit-hooks"
       }

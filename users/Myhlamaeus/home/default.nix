@@ -56,6 +56,7 @@ in {
     nix-index
     zsh-completions
     # dev
+    obelisk
     openhantek6022
     shellcheck
     sqlite
