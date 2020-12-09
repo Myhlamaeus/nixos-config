@@ -104,6 +104,7 @@
     ncurses
     # vm
     nixops
+    gparted
   ];
 
   programs.slock.enable = true;
@@ -143,7 +144,7 @@
           targets = [ "serif" "sans-serif" ];
         }
         {
-          sources = [ "Consolas" ];
+          sources = [ "Consolas" "Inconsolata" ];
           targets = [ "monospace" ];
         }
       ];
