@@ -24,6 +24,8 @@
 
   boot.tmpOnTmpfs = true;
 
+  boot.loader.grub.memtest86.enable = true;
+
   nixpkgs.overlays = [
     (self: super: {
       add-optparse-applicative-completions = { pkg, bins }:
