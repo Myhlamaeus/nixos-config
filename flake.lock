@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "Linux-Fake-Background-Webcam-source": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1617628806,
+        "narHash": "sha256-LJlCGRl2ILVF7A2/nlqCz9+n0/VDHIAbjjqv0MFVKHk=",
+        "owner": "fangfufu",
+        "repo": "Linux-Fake-Background-Webcam",
+        "rev": "0fbe69aa111794a544726faa35b3c0d070bb71f4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fangfufu",
+        "ref": "master",
+        "repo": "Linux-Fake-Background-Webcam",
+        "type": "github"
+      }
+    },
     "cabal-fmt-src": {
       "flake": false,
       "locked": {
@@ -400,6 +417,7 @@
     },
     "root": {
       "inputs": {
+        "Linux-Fake-Background-Webcam-source": "Linux-Fake-Background-Webcam-source",
         "cheatsheets": "cheatsheets",
         "felschr-nixos": "felschr-nixos",
         "flake-utils": "flake-utils_2",

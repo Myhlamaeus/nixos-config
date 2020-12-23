@@ -17,7 +17,12 @@
   # <nixpkgs>'s hardened kernel doesn't support 32 bit emulation (`linuxPackages_hardened.kernel.features.ia32Emulation`)
   # The hardened kernel breaks Chromium
   boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelModules = [ "usb_storage" "fuse" ];
+  boot.extraModulePackages = with pkgs; [ akvcam linuxPackages.v4l2loopback ];
+  boot.kernelModules =
+    [ "usb_storage" "fuse" "v4l2loopback" "videodev" "akvcam" ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1  exclusive_caps=1 video_nr=2 card_label="v4l2loopback"
+  '';
   security.lockKernelModules = false;
   # Required for `nix.useSandbox`
   security.allowUserNamespaces = true;

@@ -52,9 +52,14 @@
     flake = false;
   };
 
+  inputs.Linux-Fake-Background-Webcam-source = {
+    url = "github:fangfufu/Linux-Fake-Background-Webcam/master";
+    flake = false;
+  };
+
   outputs = { self, nixpkgs, flake-utils, nixops, home-manager, pre-commit-hooks
     , nur, nixpkgs-unstable, cheatsheets, felschr-nixos, funkwhale, gitignore
-    , omnisharp-roslyn, obelisk-source }:
+    , omnisharp-roslyn, obelisk-source, Linux-Fake-Background-Webcam-source }:
     rec {
 
       nixosModules.fontOverrides = import ./nixosModules/fontOverrides.nix;
@@ -103,6 +108,11 @@
                   inherit (unstable.gitAndTools) git-bug;
                   inherit gitignore;
 
+                  akvcam = self.linuxPackages.callPackage
+                    ((nixpkgs-unstable) + "/pkgs/os-specific/linux/akvcam") {
+                      qmake = self.qt5.qmake;
+                    };
+
                   cheatPackages = { community = cheatsheets; };
 
                   omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs
@@ -124,6 +134,20 @@
                       cp ${teensy-udev-rules} $out/lib/udev/rules.d/49-teensy.rules
                     '';
                   });
+
+                  Linux-Fake-Background-Webcam-bodypix =
+                    pkgs.stdenv.mkDerivation {
+                      pname = "Linux-Fake-Background-Webcam-bodypix";
+                      version = "git";
+                      src = Linux-Fake-Background-Webcam-source + "/bodypix";
+                    };
+
+                  Linux-Fake-Background-Webcam-fakecam =
+                    pkgs.stdenv.mkDerivation {
+                      pname = "Linux-Fake-Background-Webcam-fakecam";
+                      version = "git";
+                      src = Linux-Fake-Background-Webcam-source + "/fakecam";
+                    };
 
                   proton-ge-custom = pkgs.stdenv.mkDerivation rec {
                     pname = "proton-ge-custom";

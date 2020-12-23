@@ -33,6 +33,7 @@
       chromium = super.chromium.override { enableVaapi = true; };
     })
   ];
+  virtualisation.docker.enableNvidia = true;
 
   boot.initrd.availableKernelModules =
     [ "xhci_pci" "ahci" "uas" "usb_storage" "usbhid" "sd_mod" ];
