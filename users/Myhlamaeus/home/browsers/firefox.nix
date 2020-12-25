@@ -173,27 +173,19 @@ in {
             hint -Jc [class*="expand"],[class="togg"],[class="comment_folder"]'';
         };
 
-        urlBindings = {
-          "github.com" = {
-            # Pull request checkout command to clipboard (only works if you're a collaborator or above)
-            ",yp" = ''
-              composite js document.getElementById("clone-help-step-1").textContent.replace("git checkout -b", "git checkout -B").replace("git pull ", "git fetch ") + "git reset --hard " + document.getElementById("clone-help-step-1").textContent.split(" ")[3].replace("-","/") | yank'';
+        urlBindings = let
+          forge = gitUri: {
             # Yank git URI
-            ",yr" = ''
-              composite js document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank'';
+            ",y" = "composite js ${gitUri} | clipboard yank";
             # Clone repo
-            ",g" = ''
-              js const uri = document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git"); const namespace = uri.replace(/^git@git(?:hub|lab).com:/, "").replace(/\/.*?\.git$/, ""); tri.native.run(`mkdir -p ~/.ghq/''${namespace}; cd ~/.ghq/''${namespace}; git clone ''${uri}; cd \"$(basename \"''${uri}\" .git)\"`)'';
+            ",g" =
+              "js const remote = ${gitUri}; const local = remote.replace(/^git@(<host>.*?):/, \"$<host>/\").replace(/\\.git$/, \"\"); tri.native.run(`mkdir -p \"$(dirname ''\${local}'')\"; git clone ''\${remote}'' ''\${local}''";
           };
-
-          "gitlab.com" = {
-            # Yank git URI
-            ",y" = ''
-              composite js document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank'';
-            # Clone repo
-            ",g" = ''
-              js const uri = document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git"); const namespace = uri.replace(/^git@git(?:hub|lab).com:/, "").replace(/\/.*?\.git$/, ""); tri.native.run(`mkdir -p ~/.ghq/''${namespace}; cd ~/.ghq/''${namespace}; git clone ''${uri}; cd \"$(basename \"''${uri}\" .git)\"`)'';
-          };
+        in {
+          "github.com" = forge ''
+            document.location.href.replace(/^https:\/\/(?<host>github.com)\/(?<path>.*?\/.*?)(?:\/.*)?$/, "git@$<host>:$<path>")'';
+          "gitlab.com" = forge ''
+            document.location.href.replace(/^https:\/\/(?<host>gitlab.com)\/(?<path>.*?\/.*?(?:\/(?!-\/).*?)*)(?:\/-\/.*)?$/, "git@$<host>:$<path>")'';
 
           "www.google.com" = {
             # Only hint search results
