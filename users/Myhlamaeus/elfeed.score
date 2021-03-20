@@ -1,0 +1,29 @@
+;;; Elfeed score file                                     -*- lisp -*-
+((version 8)
+ ("title"
+  (:text "^Issue [0-9]+ - [0-9]+-[0-9][0-9]-[0-9][0-9]$" :value 50 :type r :tags
+         (t hask)
+         :feeds
+         (t
+          (t W "Haskell Planetarium"))))
+ ("content")
+ ("title-or-content")
+ ("tag"
+  (:tags
+   (t . announcement)
+   :value 50)
+  (:tags
+   (t . metroidvania)
+   :value 25))
+ ("authors")
+ ("feed"
+  (:text "Zega Intelligent Cookware" :value 500 :type s :attr t)
+  (:text "Oyo Nova Gym" :value 500 :type s :attr t)
+  (:text "The Beginning After the End" :value 300 :type s :attr t)
+  (:text "Devil Sword King" :value 300 :type s :attr t)
+  (:text "Second Life Ranker" :value 200 :type s :attr t)
+  (:text "NixOS Weekly" :value 50 :type s :attr t)
+  (:text "xkcd.com" :value 100 :type s :attr t))
+ ("link")
+ (mark nil)
+ ("adjust-tags"))

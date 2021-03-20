@@ -1,7 +1,9 @@
 * Science                                                        :sci:elfeed:
 ** Math                                                                :math:
 *** entry-title: \(math\|mathematics\|\(category\|group\) theory\)
-*** https://export.arxiv.org/rss/math
+*** [[https://export.arxiv.org/rss/math][Arxiv Math]]
 ** Physics                                                             :phys:
 *** entry-title: \(physics\|quantum\)
-*** https://physicsworld.com/feed/
+*** [[https://physicsworld.com/feed/][Physics World]]
+** Generic
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCZYTClx2T1of7BRZ86-8fow][SciShow]]

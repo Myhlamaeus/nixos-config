@@ -1,14 +1,17 @@
 * Fun                                                            :fun:elfeed:
 ** Anime :anime:
 *** http://www8.watch-anime.org/feed/
-** Manga :manga:
+** Manga                                                              :manga:
 *** https://readms.net/rss
-** Light Novel :ln:
+*** [[https://tapas.io/rss/series/111423][The Beginning After the End]]
+*** [[https://tapas.io/rss/series/54581][Devil Sword King]]
+*** [[https://tapas.io/rss/series/194483][Second Life Ranker]]
+** Light Novel                                                           :ln:
 *** https://www.wuxiaworld.com/feed/chapters
-** Gaming :gaming:
+** Gaming                                                            :gaming:
 *** entry-title: \(nvidia\|geforce\|elder scrolls\|games\|gaming\)
 *** http://nvidianews.nvidia.com/rss.xml
-*** TES                                                                 :tes:
+*** TES                                                             :tes:rpg:
 **** entry-title: \(the elder scrolls\)
 **** Morrowind                                                    :morrowind:
 ***** entry-title: \(tes iii\|the elder scrolls iii\|morrowind\|openmw\|tes3mp\)
@@ -16,13 +19,15 @@
 ***** https://www.reddit.com/r/openmw/.rss
 **** Oblivion                                                      :oblivion:
 ***** entry-title: \(tes iv\|the elder scrolls iv\|oblivion\)
-**** Skyrim                                                        :skyrim:
+**** Skyrim                                                          :skyrim:
 ***** entry-title: \(tes v\|the elder scrolls v\|skyrim\)
-*** Dwarf Fortress                                                       :df:
+*** Dwarf Fortress                                            :df:simulation:
 **** entry-title: \(dwarf fortress\)
 **** https://bay12games.com/dwarves/dev_now.rss
 **** https://bay12games.com/dwarves/dev_release.rss
 **** https://www.reddit.com/r/dwarffortress/.rss
+*** [[https://store.steampowered.com/feeds/news/app/1369630/?cc=DE&l=english][ENDER LILIES]]                              :adventure:action:metroidvania:
+*** [[https://store.steampowered.com/feeds/news/app/692850/?cc=DE&l=english][Bloodstained: Ritual of the Night]]         :adventure:action:metroidvania:
 ** Comics                                                             :comic:
 *** entry-title: \(xkcd\)
 *** https://xkcd.com/atom.xml

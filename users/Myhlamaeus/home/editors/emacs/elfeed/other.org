@@ -1,2 +1,5 @@
 * Other :elfeed:
-** https://www.indiegogo.com/rss/announcements/zega-intelligent-cookware--2?agent_type=Project
+** [[https://www.indiegogo.com/rss/announcements/zega-intelligent-cookware--2?agent_type=Project][Zega Intelligent Cookware]]
+** [[https://www.indiegogo.com/rss/announcements/oyo-nova-gym--2?agent_type=Project
+][Oyo Nova Gym]]
+** entry-title: [ANN]                                          :announcement:

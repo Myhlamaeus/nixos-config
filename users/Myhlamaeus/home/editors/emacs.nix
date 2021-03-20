@@ -90,6 +90,15 @@ in {
           mv "$temp"/private ~/.config/emacs
           rm -r "$temp"
         fi
+        if ! [ -L ~/.config/emacs/elfeed.score ] ; then
+          rm -f ~/.config/emacs/elfeed.score
+          ln -s $VERBOSE_ARG /etc/nixos/users/Myhlamaeus/elfeed.score ~/.config/emacs/elfeed.score
+          $DRY_RUN_CMD git \
+            clone $VERBOSE_ARG \
+            -b ${escapeShellArg cfg.emacs.spacemacs.ref} \
+            https://github.com/syl20bnr/spacemacs \
+            ~/.config/emacs
+        fi
         $DRY_RUN_CMD git \
           --git-dir ~/.config/emacs/.git \
           --work-tree ~/.config/emacs \
