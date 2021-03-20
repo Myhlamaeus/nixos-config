@@ -25,10 +25,12 @@
   };
 
   inputs.felschr-nixos = {
-    url = "gitlab:FelschR/nixos-config/main";
+    url =
+      "gitlab:FelschR/nixos-config/bfedaaae23620ca82e8491a5ed09130e2099fcac";
     inputs.nixpkgs.follows = "nixpkgs-unstable";
     inputs.nur.follows = "nur";
     inputs.pre-commit-hooks.follows = "pre-commit-hooks";
+    inputs.obelisk.follows = "obelisk-source";
   };
 
   inputs.gitignore = {
