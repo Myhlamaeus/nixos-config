@@ -21,7 +21,10 @@ let
     matchUrl=''${url#"http://"}
     matchUrl=''${matchUrl#"https://"}
     case "''${matchUrl}" in
-      ${concatMapAttrsToString "\n  " (k: v: "${v}) ${k} ;;") cfg.associations}
+      ${
+        concatMapAttrsToString "\n  " (k: v: "${v}) profile=${k} ;;")
+        cfg.associations
+      }
       *) profile=$(echo -e "private\nwork\nsecret" | ${cfg.dmenu}) ;;
     esac
     if [[ $profile == "" ]] ; then
