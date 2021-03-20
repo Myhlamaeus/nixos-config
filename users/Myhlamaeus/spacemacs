@@ -593,11 +593,12 @@ before packages are loaded."
       (org-projectile-todo-files)))
   (org-babel-do-load-languages
     'org-babel-load-languages
-    '((haskell . t)
-       (ledger . t)
-          (dot . t)
-        (shell . t)
-         (http . t)))
+        '((haskell . t)
+           (ledger . t)
+              (dot . t)
+            (shell . t)
+             (http . t)
+       (emacs-lisp . t)))
   (require 'org-protocol)
   (defun transform-square-brackets-to-round-ones(string-to-transform)
     "Transforms [ into ( and ] into ), other chars left unchanged."
