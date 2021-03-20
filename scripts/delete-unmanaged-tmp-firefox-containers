@@ -1,0 +1,25 @@
+// -*- mode: javascript -*-
+// https://github.com/stoically/temporary-containers/issues/371#issuecomment-615861439
+// about:debugging#/runtime/this-firefox -> Temporary Containers -> Inspect -> Console, paste the script
+(async () => {
+  const dryRun = true
+  const containers = await browser.contextualIdentities.query({})
+
+  const orphanTemporaryContainers = containers
+    .filter(container => !tmp.container.isTemporary(container.cookieStoreId))
+    .filter(container => /^tmp\d+$/.test(container.name))
+
+  const containersWithTabCounts = await Promise.all(
+    orphanTemporaryContainers
+      .map(async container => [container, (await browser.tabs.query({ cookieStoreId: container.cookieStoreId })).length])
+  )
+
+  console.log("Orphan temporary containers with tabs: %o", containersWithTabCounts.filter(([, n]) => n).map(([c, ]) => c))
+
+  const containersToDelete = containersWithTabCounts.filter(([, n]) => !n).map(([c, ]) => c)
+  console.log("Will delete containers %o", containersToDelete.map(container => container.name))
+  if (!dryRun) {
+    await Promise.all(containersToDelete.map(container => browser.contextualIdentities.remove(container.cookieStoreId)))
+    console.log("Done")
+  }
+})()
