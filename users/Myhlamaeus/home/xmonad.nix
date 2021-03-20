@@ -44,6 +44,7 @@ in {
       xautolock = "${pkgs.xautolock}/bin/xautolock";
       xsel = "${pkgs.xsel}/bin/xsel";
       xvkbd = "${pkgs.xvkbd}/bin/xvkbd";
+      gtk-launch = "${pkgs.gtk3}/bin/gtk-launch";
     };
   };
 }

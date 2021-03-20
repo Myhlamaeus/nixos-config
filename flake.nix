@@ -205,6 +205,13 @@
           hooks = { nixfmt.enable = true; };
         };
       in {
-        devShell = pkgs.mkShell { inherit (pre-commit-check) shellHook; };
+        devShell = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            (ghc.withPackages
+              (ps: with ps; [ xmonad xmonad-contrib containers ]))
+            haskellPackages.haskell-language-server
+          ];
+          inherit (pre-commit-check) shellHook;
+        };
       });
 }
