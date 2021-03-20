@@ -95,7 +95,7 @@ in {
     home.sessionVariables = mkIf
       (elem "x-scheme-handler/http" cfg.defaultApplicationFor
         && elem "x-scheme-handler/https" cfg.defaultApplicationFor) {
-          BROWSER = "firefox";
+          BROWSER = "${firefoxAuto}/bin/firefox-auto";
         };
   };
 }
