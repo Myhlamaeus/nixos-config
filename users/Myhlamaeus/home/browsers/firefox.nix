@@ -178,8 +178,8 @@ in {
             # Yank git URI
             ",y" = "composite js ${gitUri} | clipboard yank";
             # Clone repo
-            ",g" =
-              "js const remote = ${gitUri}; const local = remote.replace(/^git@(<host>.*?):/, \"$<host>/\").replace(/\\.git$/, \"\"); tri.native.run(`mkdir -p \"$(dirname ''\${local}'')\"; git clone ''\${remote}'' ''\${local}''";
+            ",g" = ''
+              js const remote = ${gitUri}; const local = remote.replace(/^git@(?<host>.*?):/, "$<host>/").replace(/\.git$/, ""); tri.native.run(`cd ~/.ghq && mkdir -p "$(dirname "''${local}")" && git clone "''${remote}" "''${local}"`)'';
           };
         in {
           "github.com" = forge ''
