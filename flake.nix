@@ -119,13 +119,13 @@
 
                   proton-ge-custom = pkgs.stdenv.mkDerivation rec {
                     pname = "proton-ge-custom";
-                    version = "5.9-GE-6-ST";
+                    version = "5.9-GE-8-ST";
                     src = builtins.fetchurl {
                       name = "${pname}-${version}-source";
                       url =
                         "https://github.com/GloriousEggroll/${pname}/releases/download/${version}/Proton-${version}.tar.gz";
                       sha256 =
-                        "1ryrkwivig5qnz57378x9jmz78nch71vhpxl73g366r7wlmx9m79";
+                        "129ws0hq2l6bb69y2afgcb98ns68bn0z8ks44nvz9gf53a8nxzdd";
                     };
                     unpackCmd = ''
                       mkdir out

@@ -59,6 +59,7 @@ in {
     acceptTerms = true;
   };
 
+  users.users.nginx.extraGroups = [ "acme" ];
   services.nginx = {
     enable = true;
 
