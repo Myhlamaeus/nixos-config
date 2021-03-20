@@ -81,7 +81,10 @@ in {
     inkscape
     krita
     # social
-    element-desktop
+    (element-desktop.override {
+      element-web =
+        element-web.override { conf = { showLabsSettings = true; }; };
+    })
     hydroxide
     keybase
     protonmail-bridge
