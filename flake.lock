@@ -38,10 +38,18 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
-        "nixpkgs": ["nixpkgs-unstable"],
-        "nur": ["nur"],
-        "obelisk": ["obelisk-source"],
-        "pre-commit-hooks": ["pre-commit-hooks"]
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ],
+        "nur": [
+          "nur"
+        ],
+        "obelisk": [
+          "obelisk-source"
+        ],
+        "pre-commit-hooks": [
+          "pre-commit-hooks"
+        ]
       },
       "locked": {
         "lastModified": 1613443413,
@@ -119,6 +127,26 @@
         "type": "github"
       }
     },
+    "funkwhale": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1616243328,
+        "narHash": "sha256-cPnu4fDCD5aoeXD4fQPfuwR5qUPGbVM+BlePFxw98fI=",
+        "owner": "mmai",
+        "repo": "funkwhale-flake",
+        "rev": "619784dd62f857e2fbcbd014e57152f8a4c6eeb9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mmai",
+        "repo": "funkwhale-flake",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "flake": false,
       "locked": {
@@ -172,7 +200,9 @@
     },
     "home-manager": {
       "inputs": {
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1613153184,
@@ -191,7 +221,9 @@
     },
     "home-manager_2": {
       "inputs": {
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1612902587,
@@ -297,7 +329,9 @@
         "flake-utils": "flake-utils_3",
         "gitignore-nix-src": "gitignore-nix-src",
         "hindent-src": "hindent-src",
-        "nixpkgs": ["nixpkgs"]
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1600939022,
@@ -319,6 +353,7 @@
         "cheatsheets": "cheatsheets",
         "felschr-nixos": "felschr-nixos",
         "flake-utils": "flake-utils_2",
+        "funkwhale": "funkwhale",
         "gitignore": "gitignore",
         "home-manager": "home-manager_2",
         "nixpkgs": "nixpkgs",

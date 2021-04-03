@@ -33,6 +33,8 @@
     inputs.obelisk.follows = "obelisk-source";
   };
 
+  inputs.funkwhale = { url = "github:mmai/funkwhale-flake"; };
+
   inputs.gitignore = {
     url = "github:toptal/gitignore/master";
     flake = false;
@@ -49,8 +51,8 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, home-manager, pre-commit-hooks, nur
-    , nixpkgs-unstable, cheatsheets, felschr-nixos, gitignore, omnisharp-roslyn
-    , obelisk-source }:
+    , nixpkgs-unstable, cheatsheets, felschr-nixos, funkwhale, gitignore
+    , omnisharp-roslyn, obelisk-source }:
     rec {
 
       nixosModules.fontOverrides = import ./nixosModules/fontOverrides.nix;
@@ -169,6 +171,8 @@
         modules = [
           nixpkgs.nixosModules.notDetected
 
+          funkwhale.nixosModule
+
           ({ pkgs, ... }: {
             networking = {
               hostName = "rpi";
@@ -184,7 +188,8 @@
           })
 
           {
-            nixpkgs.overlays = [ felschr-nixos.overlays.deconz ];
+            nixpkgs.overlays =
+              [ felschr-nixos.overlays.deconz funkwhale.overlay ];
 
             nixpkgs.config.allowUnfree = true;
 

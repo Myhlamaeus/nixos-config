@@ -11,6 +11,7 @@ in {
     ./home-assistant.nix
     ./matrix.nix
     ./webdav.nix
+    ./funkwhale.nix
   ];
 
   nix.package = pkgs.nixUnstable;
@@ -29,6 +30,7 @@ in {
     home-assistant.enable = true;
     matrix-synapse.enable = true;
     webdav.enable = true;
+    funkwhale.enable = true;
   };
 
   local.services.deconz = {
