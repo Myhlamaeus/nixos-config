@@ -1,0 +1,15 @@
+ setup.cfg | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/setup.cfg b/setup.cfg
+index 9ad4776..399a2fa 100644
+--- a/setup.cfg
++++ b/setup.cfg
+@@ -20,7 +20,6 @@ install_requires =
+     requests
+     requests_oauthlib
+     pygobject
+-    vext
+ 
+ 
+ [options.entry_points]

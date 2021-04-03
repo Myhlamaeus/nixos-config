@@ -258,17 +258,6 @@ in {
     };
   };
 
-  services.mpd = {
-    enable = true;
-
-    network = { listenAddress = "/run/user/1000/mpd.socket"; };
-
-    musicDirectory = with lib;
-      mkIf config.xdg.enable (/.
-        + replaceStrings [ "$HOME" ] [ config.home.homeDirectory ]
-        config.xdg.userDirs.music);
-  };
-
   programs.bat = {
     enable = true;
     config = { theme = "TwoDark"; };

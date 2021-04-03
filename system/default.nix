@@ -243,6 +243,54 @@
     user = "Myhlamaeus";
   };
 
+  services.mopidy = {
+    enable = true;
+    extensionPackages = with pkgs;
+      let
+        mopidy-funkwhale = callPackage
+          ({ lib, fetchurl, python3Packages, mopidy }:
+
+            python3Packages.buildPythonApplication rec {
+              pname = "mopidy-funkwhale";
+              version = "master-git";
+
+              src = fetchurl {
+                url =
+                  "https://dev.funkwhale.audio/funkwhale/mopidy/-/archive/master/mopidy-master.tar.gz";
+                sha256 = "LUzv7wijHgLB3QY0OifJ6TZ3VajvLv2cRg7s0bFsmx4=";
+              };
+
+              propagatedBuildInputs = [ mopidy ] ++ (with python3Packages; [
+                requests
+                requests_oauthlib
+                pygobject3
+              ]);
+
+              patches = [ ./mopidy-funkwhale.patch ];
+
+              doCheck = false;
+
+              meta = with lib; {
+                homepage = "https://www.mopidy.com/";
+                description =
+                  "Mopidy extension for playing music from Funkwhale";
+                license = licenses.gpl3;
+                maintainers = [ ];
+                hydraPlatforms = [ ];
+              };
+            }) { };
+      in [ mopidy-mpd mopidy-funkwhale ];
+    configuration = builtins.readFile
+      ((pkgs.formats.ini { }).generate "mopidy-config" {
+        funkwhale = {
+          enabled = true;
+          url = "https://funkwhale.maurice-dreyer.name";
+          client_id = "Byxrpf6Ryx226JXyym0sNeJ0CnDi21kP8KRdv6qT";
+          client_secret = "25swnWHkptPy8VP7XDl4oVMjrNdOd0";
+        };
+      });
+  };
+
   nix.nixPath = [
     (let
       sshConfigFile = pkgs.writeText "ssh_config" ''
