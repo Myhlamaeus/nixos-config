@@ -107,6 +107,7 @@ in {
     aspellDicts.en-computers
     aspellDicts.en-science
     aspellDicts.la
+    orca
   ]);
   xdg.enable = true;
   xdg.mimeApps = {
