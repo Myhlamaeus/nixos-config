@@ -97,6 +97,7 @@ in {
     vlc
     # non-free
     discord
+    (p7zip.override { enableUnfree = true; })
     # term emulator
     rxvt_unicode
     # media
