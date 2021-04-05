@@ -269,6 +269,7 @@ in {
 
           # Other
           g = "https://www.google.com/search?q=%s";
+          "?" = "https://duckduckgo.com/?t=ffsb&q=%s";
           gs = "https://scholar.google.com/scholar?q=%s";
           w = "https://en.wikipedia.org/wiki/Special:Search/%s";
           yt = "https://www.youtube.com/results?search_query=%s";
