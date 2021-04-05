@@ -4,5 +4,5 @@
 set -euo pipefail
 
 nixos-rebuild switch
-rsync -avz --delete --rsync-path="sudo rsync" . nixops@rpi:/etc/nixos
+rsync -avz --delete --rsync-path="sudo rsync" --filter "- .*.~undo-tree~" . nixops@rpi:/etc/nixos
 ssh -t nixops@rpi sudo nixos-rebuild switch
