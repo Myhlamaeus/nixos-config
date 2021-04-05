@@ -28,9 +28,7 @@ in {
     services.home-assistant = {
       enable = true;
 
-      package = pkgs.home-assistant.override {
-        extraPackages = ps: [ (ps.callPackage pkgs.pydeconz { }) ];
-      };
+      package = pkgs.home-assistant;
 
       openFirewall = true;
 
