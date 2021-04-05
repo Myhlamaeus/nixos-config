@@ -631,6 +631,10 @@ before packages are loaded."
   (setq org-noter-notes-search-path '("~/org/noter"))
   (setq org-noter-default-notes-file-names '("notes.org" "mathematics-exercises.org"))
   (add-to-list 'hs-special-modes-alist '(typescript-mode "{" "}" "/[*/]" nil))
+  (setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
+  (setq org-refile-use-outline-path 'buffer-name)
+  (setq org-outline-path-complete-in-steps nil)
+  (setq org-pomodoro-clock-break t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
