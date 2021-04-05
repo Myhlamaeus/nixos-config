@@ -102,7 +102,7 @@
                 in {
                   inherit (unstable)
                     dwarf-fortress-packages emacs notmuch openhantek openmw
-                    zsh-completions;
+                    zsh-completions steam;
                   inherit (unstable.gitAndTools) git-bug;
                   inherit gitignore;
 
@@ -149,13 +149,13 @@
 
                   proton-ge-custom = pkgs.stdenv.mkDerivation rec {
                     pname = "proton-ge-custom";
-                    version = "5.9-GE-8-ST";
+                    version = "6.1-GE-2";
                     src = builtins.fetchurl {
                       name = "${pname}-${version}-source";
                       url =
                         "https://github.com/GloriousEggroll/${pname}/releases/download/${version}/Proton-${version}.tar.gz";
                       sha256 =
-                        "129ws0hq2l6bb69y2afgcb98ns68bn0z8ks44nvz9gf53a8nxzdd";
+                        "1yrdw2p29vb5gqk84cyynz6z9qahiisg037r2cliclivjf17x45r";
                     };
                     unpackCmd = ''
                       mkdir out

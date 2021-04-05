@@ -55,6 +55,16 @@
         enableVaapi = true;
       };
     })
+    (self: super: {
+      steam = super.steam.override {
+        extraLibraries = pkgs:
+          with config.hardware.opengl;
+          if super.hostPlatform.is64bit then
+            [ package ] ++ extraPackages
+          else
+            [ package32 ] ++ extraPackages32;
+      };
+    })
   ];
 
   nixpkgs.config.allowUnfree = true;

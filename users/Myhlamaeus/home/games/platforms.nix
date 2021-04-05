@@ -10,8 +10,9 @@ with lib;
         steam
       ];
 
-    home.file.".steam/root/compatibilitytools.d/proton-ge-custom" = {
-      source = pkgs.proton-ge-custom;
-    };
+    home.file.".steam/root/compatibilitytools.d/${pkgs.proton-ge-custom.name}" =
+      {
+        source = pkgs.proton-ge-custom;
+      };
   };
 }
