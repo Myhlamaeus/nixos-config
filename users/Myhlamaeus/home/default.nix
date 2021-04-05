@@ -355,6 +355,11 @@ in {
 
   services.kdeconnect.enable = true;
 
+  services.gnome-keyring = {
+    enable = true;
+    components = [ "secrets" ];
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
