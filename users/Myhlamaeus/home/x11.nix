@@ -7,7 +7,11 @@ in {
   options.custom.x11 = { enable = mkEnableOption "x11"; };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ xclip (dunst.override { dunstify = true; }) ];
+    home.packages = with pkgs; [
+      xclip
+      (dunst.override { dunstify = true; })
+      obs-studio
+    ];
 
     services.redshift = {
       enable = true;
