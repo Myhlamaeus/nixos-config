@@ -33,6 +33,8 @@ in {
       };
     };
 
+    users.users.funkwhale.isSystemUser = true;
+
     # Overrides default 30M
     services.nginx.clientMaxBodySize = "250m";
   };

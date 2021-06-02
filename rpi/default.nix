@@ -98,6 +98,7 @@ in {
 
   users.users.nixops = {
     openssh.authorizedKeys.keyFiles = [ ./key ];
+    isSystemUser = true;
     isNormalUser = false;
     shell = pkgs.runtimeShell;
   };

@@ -101,8 +101,8 @@
                   };
                 in {
                   inherit (unstable)
-                    dwarf-fortress-packages emacs notmuch openhantek openmw
-                    zsh-completions steam;
+                    calibre dwarf-fortress-packages emacs notmuch openhantek
+                    openmw zsh-completions steam;
                   inherit (unstable.gitAndTools) git-bug;
                   inherit gitignore;
 
