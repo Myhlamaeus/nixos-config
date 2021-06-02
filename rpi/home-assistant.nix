@@ -35,12 +35,13 @@ in {
 
       openFirewall = true;
 
-      config = {
+      config = let secret = name: "!secret ${name}";
+      in {
         homeassistant = {
           name = "Home";
-          latitude = "!secret latitude";
-          longitude = "!secret longitude";
-          elevation = "!secret elevation";
+          latitude = secret "latitude";
+          longitude = secret "longitude";
+          elevation = secret "elevation";
           unit_system = "metric";
           time_zone = "UTC";
           temperature_unit = "C";
@@ -59,13 +60,13 @@ in {
 
         # owntracks = {
         #   mqtt_topic = "owntracks/#";
-        #   secret = "!secret owntracks_secret";
+        #   secret = secret "owntracks_secret";
         # };
 
         deconz = {
           host = "localhost";
           port = config.local.services.deconz.httpPort;
-          api_key = "!secret deconzSecret";
+          api_key = secret "deconzSecret";
         };
 
         sensor = [{
