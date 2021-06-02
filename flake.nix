@@ -11,9 +11,7 @@
   };
 
   inputs.pre-commit-hooks = {
-    url =
-      # "github:Myhlamaeus/pre-commit-hooks.nix/feat/flake";
-      "github:Myhlamaeus/pre-commit-hooks.nix/8d48a4cd434a6a6cc8f2603b50d2c0b2981a7c55";
+    url = "github:cachix/pre-commit-hooks.nix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -235,7 +233,7 @@
     } // flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        pre-commit-check = pre-commit-hooks.defaultPackage.${system} {
+        pre-commit-check = pre-commit-hooks.lib.${system}.run {
           src = ./.;
           hooks = { nixfmt.enable = true; };
         };
