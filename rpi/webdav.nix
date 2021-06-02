@@ -17,21 +17,6 @@ in {
       type = with types; str;
       default = "webdav.${cfg.serverName}";
     };
-
-    caldavHostname = mkOption {
-      type = with types; str;
-      default = "caldav.${cfg.serverName}";
-    };
-
-    carddavHostname = mkOption {
-      type = with types; str;
-      default = "carddav.${cfg.serverName}";
-    };
-
-    radicalePort = mkOption {
-      type = with types; port;
-      default = 5232;
-    };
   };
 
   config = mkIf cfg.enable {
@@ -53,10 +38,6 @@ in {
 
           locations."= /.well-known/webdav".return =
             "https://${cfg.webdavHostname}$request_uri";
-          locations."= /.well-known/caldav".return =
-            "https://${cfg.caldavHostname}/";
-          locations."= /.well-known/carddav".return =
-            "https://${cfg.carddavHostname}/";
         };
 
         ${cfg.webdavHostname} = {
@@ -86,62 +67,7 @@ in {
             autoindex on;
           '';
         };
-
-        ${cfg.caldavHostname} = {
-          enableACME = true;
-          forceSSL = true;
-
-          # serverAliases = [ cfg.carddavHostname ];
-
-          basicAuthFile = "/etc/nginx/auth/caldav-users.passwd";
-
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:${toString cfg.radicalePort}";
-            extraConfig = ''
-              proxy_buffering on;
-              proxy_set_header X-Remote-User $remote_user;
-            '';
-          };
-        };
       };
-    };
-
-    services.radicale = {
-      enable = true;
-
-      package = pkgs.radicale2.overrideAttrs (oldAtts: {
-        propagatedBuildInputs = pkgs.radicale.propagatedBuildInputs
-          ++ (with pkgs.python38Packages; [ radicale_infcloud pytz ]);
-      });
-
-      config = ''
-        [server]
-        hosts = 127.0.0.1:${toString cfg.radicalePort}
-        pid = /run/radicale.pid
-
-        ssl = False
-
-        # This needs to change if served from a subdirectory instead of a
-        # subdomain
-        # base_prefix = /
-
-        [encoding]
-        request = utf-8
-        stock = utf-8
-
-        [auth]
-        type = http_x_remote_user
-
-        [rights]
-        type = owner_only
-
-        [storage]
-        # type = filesystem
-        filesystem_folder = /var/lib/radicale/collections
-
-        [web]
-        type = radicale_infcloud
-      '';
     };
   };
 }

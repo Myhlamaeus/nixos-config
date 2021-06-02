@@ -12,6 +12,7 @@ in {
     ./matrix.nix
     ./webdav.nix
     ./funkwhale.nix
+    ./etebase.nix
   ];
 
   nix.package = pkgs.nixUnstable;
@@ -31,6 +32,7 @@ in {
     matrix-synapse.enable = true;
     webdav.enable = true;
     funkwhale.enable = true;
+    # etebase.enable = true;
   };
 
   local.services.deconz = {
