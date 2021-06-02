@@ -72,6 +72,8 @@ in {
     mpc_cli
     mpv
     shutter
+    wine
+    winetricks
     # security
     gnupg
     (pass.withExtensions (exts: with exts; [ pass-update pass-audit ]))
@@ -101,7 +103,10 @@ in {
     # term emulator
     rxvt_unicode
     # media
-    calibre
+    (calibre.overrideAttrs (oldAttrs: {
+      buildInputs = oldAttrs.buildInputs
+        ++ (with python3Packages; [ pycrypto pyopenssl ]);
+    }))
     # aspell
     aspell
     aspellDicts.de
