@@ -28,11 +28,6 @@
   hardware.opengl = {
     extraPackages = with pkgs; [ libvdpau-va-gl vaapiVdpau ];
   };
-  nixpkgs.overlays = [
-    (self: super: {
-      chromium = super.chromium.override { enableVaapi = true; };
-    })
-  ];
   virtualisation.docker.enableNvidia = true;
 
   boot.initrd.availableKernelModules =
@@ -85,7 +80,7 @@
     lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 
   hardware.bluetooth.enable = true;
-  hardware.bluetooth.config = {
+  hardware.bluetooth.settings = {
     General = { Enable = "Source,Sink,Media,Socket"; };
   };
 }

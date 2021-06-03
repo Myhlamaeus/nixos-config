@@ -7,20 +7,18 @@ in {
   options.custom.x11 = { enable = mkEnableOption "x11"; };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
-      xclip
-      (dunst.override { dunstify = true; })
-      obs-studio
-    ];
+    home.packages = with pkgs; [ xclip dunst obs-studio ];
 
     services.redshift = {
       enable = true;
+      settings = {
+        brightness = {
+          day = "0.9";
+          night = "0.3";
+        };
+      };
       latitude = "53.2626212";
       longitude = "10.4411094";
-      brightness = {
-        day = "0.9";
-        night = "0.3";
-      };
       temperature = {
         day = 5500;
         night = 2000;
@@ -103,19 +101,19 @@ in {
     programs.rofi = {
       enable = true;
       theme = "android_notification";
-      extraConfig = ''
-        rofi.kb-remove-char-back:  BackSpace
-        rofi.kb-accept-entry:  Return,KP_Enter
-        rofi.kb-remove-to-eol:  Shift+BackSpace
-        rofi.kb-move-char-back:  Left
-        rofi.kb-move-char-forward:  Right
-        rofi.kb-row-left:          Control+h
-        rofi.kb-row-right:         Control+l
-        rofi.kb-row-down:          Control+j
-        rofi.kb-row-up:            Control+k
-        rofi.kb-page-prev:         Control+b
-        rofi.kb-page-next:         Control+f
-      '';
+      extraConfig = {
+        kb-remove-char-back = "BackSpace";
+        kb-accept-entry = "Return,KP_Enter";
+        kb-remove-to-eol = "Shift+BackSpace";
+        kb-move-char-back = "Left";
+        kb-move-char-forward = "Right";
+        kb-row-left = "Control+h";
+        kb-row-right = "Control+l";
+        kb-row-down = "Control+j";
+        kb-row-up = "Control+k";
+        kb-page-prev = "Control+b";
+        kb-page-next = "Control+f";
+      };
     };
 
     xresources = {

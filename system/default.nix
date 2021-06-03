@@ -50,9 +50,9 @@
     })
     (self: super: {
       chromium = super.chromium.override {
-        commandLineArgs = "--force-dark-mode";
+        commandLineArgs =
+          "--force-dark-mode --enable-features=VaapiVideoDecoder";
         enableWideVine = true;
-        enableVaapi = true;
       };
     })
     (self: super: {
@@ -111,10 +111,6 @@
   environment.systemPackages = with pkgs; [
     # nix
     cachix
-    (add-optparse-applicative-completions {
-      pkg = cachix;
-      bins = [ "cachix" ];
-    })
     nixopsUnstable
     # shell
     wget
@@ -334,7 +330,7 @@
     dates = "04:30";
   };
 
-  services.gnome3.at-spi2-core.enable = true;
+  services.gnome.at-spi2-core.enable = true;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
