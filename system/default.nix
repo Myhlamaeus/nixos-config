@@ -233,7 +233,7 @@
     enable = true;
     autoPrune.enable = true;
   };
-  virtualisation.anbox.enable = true;
+  # virtualisation.anbox.enable = true;
   programs.adb.enable = true;
 
   services.davfs2.enable = true;

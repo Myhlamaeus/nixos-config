@@ -31,7 +31,7 @@ in {
     home-assistant.enable = true;
     matrix-synapse.enable = true;
     webdav.enable = true;
-    funkwhale.enable = true;
+    # funkwhale.enable = true;
     # etebase.enable = true;
   };
 
