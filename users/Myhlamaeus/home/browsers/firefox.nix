@@ -90,6 +90,9 @@ let
     # Localisation
     "intl.accept_languages" = concatStringsSep "," [ "en-GB" "en" "de" ];
     "intl.locale.requested" = concatStringsSep "," [ "en-GB" "en-US" ];
+
+    # Disable pocket
+    "extensions.pocket.enabled" = false;
   };
 
 in {
