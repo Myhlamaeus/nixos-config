@@ -122,7 +122,6 @@
     git
     ncurses
     # vm
-    nixops
     gparted
   ];
 
