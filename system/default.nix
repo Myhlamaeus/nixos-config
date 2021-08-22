@@ -198,7 +198,7 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
   services.printing.drivers = with pkgs; [ gutenprint ];
-  hardware.sane.enable = true;
+  # hardware.sane.enable = true;
 
   # Enable the X11 windowing system.
   services.xserver = {
