@@ -305,23 +305,6 @@
         "type": "github"
       }
     },
-    "omnisharp-roslyn": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1622658764,
-        "narHash": "sha256-7L4aylWsvAL4IVChuft95G5nQR6THSZh21uRHXb3JYk=",
-        "owner": "OmniSharp",
-        "repo": "omnisharp-roslyn",
-        "rev": "65bb6301f9194d70aa6fa78eab6c4981ea7bc9fb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "OmniSharp",
-        "ref": "master",
-        "repo": "omnisharp-roslyn",
-        "type": "github"
-      }
-    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-utils": "flake-utils_3",
@@ -357,7 +340,6 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
         "obelisk-source": "obelisk-source",
-        "omnisharp-roslyn": "omnisharp-roslyn",
         "pre-commit-hooks": "pre-commit-hooks"
       }
     },

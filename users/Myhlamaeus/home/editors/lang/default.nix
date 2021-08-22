@@ -1,6 +1,5 @@
 {
   imports = [
-    ./csharp.nix
     ./graphviz.nix
     ./haskell.nix
     ./javascript.nix

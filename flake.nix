@@ -40,11 +40,6 @@
     flake = false;
   };
 
-  inputs.omnisharp-roslyn = {
-    url = "github:OmniSharp/omnisharp-roslyn/master";
-    flake = false;
-  };
-
   inputs.obelisk-source = {
     url = "github:obsidiansystems/obelisk/master";
     flake = false;
@@ -57,7 +52,7 @@
 
   outputs = { self, nixpkgs, flake-utils, nixops, home-manager, pre-commit-hooks
     , nur, nixpkgs-unstable, cheatsheets, felschr-nixos, funkwhale, gitignore
-    , omnisharp-roslyn, obelisk-source, Linux-Fake-Background-Webcam-source }:
+    , obelisk-source, Linux-Fake-Background-Webcam-source }:
     rec {
 
       nixosModules.fontOverrides = import ./nixosModules/fontOverrides.nix;
@@ -112,13 +107,6 @@
                     };
 
                   cheatPackages = { community = cheatsheets; };
-
-                  omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs
-                    (oldAttrs: rec {
-                      version = omnisharp-roslyn.rev;
-                      versionSuffix = "-git";
-                      src = omnisharp-roslyn;
-                    });
 
                   teensy-loader-cli = let
                     teensy-udev-rules = builtins.fetchurl {
