@@ -86,6 +86,10 @@ let
         "light")
       "@mozilla.org"
     ];
+
+    # Localisation
+    "intl.accept_languages" = concatStringsSep "," [ "en-GB" "en" "de" ];
+    "intl.locale.requested" = concatStringsSep "," [ "en-GB" "en-US" ];
   };
 
 in {
