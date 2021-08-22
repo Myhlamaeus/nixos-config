@@ -110,7 +110,7 @@ This function should only modify configuration layer settings."
      (org :variables
        org-enable-roam-support t
        org-enable-roam-protocol t
-       org-agenda-files '("~/org" "~/org/roam/daily")
+       org-agenda-files '("~/org" "~/org/roam" "~/org/roam/daily")
        org-roam-directory "~/org/roam"
        org-roam-capture-templates '(
                                     ("d" "default" plain "%?"
