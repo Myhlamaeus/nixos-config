@@ -32,7 +32,7 @@ in {
     matrix-synapse.enable = true;
     webdav.enable = true;
     # funkwhale.enable = true;
-    # etebase.enable = true;
+    etebase.enable = true;
   };
 
   local.services.deconz = {

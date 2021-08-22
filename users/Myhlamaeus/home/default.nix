@@ -97,6 +97,7 @@ in {
     ledger
     transmission-gtk
     vlc
+    etesync-dav
     # non-free
     discord
     (p7zip.override { enableUnfree = true; })

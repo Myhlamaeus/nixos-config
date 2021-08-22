@@ -18,33 +18,30 @@ in {
       default = "etebase.${cfg.serverName}";
     };
 
-    etebaseSocket = mkOption {
-      type = with types; str;
-      default = "/run/etebase-server/etebase-server.sock";
+    etebasePort = mkOption {
+      type = with types; port;
+      default = 8001;
     };
   };
 
   config = mkIf cfg.enable {
     services.etebase-server = {
       enable = true;
-      port = null;
-      unixSocket = cfg.etebaseSocket;
+      port = cfg.etebasePort;
       settings = {
         global = { secret_file = "/etc/nixos/secrets/etebase-server"; };
         allowed_hosts = { allowed_host1 = cfg.etebaseHostname; };
       };
     };
 
-    services.nginx = {
-      virtualHosts."${cfg.etebaseHostname}" = {
-        enableACME = true;
-        forceSSL = true;
-        locations."/".proxyPass = cfg.etebaseSocket;
+    services.nginx.virtualHosts.${cfg.etebaseHostname} = {
+      enableACME = true;
+      forceSSL = true;
+
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${toString cfg.etebasePort}";
+        proxyWebsockets = true;
       };
     };
-
-    systemd.services.etebase-server.preStart = ''
-      mkdir -p /run/etebase-server
-    '';
   };
 }
