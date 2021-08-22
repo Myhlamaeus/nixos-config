@@ -29,12 +29,12 @@ in {
       cmake
     ];
 
-    home.file.".emacs.d/private" = {
+    xdg.configFile."emacs/private" = {
       source = ./emacs;
       recursive = true;
     };
 
-    home.file.".emacs.d/private/user-init.el" = {
+    xdg.configFile."emacs/private/user-init.el" = {
       text = let
         bin = (pkgs.symlinkJoin {
           name = "editor-env-bin";
@@ -71,45 +71,40 @@ in {
 
     home.activation.spacemacs-setup =
       lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        if ! [ -e ~/.emacs.d ] ; then
+        if ! [ -e ~/.config/emacs ] ; then
           $DRY_RUN_CMD git \
             clone $VERBOSE_ARG \
             -b ${escapeShellArg cfg.emacs.spacemacs.ref} \
             https://github.com/syl20bnr/spacemacs \
-            ~/.emacs.d
+            ~/.config/emacs
         fi
-        if ! [ -e ~/.emacs.d/.git ] ; then
-          local temp=$(mktemp -d)
-          mv ~/.emacs.d/private "$temp"
+        if ! [ -e ~/.config/emacs/.git ] ; then
+          temp=$(mktemp -d)
+          mv ~/.config/emacs/private "$temp"
           $DRY_RUN_CMD git \
             clone $VERBOSE_ARG \
             -b ${escapeShellArg cfg.emacs.spacemacs.ref} \
             https://github.com/syl20bnr/spacemacs \
-            ~/.emacs.d
-          rm -r ~/.emacs.d/private
-          mv "$temp"/private ~/.emacs.d
+            ~/.config/emacs
+          rm -r ~/.config/emacs/private
+          mv "$temp"/private ~/.config/emacs
           rm -r "$temp"
         fi
-        if ! [ -L ~/.spacemacs ] ; then
-          $DRY_RUN_CMD ln -s $VERBOSE_ARG \
-            /etc/nixos/users/Myhlamaeus/spacemacs \
-            ~/.spacemacs
-        fi
         $DRY_RUN_CMD git \
-          --git-dir ~/.emacs.d/.git \
-          --work-tree ~/.emacs.d \
+          --git-dir ~/.config/emacs/.git \
+          --work-tree ~/.config/emacs \
           fetch $VERBOSE_ARG \
           origin \
           ${escapeShellArg cfg.emacs.spacemacs.ref}
         $DRY_RUN_CMD git \
-          --git-dir ~/.emacs.d/.git \
-          --work-tree ~/.emacs.d \
+          --git-dir ~/.config/emacs/.git \
+          --work-tree ~/.config/emacs \
           update-ref \
           refs/heads/${escapeShellArg cfg.emacs.spacemacs.ref} \
           ${escapeShellArg cfg.emacs.spacemacs.rev}
         $DRY_RUN_CMD git \
-          --git-dir ~/.emacs.d/.git \
-          --work-tree ~/.emacs.d \
+          --git-dir ~/.config/emacs/.git \
+          --work-tree ~/.config/emacs \
           checkout \
           ${escapeShellArg cfg.emacs.spacemacs.ref}
       '';
@@ -124,6 +119,8 @@ in {
 
     systemd.user.services.emacs.Service.Requires =
       "gpg-agent.service basic.target -.slice";
+    systemd.user.services.emacs.Service.Environment =
+      [ "SPACEMACSDIR=${config.home.sessionVariables.SPACEMACSDIR}" ];
 
     home.packages = with pkgs;
       [
@@ -139,6 +136,10 @@ in {
       defaultApplications = {
         "x-scheme-handler/org-protocol" = "org-protocol.desktop";
       };
+    };
+
+    home.sessionVariables = {
+      SPACEMACSDIR = "/home/Myhlamaeus/.config/spacemacs";
     };
   };
 }

@@ -47,9 +47,9 @@ This function should only modify configuration layer settings."
      dhall
      (elfeed :variables
        rmh-elfeed-org-files (list
-                              "~/.emacs.d/private/elfeed/dev.org"
-                              "~/.emacs.d/private/elfeed/fun.org"
-                              "~/.emacs.d/private/elfeed/math.org"
+                              "~/.config/emacs/private/elfeed/dev.org"
+                              "~/.config/emacs/private/elfeed/fun.org"
+                              "~/.config/emacs/private/elfeed/math.org"
                               )
        )
      epub
@@ -608,7 +608,7 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  (load "~/.emacs.d/private/user-init")
+  (load "~/.config/emacs/private/user-init")
   ;; (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
   ;; (lsp-register-client
   ;;   (make-lsp-client :new-connection (lsp-stdio-connection '("rnix-lsp"))
