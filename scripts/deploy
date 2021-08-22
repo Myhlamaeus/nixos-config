@@ -3,6 +3,18 @@
 # shellcheck shell=bash
 set -euo pipefail
 
-nixos-rebuild switch
-rsync -avz --delete --rsync-path="sudo rsync" --filter "- .*.~undo-tree~" . nixops@rpi:/etc/nixos
-ssh -t nixops@rpi sudo nixos-rebuild switch
+target=${1:-all}
+
+deployRpi() {
+  rsync -avz --delete --rsync-path="sudo rsync" --filter "- .*.~undo-tree~" . nixops@rpi:/etc/nixos
+  ssh -t nixops@rpi sudo nixos-rebuild switch
+}
+
+case "$target" in
+     rpi) deployRpi ;;
+     self) nixos-rebuild switch ;;
+     all)
+         nixos-rebuild switch
+         deployRpi
+         ;;
+esac
