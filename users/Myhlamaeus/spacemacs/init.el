@@ -178,7 +178,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(editorconfig direnv org-noter ttl-mode org-board ob-http org-roam-bibtex org-chef org-pdftools)
+   dotspacemacs-additional-packages '(editorconfig direnv org-noter ttl-mode org-board ob-http org-roam-bibtex org-chef org-pdftools org-caldav)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -728,6 +728,36 @@ before packages are loaded."
   ;;   :config
   ;;   (with-eval-after-load 'pdf-annot
   ;;     (add-hook 'pdf-annot-activate-handler-functions #'org-noter-pdftools-jump-to-note)))
+  (use-package org-caldav
+    :after org
+    :custom
+      (org-caldav-url "http://localhost:37358/maublew")
+      (org-caldav-calendars '(
+                              (
+                                :calendar-id "elQOagpMiFzKw3JjVsGf00deUmbDgIR0"
+                                :files ("~/media/keybase/private/myhlamaeus/org/roam/20210629180543-day_to_day_schedule.org")
+                                :inbox (file+headline "~/media/keybase/private/myhlamaeus/org/roam/20210629180543-day_to_day_schedule.org" "Inbox")
+                                )
+                              (
+                                :calendar-id "HQH290Ndqz11QAmcVBZG03BoXaIb2Dj9"
+                                :files ("~/media/keybase/private/myhlamaeus/org/roam/20210704153949-trash.org")
+                                :inbox (file+headline "~/media/keybase/private/myhlamaeus/org/roam/20210704153949-trash.org" "Inbox")
+                                )
+                              (
+                                :calendar-id "PcGVhrtcG6ilHNz57koWYfCguhIb2kxM"
+                                :files ("~/media/keybase/private/myhlamaeus/org/roam/20210705050400-holidays.org")
+                                :inbox (file+headline "~/media/keybase/private/myhlamaeus/org/roam/20210705050400-holidays.org" "Inbox")
+                                )
+                              ;; (
+                              ;;   :calendar-id
+                              ;;   :files ("~/.ghq/gitlab.com/fitnesspilot/fitnesspilot/TODOs.org")
+                              ;;   :inbox (file+headline "~/.ghq/gitlab.com/fitnesspilot/fitnesspilot/TODOs.org" "Inbox")
+                              ;;   )
+                              )
+        )
+      (org-caldav-backup-file "~/org.bak/caldav/backup.org")
+      (org-caldav-save-directory "~/org.bak/caldav/saves/")
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
