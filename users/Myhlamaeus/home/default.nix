@@ -108,6 +108,7 @@ in {
       buildInputs = oldAttrs.buildInputs
         ++ (with python3Packages; [ pycrypto pyopenssl ]);
     }))
+    zotero
     # aspell
     aspell
     aspellDicts.de
