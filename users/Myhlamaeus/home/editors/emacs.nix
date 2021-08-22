@@ -14,7 +14,7 @@ in {
       };
       rev = mkOption {
         type = with types; str;
-        default = "8c8fc6463ca873d66616144884d1108b42efc4b5";
+        default = "40ae5e2293c6edb5aed1c554ec6b825f24db45d8";
       };
     };
   };
@@ -25,6 +25,8 @@ in {
       unzip
       texlive.combined.scheme-full
       python3
+      global
+      cmake
     ];
 
     home.file.".emacs.d/private" = {
@@ -62,7 +64,10 @@ in {
       });
     };
 
-    services.emacs.enable = true;
+    services.emacs = {
+      enable = true;
+      socketActivation.enable = true;
+    };
 
     home.activation.spacemacs-setup =
       lib.hm.dag.entryAfter [ "writeBoundary" ] ''

@@ -113,31 +113,45 @@ This function should only modify configuration layer settings."
        org-agenda-files '("~/org" "~/org/roam/daily")
        org-roam-directory "~/org/roam"
        org-roam-capture-templates '(
-                                    ("d" "default" plain (function org-roam--capture-get-point)
-                                      "abc%?"
-                                      :file-name "%<%Y%m%d%H%M%S>-${slug}"
-                                      :head "#+title: ${title}\n"
-                                      :unnarrowed t)
-                                    ("r" "roam" plain (function org-roam--capture-get-point)
-                                      "${body}\n%?"
-                                      :file-name "%<%Y%m%d%H%M%S>-${slug}"
-                                      :head "#+title: ${title}\n#+roam_key: ${ref}\n:PROPERTIES:\n:URL: ${ref}\n:END:\n"
+                                    ("d" "default" plain "%?"
+                                      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+                                      :unnarrowed t
+                                      )
+                                    ("r" "ref" plain "${body}\n%?"
+                                      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" ":PROPERTIES:
+:URL: ${ref}
+:ROAM_REFS: ${ref}
+:END:
+#+title: ${title}
+")
+                                      :unnarrowed t
+                                      )
+                                    ("c" "cite" plain "%?"
+                                      :if-new (file+head "${citekey}" "#+TITLE: ${citekey}: ${title}
+#+ROAM_KEY: ${ref}
+- tags ::
+- keywords :: ${keywords}
+* ${title}
+  :PROPERTIES:
+  :Custom_ID: ${citekey}
+  :URL: ${url}
+  :AUTHOR: ${author-or-editor}
+  :NOTER_DOCUMENT: ${file}
+  :NOTER_AUTO_SAVE_LAST_LOCATION: t
+  :END:
+                                          ")
                                       :unnarrowed t)
                                    )
        org-roam-dailies-capture-templates '(
-                                            ("d" "default" entry
-                                              #'org-roam-capture--get-point
-                                              "* %?"
-                                              :file-name "daily/%<%Y-%m-%d>"
-                                              :head "#+title: %<%F> (%<%G-W%V-%u>)"
-                                              :olp ("Journal"))
-                                            ("n" "now" entry
-                                               #'org-roam-capture--get-point
-                                               "* %<%H:%M>\n%?"
-                                               :file-name "daily/%<%Y-%m-%d>"
-                                               :head "#+title: %<%F> (%<%G-W%V-%u>)"
-                                               :olp ("Journal"))
+                                            ("d" "default" plain
+                                              "** %?"
+                                              :if-new (file+head+olp "%<%Y-%m-%d>.org" "#+title: %<%F> (%<%G-W%V-%u>)" ("Journal"))
+                                              )
+                                            ("n" "now" plain
+                                              "** %<%H:%M>\n   %?"
+                                              :if-new (file+head+olp "%<%Y-%m-%d>.org" "#+title: %<%F> (%<%G-W%V-%u>)" ("Journal")))
                                            )
+       org-roam-v2-ack t
        )
      (bibtex :variables
        bibtex-completion-bibliography (expand-file-name "~/My Library.bib")
@@ -164,7 +178,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(bazel-mode editorconfig direnv org-noter ttl-mode org-board ob-http org-roam-bibtex org-chef)
+   dotspacemacs-additional-packages '(editorconfig direnv org-noter ttl-mode org-board ob-http org-roam-bibtex org-chef org-pdftools)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -595,15 +609,15 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (load "~/.emacs.d/private/user-init")
-  (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
-  (lsp-register-client
-    (make-lsp-client :new-connection (lsp-stdio-connection '("rnix-lsp"))
-      :major-modes '(nix-mode)
-      :server-id 'nix))
-  (lsp-register-client
-    (make-lsp-client :new-connection (lsp-stdio-connection '("terraform-ls" "serve"))
-      :major-modes '(terraform-mode)
-      :server-id 'terraform))
+  ;; (add-to-list 'lsp-language-id-configuration '(nix-mode . "nix"))
+  ;; (lsp-register-client
+  ;;   (make-lsp-client :new-connection (lsp-stdio-connection '("rnix-lsp"))
+  ;;     :major-modes '(nix-mode)
+  ;;     :server-id 'nix))
+  ;; (lsp-register-client
+  ;;   (make-lsp-client :new-connection (lsp-stdio-connection '("terraform-ls" "serve"))
+  ;;     :major-modes '(terraform-mode)
+  ;;     :server-id 'terraform))
   )
 
 (defun dotspacemacs/user-load ()
@@ -703,22 +717,7 @@ before packages are loaded."
     (orb-preformat-keywords '("citekey" "title" "url" "author-or-editor" "keywords" "file"))
     (orb-file-field-extensions '("pdf" "epub" "html"))
 
-    (orb-templates
-      '(("r" "ref" plain (function org-roam-capture--get-point)
-          ""
-          :file-name "${citekey}"
-          :head "#+TITLE: ${citekey}: ${title}
-#+ROAM_KEY: ${ref}
-- tags ::
-- keywords :: ${keywords}
-* ${title}
-  :PROPERTIES:
-  :Custom_ID: ${citekey}
-  :URL: ${url}
-  :AUTHOR: ${author-or-editor}
-  :NOTER_DOCUMENT: ${file}
-  :NOTER_PAGE:
-  :END:"))))
+    )
   ;; (use-package org-pdftools
   ;;   :hook (org-load . org-pdftools-setup-link))
   (use-package org-noter
@@ -748,7 +747,7 @@ This function is called at the very end of Spacemacs initialization."
  '(evil-want-Y-yank-to-eol nil)
  '(haskell-font-lock-symbols t)
  '(package-selected-packages
-    '(org-chef flycheck-credo elixir-mode reformatter floobits highlight dhall-mode ob-http github-search github-clone gist gh marshal logito pcache forge ghub closql emacsql-sqlite emacsql treepy graphviz-dot-mode bazel-mode org-board org-noter pdf-tools spray csv-mode magit-section helm-notmuch notmuch git-gutter-fringe+ fringe-helper git-gutter+ browse-at-remote org-journal protobuf-mode zeal-at-point helm-dash dash-docs elfeed-org elfeed-goodies ace-jump-mode noflet elfeed helm-pass password-store auth-source-pass rainbow-mode rainbow-identifiers color-identifiers-mode yatemplate dap-mode bui tree-mode nov esxml powershell counsel-gtags counsel swiper ivy rjsx-mode treemacs-magit smeargle orgit magit-svn magit-gitflow magit-popup helm-gitignore helm-git-grep gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit transient git-commit with-editor python ttl-mode yasnippet-snippets yapfify yaml-mode xterm-color web-mode web-beautify vterm tide typescript-mode tagedit slim-mode shell-pop scss-mode sass-mode pytest pyenv-mode py-isort pug-mode prettier-js pippel pipenv pyvenv pip-requirements org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-brain omnisharp nodejs-repl nix-mode multi-term mmm-mode markdown-toc lsp-haskell lsp-mode markdown-mode livid-mode skewer-mode live-py-mode json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc intero insert-shebang importmagic epc ctable concurrent deferred impatient-mode simple-httpd htmlize hlint-refactor hindent helm-pydoc helm-org-rifle helm-org helm-nixos-options helm-hoogle helm-gtags helm-css-scss helm-company helm-c-yasnippet haskell-snippets haml-mode gnuplot gh-md ggtags fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck-ledger flycheck-haskell flycheck-bashate fish-mode evil-org evil-ledger ledger-mode eshell-z eshell-prompt-extras esh-help emmet-mode direnv dante lcr cython-mode csharp-mode company-web web-completion-data company-terraform terraform-mode hcl-mode company-tern dash-functional tern company-statistics company-shell company-nixos-options nixos-options company-ghci company-ghc ghc haskell-mode company-cabal company-anaconda company cmm-mode blacken auto-yasnippet yasnippet auto-dictionary attrap anaconda-mode pythonic ac-ispell auto-complete ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin persp-mode pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))
+    '(org-chef flycheck-credo elixir-mode reformatter floobits highlight dhall-mode ob-http github-search github-clone gist gh marshal logito pcache forge ghub closql emacsql-sqlite emacsql treepy graphviz-dot-mode org-board org-noter pdf-tools spray csv-mode magit-section helm-notmuch notmuch git-gutter-fringe+ fringe-helper git-gutter+ browse-at-remote org-journal protobuf-mode zeal-at-point helm-dash dash-docs elfeed-org elfeed-goodies ace-jump-mode noflet elfeed helm-pass password-store auth-source-pass rainbow-mode rainbow-identifiers color-identifiers-mode yatemplate dap-mode bui tree-mode nov esxml powershell counsel-gtags counsel swiper ivy rjsx-mode treemacs-magit smeargle orgit magit-svn magit-gitflow magit-popup helm-gitignore helm-git-grep gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit transient git-commit with-editor python ttl-mode yasnippet-snippets yapfify yaml-mode xterm-color web-mode web-beautify vterm tide typescript-mode tagedit slim-mode shell-pop scss-mode sass-mode pytest pyenv-mode py-isort pug-mode prettier-js pippel pipenv pyvenv pip-requirements org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download org-cliplink org-brain omnisharp nodejs-repl nix-mode multi-term mmm-mode markdown-toc lsp-haskell lsp-mode markdown-mode livid-mode skewer-mode live-py-mode json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc intero insert-shebang importmagic epc ctable concurrent deferred impatient-mode simple-httpd htmlize hlint-refactor hindent helm-pydoc helm-org-rifle helm-org helm-nixos-options helm-hoogle helm-gtags helm-css-scss helm-company helm-c-yasnippet haskell-snippets haml-mode gnuplot gh-md ggtags fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck-ledger flycheck-haskell flycheck-bashate fish-mode evil-org evil-ledger ledger-mode eshell-z eshell-prompt-extras esh-help emmet-mode direnv dante lcr cython-mode csharp-mode company-web web-completion-data company-terraform terraform-mode hcl-mode company-tern dash-functional tern company-statistics company-shell company-nixos-options nixos-options company-ghci company-ghc ghc haskell-mode company-cabal company-anaconda company cmm-mode blacken auto-yasnippet yasnippet auto-dictionary attrap anaconda-mode pythonic ac-ispell auto-complete ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package treemacs-projectile treemacs-evil toc-org symon symbol-overlay string-inflection spaceline-all-the-icons restart-emacs request rainbow-delimiters popwin persp-mode pcre2el password-generator paradox overseer org-plus-contrib org-bullets open-junk-file nameless move-text macrostep lorem-ipsum link-hint indent-guide hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-purpose helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio font-lock+ flycheck-package flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu elisp-slime-nav editorconfig dumb-jump dotenv-mode doom-modeline diminish devdocs define-word column-enforce-mode clean-aindent-mode centered-cursor-mode auto-highlight-symbol auto-compile aggressive-indent ace-link ace-jump-helm-line))
  '(paradox-github-token t)
  '(safe-local-variable-values
     '((undo-tree-auto-save-history)

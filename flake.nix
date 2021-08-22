@@ -1,6 +1,10 @@
 {
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
 
+  # calibre is broken in stable
+  inputs.nixpkgs-calibre.url =
+    "github:NixOS/nixpkgs/ea7d4aa9b8225abd6147339f0d56675d6f1f0fd1";
+
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
   inputs.nixops.url = "github:NixOS/nixops/master";
@@ -50,9 +54,10 @@
     flake = false;
   };
 
-  outputs = { self, nixpkgs, flake-utils, nixops, home-manager, pre-commit-hooks
-    , nur, nixpkgs-unstable, cheatsheets, felschr-nixos, funkwhale, gitignore
-    , obelisk-source, Linux-Fake-Background-Webcam-source }:
+  outputs = { self, nixpkgs, nixpkgs-calibre, flake-utils, nixops, home-manager
+    , pre-commit-hooks, nur, nixpkgs-unstable, cheatsheets, felschr-nixos
+    , funkwhale, gitignore, obelisk-source, Linux-Fake-Background-Webcam-source
+    }:
     rec {
 
       nixosModules.fontOverrides = import ./nixosModules/fontOverrides.nix;
@@ -94,12 +99,26 @@
                     inherit (self) system;
                     config = { allowUnfree = true; };
                   };
+                  calibre = import nixpkgs-calibre.outPath {
+                    inherit (self) system;
+                    config = { allowUnfree = true; };
+                  };
                 in {
                   inherit (unstable)
-                    calibre dwarf-fortress-packages emacs notmuch openhantek
-                    openmw zsh-completions steam;
+                    dwarf-fortress-packages emacs notmuch openhantek openmw
+                    zsh-completions steam;
+                  inherit (calibre) calibre;
                   inherit (unstable.gitAndTools) git-bug;
                   inherit gitignore;
+                  tor-browser-bundle-bin = pkgs.callPackage
+                    (pkgs.fetchFromGitHub {
+                      owner = "FliegendeWurst";
+                      repo = "nixpkgs";
+                      rev = "tbb-bin-10.5.2";
+                      sha256 = "MqSHOHsfACtVWyjrnnVYlrE1EPM6IMV/d1lE1PLgYq0=";
+                    }
+                      + "/pkgs/applications/networking/browsers/tor-browser-bundle-bin/default.nix")
+                    { };
 
                   akvcam = self.linuxPackages.callPackage
                     ((nixpkgs-unstable) + "/pkgs/os-specific/linux/akvcam") {
@@ -112,7 +131,7 @@
                     teensy-udev-rules = builtins.fetchurl {
                       url = "https://www.pjrc.com/teensy/49-teensy.rules";
                       sha256 =
-                        "052rgk3q9pnxrrxx98x6yrhbxvhjp1z5mn4vpkwgni7jrrnvn5vw";
+                        "1qbl1f40jc0dg3z1lag2bk2b0nv54n9z3bdpwmdz09m50a0nskbv";
                     };
                   in super.teensy-loader-cli.overrideAttrs (attrs: rec {
                     postInstall = (attrs.postInstall or "") + ''

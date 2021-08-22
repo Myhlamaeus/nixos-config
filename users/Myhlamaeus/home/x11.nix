@@ -44,12 +44,12 @@ in {
       # referenced like this as it is wrapped
       lockCmd = let
         cmd = pkgs.writeScript "lock" ''
-          ${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_PAUSE
+          ${pkgs.dunst}/bin/dunstctl set-paused true
           /run/wrappers/bin/slock
-          ${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_RESUME
+          ${pkgs.dunst}/bin/dunstctl set-paused false
         '';
       in "${pkgs.bash}/bin/bash -c '${cmd} & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
-      # lockCmd = "${pkgs.bash}/bin/bash -c '${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_PAUSE; /run/wrappers/bin/slock ${pkgs.libnotify}/bin/notify-send DUNST_COMMAND_RESUME & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
+      # lockCmd = "${pkgs.bash}/bin/bash -c '${pkgs.dunst}/bin/dunstctl set-paused true; /run/wrappers/bin/slock ${pkgs.dunst}/bin/dunstctl set-paused false & ${pkgs.coreutils}/bin/sleep 0.5 && ${pkgs.xlibs.xset}/bin/xset dpms force off'";
       xautolockExtraOptions = [ "-corners -000" ];
     };
 
