@@ -57,12 +57,14 @@
     })
     (self: super: {
       steam = super.steam.override {
+        extraPkgs = pkgs: with pkgs; [ pipewire.lib ];
         extraLibraries = pkgs:
+          with pkgs;
           with config.hardware.opengl;
-          if super.hostPlatform.is64bit then
-            [ package ] ++ extraPackages
+          if self.hostPlatform.is64bit then
+            [ pipewire.lib package ] ++ extraPackages
           else
-            [ package32 ] ++ extraPackages32;
+            [ pipewire.lib package32 ] ++ extraPackages32;
       };
     })
   ];
@@ -73,6 +75,8 @@
     useUserPackages = true;
     useGlobalPkgs = true;
   };
+
+  programs.steam.enable = true;
 
   hardware.enableAllFirmware = true;
 
