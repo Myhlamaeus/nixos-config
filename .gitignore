@@ -25,3 +25,5 @@
 ### direnv ###
 .direnv
 .envrc
+
+dist-newstyle
