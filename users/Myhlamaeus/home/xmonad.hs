@@ -209,6 +209,7 @@ main = do
         , ("M-n",     withFocused pictureInPicture >> markBoring)
         , ("M-S-n",   killAllOtherCopies >> clearBoring)
         , ("M-/",     runSelectedAction def $ (projectName &&& switchProject) <$> projects)
+        , ("M-S-/",     runSelectedAction def $ (projectName &&& shiftToProject) <$> projects)
         , ("M--",     withFocused minimizeWindow)
         , ("M-S--",   withMinimized $ maybe (pure ()) maximizeWindow <=< gridselectWindow def)
         , ("M-j",     focusDown)
