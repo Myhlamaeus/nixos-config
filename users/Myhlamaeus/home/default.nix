@@ -140,6 +140,7 @@ in {
       $DRY_RUN_CMD find ~ \
         -path "$HOME/media" -prune -o \
         -path "$HOME/webdav" -prune -o \
+        -path "$HOME/.local/share/containers/storage" -prune -o \
         -type d \
         -exec setfacl -dm "o::000" "{}" + \
         -exec setfacl -dm "g::000" "{}" + \
@@ -148,6 +149,7 @@ in {
         -path "$HOME/media" -prune -o \
         -path "$HOME/webdav/lost+found" -prune -o \
         -path "$HOME/webdav/mnt/lost+found" -prune -o \
+        -path "$HOME/.local/share/containers/storage" -prune -o \
         -type f \
         -exec chmod go-rwx "{}" +
     '';

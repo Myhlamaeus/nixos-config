@@ -7,7 +7,7 @@
     isNormalUser = true;
     shell = pkgs.zsh;
     home = "/home/Myhlamaeus";
-    extraGroups = [ "wheel" "docker" "audio" "jackaudio" ];
+    extraGroups = [ "wheel" "docker" "podman" "audio" "jackaudio" ];
     passwordFile = "/etc/nixos/secrets/Myhlamaeus-password";
   };
 

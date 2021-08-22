@@ -233,6 +233,11 @@
   };
 
   virtualisation.libvirtd.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    # It sadly doesn't seem to be fully compatible just yet
+    # dockerCompat = true;
+  };
   virtualisation.docker = {
     enable = true;
     autoPrune.enable = true;
