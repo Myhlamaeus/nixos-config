@@ -179,6 +179,7 @@
               ./system/hardware-configurations/home-desktop.nix
               ./system
               ./users
+              ./system/persist.nix
             ];
 
             home-manager.users.Myhlamaeus = {
