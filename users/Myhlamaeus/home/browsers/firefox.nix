@@ -106,7 +106,7 @@ in {
         canvasblocker
         clearurls
         darkreader
-        decentraleyes
+        localcdn
         # grammarly
         https-everywhere
         multi-account-containers
