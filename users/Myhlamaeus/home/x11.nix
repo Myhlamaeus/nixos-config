@@ -75,6 +75,8 @@ in {
       };
     };
 
+    fonts.fontconfig.enable = true;
+
     services.unclutter = { enable = true; };
 
     gtk = {
