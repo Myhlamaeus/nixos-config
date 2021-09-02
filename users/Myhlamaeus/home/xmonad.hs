@@ -123,7 +123,7 @@ xpConfig = def
 projects :: [Project]
 projects =
   [ Project { projectName = "drawing"
-            , projectDirectory = "~/Documents/Paintings"
+            , projectDirectory = "~/.ghq/gitlab.com/Myhlamaeus/paintings"
             , projectStartHook = Just $ gtkSpawn "org.kde.krita.desktop"
             }
   , Project { projectName = "social"
