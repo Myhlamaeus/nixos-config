@@ -1,6 +1,10 @@
 {
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.05";
 
+  # calibre is broken in stable
+  inputs.nixpkgs-calibre.url =
+    "github:NixOS/nixpkgs/ea7d4aa9b8225abd6147339f0d56675d6f1f0fd1";
+
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
   inputs.nixops.url = "github:NixOS/nixops/master";
@@ -50,9 +54,10 @@
     flake = false;
   };
 
-  outputs = { self, nixpkgs, flake-utils, nixops, home-manager, pre-commit-hooks
-    , nur, nixpkgs-unstable, cheatsheets, felschr-nixos, funkwhale, gitignore
-    , obelisk-source, Linux-Fake-Background-Webcam-source }:
+  outputs = { self, nixpkgs, nixpkgs-calibre, flake-utils, nixops, home-manager
+    , pre-commit-hooks, nur, nixpkgs-unstable, cheatsheets, felschr-nixos
+    , funkwhale, gitignore, obelisk-source, Linux-Fake-Background-Webcam-source
+    }:
     rec {
 
       nixosModules.fontOverrides = import ./nixosModules/fontOverrides.nix;
@@ -94,10 +99,15 @@
                     inherit (self) system;
                     config = { allowUnfree = true; };
                   };
+                  calibre = import nixpkgs-calibre.outPath {
+                    inherit (self) system;
+                    config = { allowUnfree = true; };
+                  };
                 in {
                   inherit (unstable)
-                    calibre dwarf-fortress-packages emacs notmuch openhantek
-                    openmw zsh-completions steam;
+                    dwarf-fortress-packages emacs notmuch openhantek openmw
+                    zsh-completions steam;
+                  inherit (calibre) calibre;
                   inherit (unstable.gitAndTools) git-bug;
                   inherit gitignore;
                   tor-browser-bundle-bin = pkgs.callPackage
