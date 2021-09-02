@@ -271,7 +271,7 @@
               src = fetchurl {
                 url =
                   "https://dev.funkwhale.audio/funkwhale/mopidy/-/archive/master/mopidy-master.tar.gz";
-                sha256 = "LUzv7wijHgLB3QY0OifJ6TZ3VajvLv2cRg7s0bFsmx4=";
+                sha256 = "dRuxtLAEshI8FCqXdIX2YSBU9SVIVlxdK0gylY68uIA=";
               };
 
               propagatedBuildInputs = [ mopidy ] ++ (with python3Packages; [

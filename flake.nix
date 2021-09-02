@@ -106,19 +106,10 @@
                 in {
                   inherit (unstable)
                     dwarf-fortress-packages emacs notmuch openhantek openmw
-                    zsh-completions steam;
+                    tor-browser-bundle-bin zsh-completions steam;
                   inherit (calibre) calibre;
                   inherit (unstable.gitAndTools) git-bug;
                   inherit gitignore;
-                  tor-browser-bundle-bin = pkgs.callPackage
-                    (pkgs.fetchFromGitHub {
-                      owner = "FliegendeWurst";
-                      repo = "nixpkgs";
-                      rev = "tbb-bin-10.5.2";
-                      sha256 = "MqSHOHsfACtVWyjrnnVYlrE1EPM6IMV/d1lE1PLgYq0=";
-                    }
-                      + "/pkgs/applications/networking/browsers/tor-browser-bundle-bin/default.nix")
-                    { };
 
                   akvcam = self.linuxPackages.callPackage
                     ((nixpkgs-unstable) + "/pkgs/os-specific/linux/akvcam") {
