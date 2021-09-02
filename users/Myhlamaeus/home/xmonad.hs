@@ -122,21 +122,37 @@ xpConfig = def
 
 projects :: [Project]
 projects =
-  [ gitlabProject "fitnesspilot" "fitnesspilot"
-  , Project { projectName = "hoyer-xp"
-            , projectDirectory = "~/.ghq/bitbucket.org/hpg-webdev"
-            , projectStartHook = Just $ do
-                spawn "gtk-launch emacs.desktop hoyer-xp"
+  [ Project { projectName = "drawing"
+            , projectDirectory = "~/Documents/Paintings"
+            , projectStartHook = Just $ gtkSpawn "org.kde.krita.desktop"
             }
-  , gitlabProject "upsquared/gamification" "gamification"
+  , Project { projectName = "social"
+            , projectDirectory = "~"
+            , projectStartHook = Just $ do
+                gtkSpawn "element-desktop.desktop"
+                gtkSpawn "org.telegram.desktop"
+            }
+  , Project { projectName = "read"
+            , projectDirectory = "~"
+            , projectStartHook = Just $ do
+                gtkSpawn "calibre.desktop"
+                gtkSpawn "zotero.desktop"
+                gtkSpawn "emacs.desktop"
+            }
+  , Project { projectName = "game"
+            , projectDirectory = "~"
+            , projectStartHook = Just $ do
+                gtkSpawn "steam.desktop"
+            }
   ]
   where
-    gitlabProject owner name =
+    gtkSpawn name = spawn $ "gtk-launch " <> name
+    ghqProject platform owner name =
       Project { projectName = name
-              , projectDirectory = "~/.ghq/gitlab.com/" <> owner <> "/" <> name
-              , projectStartHook = Just $ do
-                  spawn "gtk-launch emacs.desktop ."
+              , projectDirectory = "~/.ghq/" <> platform <> "/" <> owner <> "/" <> name
+              , projectStartHook = Just $ gtkSpawn "emacs.desktop ."
               }
+    gitlabProject = ghqProject "gitlab.com"
 
 additionalKeys' :: XConfig a -> (XConfig a -> [((KeyMask, KeySym), X ())]) -> XConfig a
 cfg `additionalKeys'` map = cfg `additionalKeys` (first (first (modMask cfg .|.)) <$> map cfg)
