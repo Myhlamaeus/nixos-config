@@ -244,14 +244,6 @@
   # virtualisation.anbox.enable = true;
   programs.adb.enable = true;
 
-  services.davfs2.enable = true;
-  fileSystems."/home/Myhlamaeus/webdav" = {
-    device = "https://webdav.maurice-dreyer.name";
-    fsType = "davfs";
-    options = [ "_netdev" "user" "uid=Myhlamaeus" "gid=users" ];
-  };
-  users.users.Myhlamaeus.extraGroups = [ config.services.davfs2.davGroup ];
-
   services.foldingathome = {
     enable = true;
     user = "Myhlamaeus";

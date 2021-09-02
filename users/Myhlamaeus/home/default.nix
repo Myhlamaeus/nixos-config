@@ -140,7 +140,6 @@ in {
     lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       $DRY_RUN_CMD find ~ \
         -path "$HOME/media" -prune -o \
-        -path "$HOME/webdav" -prune -o \
         -path "$HOME/.local/share/containers/storage" -prune -o \
         -type d \
         -exec setfacl -dm "o::000" "{}" + \
@@ -148,8 +147,6 @@ in {
         -exec chmod go-rwx "{}" +
       $DRY_RUN_CMD find ~ \
         -path "$HOME/media" -prune -o \
-        -path "$HOME/webdav/lost+found" -prune -o \
-        -path "$HOME/webdav/mnt/lost+found" -prune -o \
         -path "$HOME/.local/share/containers/storage" -prune -o \
         -type f \
         -exec chmod go-rwx "{}" +
