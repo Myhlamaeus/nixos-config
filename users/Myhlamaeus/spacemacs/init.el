@@ -127,7 +127,7 @@ This function should only modify configuration layer settings."
                                       :unnarrowed t
                                       )
                                     ("c" "cite" plain "%?"
-                                      :if-new (file+head "${citekey}" "#+TITLE: ${citekey}: ${title}
+                                      :if-new (file+head "${citekey}.org" "#+TITLE: ${citekey}: ${title}
 #+ROAM_KEY: ${ref}
 - tags ::
 - keywords :: ${keywords}
